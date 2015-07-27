@@ -1,3 +1,8 @@
+.time-tag{
+    padding:0.5em 0 1em;
+    letter-spacing:2px;
+}
+
 .pd1{
     padding-bottom:1em;
 }
@@ -15,4 +20,10 @@
 }
 .tr {
     text-align:right;
+}
+
+
+
+.fz12{
+    font-size:12px;
 }
