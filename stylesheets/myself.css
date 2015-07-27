@@ -1,0 +1,18 @@
+.pd1{
+    padding-bottom:1em;
+}
+    .pd1 p {
+        text-indent:1em;
+        text-align:left;
+    }
+
+
+.tl{
+    text-align:left;
+}
+.tc {
+    text-align:center;
+}
+.tr {
+    text-align:right;
+}
