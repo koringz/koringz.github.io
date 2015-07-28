@@ -83,10 +83,9 @@
                 var expdate = new Date();
                 var visits;
                 expdate.setTime(expdate.getTime() + (24 * 60 * 60 * 1000 * 365));
-                if (!(visits = GetCookie("visits"))){
+                if (!(visits = GetCookie("visits")))
                     visits = 0; visits++; SetCookie("visits", visits, expdate, "/", null, false);//以下信息显示可以使用标准的HTML语法,自己随便设置。
-                }
-                document.write("<i style='color:#999'>你已经光临本页" + "<font color='gray'>" + visits + "</FONT>" + "次！</i>");
+                    document.write("<i style='color:#999'>你已经光临本页" + "<font color='gray'>" + visits + "</FONT>" + "次！</i>");
                 if (visits == 1){
                     document.write("" + "<i style='color:#999'>欢迎光临本站？</i>");
                 }
