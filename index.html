@@ -58,6 +58,54 @@
             } catch(err) {}
           </script>
 
+      
+              
+            <script language="JavaScript">
+                    function getCookieVal(offset)
+
+                    {var endstr=document.cookie.indexOf(";",offset);if(endstr==-1)
+
+                    endstr=document.cookie.length;return unescape(document.cookie.substring(offset,endstr));}function GetCookie(name)
+
+                    {var arg=name+"=";var alen=arg.length;var clen=document.cookie.length;var i=0;while(i<clen)
+
+                    {var j=i+alen;if(document.cookie.substring(i,j)==arg)
+
+                    return getCookieVal(j);i=document.cookie.indexOf(" ",i)+1;if(i==0)
+
+                    break;
+
+                    }return null;}function SetCookie(name,value)
+
+                    {var argv=SetCookie.arguments;var argc=SetCookie.arguments.length;var expires=(2<argc)?argv[2]:null;var path=(3<argc)?argv[3]:null;var domain=(4<argc)?argv[4]:null;var secure=(5<argc)?argv[5]:false;document.cookie=name+"="+escape(value)+((expires==null)?"":("; expires="+expires.toGMTString()))+((path==null)?"":("; path="+path))+((domain==null)?"":("; domain="+domain))+((secure==true)?"; secure":"");}function ResetCounts(name)
+
+                    {visits=0;SetCookie("visits",visits,expdate,"/",null,false);location.reload();}
+            </script>
+            <script language="JavaScript">
+                var expdate = new Date();
+                var visits;
+                expdate.setTime(expdate.getTime() + (24 * 60 * 60 * 1000 * 365));
+                if (!(visits = GetCookie("visits"))){
+                    visits = 0; visits++; SetCookie("visits", visits, expdate, "/", null, false);//以下信息显示可以使用标准的HTML语法,自己随便设置。
+                }
+                document.write("<i style='color:#999'>你已经光临本页" + "<font color='gray'>" + visits + "</FONT>" + "次！</i>");
+                if (visits == 1){
+                    document.write("" + "<i style='color:#999'>欢迎光临本站？</i>");
+                }
+                if (visits == 2){
+                    document.write("" + "<i style='color:#999'>再次光临不胜容幸!今后要常来啊！</i>");
+                }
+                if (visits == 3){
+                    document.write("" + "<i style='color:#999'>常客，在本站的论坛发个帖子如何？等待开通</i>");
+                }
+                if (visits == 4){
+                    document.write("" + "<i style='color:#999'>你很棒!</i>");
+                }
+                if (visits >= 5){
+                    document.write("" + "<i style='color:#999'>你超棒。</i>");
+                }
+            </script>
+          
       </div>
     </div>
   </body>
