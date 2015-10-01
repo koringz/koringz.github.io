@@ -1,0 +1,137 @@
+/*
+* Auther: koringz(www.seewi.com.cn);
+* -----
+* Date: 2015/9/30;
+* ----------------
+* Email: 260713986@qq.com
+* -----------------------
+* the first part. all father html
+*/
+body{
+	background-color: #10131A;
+}
+section.main{
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+}
+/*------------------***********************------------------*/
+/*
+* Page head.
+* ---------
+*/
+header.head{
+    height:150px;
+    max-height:150px;
+    /*background-color:rgb(33, 21, 51);*/
+    overflow: hidden;
+}
+/*
+* Page container.
+* ---------
+*/
+section.container{
+	height: 100%;
+	max-height: 100% !important;
+    /*background-color:rgb(199, 155, 129);*/
+}
+/*
+*
+* Auther: koringz(www.seewi.com.cn);
+* -----
+* Date: 2015/9/30;
+* ----------------
+* Email: 260713986@qq.com
+* -----------------------
+* the second part. this is children content
+*
+*/
+/*------------------***********************------------------*/
+/*
+* compenent: head.
+* ---------
+*/
+header.head >h1{
+	margin:100px 0 0 25px;
+	padding: 10px 0;
+	width: 150px;
+	font-size: 1.75rem;
+}
+header.head >nav{
+
+}
+/*
+* compenent: container.
+* ---------
+*/
+section.container >div.content{
+	margin:100px 0 20px 20%;
+	height: auto;
+	width: 60%;
+	max-width: 60%;
+}
+section.container >div.content >p{
+	color: #766454;
+	font-size: 1.25rem;
+}
+section.container >div.content >p >span{
+	color: #373636;
+}
+section.container >div.content >p >a{
+	text-decoration:none;
+	cursor:pointer;
+}
+/*
+
+什么是相对定位，相对定位指的是当前的窗口相对与父窗口的定位
+如果上一个窗口是相对浏览器默认的流，
+当前窗口相对于上一个窗口就会紧贴父窗口继承的上一个窗口的底部，
+那么当前窗口的子窗口相对于上上一个窗口就会摆脱当前的父窗口，
+从而继承当前窗口的父窗口所继承的流的相对位置改变，如果我给子窗口
+margin-top一下，就会使当前窗口的父窗口全部摆脱上一个窗口的继承流
+所以，我们应该在当前窗口的子窗口绝对定位，才能让子窗口跟随当前窗口而变
+这样可以解决子窗口在浏览器的自带外边距属性的情况下，使当前窗口的样式发生改变
+
+*
+*use-of-software
+*
+*/
+
+/*
+*
+* Auther: koringz(www.seewi.com.cn);
+* -----
+* Date: 2015/9/30;
+* ----------------
+* Email: 260713986@qq.com
+* -----------------------
+* the third part. this is public Element html.
+*
+*/
+/*------------------***********************------------------*/
+header.head,
+section.container{
+    width: 86%;
+    max-width: 86%;
+}
+
+.cc01{
+	color: #8e3757;
+}
+.cc02{
+	color: #563475;
+}
+.cc03{
+	color: #0bcc86;
+}
+.cc04{
+	color: #737c0e;
+}
+.cc05{
+	color: #8d8e91;
+}
+.cc06{
+	color:#eee;
+}

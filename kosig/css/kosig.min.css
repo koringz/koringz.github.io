@@ -1,0 +1,121 @@
+/**{*/
+/*box-sizing:border-box;*/
+/*box-sizing:-webkit-border-box;*/
+/*box-sizing:-moz-border-box;*/
+/*}*/
+
+/*
+*
+* Auther: koringz;
+* \\\\\\\\-----[
+* Date: 2015/9/30;
+* ----------------
+* Email: 260713986@qq.com
+* '****'
+* Website;www.seewi.com.cn
+* ****************
+*
+*
+*/
+
+/************* ***************/
+/************* ***************/
+/************* ***************/
+/*************如果样式只有一个单词，单词输出值不是一个单词，而是字符串或者数字，表示默认继承window，直接用首字母定义***************/
+/*************如果样式不是一个单词，而是一个驼峰的单词，就用被-分割开来的二个首字母来定义***************/
+/*************如果样式不是一个单词，单词输出的值是一个单词，那么定义它的时候，就用首字母的追加模式，双写首字母。**************/
+/*************如果输出单词有重复，就在结尾加一个0(viod),表示空字符，在空字符后面追加一个当前单词尾部的一个字母 ***************/
+/*************如果输出单词有重复，而且是驼峰的字符，就在结尾的最后一个字符加一个0(viod),表示空字符，在空字符后面追加一个当前单词尾部的一个字母***************/
+/************* ***************/
+/************* ***************/
+
+
+
+/*表示定义陈列的元素*/
+.ddb{display:block;}
+.ddib{display:inline-block;}
+.ddi{display:inline;}
+.ddt{display:table;}/*此元素会作为块级表格来显示（类似 <table>），表格前后带有换行符。*/
+.ddi0t{display:inherit;}
+/**/
+.ppa{position:absolute;}
+.ppr{position:relative;}
+/*默认情况为根据window窗口定义宽度*/
+.w{ width:100%;}
+/*默认情况为根据height窗口定义宽度*/
+.h{ height:100%;}
+/* margin后面的冒号定义为追加首字母 * */ /* this is margin style */
+.mma{ margin:auto;}
+/* 表示定义浮动属性*/
+.ffl{float:left;}
+.ffr{float:right;}
+/* 给字体定义大小*/
+.fs12{font-size:12px;}
+.fs13{font-size:13px}
+.fs14{font-size:14px;}
+.fs15{font-size:15px;}
+.fs16{font-size:16px;}
+.fs17{font-size:17px;}
+.fs18{font-size:18px;}
+.fs19{font-size:19px;}
+.fs20{font-size:20px;}
+/* H1 - H6 font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {font-family: 'Source Sans Pro', sans-serif;}
+/*文本的水平对齐方式*/
+.tac{text-align:center;}
+.tal{text-align:left;}
+.tar{text-align:right;}
+/*文本的垂直对齐方式*/
+.vam{vertical-align:middle;}
+.vat{vertical-align:top;}
+.vab{vertical-align:bottom;}
+/**/
+.lh{line-height:1;}/*line-height:100%;*/
+/*背景颜色*/
+.bcg0y{background-color:gray;}
+.bcg0n{background-color:green;}
+.bcp{background-color:pink;}
+.bcr{background-color:red;}
+.bcy{background-color:yellow;}
+.bcb{background-color:blue;}
+/**/
+/*字体颜色*/
+.ccg0y{color:gray;}
+.ccg0n{color:green;}
+.ccr{color:red;}
+.ccy{color:yellow;}
+.ccb{color:blue;}
+.ccp{color:pink;}
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+
+
+
+
