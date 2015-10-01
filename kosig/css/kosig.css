@@ -4,9 +4,17 @@
     box-sizing:-webkit-border-box;
     box-sizing:-moz-border-box;
 }
-html,body{
+html,body,p{
 	margin: 0;
 	padding: 0;
+}
+a{
+	text-decoration:none;
+	cursor:pointer;
+}
+a:hover{
+	text-decoration:none;
+	cursor:pointer;
 }
 /*
 *
