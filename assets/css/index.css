@@ -9,9 +9,10 @@
 */
 body{
 	font-size: 100%;
+	letter-spacing: 0.08rem;
 	background-color: #10131A;
-}
-section.main{
+	}
+ .main{
 	top: 0;
 	left: 0;
 	right: 0;
@@ -23,7 +24,7 @@ section.main{
 * Page head.
 * ---------
 */
-header.head{
+ .head{
     height:150px;
     max-height:150px;
 }
@@ -31,7 +32,7 @@ header.head{
 * Page container.
 * ---------
 */
-section.container{
+ .container{
 	height: 100%;
 	max-height: 100% !important;
     /*background-color:rgb(199, 155, 129);*/
@@ -52,23 +53,24 @@ section.container{
 * compenent: head.
 * ---------
 */
-header.head >h1{
+ .head >h1{
 	margin:100px 0 0 25px;
 	padding-bottom: 10px;
 	width: 150px;
 	font-size: 1.75rem;
 }
-header.head >h1:hover{
+ .head >h1:hover{
 	font-size: 1.8rem;
 	color:#f2f2f2;
 }
-header.head >nav{
+ .head >.menu{
 	margin:98px 0 0 ;
 	width: 100px;
 }
-header.head >nav >p{
+ .head >.menu >.menu-bar{
+ 	position: relative;
 }
-header.head >nav >p >span{
+ .head >.menu >.menu-bar >.box-bar{
 	position: relative;
 	display: inline-block;
 	width: 90%;
@@ -76,75 +78,84 @@ header.head >nav >p >span{
 	height: 250px;
 	z-index: 999;
 }
-header.head >nav >p >span >span{
+ .head >.menu >.menu-bar >.box-bar >.box-grid{
 	position: relative;
 	display: inline-block;
 	margin-left: -1px;/*因为宽度百分之百，有边框就增加了1像素宽度*/
 	width: 100%;
 	height: 42px;
 	line-height: 42px;
-	border:1px solid rgba(255, 255, 255, 0.5);
+	border:1px solid rgb(255, 255, 255);/*ie不能显示rgba，但是能显示rgb*/
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
+	-ms-border-radius:5px;
 	border-radius:5px;
 	text-align: center;
-	font-size: 12px;
+	font-size: 14px;
 	overflow: hidden;
-	z-index: 9;
 	cursor: pointer;
+	z-index: 9;
 }
 
-header.head >nav >p >span:hover >span:hover{
+ .head >.menu >.menu-bar >.box-bar:hover >.box-grid:hover{
 	background-color: #fff;/*on moues over btn change color*/
+	border-color: rgb(111, 111, 111);/*ie不能显示rgba，但是能显示rgb*/
 	color: #222;
-	-webkit-transition:all 0.5s;
-	-moz-transition:all 0.5s;
-	transition:all 0.5s;
+	-webkit-transition:all 0.2s ease;
+	-moz-transition:all 0.2s ease;
+	transition:all 0.2s ease;
+	background:-webkit-linear-gradient(to bottom,rgba(255,255,255,.9) 0%,rgba(255,255,255,.9) 25%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.9) 75%,rgba(255,255,255,1) 100%);
+	background:-moz-linear-gradient(to bottom,rgba(255,255,255,.9) 0%,rgba(255,255,255,.9) 25%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.9) 75%,rgba(255,255,255,1) 100%);
+	background:linear-gradient(to bottom,rgba(255,255,255,.9) 0%,rgba(255,255,255,.9) 25%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.9) 75%,rgba(255,255,255,1) 100%);
 	overflow: visible;
 }
-header.head >nav >p >span >span >a{
+ .head >.menu >.menu-bar >.box-bar >.box-grid >a{
 	position: relative;
 	display: inline-block;
 	float: right;
-	width: 100%;
+	width: 88px;
 	height: 41px;
 	line-height: 41px;
-	border-left:1px rgba(255, 255, 255, 0.7) solid ;
-	border-right:1px rgba(255, 255, 255, 0.7) solid ;
-	border-bottom:1px rgba(255, 255, 255, 0.7) solid ;
+	border-left:1px rgb(155, 189, 157) solid ;
+	border-right:1px rgb(155, 189, 157) solid ;
+	border-bottom:1px rgb(155, 189, 157) solid ;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
+	-ms-border-radius:5px;
 	border-radius:5px;
+	white-space:nowrap;
 	text-align: center;
 	color: #eee;
 	font-size: 16px;
 }
-header.head >nav >p >span:hover >span:hover >a:hover{
+ .head >.menu >.menu-bar >.box-bar:hover >.box-grid:hover >a:hover{
 	background-color: #f2f2f2;/*on moues over btn change color*/
 	color: #222;
-	-webkit-transition:all 0.3s ease;
-	-moz-transition:all 0.3s ease;
-	transition:all 0.3s ease;
+	-webkit-transition:all 0.2s ease;
+	-moz-transition:all 0.2s ease;
+	-ms-transition:all 0.2s ease;
+	transition:all 0.2s ease;
 
 }
-header.head >nav >p >span:hover >span:hover >a{
+ .head >.menu >.menu-bar:hover >.box-bar:hover >a{
 	box-shadow: 1px 0px 0px rgba(255,255,255,0.3), 0px 1px 0px rgba(255,255,255,0.3), -1px 0px 1px rgba(255,255,255,0.3), 0px -1px 1px rgba(255,255,255,0.5);
 }
 /*
 * compenent: container.
 * ---------
 */
-section.container >div.content{
+ .container >div.content{
 	margin:100px 0 20px 20%;
 	height: auto;
 	width: 60%;
 	min-width: 60%;
 }
-section.container >div.content >p{
+ .container >div.content >p{
 	color: #766454;
 	font-size: 1.25rem;
+	line-height: 2rem;
 }
-section.container >div.content >p >span{
+ .container >div.content >p >span{
 	color: #373636;
 }
 /*
@@ -175,13 +186,13 @@ margin-top一下，就会使当前窗口的父窗口全部摆脱上一个窗口�
 *
 */
 /*------------------***********************------------------*/
-header.head,
-section.container{
+ .head,
+ .container{
     width: 66%;
     min-width: 480px;
 }
-header.head >nav >p >span >span,
-header.head >nav >p >span >span >a{
+ .head >div.menu >p.menu-bar >span.box-bar >span,
+ .head >div.menu >p.menu-bar >span.box-bar >span >a{
 	font-family: 'Open Sans', sans-serif;
 }
 .cc01{
