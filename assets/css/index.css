@@ -161,6 +161,9 @@ body{
  .container >div.content >p >span{
 	color: #373636;
 }
+ .container >div.content >p >a:hover{
+	text-transform:lowercase; 
+}
 /*
 
 什么是相对定位，相对定位指的是当前的窗口相对与父窗口的定位
