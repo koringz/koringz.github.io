@@ -1,0 +1,125 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:300);
+
+body {
+  background: #5a279c;
+  color: #fff;
+}
+
+$size: 50px;
+$width: 300px;
+$stroke: 1px;
+$speed: 0.4s;
+
+.inputbox {
+  height: $size;
+  width: $width;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: ($size - 16 - 1)/2 0;
+    border: 0;
+    background: none;
+    width: $size;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 100%;
+    transition: width $speed ease-in-out, border-radius $speed ease-in-out, padding $speed/2;
+    transition-delay: 0s, $speed, 0s;
+    box-shadow: 0 0 0 $stroke currentColor;
+    color: inherit;
+    cursor: pointer;
+    padding: ($size - 16 - 1)/2 0;
+    padding-right: $size;
+    font-weight: lighter;
+    font-family: 'Roboto';
+
+    &:focus, &:valid {
+      width: 100%;
+      transition-delay: $speed, 0s, $speed;
+      outline: 0;
+      border-radius: 0;
+      cursor: text;
+      padding-left: ($size - 16 - 1)/2;
+
+      
+      +.del {
+        pointer-events: all;
+        left: calc(100% - #{$size/2});
+        transition-delay: $speed;
+        
+        &:focus {
+          box-shadow: 0 0 0 1px currentColor;
+          height: $size/4*3;
+          width: $size/4*3;
+        }
+      &:before {
+          transform: translate(-50%,-50%) rotate(-45deg) scaleY(0.7);
+          transition-delay: 0s;
+
+        }
+       &:after {
+         transform: translate(-50%,-50%) rotate(45deg) scaleY(0.7);
+          transition-delay: $speed/2;
+
+        }
+      }
+    }
+  }
+  
+  .del {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: $size;
+    width: $size;
+    padding: 0;
+    background: none;
+    border-radius: 100%;
+    border: 0;
+    pointer-events: none;
+    transition: left $speed ease-in-out;
+    transition-delay: 0s;
+    color: inherit;
+    cursor: pointer;
+   
+    &:focus {
+      outline: none;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background:  currentColor;
+      width: $stroke;
+      height: $size/4*3;
+      transform: translate($size/8*5 + 1,$size/8*5 + 1) translate(-50%,-50%) rotate(-45deg) scaleY(1);
+      transition: transform $speed/2 ease-in-out;
+      transition-delay: $speed*1.5;
+  }
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background:  currentColor;
+      width: $stroke;
+      height: $size/4*3;
+      transform: translate(-50%,-50%) rotate(45deg) scaleY(0);
+      transition: transform $speed/2 ease-in-out;
+      transition-delay: $speed;
+    }
+  }
+
+}

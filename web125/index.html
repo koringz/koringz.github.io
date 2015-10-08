@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+         <title>Ajax test</title>
+    </head>
+    <body>
+    	<div id="test"></div>
+
+    	<script type="text/javascript">
+
+    	function getHTTPobject() {
+    		if (typeof XMLHttpRequest  == 'undefined') { //异部请求是否定义
+    			XMLHttpRequest = function(){
+    				try{
+    					return new ActiveXObject('Microsoft.XMLHTTP');
+    				}catch(e){
+    					
+    				}
+    				return false;
+    			}
+    		}
+    		return new XMLHttpRequest();
+    	}
+
+
+    	function getcontent() {
+    		var request = getHTTPobject();
+
+    		if(request){
+    			request.open('GET','text.txt',true);
+    			request.onreadystatechange = function (argument) {
+    				if(request.readyState == 4){
+    					console.log('okay');
+    					var p  = document.createElement('p');
+    					var str = document.createTextNode(request.responseText);
+    					p.appendChild(str);
+    					document.getElementById('test').appendChild(p);
+    				}
+    			};
+
+    			request.send(null);
+    		}
+    		else{
+    			console.log('browser does not suport http')
+    		}
+
+    	}
+    	function addloadevent (fun) {
+    		var oldload = window.onload;
+    		if(typeof window.onload != 'function'){
+    			window.onload = fun;
+    		}else{
+    			window.onload = function  () {
+    			oldload();
+    			fun();
+    		}
+    	}
+    }
+    		addloadevent (getcontent)
+
+
+    	</script>
+    </body>
+</html>
