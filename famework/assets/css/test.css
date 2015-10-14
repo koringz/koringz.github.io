@@ -1,0 +1,114 @@
+a:link{text-decoration:none;}
+
+.Framework-topbar{position:fixed;width:100%;background:#09C;height:50px;z-index:101}
+.Framework-control-topbar{position:relative;z-index:100;clear:both;height:50px;background:rgba(8, 178, 241,.);font-size:12px;min-width:990px}
+.Framework-control-topbar .topbar-wrap,
+.Framework-control-topbar .topbar-logo,
+.Framework-control-topbar .topbar-home,
+.Framework-control-topbar .topbar-home-link,
+.Framework-control-topbar .topbar-nav,
+.Framework-control-topbar .topbar-info{height:100%}
+.Framework-control-topbar .topbar-left{float:left}
+.Framework-control-topbar .topbar-right{float:right}
+.Framework-control-topbar .topbar-clearfix:before,
+.Framework-control-topbar .topbar-clearfix:after{display:table;content:" "}
+.Framework-control-topbar .topbar-clearfix:after{clear:both}
+
+.Framework-control-topbar .topbar-head{background:#008fbf;height:50px;position:relative;z-index:3}
+
+.Framework-control-topbar .topbar-btn{color:#fff;font-size:14px;line-height:50px}
+.Framework-control-topbar .topbar-home-link{padding:0 20px;margin-right:1px;background:#09c}
+
+.Framework-control-topbar .topbar-nav{position:relative;z-index:2;background:#09C}
+
+.Framework-control-topbar .topbar-nav-btn{padding:0 20px;display:inline-block;height:50px}
+.Framework-control-topbar .icon-arrow-down{display:inline-block;width:18px;text-align:center;vertical-align:middle;transition:transform 0.2s,vertical-align 0.2s;-o-transition:transform 0.2s,vertical-align 0.2s;-ms-transition:transform 0.2s,vertical-align 0.2s;-moz-transition:transform 0.2s,vertical-align 0.2s;-webkit-transition:transform 0.2s,vertical-align 0.2s}
+
+/**/
+
+.Framework-control-topbar .topbar-info .topbar-btn{padding:0 10px;height:50px;display:block;z-index:2;background:#09c}
+.Framework-control-topbar .topbar-notice{position:relative;font-size:12px;margin-left:1px;padding:0 12px 0 8px !important}
+
+
+
+.Framework-control-topbar .topbar-btn-notice .topbar-btn-notice-num{font-size:12px;color:#fff;background:rgb(78, 30, 36);border-radius:5px;padding:2px 5px;display:inline-block;margin-top:15px;line-height:16px;vertical-align:top;text-align:center}
+.Framework-control-topbar .topbar-info-item{display:inline-block;margin-left:1px}
+.dropdown {  position: relative;  }
+
+
+.Framework-control-topbar .topbar-info .dropdown .dropdown-menu{width:100%;min-width:0px;margin-top:-1px;border:none}
+.Framework-control-topbar .dropdown .dropdown-menu{z-index:1;font-size:12px;border-radius:0;-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.1);-moz-box-shadow:0 1px 3px rgba(0,0,0,0.1);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.dropdown-menu{font-size:12px;border-radius:0px;padding:0px;box-shadow:2px 2px 8px rgba(0,0,0,0.2)}
+
+
+.Framework-control-topbar .topbar-info .topbar-info-btn{height:40px;border-bottom:1px solid #eaedf1}
+.Framework-control-topbar .topbar-info .topbar-info-btn a{line-height:40px;padding-left:10px}
+.Framework-control-topbar .dropdown .dropdown-menu a{padding:0}
+.Framework-control-topbar .topbar-left{float:left}
+
+
+/*
+*this is the Framework-container!
+* -----------------------------
+*/
+.Framework-container { position: absolute; width: 100%; top: 50px; bottom: 0px; background-color: #000; z-index: 100; }
+/*
+*this is the module left aside framework!
+* -----------------------------
+*/
+
+.Framework-sidebar {  width:180px; position: fixed; top: 50px; bottom: 0px; background-color: #293038; z-index: 102; overflow-x: hidden; }
+.Framework-sidebar .sidebar-fold{height:30px;width:180px;background:#394555;color:#aeb9c2;text-align:center;line-height:30px!important;font-size:12px;user-select:none;cursor:pointer;-webkit-user-select:none;-moz-user-select:none}
+.Framework-sidebar .sidebar-content{width:100%;height:100%;overflow:auto;overflow-x:hidden}
+.Framework-sidebar ul { margin: 0px; padding: 0px; list-style: none; overflow: hidden; }
+/*.Framework-sidebar .nav-item{position:relative;border-bottom:1px solid rgba(45, 149, 216,.1);}*/
+.Framework-sidebar .nav-item:hover{background-color:rgba(45, 149, 216,.3);}
+.Framework-sidebar li a{display:block;width:100%;height:40px;line-height:40px;overflow:hidden}
+.Framework-sidebar .nav-icon{height:50px;width:50px;text-align:center;font-size:16px;float:left;color:#aeb9c2}
+.Framework-sidebar .sidebar-trans{-webkit-transition: all 0.12s ease,0.12s ease; }
+.Framework-sidebar .nav-title{float:left;overflow:hidden;color:#eee;white-space:nowrap;text-overflow:ellipsis;display:block;width:130px}
+
+/*
+*this is the module right container framework !
+* -----------------------------
+*/
+.Framework-product { width: auto; position: absolute; top: 0px; /*left: 0px;*/ bottom: 0px; right: 0px; overflow: hidden; background: #FFF; }
+.Framework-sidebar-full .Framework-product { left: 180px; }
+
+/*
+*
+* show information in the aside navbar !
+*
+*/
+.Framework-product-navbar{float:left;background-color:#EAEDF1;position:absolute;top:0px;bottom:0px;z-index:2;overflow:hidden;-o-transition:all 0.2s ease;-ms-transition:all 0.2s ease;-moz-transition:all 0.2s ease;-webkit-transition:all 0.2s ease}
+.Framework-product-navbar .product-nav-stage{/*width:180px;*/overflow:hidden;position:absolute;left:0;top:0px;bottom:0px;right:0px}
+.Framework-product-navbar .product-nav-stage .product-nav-scene{width:180px;position:absolute;top:0px;bottom:0px;-webkit-transition:position,.2s,linear;-moz-transition:position,.2s,linear}
+.Framework-product-navbar .product-nav-scene .product-nav-title{/*width:180px;*//*ie浏览器 white-space*/ height:70px;line-height:70px;background:#D9DEE4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.Framework-product-navbar .product-nav-main-scene .product-nav-title{font-weight:bold;text-indent:20px}
+
+.Framework-product-navbar .product-nav-list{position:absolute;top:70px;left:0px;right:0px;bottom:0px;overflow-y:auto;overflow-x:hidden}
+.Framework-product-navbar .product-nav-list ul{list-style:none;padding:0px;margin:0px}
+.Framework-product-navbar .product-nav-list li a{width:180px;height:40px;line-height:40px;display:block;color:#333;text-indent:25px;}
+.Framework-product-navbar .product-nav-list li.active a{background-color:#fff;}
+
+/*
+* connection the module content!
+* ? ------------
+*/
+.Framework-product-body{position:absolute;width:auto;top:0px;bottom:0px;left:0px;right:0px;overflow:hidden;overflow-y:auto;-o-transition:all 0.2s ease;-ms-transition:all 0.2s ease;-moz-transition:all 0.2s ease;-webkit-transition:all 0.2s ease}
+.Framework-product-col-1 .Framework-product-body{/*left:180px*/}
+
+.console-container{padding: 0 15px;}
+.row{margin-right: -15px; margin-left: -15px;}
+.console-title{padding:20px 0; min-height:80px;}
+
+/*
+* public container css style !
+*
+*/
+.Framework-product-col-1 .Framework-product-navbar-bg,.Framework-product-col-1 .Framework-product-navbar{/*width:0*/ /*动画效果*/}
+.col-xs-1,.col-sm-1,.col-md-1,.col-lg-1,.col-xs-2,.col-sm-2,.col-md-2,.col-lg-2,.col-xs-3,.col-sm-3,.col-md-3,.col-lg-3,.col-xs-4,.col-sm-4,.col-md-4,.col-lg-4,.col-xs-5,.col-sm-5,.col-md-5,.col-lg-5,.col-xs-6,.col-sm-6,.col-md-6,.col-lg-6,.col-xs-7,.col-sm-7,.col-md-7,.col-lg-7,.col-xs-8,.col-sm-8,.col-md-8,.col-lg-8,.col-xs-9,.col-sm-9,.col-md-9,.col-lg-9,.col-xs-10,.col-sm-10,.col-md-10,.col-lg-10,.col-xs-11,.col-sm-11,.col-md-11,.col-lg-11,.col-xs-12,.col-sm-12,.col-md-12,.col-lg-12{position:relative;min-height:1px;padding-right:15px;padding-left:15px}
+.show{display: block;}
+.hidden{display: hidden;}
+
+
