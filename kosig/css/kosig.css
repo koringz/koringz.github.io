@@ -13,12 +13,8 @@ html,body,p{
 	padding: 0;
 }
 a{
-	text-decoration:none;
 	cursor:pointer;
-}
-a:hover{
 	text-decoration:none;
-	cursor:pointer;
 }
 /*
 *
@@ -28,7 +24,7 @@ a:hover{
 * ----------------
 * Email: 260713986@qq.com
 * '****'
-* Website;www.seewi.com.cn
+* Website: https://koringz.github.io;
 * ****************
 *
 */
@@ -112,23 +108,6 @@ h6,
 .ccy{color:yellow;}
 .ccb{color:blue;}
 .ccp{color:pink;}
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
 /**/
 
 
