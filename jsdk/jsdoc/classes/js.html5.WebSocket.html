@@ -1,0 +1,114 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.html5.WebSocket</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-html5-websocket.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.html5</div>
+<div class="topic" title="js.html5.WebSocket">
+Class: 
+WebSocket</div>
+
+<b>public</b> WebSocket
+
+<hr/>
+
+<pre class="desc">
+URI format: scheme://user:passward@host:port/path?query#fragment</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="WebSocket" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public WebSocket">+ WebSocket</span></span>(<i title="optional"><b>host</b></i>:String, <i title="optional"><b>port</b></i>:Int, <i title="optional"><b>path</b></i>:String)</span>
+<div id="WebSocket_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>host</b></i>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>port</b></i>  &lt;Int&gt; </dd><br/>
+<dd><i title="optional"><b>path</b></i>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;Error&gt; when the browser not support HTML5's WebSocket</dd><br/>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="host" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public host">+ host</span></span>: String</span>
+<div id="host_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="port" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public port">+ port</span></span>: Int</span>
+<div id="port_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="path" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public path">+ path</span></span>: String</span>
+<div id="path_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="getStatus" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getStatus">+ getStatus</span></span>():Int</span>
+<div id="getStatus_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; status</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="connect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public connect">+ connect</span></span>():void</span>
+<div id="connect_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="on" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public on">+ on</span></span>(<span title="required"><b>eName</b></span>:String, <span title="required"><b>fn</b></span>:Function):void</span>
+<div id="on_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>eName</b></span>  &lt;String&gt; values: open|message|close|error</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="send" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public send">+ send</span></span>(<span title="required"><b>data</b></span>:String):void</span>
+<div id="send_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>data</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="close" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public close">+ close</span></span>():void</span>
+<div id="close_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Events</td></tr></thead><tr><td>
+<span id="@open" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="open">open</span>
+<div id="@open_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@message" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="message">message</span>
+<div id="@message_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@close" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="close">close</span>
+<div id="@close_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@error" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="error">error</span>
+<div id="@error_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr></table><br/>
+
+</BODY>
+</HTML>

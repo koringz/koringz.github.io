@@ -1,0 +1,76 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.util.Cookie</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-util-cookie.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.util</div>
+<div class="topic" title="js.util.Cookie">
+Class: 
+Cookie</div>
+
+<b>public final static</b> Cookie
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="NAME_SPACE" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static NAME_SPACE">+ <b>NAME_SPACE</b></span></span>: String</span>
+<div id="NAME_SPACE_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="write" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static write">+ <b>write</b></span></span>(<span title="required"><b>key</b></span>:String, <span title="required"><b>value</b></span>:String|Number, <i title="optional"><b>expires</b></i>:Date, <i title="optional"><b>path</b></i>:String):void</span>
+<div id="write_detail" style="display: none;">
+<pre class="desc">Write to cookie.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>key</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>value</b></span>  &lt;String|Number&gt; </dd><br/>
+<dd><i title="optional"><b>expires</b></i>  &lt;Date&gt; </dd><br/>
+<dd><i title="optional"><b>path</b></i>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="read" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static read">+ <b>read</b></span></span>(<span title="required"><b>key</b></span>:String):String</span>
+<div id="read_detail" style="display: none;">
+<pre class="desc">Read the value of the key.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>key</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="clear" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static clear">+ <b>clear</b></span></span>(<span title="required"><b>key</b></span>:String):void</span>
+<div id="clear_detail" style="display: none;">
+<pre class="desc">Clear the value of the key.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>key</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

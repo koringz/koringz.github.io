@@ -1,0 +1,86 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.lang.Loader</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.lang</div>
+<div class="topic" title="js.lang.Loader">
+Class: 
+Loader</div>
+
+<b>public static</b> Loader
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="SOURCE_ROOT_DIR" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static SOURCE_ROOT_DIR">+ <b>SOURCE_ROOT_DIR</b></span></span>: String</span>
+<div id="SOURCE_ROOT_DIR_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="loadImage" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static loadImage">+ <b>loadImage</b></span></span>(<span title="required"><b>url</b></span>:String|Array, <i title="optional"><b>loadHandler</b></i>:<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>, <i title="optional"><b>errorHandler</b></i>:<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>):void</span>
+<div id="loadImage_detail" style="display: none;">
+<pre class="desc">Load many images from URL.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>url</b></span>  &lt;String|Array&gt; the images's url</dd><br/>
+<dd><i title="optional"><b>loadHandler</b></i>  &lt;<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>&gt; </dd><br/>
+<dd><i title="optional"><b>errorHandler</b></i>  &lt;<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="loadCss" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static loadCss">+ <b>loadCss</b></span></span>(<span title="required"><b>cssConfig</b></span>:<a href="js.lang.Loader$cssConfig.html" title="js.lang.Loader$cssConfig">Loader$cssConfig</a>):Boolean</span>
+<div id="loadCss_detail" style="display: none;">
+<pre class="desc">Load css from URL.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>cssConfig</b></span>  &lt;<a href="js.lang.Loader$cssConfig.html" title="js.lang.Loader$cssConfig">Loader$cssConfig</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="loadJs" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static loadJs">+ <b>loadJs</b></span></span>(<span title="required"><b>jsConfig</b></span>:<a href="js.lang.Loader$jsConfig.html" title="js.lang.Loader$jsConfig">Loader$jsConfig</a>):Boolean</span>
+<div id="loadJs_detail" style="display: none;">
+<pre class="desc">Load js from URL.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>jsConfig</b></span>  &lt;<a href="js.lang.Loader$jsConfig.html" title="js.lang.Loader$jsConfig">Loader$jsConfig</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="loadLib" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static loadLib">+ <b>loadLib</b></span></span>(<span title="required"><b>resList</b></span>:<a href="js.lang.Loader$resList.html" title="js.lang.Loader$resList">Loader$resList</a>, <span title="required"><b>fnLoad</b></span>:Function):void</span>
+<div id="loadLib_detail" style="display: none;">
+<pre class="desc">Load js or css from URL.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>resList</b></span>  &lt;<a href="js.lang.Loader$resList.html" title="js.lang.Loader$resList">Loader$resList</a>&gt; </dd><br/>
+<dd><span title="required"><b>fnLoad</b></span>  &lt;Function&gt; </dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;Error&gt; when loading failure</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

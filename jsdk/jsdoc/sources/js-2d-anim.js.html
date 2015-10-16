@@ -1,0 +1,901 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">js2d\js-2d-anim.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.3
+ * @author feng.chun
+ * @date 2011-01-05
+ * @date 2011-01-11
+ * @date 2011-03-22
+ * 
+ * @version 0.2
+ * @author feng.chun
+ * @date 2010-12-31
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-10-6
+ * 
+ * @requires /core/js-core.js
+ * @requires /core/js-mathphys.js
+ */</span>
+js.lang.System.namespace('js.anim');
+
+(<b>function </b>(){
+    <b>var </b>SYS = js.lang.System
+      , D = js.core.Dom
+      , $ = js.core.Dom.$
+      , MT = js.math.MathTool
+      , G2D = js.math.Geom2D;
+
+<span class="multiComment">/**
+ * Math formulas.
+ * 
+ * @class js.anim.Formulas 
+ * @singleton
+ */</span>
+js.anim.Formulas = {
+<span class="multiComment">    /**
+     * @method linear
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    linear: <b>function </b>(t,b,c,d){ <b>return</b> c*t/d + b; },
+<span class="multiComment">    /**
+     * @method quad_easein
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    quad_easein: <b>function </b>(t,b,c,d){
+        <b>return</b> c*(t/=d)*t + b;
+    },
+<span class="multiComment">    /**
+     * @method quad_easeout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    quad_easeout: <b>function </b>(t,b,c,d){
+        <b>return</b> -c *(t/=d)*(t-2) + b;
+    },
+<span class="multiComment">    /**
+     * @method quad_easeinout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    quad_easeinout: <b>function </b>(t,b,c,d){
+        <b>if </b>((t/=d/2) &lt; 1) <b>return</b> c/2*t*t + b;
+        <b>return</b> -c/2 * ((--t)*(t-2) - 1) + b;
+    },
+<span class="multiComment">    /**
+     * @method cubic_easein
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    cubic_easein: <b>function </b>(t,b,c,d){
+        <b>return</b> c*(t/=d)*t*t + b;
+    },
+<span class="multiComment">    /**
+     * @method cubic_easeout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    cubic_easeout: <b>function </b>(t,b,c,d){
+        <b>return</b> c*((t=t/d-1)*t*t + 1) + b;
+    },
+<span class="multiComment">    /**
+     * @method cubic_easeinout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    cubic_easeinout: <b>function </b>(t,b,c,d){
+        <b>if </b>((t/=d/2) &lt; 1) <b>return</b> c/2*t*t*t + b;
+        <b>return</b> c/2*((t-=2)*t*t + 2) + b;
+    },
+<span class="multiComment">    /**
+     * @method quart_easein
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    quart_easein: <b>function </b>(t,b,c,d){
+        <b>return</b> c*(t/=d)*t*t*t + b;
+    },
+<span class="multiComment">    /**
+     * @method quart_easeout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    quart_easeout: <b>function </b>(t,b,c,d){
+        <b>return</b> -c * ((t=t/d-1)*t*t*t - 1) + b;
+    },
+<span class="multiComment">    /**
+     * @method quart_easeinout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    quart_easeinout: <b>function </b>(t,b,c,d){
+        <b>if </b>((t/=d/2) &lt; 1) <b>return</b> c/2*t*t*t*t + b;
+        <b>return</b> -c/2 * ((t-=2)*t*t*t - 2) + b;
+    },
+<span class="multiComment">    /**
+     * @method quint_easein
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    quint_easein: <b>function </b>(t,b,c,d){
+        <b>return</b> c*(t/=d)*t*t*t*t + b;
+    },
+<span class="multiComment">    /**
+     * @method quint_easeout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    quint_easeout: <b>function </b>(t,b,c,d){
+        <b>return</b> c*((t=t/d-1)*t*t*t*t + 1) + b;
+    },
+<span class="multiComment">    /**
+     * @method quint_easeinout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    quint_easeinout: <b>function </b>(t,b,c,d){
+        <b>if </b>((t/=d/2) &lt; 1) <b>return</b> c/2*t*t*t*t*t + b;
+        <b>return</b> c/2*((t-=2)*t*t*t*t + 2) + b;
+    },
+<span class="multiComment">    /**
+     * @method sine_easein
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    sine_easein: <b>function </b>(t,b,c,d){
+        <b>return</b> -c * Math.cos(t/d * (Math.PI/2)) + c + b;
+    },
+<span class="multiComment">    /**
+     * @method sine_easeout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    sine_easeout: <b>function </b>(t,b,c,d){
+        <b>return</b> c * Math.sin(t/d * (Math.PI/2)) + b;
+    },
+<span class="multiComment">    /**
+     * @method sine_easeinout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    sine_easeinout: <b>function </b>(t,b,c,d){
+        <b>return</b> -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
+    },
+<span class="multiComment">    /**
+     * @method expo_easein
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    expo_easein: <b>function </b>(t,b,c,d){
+        <b>return</b> (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
+    },
+<span class="multiComment">    /**
+     * @method expo_easeout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    expo_easeout: <b>function </b>(t,b,c,d){
+        <b>return</b> (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+    },
+<span class="multiComment">    /**
+     * @method expo_easeinout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    expo_easeinout: <b>function </b>(t,b,c,d){
+        <b>if </b>(t==0) <b>return</b> b;
+        <b>if </b>(t==d) <b>return</b> b+c;
+        <b>if </b>((t/=d/2) &lt; 1) <b>return</b> c/2 * Math.pow(2, 10 * (t - 1)) + b;
+        <b>return</b> c/2 * (-Math.pow(2, -10 * --t) + 2) + b;
+    },
+<span class="multiComment">    /**
+     * @method circ_easein
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    circ_easein: <b>function </b>(t,b,c,d){
+        <b>return</b> -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
+    },
+<span class="multiComment">    /**
+     * @method circ_easeout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    circ_easeout: <b>function </b>(t,b,c,d){
+        <b>return</b> c * Math.sqrt(1 - (t=t/d-1)*t) + b;
+    },
+<span class="multiComment">    /**
+     * @method circ_easeinout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    circ_easeinout: <b>function </b>(t,b,c,d){
+        <b>if </b>((t/=d/2) &lt; 1) <b>return</b> -c/2 * (Math.sqrt(1 - t*t) - 1) + b;
+        <b>return</b> c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;
+    },
+<span class="multiComment">    /**
+     * @method elastic_easein
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    elastic_easein: <b>function </b>(t,b,c,d,a,p){
+        <b>if </b>(t==0) <b>return</b> b;  <b>if </b>((t/=d)==1) <b>return</b> b+c;  <b>if </b>(!p) p=d*.3;
+        <b>if </b>(!a || a &lt; Math.abs(c)) { a=c; <b>var </b>s=p/4; }
+        <b>else </b><b>var </b>s = p/(2*Math.PI) * Math.asin (c/a);
+        <b>return</b> -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+    },
+<span class="multiComment">    /**
+     * @method elastic_easeout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    elastic_easeout: <b>function </b>(t,b,c,d,a,p){
+        <b>if </b>(t==0) <b>return</b> b;  <b>if </b>((t/=d)==1) <b>return</b> b+c;  <b>if </b>(!p) p=d*.3;
+        <b>if </b>(!a || a &lt; Math.abs(c)) { a=c; <b>var </b>s=p/4; }
+        <b>else </b><b>var </b>s = p/(2*Math.PI) * Math.asin (c/a);
+        <b>return</b> (a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b);
+    },
+<span class="multiComment">    /**
+     * @method elastic_easeinout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    elastic_easeinout: <b>function </b>(t,b,c,d,a,p){
+        <b>if </b>(t==0) <b>return</b> b;  <b>if </b>((t/=d/2)==2) <b>return</b> b+c;  <b>if </b>(!p) p=d*(.3*1.5);
+        <b>if </b>(!a || a &lt; Math.abs(c)) { a=c; <b>var </b>s=p/4; }
+        <b>else </b><b>var </b>s = p/(2*Math.PI) * Math.asin (c/a);
+        <b>if </b>(t &lt; 1) <b>return</b> -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+        <b>return</b> a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;
+    },
+<span class="multiComment">    /**
+     * @method back_easein
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    back_easein: <b>function </b>(t,b,c,d,s){
+        <b>if </b>(s == undefined) s = 1.70158;
+        <b>return</b> c*(t/=d)*t*((s+1)*t - s) + b;
+    },
+<span class="multiComment">    /**
+     * @method back_easeout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    back_easeout: <b>function </b>(t,b,c,d,s){
+        <b>if </b>(s == undefined) s = 1.70158;
+        <b>return</b> c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+    },
+<span class="multiComment">    /**
+     * @method back_easeinout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    back_easeinout: <b>function </b>(t,b,c,d,s){
+        <b>if </b>(s == undefined) s = 1.70158; 
+        <b>if </b>((t/=d/2) &lt; 1) <b>return</b> c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+        <b>return</b> c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+    },
+<span class="multiComment">    /**
+     * @method bounce_easein
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    bounce_easein: <b>function </b>(t,b,c,d){
+        <b>return</b> c - <b>this</b>.bounce_easeout(d-t, 0, c, d) + b;
+    },
+<span class="multiComment">    /**
+     * @method bounce_easeout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    bounce_easeout: <b>function </b>(t,b,c,d){
+        <b>if </b>((t/=d) &lt; (1/2.75)) {
+            <b>return</b> c*(7.5625*t*t) + b;
+        } <b>else </b><b>if </b>(t &lt; (2/2.75)) {
+            <b>return</b> c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+        } <b>else </b><b>if </b>(t &lt; (2.5/2.75)) {
+            <b>return</b> c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+        } <b>else </b>{
+            <b>return</b> c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
+        }
+    },
+<span class="multiComment">    /**
+     * @method bounce_easeinout
+     * @param {Int} t times
+     * @param {Number} b begin
+     * @param {Number} c increment
+     * @param {Number} d step
+     * @return {Number}
+     */</span>
+    bounce_easeinout: <b>function </b>(t,b,c,d){
+        <b>if </b>(t &lt; d/2) <b>return</b> <b>this</b>.bounce_easein(t*2, 0, c, d) * .5 + b;
+        <b>else </b><b>return</b> <b>this</b>.bounce_easeout(t*2-d, 0, c, d) * .5 + c*.5 + b;
+    }
+}
+
+<span class="multiComment">/**
+ * @class js.anim.Anim
+ * @constructor 
+ * 
+ * @struct js.anim.Anim$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "repeat":{"description":"the default value is 0", "type":"number", "required":false}
+ *             ,"interval":{"description":"the default value is 0", "type":"number", "required":false}
+ *         }
+ * } 
+ * 
+ * @param {js.anim.Anim$Config} config
+ * @param {Function} method The arguments:[currentCount, currentRepeat]
+ */      </span>
+js.anim.Anim = <b>function </b>(config, method){
+    <b>this</b>._config = config;
+    <b>this</b>._method = method;    
+    
+    <b>this</b>._isAnimated = <b>false</b>;//是否动画已开始
+    <b>this</b>._startTime = <b>null</b>;//动画开始时间
+    <b>this</b>._counter = 0;//计数器
+    <b>this</b>._maxRepeat = config['repeat'] || 0;
+    <b>this</b>._repeat = 0;
+    
+<span class="multiComment">    /**
+     * @event started 
+     * {
+     *     "description": "fires when the animation started"
+     *     ,"type":"function"
+     *     ,"scope":{"type":"js.anim.Anim"}
+     *     ,"arguments":{
+     *         "type":"null"
+     *     }
+     * }
+     */</span>
+    <b>this</b>.createEvent('started');
+<span class="multiComment">    /**
+     * @event completed
+     * {
+     *     "description": "fires when the animation finished"
+     *     ,"type":"function"
+     *     ,"scope":{"type":"js.anim.Anim"}
+     *     ,"arguments":{
+     *         "type":"null"
+     *     }
+     * }
+     */</span>
+    <b>this</b>.createEvent('completed');
+<span class="multiComment">    /**
+     * @event stoped
+     * {
+     *     "description": "fires when the animation stoped"
+     *     ,"type":"function"
+     *     ,"scope":{"type":"js.anim.Anim"}
+     *     ,"arguments":{
+     *         "type":"null"
+     *     }
+     * }
+     */</span>
+    <b>this</b>.createEvent('stoped');
+<span class="multiComment">    /**
+     * @event looped
+     * {
+     *     "description": "fires when looped on same repeat"
+     *     ,"type":"function"
+     *     ,"scope":{"type":"js.anim.Anim"}
+     *     ,"arguments":{
+     *         "type":"array"
+     *         ,"items":[
+     *             {"type":"int", "description": "current counter number on current repeat"}
+     *             ,{"type":"int", "description": "current repeat number"}
+     *         ]
+     *     }
+     * }
+     */</span>
+    <b>this</b>.createEvent('looped');
+<span class="multiComment">    /**
+     * @event repeated
+     * {
+     *     "description": "fires when a repeat finished"
+     *     ,"type":"function"
+     *     ,"scope":{"type":"js.anim.Anim"}
+     *     ,"arguments":{
+     *         "type":"null"
+     *     }
+     * } 
+     */</span>
+    <b>this</b>.createEvent('repeated');
+        
+    <b>this</b>._thread = <b>new </b>SYS.Thread(<b>this</b>,{interval:<b>this</b>._config['interval']});        
+} 
+js.anim.Anim.prototype = {
+<span class="multiComment">    /**
+     * Sets the config by key.
+     * 
+     * @method setConfig
+     * @param {String} k
+     * @param {Object} v
+     */</span>
+    setConfig: <b>function </b>(k, v){
+        <b>this</b>._config[k] = v;
+    },
+<span class="multiComment">    /**
+     * Returns the config of the key.
+     * 
+     * @method getConfig
+     * @param {String} k
+     * @return {Object}
+     */</span>
+    getConfig: <b>function </b>(k){
+        <b>return</b> <b>this</b>._config[k];
+    },
+<span class="multiComment">    /**
+     * Returns the max repeat times.The default value is zero.
+     * 
+     * @method getMaxTimes
+     * @return {Int}
+     */</span>
+    getMaxTimes: <b>function </b>(){
+        <b>return</b> <b>this</b>._maxRepeat;
+    },
+<span class="multiComment">    /**
+     * Returns the current repeat times.
+     * 
+     * @method getCurrentTimes
+     * @return {Int}
+     */</span>
+    getCurrentTimes: <b>function </b>(){
+        <b>return</b> <b>this</b>._repeat;
+    },
+<span class="multiComment">    /**
+     * Returns the current counter in this times.
+     * 
+     * @method getCount
+     * @return {Int}
+     */</span>
+    getCount: <b>function </b>(){
+        <b>return</b> <b>this</b>._counter;
+    },
+<span class="multiComment">    /**
+     * Returns True when the animation is started.
+     * 
+     * @method isAnimated
+     * @return {Boolean}
+     */</span>
+    isAnimated: <b>function </b>(){
+        <b>return</b> <b>this</b>._isAnimated;
+    },
+<span class="multiComment">    /**
+     * Returns the start time.
+     * 
+     * @method getStartTime
+     * @return {Date}
+     */</span>
+    getStartTime: <b>function </b>(){
+        <b>return</b> <b>this</b>._startTime;
+    },
+<span class="multiComment">    /**
+     * Start the animation.
+     * 
+     * @method start
+     */</span>
+    start: <b>function </b>(){
+        <b>if </b>(<b>this</b>.isAnimated()) <b>return</b>;
+        <b>this</b>._isAnimated = <b>true</b>;
+        <b>this</b>._counter = 0;
+        <b>this</b>._repeat = 0;    
+        <b>this</b>._startTime = <b>new </b>Date();        
+        
+        <b>this</b>._thread.start();
+        <b>this</b>.fireEvent('started');
+    },
+<span class="multiComment">    /**
+     * Reset the counter equals zero.
+     * 
+     * @method resetCount
+     */</span>
+    resetCount: <b>function </b>(){<b>this</b>._counter = 0},
+<span class="multiComment">    /**
+     * Execute the main method when the main thread is running.
+     * 
+     * @method run
+     * @protected
+     */</span>
+    run: <b>function </b>(){
+        <b>if </b>(<b>typeof </b><b>this</b>._method == 'function'){
+            <b>var </b>rst = <b>this</b>._method.call(<b>this</b>, <b>this</b>._counter, <b>this</b>._repeat);                
+            <b>this</b>._counter++;
+            <b>this</b>.fireEvent('looped', <b>this</b>._counter, <b>this</b>._repeat);        
+                
+            <b>if </b>(rst){
+                <b>this</b>._counter = 0;
+                <b>if </b>((<b>this</b>._repeat+1) &gt; <b>this</b>._maxRepeat) {
+                    <b>this</b>.complete();
+                }<b>else </b>{
+                    <b>this</b>._repeat++;                
+                    <b>this</b>.fireEvent('repeated');                
+                }                            
+            }
+        }<b>else </b>{
+            <b>this</b>.complete();
+        }
+    },
+<span class="multiComment">    /**
+     * End the animation.
+     * 
+     * @method complete
+     */</span>
+    complete: <b>function </b>(){
+        <b>if </b>(!<b>this</b>.isAnimated()) <b>return</b>;
+        <b>this</b>._thread.stop();        
+        <b>this</b>._counter = 0;
+        <b>this</b>._isAnimated = <b>false</b>;
+        <b>this</b>.fireEvent('completed');                    
+    },
+<span class="multiComment">    /**
+     * Stop the animation.
+     * 
+     * @method stop
+     */</span>
+    stop: <b>function </b>(){
+        <b>if </b>(!<b>this</b>.isAnimated()) <b>return</b>;
+        <b>this</b>._thread.stop();        
+        <b>this</b>._counter = 0;
+        <b>this</b>._isAnimated = <b>false</b>;
+        <b>this</b>.fireEvent('stoped');                    
+    }
+}
+<span class="multiComment">/**
+ * @mix js.core.EventProvider
+ */</span>
+SYS.augment(js.anim.Anim, js.core.EventProvider);
+
+<span class="multiComment">/**
+ * @struct js.anim.Film$Element {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             ,"id":{"type":"string", "description":"HTML Element's id", "required":false}
+ *             ,"x":{"type":"number", "description":"default value is 0", "required":false}
+ *             ,"y":{"type":"number", "description":"default value is 0", "required":false}
+ *         }
+ * }
+ */</span>
+<span class="multiComment">/**
+ * @struct js.anim.Film$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             ,"target":{"type":"string|js.anim.Film$Element[]", "description":"Image Element's id or Image Elements", "required":false}
+ *             ,"canvas":{"type":"js.d2.Canvas"}
+ *             ,"frameSeq":{"type":"array&lt;js.math.Point&gt;", "description":"a array of offset points in the image map"}
+ *             ,"src":{"type":"string", "description":"the file path of a image"}
+ *         }
+ *      ,"extends":"js.anim.Anim$Config"
+ * } 
+ */</span>
+<span class="multiComment">/**
+ * @class js.anim.Film
+ * @constructor
+ * @extends js.anim.Anim
+ * 
+ * @param {js.anim.Film$Config} config
+ * @throws {TypeError} when canvas or frames or src is null
+ */    </span>
+js.anim.Film = <b>function </b>(config){
+    <b>var </b>_w = config['width'], _h = config['height']
+    , _canvas = config['canvas']
+    , _frames = config['frameSeq']
+    , _src = config['src'];
+    <b>if </b>(!_canvas || !_frames || !_src) <b>throw </b><b>new </b>TypeError("[js.anim.Film]The arguments invalid.");
+    <b>this</b>._objArray = SYS.isString(config['target'])?[{'id':config['target']}]:(config['target']||[]);
+
+    <b>var </b>_doRun = <b>function </b>(t){        
+        <b>if </b>(t &gt;= _frames.length){
+            <b>this</b>._objArray.forEach(<b>function </b>(a){
+                _canvas.erase(a['id']);
+            });            
+                    
+            <b>return</b> <b>true</b>;    
+        }
+        
+        <b>this</b>._objArray.forEach(<b>function </b>(a){
+            <b>if </b>(SYS.isUndefined(a['id'])) a['id'] = SYS.getUUID();
+            
+            <b>var </b>offXY = _frames[t]
+            ,json = {
+                id:a['id'], z:a['z']||0, width:_w, height:_h
+                ,src:_src, x:a['x']||0, y:a['y']||0, offsetX:offXY[0], offsetY:offXY[1]                
+            };
+        
+            <b>if </b>($(a['id'])){
+                _canvas.updateImage(json);    
+            }<b>else </b>{
+                _canvas.drawImage(json);    
+            }            
+        },<b>this</b>);        
+        
+        <b>return</b> <b>false</b>;
+    }
+    
+    js.anim.Film.superclass.constructor.call(<b>this</b>, config, _doRun);
+} 
+SYS.extend(js.anim.Film, js.anim.Anim, {
+<span class="multiComment">    /**
+     * Sets the first position(x, y) of the image element by id.
+     * 
+     * @method setPosition
+     * @param {js.math.Point} xyz
+     * @param {String} id:optional
+     */</span>
+    setPosition: <b>function </b>(xyz, id){
+        <b>var </b>index = <b>this</b>._objArray.indexOf(id, <b>function </b>(a, b){
+            <b>return</b> a['id'] === b;
+        })
+        <b>if </b>(index &gt; -1) {
+            <b>this</b>._objArray[index] = {
+                id: id,
+                x: xyz[0],
+                y: xyz[1],
+                z: xyz[2]
+            };
+        }<b>else </b>{
+            <b>this</b>._objArray.push({
+                id: id,
+                x: xyz[0],
+                y: xyz[1],
+                z: xyz[2]
+            });
+        }
+    }    
+});
+
+<span class="multiComment">/**
+ * @struct js.anim.Motion$Points {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "from":{"type":"js.math.Point","required":false}
+ *             ,"to":{"type":"js.math.Point"}
+ *             ,"path":{"type":"js.math.Point[]","required":false}
+ *         }
+ * }
+ */</span>
+<span class="multiComment">/**
+ * @struct js.anim.Motion$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             ,"target":{"type":"string|string[]"}
+ *             ,"points":{"type":"js.anim.Motion$Points"}
+ *             ,"formula":{"type":"function","required":false}
+ *             ,"step":{"type":"number","required":false}
+ *         }
+ *      ,"extends":"js.anim.Anim$Config"
+ * }
+ */</span>
+<span class="multiComment">/**
+ * @class js.anim.Motion
+ * @constructor
+ * @extends js.anim.Anim
+ * 
+ *   
+ * @param {js.anim.Motion$Config} config
+ * @throws {TypeError} when target or points is null
+ */    </span>
+js.anim.Motion = <b>function </b>(config){
+    <b>var </b>target = config['target'], points = config['points'], to = points['to'];
+    <b>if </b>(!target || !points || !to) <b>throw </b><b>new </b>TypeError("[js.anim.Motion]The arguments invalid.");    
+    <b>this</b>._formula = config['formula'] || js.anim.Formulas.linear;
+    
+    <b>var </b>ps = [points['from']||D.getXY(target)], path = points['path'];
+    <b>if </b>(path) ps = ps.concat(path);
+    ps.push(to);
+    <b>this</b>._ps = ps;
+    <b>this</b>._psIndex = 0; 
+    
+    <b>var </b>_setXY = <b>function </b>(target, x, y){
+        D.setStyle(target, 'x', x);
+        D.setStyle(target, 'y', y);
+    }
+            
+    <b>var </b>_doRun = <b>function </b>(t){
+        <b>var </b>target = <b>this</b>.getConfig('target'), step = <b>this</b>.getConfig('step')||1,
+        from = <b>this</b>._ps[<b>this</b>._psIndex], to = <b>this</b>._ps[<b>this</b>._psIndex+1];                
+        
+        <b>var </b>x = <b>this</b>._formula(t, from[0], to[0]-from[0], step)
+        , y = <b>this</b>._formula(t, from[1], to[1]-from[1], step);
+        _setXY(target, x, y);
+        
+        <b>if </b>(G2D.equalsPoint([x,y], <b>this</b>._ps[<b>this</b>._ps.length-1])) {
+            <b>this</b>._psIndex = 0;
+            <b>return</b> <b>true</b>;
+        }
+        <b>if </b>(G2D.equalsPoint(to, [x,y])) {
+            <b>this</b>._psIndex += 1;
+            <b>this</b>.resetCount();
+        }
+        
+        <b>return</b> <b>false</b>;
+    }
+    
+    js.anim.Motion.superclass.constructor.call(<b>this</b>, config, _doRun);
+}
+SYS.extend(js.anim.Motion, js.anim.Anim, {    
+});
+<span class="multiComment">/**
+ * @struct js.anim.Flicker$Opacity {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "from":{"type":"number"}
+ *             ,"to":{"type":"number"}
+ *         }
+ * }
+ */</span>
+<span class="multiComment">/**
+ * @struct js.anim.Flicker$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             ,"target":{"type":"string|string[]"}
+ *             ,"opacity":{"type":"js.anim.Flicker$Opacity"}
+ *             ,"step":{"type":"number","required":false}
+ *         }
+ *      ,"extends":"js.anim.Anim$Config"
+ * }
+ */</span>
+<span class="multiComment">/**
+ * @class js.anim.Flicker
+ * @constructor
+ * @extends js.anim.Anim 
+ * 
+ * @param {js.anim.Flicker$Config} config
+ * @throws {TypeError} when target or opacity is null
+ */    </span>
+js.anim.Flicker = <b>function </b>(config){
+    <b>var </b>target = config['target'], opa = config['opacity'];
+    <b>if </b>(!target || !opa) <b>throw </b><b>new </b>TypeError("[js.anim.Flicker]The arguments invalid.");
+    <b>this</b>._from = opa['from'];
+    <b>this</b>._to = opa['to'];            
+    <b>if </b>(SYS.isUndefined(<b>this</b>._from) || SYS.isUndefined(<b>this</b>._to)) <b>throw </b><b>new </b>TypeError("[js.anim.Flicker]The arguments invalid.");
+    
+    <b>var </b>_doRun = <b>function </b>(t){
+        <b>var </b>step = <b>this</b>.getConfig('step')||1
+        ,target = <b>this</b>.getConfig('target')
+        ,from = <b>this</b>._from, to = <b>this</b>._to;
+        
+        <b>var </b>opacity = from + t*(to - from)/step;
+        D.setStyle(target, 'opacity', opacity);
+        
+        <b>if </b>(MT.equals(opacity,to)) <b>return</b> <b>true</b>;
+    }
+    
+    js.anim.Flicker.superclass.constructor.call(<b>this</b>, config, _doRun);
+}
+SYS.extend(js.anim.Flicker, js.anim.Anim, {
+<span class="multiComment">    /**
+     * @method start
+     * @override
+     */</span>
+    start: <b>function </b>(){
+        <b>if </b>(!<b>this</b>.isAnimated()) {
+            <b>this</b>._from = SYS.isUndefined(<b>this</b>._from)?Number(D.getStyle(<b>this</b>.getConfig('target'), 'opacity')):<b>this</b>._from;    
+        }
+        js.anim.Motion.superclass.start.call(<b>this</b>);
+    }
+});
+}());
+
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

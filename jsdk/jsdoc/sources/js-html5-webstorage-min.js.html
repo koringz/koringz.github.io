@@ -1,0 +1,31 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">util\js-html5-webstorage-min.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2011-7-28
+ * 
+ * @browsers FF 4+;Chrome 8+
+ */</span>
+js.lang.System.namespace("js.html5");(<b>function </b>(){<b>var </b>a=<b>function </b>(b){<b>this</b>.type=b;<b>this</b>._storage=window[b+"Storage"];<b>if </b>(!<b>this</b>._storage){<b>throw </b><b>new </b>Error("[js.html5."+b+"Storage"+"]The browser not support HTML5's WebStorage");}<b>this</b>.createEvent("changed");<b>this</b>.createEvent("removed");<b>this</b>.createEvent("cleared");};a.prototype={get:<b>function </b>(b){<b>return</b> <b>this</b>._storage.getItem(b);},set:<b>function </b>(d,c){<b>var </b>b=<b>this</b>.get(d);<b>this</b>._storage.setItem(d,c);<b>this</b>.fireEvent("changed",d,b,c);},remove:<b>function </b>(c){<b>var </b>b=<b>this</b>.get(c);<b>this</b>._storage.removeItem(c);<b>this</b>.fireEvent("removed",c,b);},clear:<b>function </b>(){<b>this</b>._storage.clear();<b>this</b>.fireEvent("cleared");},getLength:<b>function </b>(){<b>return</b> <b>this</b>._storage.length;}};js.lang.System.augment(a,js.core.EventProvider);js.html5.SessionStorage=<b>new </b>a("session");js.html5.LocalStorage=<b>new </b>a("local");}());
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

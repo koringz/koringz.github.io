@@ -1,0 +1,262 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.util.DragDropMgr</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-util-dragdrop.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.util</div>
+<div class="topic" title="js.util.DragDropMgr">
+Class: 
+DragDropMgr</div>
+
+<b>public static</b> DragDropMgr
+
+<hr/>
+
+<pre class="desc">
+DragDropMgr is a singleton that tracks the element interaction for
+all DragDrop items in the window.  Generally, you will not call
+this class directly, but it does have helper methods that could
+be useful in your DragDrop implementations.</pre>
+<hr/><br/>
+
+
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="useShim" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static useShim">+ <b>useShim</b></span></span>: Boolean</span>
+<div id="useShim_detail" style="display: none;">
+<pre class="desc">This property is used to turn on global use of the shim element on all DragDrop instances,
+defaults to false for backcompat. (Use: YAHOO.util.DDM.useShim = true)</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="preventDefault" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static preventDefault">+ <b>preventDefault</b></span></span>: Boolean</span>
+<div id="preventDefault_detail" style="display: none;">
+<pre class="desc">Flag to determine if we should prevent the default behavior of the
+events we define. By default this is true, but this can be set to
+false if you need the default behavior (not recommended)</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="stopPropagation" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static stopPropagation">+ <b>stopPropagation</b></span></span>: Boolean</span>
+<div id="stopPropagation_detail" style="display: none;">
+<pre class="desc">Flag to determine if we should stop the propagation of the events
+we generate. This is true by default but you may want to set it to
+false if the html element contains other features that require the
+mouse click.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="interactionInfo" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static interactionInfo">+ <b>interactionInfo</b></span></span>: Object</span>
+<div id="interactionInfo_detail" style="display: none;">
+<pre class="desc">Provides additional information about the the current set of
+interactions.  Can be accessed from the event handlers. It
+contains the following properties:
+      out:       onDragOut interactions
+      enter:     onDragEnter interactions
+      over:      onDragOver interactions
+      drop:      onDragDrop interactions
+      point:     The location of the cursor
+      draggedRegion: The location of dragged element at the time
+                     of the interaction
+      sourceRegion: The location of the source elemtn at the time
+                    of the interaction
+      validDrop: boolean</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="POINT" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static POINT">+ <b>POINT</b></span></span>: int</span>
+<div id="POINT_detail" style="display: none;">
+<pre class="desc">In point mode, drag and drop interaction is defined by the
+location of the cursor during the drag/drop</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="INTERSECT" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static INTERSECT">+ <b>INTERSECT</b></span></span>: int</span>
+<div id="INTERSECT_detail" style="display: none;">
+<pre class="desc">In intersect mode, drag and drop interaction is defined by the
+cursor position or the amount of overlap of two or more drag and
+drop objects.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="STRICT_INTERSECT" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static STRICT_INTERSECT">+ <b>STRICT_INTERSECT</b></span></span>: int</span>
+<div id="STRICT_INTERSECT_detail" style="display: none;">
+<pre class="desc">In intersect mode, drag and drop interaction is defined only by the
+overlap of two or more drag and drop objects.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="mode" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static mode">+ <b>mode</b></span></span>: int</span>
+<div id="mode_detail" style="display: none;">
+<pre class="desc">The current drag and drop mode.  Default: POINT</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="useCache" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static useCache">+ <b>useCache</b></span></span>: boolean</span>
+<div id="useCache_detail" style="display: none;">
+<pre class="desc">Set useCache to false if you want to force object the lookup of each
+drag and drop linked element constantly during a drag.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="clickPixelThresh" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static clickPixelThresh">+ <b>clickPixelThresh</b></span></span>: int</span>
+<div id="clickPixelThresh_detail" style="display: none;">
+<pre class="desc">The number of pixels that the mouse needs to move after the
+mousedown before the drag is initiated.  Default=3</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="clickTimeThresh" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static clickTimeThresh">+ <b>clickTimeThresh</b></span></span>: int</span>
+<div id="clickTimeThresh_detail" style="display: none;">
+<pre class="desc">The number of milliseconds after the mousedown event to initiate the
+drag if we don't get a mouseup event. Default=1000</pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="getBestMatch" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getBestMatch">+ <b>getBestMatch</b></span></span>(<span title="required"><b>dds</b></span>:<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>[]):<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a></span>
+<div id="getBestMatch_detail" style="display: none;">
+<pre class="desc">Helper function for getting the best match from the list of drag
+and drop objects returned by the drag and drop events when we are
+in INTERSECT mode.  It returns either the first object that the
+cursor is over, or the object that has the greatest overlap with
+the dragged element.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>dds</b></span>  &lt;<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>[]&gt; The array of drag and drop objects targeted</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>&gt; The best single match</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getDDById" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getDDById">+ <b>getDDById</b></span></span>(<span title="required"><b>id</b></span>:String):<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a></span>
+<div id="getDDById_detail" style="display: none;">
+<pre class="desc">Returns the DragDrop instance for a given id</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; the id of the DragDrop object</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>&gt; the drag drop object, null if it is not found</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getLocation" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getLocation">+ <b>getLocation</b></span></span>(<span title="required"><b>oDD</b></span>:<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>):<a href="js.math.Rect.html" title="js.math.Rect">Rect</a></span>
+<div id="getLocation_detail" style="display: none;">
+<pre class="desc">Returns a Region object containing the drag and drop element's position
+and size, including the padding configured for it</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>oDD</b></span>  &lt;<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>&gt; the drag and drop object to get the 
+                      location for</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; a Region object representing the total area</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getRelated" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getRelated">+ <b>getRelated</b></span></span>(<span title="required"><b>p_oDD</b></span>:<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>, <span title="required"><b>bTargetsOnly</b></span>:boolean):<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>[]</span>
+<div id="getRelated_detail" style="display: none;">
+<pre class="desc">Returns the drag and drop instances that are in all groups the
+passed in instance belongs to.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p_oDD</b></span>  &lt;<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>&gt; the obj to get related data for</dd><br/>
+<dd><span title="required"><b>bTargetsOnly</b></span>  &lt;boolean&gt; if true, only return targetable objs</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>[]&gt; the related instances</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isDragDrop" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isDragDrop">+ <b>isDragDrop</b></span></span>(<span title="required"><b>id</b></span>:String):boolean</span>
+<div id="isDragDrop_detail" style="display: none;">
+<pre class="desc">Utility function to determine if a given element has been
+registered as a drag drop item.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; the element id to check</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;boolean&gt; true if this element is a DragDrop item, false otherwise</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isHandle" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isHandle">+ <b>isHandle</b></span></span>(<span title="required"><b>id</b></span>:String):boolean</span>
+<div id="isHandle_detail" style="display: none;">
+<pre class="desc">Utility function to determine if a given element has been
+registered as a drag drop handle for the given Drag Drop object.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; the element id to check</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;boolean&gt; true if this element is a DragDrop handle, false otherwise</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isLegalTarget" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isLegalTarget">+ <b>isLegalTarget</b></span></span>(<span title="required"><b>the</b></span>:<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>, <span title="required"><b>the</b></span>:<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>):boolean</span>
+<div id="isLegalTarget_detail" style="display: none;">
+<pre class="desc">Returns true if the specified dd target is a legal target for
+the specifice drag obj</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>the</b></span>  &lt;<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>&gt; drag obj</dd><br/>
+<dd><span title="required"><b>the</b></span>  &lt;<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>&gt; target</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;boolean&gt; true if the target is a legal target for the dd obj</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isLocked" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isLocked">+ <b>isLocked</b></span></span>():boolean</span>
+<div id="isLocked_detail" style="display: none;">
+<pre class="desc">Is drag and drop locked?</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;boolean&gt; True if drag and drop is locked, false otherwise.</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isTypeOfDD" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isTypeOfDD">+ <b>isTypeOfDD</b></span></span>(<span title="required"><b>the</b></span>:Object):boolean</span>
+<div id="isTypeOfDD_detail" style="display: none;">
+<pre class="desc">My goal is to be able to transparently determine if an object is
+typeof DragDrop, and the exact subclass of DragDrop.  typeof
+returns "object", oDD.constructor.toString() always returns
+"DragDrop" and not the name of the subclass.  So for now it just
+evaluates a well-known variable in DragDrop.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>the</b></span>  &lt;Object&gt; object to evaluate</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;boolean&gt; true if typeof oDD = js.util.DragDrop</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="lock" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static lock">+ <b>lock</b></span></span>():void</span>
+<div id="lock_detail" style="display: none;">
+<pre class="desc">Lock all drag and drop functionality</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="unlock" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static unlock">+ <b>unlock</b></span></span>():void</span>
+<div id="unlock_detail" style="display: none;">
+<pre class="desc">Unlock all drag and drop functionality</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="regDragDrop" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static regDragDrop">+ <b>regDragDrop</b></span></span>(<span title="required"><b>oDD</b></span>:<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>, <span title="required"><b>sGroup</b></span>:String):void</span>
+<div id="regDragDrop_detail" style="display: none;">
+<pre class="desc">Each DragDrop instance must be registered with the DragDropMgr.
+This is executed in DragDrop.init()</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>oDD</b></span>  &lt;<a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>&gt; the DragDrop object to register</dd><br/>
+<dd><span title="required"><b>sGroup</b></span>  &lt;String&gt; the name of the group this element belongs to</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="regHandle" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static regHandle">+ <b>regHandle</b></span></span>(<span title="required"><b>sDDId</b></span>:String, <span title="required"><b>sHandleId</b></span>:String):void</span>
+<div id="regHandle_detail" style="display: none;">
+<pre class="desc">Each DragDrop handle element must be registered.  This is done
+automatically when executing DragDrop.setHandleElId()</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>sDDId</b></span>  &lt;String&gt; the DragDrop id this element is a handle for</dd><br/>
+<dd><span title="required"><b>sHandleId</b></span>  &lt;String&gt; the id of the element that is the drag handle</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="startDrag" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static startDrag">+ <b>startDrag</b></span></span>(<span title="required"><b>{int}</b></span>:<a href="x.html" title="x">x</a>, <span title="required"><b>{int}</b></span>:<a href="y.html" title="y">y</a>):void</span>
+<div id="startDrag_detail" style="display: none;">
+<pre class="desc">Fired when either the drag pixel threshold or the mousedown hold
+time threshold has been met.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>{int}</b></span>  &lt;<a href="x.html" title="x">x</a>&gt; the X position of the original mousedown</dd><br/>
+<dd><span title="required"><b>{int}</b></span>  &lt;<a href="y.html" title="y">y</a>&gt; the Y position of the original mousedown</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="stopDrag" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static stopDrag">+ <b>stopDrag</b></span></span>(<span title="required"><b>e</b></span>:Event, <i title="optional"><b>silent</b></i>:boolean):void</span>
+<div id="stopDrag_detail" style="display: none;">
+<pre class="desc">Ends the current drag, cleans up the state, and fires the endDrag
+and mouseUp events.  Called internally when a mouseup is detected
+during the drag.  Can be fired manually during the drag by passing
+either another event (such as the mousemove event received in onDrag)
+or a fake event with pageX and pageY defined (so that endDrag and
+onMouseUp have usable position data.).  Alternatively, pass true
+for the silent parameter so that the endDrag and onMouseUp events
+are skipped (so no event data is needed.)</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>e</b></span>  &lt;Event&gt; the mouseup event, another event (or a fake event) 
+                 with pageX and pageY defined, or nothing if the 
+                 silent parameter is true</dd><br/>
+<dd><i title="optional"><b>silent</b></i>  &lt;boolean&gt; skips the enddrag and mouseup events if true</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="stopEvent" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static stopEvent">+ <b>stopEvent</b></span></span>(<span title="required"><b>e</b></span>:Event):void</span>
+<div id="stopEvent_detail" style="display: none;">
+<pre class="desc">Utility to stop event propagation and event default, if these
+features are turned on.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>e</b></span>  &lt;Event&gt; the event as returned by this.getEvent()</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

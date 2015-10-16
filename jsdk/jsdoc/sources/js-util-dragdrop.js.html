@@ -1,0 +1,700 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">util\js-util-dragdrop.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2011-09-26
+ * 
+ * @requires /core/js-core.js
+ */</span>
+<span class="multiComment">/*!
+Copyright (c) 2010, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 2.8.1
+*/</span>
+<b>if </b>(!YAHOO.util.DragDropMgr){YAHOO.util.DragDropMgr=<b>function </b>(){<b>var </b>A=YAHOO.util.Event,B=YAHOO.util.Dom;<b>return</b>{useShim:<b>false</b>,_shimActive:<b>false</b>,_shimState:<b>false</b>,_debugShim:<b>false</b>,_createShim:<b>function </b>(){<b>var </b>C=document.createElement("div");C.id="yui-ddm-shim";<b>if </b>(document.body.firstChild){document.body.insertBefore(C,document.body.firstChild);}<b>else </b>{document.body.appendChild(C);}C.style.display="none";C.style.backgroundColor="red";C.style.position="absolute";C.style.zIndex="99999";B.setStyle(C,"opacity","0");<b>this</b>._shim=C;A.on(C,"mouseup",<b>this</b>.handleMouseUp,<b>this</b>,<b>true</b>);A.on(C,"mousemove",<b>this</b>.handleMouseMove,<b>this</b>,<b>true</b>);A.on(window,"scroll",<b>this</b>._sizeShim,<b>this</b>,<b>true</b>);},_sizeShim:<b>function </b>(){<b>if </b>(<b>this</b>._shimActive){<b>var </b>C=<b>this</b>._shim;C.style.height=B.getDocumentHeight()+"px";C.style.width=B.getDocumentWidth()+"px";C.style.top="0";C.style.left="0";}},_activateShim:<b>function </b>(){<b>if </b>(<b>this</b>.useShim){<b>if </b>(!<b>this</b>._shim){<b>this</b>._createShim();}<b>this</b>._shimActive=<b>true</b>;<b>var </b>C=<b>this</b>._shim,D="0";<b>if </b>(<b>this</b>._debugShim){D=".5";}B.setStyle(C,"opacity",D);<b>this</b>._sizeShim();C.style.display="block";}},_deactivateShim:<b>function </b>(){<b>this</b>._shim.style.display="none";<b>this</b>._shimActive=<b>false</b>;},_shim:<b>null</b>,ids:{},handleIds:{},dragCurrent:<b>null</b>,dragOvers:{},deltaX:0,deltaY:0,preventDefault:<b>true</b>,stopPropagation:<b>true</b>,initialized:<b>false</b>,locked:<b>false</b>,interactionInfo:<b>null</b>,init:<b>function </b>(){<b>this</b>.initialized=<b>true</b>;},POINT:0,INTERSECT:1,STRICT_INTERSECT:2,mode:0,_execOnAll:<b>function </b>(E,D){<b>for </b>(<b>var </b>F<b> in </b><b>this</b>.ids){<b>for </b>(<b>var </b>C<b> in </b><b>this</b>.ids[F]){<b>var </b>G=<b>this</b>.ids[F][C];<b>if </b>(!<b>this</b>.isTypeOfDD(G)){<b>continue</b>;}G[E].apply(G,D);}}},_onLoad:<b>function </b>(){<b>this</b>.init();A.on(document,"mouseup",<b>this</b>.handleMouseUp,<b>this</b>,<b>true</b>);A.on(document,"mousemove",<b>this</b>.handleMouseMove,<b>this</b>,<b>true</b>);A.on(window,"unload",<b>this</b>._onUnload,<b>this</b>,<b>true</b>);A.on(window,"resize",<b>this</b>._onResize,<b>this</b>,<b>true</b>);},_onResize:<b>function </b>(C){<b>this</b>._execOnAll("resetConstraints",[]);},lock:<b>function </b>(){<b>this</b>.locked=<b>true</b>;},unlock:<b>function </b>(){<b>this</b>.locked=<b>false</b>;},isLocked:<b>function </b>(){<b>return</b> <b>this</b>.locked;},locationCache:{},useCache:<b>true</b>,clickPixelThresh:3,clickTimeThresh:1000,dragThreshMet:<b>false</b>,clickTimeout:<b>null</b>,startX:0,startY:0,fromTimeout:<b>false</b>,regDragDrop:<b>function </b>(D,C){<b>if </b>(!<b>this</b>.initialized){<b>this</b>.init();}<b>if </b>(!<b>this</b>.ids[C]){<b>this</b>.ids[C]={};}<b>this</b>.ids[C][D.id]=D;},removeDDFromGroup:<b>function </b>(E,C){<b>if </b>(!<b>this</b>.ids[C]){<b>this</b>.ids[C]={};}<b>var </b>D=<b>this</b>.ids[C];<b>if </b>(D&&D[E.id]){<b>delete </b>D[E.id];}},_remove:<b>function </b>(E){<b>for </b>(<b>var </b>D<b> in </b>E.groups){<b>if </b>(D){<b>var </b>C=<b>this</b>.ids[D];<b>if </b>(C&&C[E.id]){<b>delete </b>C[E.id];}}}<b>delete </b><b>this</b>.handleIds[E.id];},regHandle:<b>function </b>(D,C){<b>if </b>(!<b>this</b>.handleIds[D]){<b>this</b>.handleIds[D]={};}<b>this</b>.handleIds[D][C]=C;},isDragDrop:<b>function </b>(C){<b>return</b>(<b>this</b>.getDDById(C))?<b>true</b>:<b>false</b>;},getRelated:<b>function </b>(H,D){<b>var </b>G=[];<b>for </b>(<b>var </b>F<b> in </b>H.groups){<b>for </b>(<b>var </b>E<b> in </b><b>this</b>.ids[F]){<b>var </b>C=<b>this</b>.ids[F][E];<b>if </b>(!<b>this</b>.isTypeOfDD(C)){<b>continue</b>;}<b>if </b>(!D||C.isTarget){G[G.length]=C;}}}<b>return</b> G;},isLegalTarget:<b>function </b>(G,F){<b>var </b>D=<b>this</b>.getRelated(G,<b>true</b>);<b>for </b>(<b>var </b>E=0,C=D.length;E&lt;C;++E){<b>if </b>(D[E].id==F.id){<b>return</b> <b>true</b>;}}<b>return</b> <b>false</b>;},isTypeOfDD:<b>function </b>(C){<b>return</b>(C&&C.__ygDragDrop);},isHandle:<b>function </b>(D,C){<b>return</b>(<b>this</b>.handleIds[D]&&<b>this</b>.handleIds[D][C]);},getDDById:<b>function </b>(D){<b>for </b>(<b>var </b>C<b> in </b><b>this</b>.ids){<b>if </b>(<b>this</b>.ids[C][D]){<b>return</b> <b>this</b>.ids[C][D];}}<b>return</b> <b>null</b>;},handleMouseDown:<b>function </b>(E,D){<b>this</b>.currentTarget=YAHOO.util.Event.getTarget(E);<b>this</b>.dragCurrent=D;<b>var </b>C=D.getEl();<b>this</b>.startX=YAHOO.util.Event.getPageX(E);<b>this</b>.startY=YAHOO.util.Event.getPageY(E);<b>this</b>.deltaX=<b>this</b>.startX-C.offsetLeft;<b>this</b>.deltaY=<b>this</b>.startY-C.offsetTop;<b>this</b>.dragThreshMet=<b>false</b>;<b>this</b>.clickTimeout=setTimeout(<b>function </b>(){<b>var </b>F=YAHOO.util.DDM;F.startDrag(F.startX,F.startY);F.fromTimeout=<b>true</b>;},<b>this</b>.clickTimeThresh);},startDrag:<b>function </b>(C,E){<b>if </b>(<b>this</b>.dragCurrent&&<b>this</b>.dragCurrent.useShim){<b>this</b>._shimState=<b>this</b>.useShim;<b>this</b>.useShim=<b>true</b>;}<b>this</b>._activateShim();clearTimeout(<b>this</b>.clickTimeout);<b>var </b>D=<b>this</b>.dragCurrent;<b>if </b>(D&&D.events.b4StartDrag){D.b4StartDrag(C,E);D.fireEvent("b4StartDragEvent",{x:C,y:E});}<b>if </b>(D&&D.events.startDrag){D.startDrag(C,E);D.fireEvent("startDragEvent",{x:C,y:E});}<b>this</b>.dragThreshMet=<b>true</b>;},handleMouseUp:<b>function </b>(C){<b>if </b>(<b>this</b>.dragCurrent){clearTimeout(<b>this</b>.clickTimeout);<b>if </b>(<b>this</b>.dragThreshMet){<b>if </b>(<b>this</b>.fromTimeout){<b>this</b>.fromTimeout=<b>false</b>;<b>this</b>.handleMouseMove(C);}<b>this</b>.fromTimeout=<b>false</b>;<b>this</b>.fireEvents(C,<b>true</b>);}<b>else </b>{}<b>this</b>.stopDrag(C);<b>this</b>.stopEvent(C);}},stopEvent:<b>function </b>(C){<b>if </b>(<b>this</b>.stopPropagation){YAHOO.util.Event.stopPropagation(C);}<b>if </b>(<b>this</b>.preventDefault){YAHOO.util.Event.preventDefault(C);}},stopDrag:<b>function </b>(E,D){<b>var </b>C=<b>this</b>.dragCurrent;<b>if </b>(C&&!D){<b>if </b>(<b>this</b>.dragThreshMet){<b>if </b>(C.events.b4EndDrag){C.b4EndDrag(E);C.fireEvent("b4EndDragEvent",{e:E});}<b>if </b>(C.events.endDrag){C.endDrag(E);C.fireEvent("endDragEvent",{e:E});}}<b>if </b>(C.events.mouseUp){C.onMouseUp(E);C.fireEvent("mouseUpEvent",{e:E});}}<b>if </b>(<b>this</b>._shimActive){<b>this</b>._deactivateShim();<b>if </b>(<b>this</b>.dragCurrent&&<b>this</b>.dragCurrent.useShim){<b>this</b>.useShim=<b>this</b>._shimState;<b>this</b>._shimState=<b>false</b>;}}<b>this</b>.dragCurrent=<b>null</b>;<b>this</b>.dragOvers={};},handleMouseMove:<b>function </b>(F){<b>var </b>C=<b>this</b>.dragCurrent;<b>if </b>(C){<b>if </b>(YAHOO.util.Event.isIE&&!F.button){<b>this</b>.stopEvent(F);<b>return</b> <b>this</b>.handleMouseUp(F);}<b>else </b>{<b>if </b>(F.clientX&lt;0||F.clientY&lt;0){}}<b>if </b>(!<b>this</b>.dragThreshMet){<b>var </b>E=Math.abs(<b>this</b>.startX-YAHOO.util.Event.getPageX(F));<b>var </b>D=Math.abs(<b>this</b>.startY-YAHOO.util.Event.getPageY(F));<b>if </b>(E&gt;<b>this</b>.clickPixelThresh||D&gt;<b>this</b>.clickPixelThresh){<b>this</b>.startDrag(<b>this</b>.startX,<b>this</b>.startY);}}<b>if </b>(<b>this</b>.dragThreshMet){<b>if </b>(C&&C.events.b4Drag){C.b4Drag(F);C.fireEvent("b4DragEvent",{e:F});}<b>if </b>(C&&C.events.drag){C.onDrag(F);C.fireEvent("dragEvent",{e:F});}<b>if </b>(C){<b>this</b>.fireEvents(F,<b>false</b>);}}<b>this</b>.stopEvent(F);}},fireEvents:<b>function </b>(V,L){<b>var </b>a=<b>this</b>.dragCurrent;<b>if </b>(!a||a.isLocked()||a.dragOnly){<b>return</b>;}<b>var </b>N=YAHOO.util.Event.getPageX(V),M=YAHOO.util.Event.getPageY(V),P=<b>new </b>YAHOO.util.Point(N,M),K=a.getTargetCoord(P.x,P.y),F=a.getDragEl(),E=["out","over","drop","enter"],U=<b>new </b>YAHOO.util.Region(K.y,K.x+F.offsetWidth,K.y+F.offsetHeight,K.x),I=[],D={},Q=[],c={outEvts:[],overEvts:[],dropEvts:[],enterEvts:[]};<b>for </b>(<b>var </b>S<b> in </b><b>this</b>.dragOvers){<b>var </b>d=<b>this</b>.dragOvers[S];<b>if </b>(!<b>this</b>.isTypeOfDD(d)){<b>continue</b>;
+}<b>if </b>(!<b>this</b>.isOverTarget(P,d,<b>this</b>.mode,U)){c.outEvts.push(d);}I[S]=<b>true</b>;<b>delete </b><b>this</b>.dragOvers[S];}<b>for </b>(<b>var </b>R<b> in </b>a.groups){<b>if </b>("string"!=<b>typeof </b>R){<b>continue</b>;}<b>for </b>(S<b> in </b><b>this</b>.ids[R]){<b>var </b>G=<b>this</b>.ids[R][S];<b>if </b>(!<b>this</b>.isTypeOfDD(G)){<b>continue</b>;}<b>if </b>(G.isTarget&&!G.isLocked()&&G!=a){<b>if </b>(<b>this</b>.isOverTarget(P,G,<b>this</b>.mode,U)){D[R]=<b>true</b>;<b>if </b>(L){c.dropEvts.push(G);}<b>else </b>{<b>if </b>(!I[G.id]){c.enterEvts.push(G);}<b>else </b>{c.overEvts.push(G);}<b>this</b>.dragOvers[G.id]=G;}}}}}<b>this</b>.interactionInfo={out:c.outEvts,enter:c.enterEvts,over:c.overEvts,drop:c.dropEvts,point:P,draggedRegion:U,sourceRegion:<b>this</b>.locationCache[a.id],validDrop:L};<b>for </b>(<b>var </b>C<b> in </b>D){Q.push(C);}<b>if </b>(L&&!c.dropEvts.length){<b>this</b>.interactionInfo.validDrop=<b>false</b>;<b>if </b>(a.events.invalidDrop){a.onInvalidDrop(V);a.fireEvent("invalidDropEvent",{e:V});}}<b>for </b>(S=0;S&lt;E.length;S++){<b>var </b>Y=<b>null</b>;<b>if </b>(c[E[S]+"Evts"]){Y=c[E[S]+"Evts"];}<b>if </b>(Y&&Y.length){<b>var </b>H=E[S].charAt(0).toUpperCase()+E[S].substr(1),X="onDrag"+H,J="b4Drag"+H,O="drag"+H+"Event",W="drag"+H;<b>if </b>(<b>this</b>.mode){<b>if </b>(a.events[J]){a[J](V,Y,Q);a.fireEvent(J+"Event",{event:V,info:Y,group:Q});}<b>if </b>(a.events[W]){a[X](V,Y,Q);a.fireEvent(O,{event:V,info:Y,group:Q});}}<b>else </b>{<b>for </b>(<b>var </b>Z=0,T=Y.length;Z&lt;T;++Z){<b>if </b>(a.events[J]){a[J](V,Y[Z].id,Q[0]);a.fireEvent(J+"Event",{event:V,info:Y[Z].id,group:Q[0]});}<b>if </b>(a.events[W]){a[X](V,Y[Z].id,Q[0]);a.fireEvent(O,{event:V,info:Y[Z].id,group:Q[0]});}}}}}},getBestMatch:<b>function </b>(E){<b>var </b>G=<b>null</b>;<b>var </b>D=E.length;<b>if </b>(D==1){G=E[0];}<b>else </b>{<b>for </b>(<b>var </b>F=0;F&lt;D;++F){<b>var </b>C=E[F];<b>if </b>(<b>this</b>.mode==<b>this</b>.INTERSECT&&C.cursorIsOver){G=C;<b>break</b>;}<b>else </b>{<b>if </b>(!G||!G.overlap||(C.overlap&&G.overlap.getArea()&lt;C.overlap.getArea())){G=C;}}}}<b>return</b> G;},refreshCache:<b>function </b>(D){<b>var </b>F=D||<b>this</b>.ids;<b>for </b>(<b>var </b>C<b> in </b>F){<b>if </b>("string"!=<b>typeof </b>C){<b>continue</b>;}<b>for </b>(<b>var </b>E<b> in </b><b>this</b>.ids[C]){<b>var </b>G=<b>this</b>.ids[C][E];<b>if </b>(<b>this</b>.isTypeOfDD(G)){<b>var </b>H=<b>this</b>.getLocation(G);<b>if </b>(H){<b>this</b>.locationCache[G.id]=H;}<b>else </b>{<b>delete </b><b>this</b>.locationCache[G.id];}}}}},verifyEl:<b>function </b>(D){<b>try </b>{<b>if </b>(D){<b>var </b>C=D.offsetParent;<b>if </b>(C){<b>return</b> <b>true</b>;}}}<b>catch </b>(E){}<b>return</b> <b>false</b>;},getLocation:<b>function </b>(H){<b>if </b>(!<b>this</b>.isTypeOfDD(H)){<b>return</b> <b>null</b>;}<b>var </b>F=H.getEl(),K,E,D,M,L,N,C,J,G;<b>try </b>{K=YAHOO.util.Dom.getXY(F);}<b>catch </b>(I){}<b>if </b>(!K){<b>return</b> <b>null</b>;}E=K[0];D=E+F.offsetWidth;M=K[1];L=M+F.offsetHeight;N=M-H.padding[0];C=D+H.padding[1];J=L+H.padding[2];G=E-H.padding[3];<b>return</b> <b>new </b>YAHOO.util.Region(N,C,J,G);},isOverTarget:<b>function </b>(K,C,E,F){<b>var </b>G=<b>this</b>.locationCache[C.id];<b>if </b>(!G||!<b>this</b>.useCache){G=<b>this</b>.getLocation(C);<b>this</b>.locationCache[C.id]=G;}<b>if </b>(!G){<b>return</b> <b>false</b>;}C.cursorIsOver=G.contains(K);<b>var </b>J=<b>this</b>.dragCurrent;<b>if </b>(!J||(!E&&!J.constrainX&&!J.constrainY)){<b>return</b> C.cursorIsOver;}C.overlap=<b>null</b>;<b>if </b>(!F){<b>var </b>H=J.getTargetCoord(K.x,K.y);<b>var </b>D=J.getDragEl();F=<b>new </b>YAHOO.util.Region(H.y,H.x+D.offsetWidth,H.y+D.offsetHeight,H.x);}<b>var </b>I=F.intersect(G);<b>if </b>(I){C.overlap=I;<b>return</b>(E)?<b>true</b>:C.cursorIsOver;}<b>else </b>{<b>return</b> <b>false</b>;}},_onUnload:<b>function </b>(D,C){<b>this</b>.unregAll();},unregAll:<b>function </b>(){<b>if </b>(<b>this</b>.dragCurrent){<b>this</b>.stopDrag();<b>this</b>.dragCurrent=<b>null</b>;}<b>this</b>._execOnAll("unreg",[]);<b>this</b>.ids={};},elementCache:{},getElWrapper:<b>function </b>(D){<b>var </b>C=<b>this</b>.elementCache[D];<b>if </b>(!C||!C.el){C=<b>this</b>.elementCache[D]=<b>new </b><b>this</b>.ElementWrapper(YAHOO.util.Dom.get(D));}<b>return</b> C;},getElement:<b>function </b>(C){<b>return</b> YAHOO.util.Dom.get(C);},getCss:<b>function </b>(D){<b>var </b>C=YAHOO.util.Dom.get(D);<b>return</b>(C)?C.style:<b>null</b>;},ElementWrapper:<b>function </b>(C){<b>this</b>.el=C||<b>null</b>;<b>this</b>.id=<b>this</b>.el&&C.id;<b>this</b>.css=<b>this</b>.el&&C.style;},getPosX:<b>function </b>(C){<b>return</b> YAHOO.util.Dom.getX(C);},getPosY:<b>function </b>(C){<b>return</b> YAHOO.util.Dom.getY(C);},swapNode:<b>function </b>(E,C){<b>if </b>(E.swapNode){E.swapNode(C);}<b>else </b>{<b>var </b>F=C.parentNode;<b>var </b>D=C.nextSibling;<b>if </b>(D==E){F.insertBefore(E,C);}<b>else </b>{<b>if </b>(C==E.nextSibling){F.insertBefore(C,E);}<b>else </b>{E.parentNode.replaceChild(C,E);F.insertBefore(E,D);}}}},getScroll:<b>function </b>(){<b>var </b>E,C,F=document.documentElement,D=document.body;<b>if </b>(F&&(F.scrollTop||F.scrollLeft)){E=F.scrollTop;C=F.scrollLeft;}<b>else </b>{<b>if </b>(D){E=D.scrollTop;C=D.scrollLeft;}<b>else </b>{}}<b>return</b>{top:E,left:C};},getStyle:<b>function </b>(D,C){<b>return</b> YAHOO.util.Dom.getStyle(D,C);},getScrollTop:<b>function </b>(){<b>return</b> <b>this</b>.getScroll().top;},getScrollLeft:<b>function </b>(){<b>return</b> <b>this</b>.getScroll().left;},moveToEl:<b>function </b>(C,E){<b>var </b>D=YAHOO.util.Dom.getXY(E);YAHOO.util.Dom.setXY(C,D);},getClientHeight:<b>function </b>(){<b>return</b> YAHOO.util.Dom.getViewportHeight();},getClientWidth:<b>function </b>(){<b>return</b> YAHOO.util.Dom.getViewportWidth();},numericSort:<b>function </b>(D,C){<b>return</b>(D-C);},_timeoutCount:0,_addListeners:<b>function </b>(){<b>var </b>C=YAHOO.util.DDM;<b>if </b>(YAHOO.util.Event&&document){C._onLoad();}<b>else </b>{<b>if </b>(C._timeoutCount&gt;2000){}<b>else </b>{setTimeout(C._addListeners,10);<b>if </b>(document&&document.body){C._timeoutCount+=1;}}}},handleWasClicked:<b>function </b>(C,E){<b>if </b>(<b>this</b>.isHandle(E,C.id)){<b>return</b> <b>true</b>;}<b>else </b>{<b>var </b>D=C.parentNode;<b>while </b>(D){<b>if </b>(<b>this</b>.isHandle(E,D.id)){<b>return</b> <b>true</b>;}<b>else </b>{D=D.parentNode;}}}<b>return</b> <b>false</b>;}};}();YAHOO.util.DDM=YAHOO.util.DragDropMgr;YAHOO.util.DDM._addListeners();}(<b>function </b>(){<b>var </b>A=YAHOO.util.Event;<b>var </b>B=YAHOO.util.Dom;YAHOO.util.DragDrop=<b>function </b>(E,C,D){<b>if </b>(E){<b>this</b>.init(E,C,D);}};YAHOO.util.DragDrop.prototype={events:<b>null</b>,on:<b>function </b>(){<b>this</b>.subscribe.apply(<b>this</b>,arguments);},id:<b>null</b>,config:<b>null</b>,dragElId:<b>null</b>,handleElId:<b>null</b>,invalidHandleTypes:<b>null</b>,invalidHandleIds:<b>null</b>,invalidHandleClasses:<b>null</b>,startPageX:0,startPageY:0,groups:<b>null</b>,locked:<b>false</b>,lock:<b>function </b>(){<b>this</b>.locked=<b>true</b>;},unlock:<b>function </b>(){<b>this</b>.locked=<b>false</b>;},isTarget:<b>true</b>,padding:<b>null</b>,dragOnly:<b>false</b>,useShim:<b>false</b>,_domRef:<b>null</b>,__ygDragDrop:<b>true</b>,constrainX:<b>false</b>,constrainY:<b>false</b>,minX:0,maxX:0,minY:0,maxY:0,deltaX:0,deltaY:0,maintainOffset:<b>false</b>,xTicks:<b>null</b>,yTicks:<b>null</b>,primaryButtonOnly:<b>true</b>,available:<b>false</b>,hasOuterHandles:<b>false</b>,cursorIsOver:<b>false</b>,overlap:<b>null</b>,b4StartDrag:<b>function </b>(C,D){},startDrag:<b>function </b>(C,D){},b4Drag:<b>function </b>(C){},onDrag:<b>function </b>(C){},onDragEnter:<b>function </b>(C,D){},b4DragOver:<b>function </b>(C){},onDragOver:<b>function </b>(C,D){},b4DragOut:<b>function </b>(C){},onDragOut:<b>function </b>(C,D){},b4DragDrop:<b>function </b>(C){},onDragDrop:<b>function </b>(C,D){},onInvalidDrop:<b>function </b>(C){},b4EndDrag:<b>function </b>(C){},endDrag:<b>function </b>(C){},b4MouseDown:<b>function </b>(C){},onMouseDown:<b>function </b>(C){},onMouseUp:<b>function </b>(C){},onAvailable:<b>function </b>(){},getEl:<b>function </b>(){<b>if </b>(!<b>this</b>._domRef){<b>this</b>._domRef=B.get(<b>this</b>.id);
+}<b>return</b> <b>this</b>._domRef;},getDragEl:<b>function </b>(){<b>return</b> B.get(<b>this</b>.dragElId);},init:<b>function </b>(F,C,D){<b>this</b>.initTarget(F,C,D);A.on(<b>this</b>._domRef||<b>this</b>.id,"mousedown",<b>this</b>.handleMouseDown,<b>this</b>,<b>true</b>);<b>for </b>(<b>var </b>E<b> in </b><b>this</b>.events){<b>this</b>.createEvent(E+"Event");}},initTarget:<b>function </b>(E,C,D){<b>this</b>.config=D||{};<b>this</b>.events={};<b>this</b>.DDM=YAHOO.util.DDM;<b>this</b>.groups={};<b>if </b>(<b>typeof </b>E!=="string"){<b>this</b>._domRef=E;E=B.generateId(E);}<b>this</b>.id=E;<b>this</b>.addToGroup((C)?C:"default");<b>this</b>.handleElId=E;A.onAvailable(E,<b>this</b>.handleOnAvailable,<b>this</b>,<b>true</b>);<b>this</b>.setDragElId(E);<b>this</b>.invalidHandleTypes={A:"A"};<b>this</b>.invalidHandleIds={};<b>this</b>.invalidHandleClasses=[];<b>this</b>.applyConfig();},applyConfig:<b>function </b>(){<b>this</b>.events={mouseDown:<b>true</b>,b4MouseDown:<b>true</b>,mouseUp:<b>true</b>,b4StartDrag:<b>true</b>,startDrag:<b>true</b>,b4EndDrag:<b>true</b>,endDrag:<b>true</b>,drag:<b>true</b>,b4Drag:<b>true</b>,invalidDrop:<b>true</b>,b4DragOut:<b>true</b>,dragOut:<b>true</b>,dragEnter:<b>true</b>,b4DragOver:<b>true</b>,dragOver:<b>true</b>,b4DragDrop:<b>true</b>,dragDrop:<b>true</b>};<b>if </b>(<b>this</b>.config.events){<b>for </b>(<b>var </b>C<b> in </b><b>this</b>.config.events){<b>if </b>(<b>this</b>.config.events[C]===<b>false</b>){<b>this</b>.events[C]=<b>false</b>;}}}<b>this</b>.padding=<b>this</b>.config.padding||[0,0,0,0];<b>this</b>.isTarget=(<b>this</b>.config.isTarget!==<b>false</b>);<b>this</b>.maintainOffset=(<b>this</b>.config.maintainOffset);<b>this</b>.primaryButtonOnly=(<b>this</b>.config.primaryButtonOnly!==<b>false</b>);<b>this</b>.dragOnly=((<b>this</b>.config.dragOnly===<b>true</b>)?<b>true</b>:<b>false</b>);<b>this</b>.useShim=((<b>this</b>.config.useShim===<b>true</b>)?<b>true</b>:<b>false</b>);},handleOnAvailable:<b>function </b>(){<b>this</b>.available=<b>true</b>;<b>this</b>.resetConstraints();<b>this</b>.onAvailable();},setPadding:<b>function </b>(E,C,F,D){<b>if </b>(!C&&0!==C){<b>this</b>.padding=[E,E,E,E];}<b>else </b>{<b>if </b>(!F&&0!==F){<b>this</b>.padding=[E,C,E,C];}<b>else </b>{<b>this</b>.padding=[E,C,F,D];}}},setInitPosition:<b>function </b>(F,E){<b>var </b>G=<b>this</b>.getEl();<b>if </b>(!<b>this</b>.DDM.verifyEl(G)){<b>if </b>(G&&G.style&&(G.style.display=="none")){}<b>else </b>{}<b>return</b>;}<b>var </b>D=F||0;<b>var </b>C=E||0;<b>var </b>H=B.getXY(G);<b>this</b>.initPageX=H[0]-D;<b>this</b>.initPageY=H[1]-C;<b>this</b>.lastPageX=H[0];<b>this</b>.lastPageY=H[1];<b>this</b>.setStartPosition(H);},setStartPosition:<b>function </b>(D){<b>var </b>C=D||B.getXY(<b>this</b>.getEl());<b>this</b>.deltaSetXY=<b>null</b>;<b>this</b>.startPageX=C[0];<b>this</b>.startPageY=C[1];},addToGroup:<b>function </b>(C){<b>this</b>.groups[C]=<b>true</b>;<b>this</b>.DDM.regDragDrop(<b>this</b>,C);},removeFromGroup:<b>function </b>(C){<b>if </b>(<b>this</b>.groups[C]){<b>delete </b><b>this</b>.groups[C];}<b>this</b>.DDM.removeDDFromGroup(<b>this</b>,C);},setDragElId:<b>function </b>(C){<b>this</b>.dragElId=C;},setHandleElId:<b>function </b>(C){<b>if </b>(<b>typeof </b>C!=="string"){C=B.generateId(C);}<b>this</b>.handleElId=C;<b>this</b>.DDM.regHandle(<b>this</b>.id,C);},setOuterHandleElId:<b>function </b>(C){<b>if </b>(<b>typeof </b>C!=="string"){C=B.generateId(C);}A.on(C,"mousedown",<b>this</b>.handleMouseDown,<b>this</b>,<b>true</b>);<b>this</b>.setHandleElId(C);<b>this</b>.hasOuterHandles=<b>true</b>;},unreg:<b>function </b>(){A.removeListener(<b>this</b>.id,"mousedown",<b>this</b>.handleMouseDown);<b>this</b>._domRef=<b>null</b>;<b>this</b>.DDM._remove(<b>this</b>);},isLocked:<b>function </b>(){<b>return</b>(<b>this</b>.DDM.isLocked()||<b>this</b>.locked);},handleMouseDown:<b>function </b>(J,I){<b>var </b>D=J.which||J.button;<b>if </b>(<b>this</b>.primaryButtonOnly&&D&gt;1){<b>return</b>;}<b>if </b>(<b>this</b>.isLocked()){<b>return</b>;}<b>var </b>C=<b>this</b>.b4MouseDown(J),F=<b>true</b>;<b>if </b>(<b>this</b>.events.b4MouseDown){F=<b>this</b>.fireEvent("b4MouseDownEvent",J);}<b>var </b>E=<b>this</b>.onMouseDown(J),H=<b>true</b>;<b>if </b>(<b>this</b>.events.mouseDown){H=<b>this</b>.fireEvent("mouseDownEvent",J);}<b>if </b>((C===<b>false</b>)||(E===<b>false</b>)||(F===<b>false</b>)||(H===<b>false</b>)){<b>return</b>;}<b>this</b>.DDM.refreshCache(<b>this</b>.groups);<b>var </b>G=<b>new </b>YAHOO.util.Point(A.getPageX(J),A.getPageY(J));<b>if </b>(!<b>this</b>.hasOuterHandles&&!<b>this</b>.DDM.isOverTarget(G,<b>this</b>)){}<b>else </b>{<b>if </b>(<b>this</b>.clickValidator(J)){<b>this</b>.setStartPosition();<b>this</b>.DDM.handleMouseDown(J,<b>this</b>);<b>this</b>.DDM.stopEvent(J);}<b>else </b>{}}},clickValidator:<b>function </b>(D){<b>var </b>C=YAHOO.util.Event.getTarget(D);<b>return</b>(<b>this</b>.isValidHandleChild(C)&&(<b>this</b>.id==<b>this</b>.handleElId||<b>this</b>.DDM.handleWasClicked(C,<b>this</b>.id)));},getTargetCoord:<b>function </b>(E,D){<b>var </b>C=E-<b>this</b>.deltaX;<b>var </b>F=D-<b>this</b>.deltaY;<b>if </b>(<b>this</b>.constrainX){<b>if </b>(C&lt;<b>this</b>.minX){C=<b>this</b>.minX;}<b>if </b>(C&gt;<b>this</b>.maxX){C=<b>this</b>.maxX;}}<b>if </b>(<b>this</b>.constrainY){<b>if </b>(F&lt;<b>this</b>.minY){F=<b>this</b>.minY;}<b>if </b>(F&gt;<b>this</b>.maxY){F=<b>this</b>.maxY;}}C=<b>this</b>.getTick(C,<b>this</b>.xTicks);F=<b>this</b>.getTick(F,<b>this</b>.yTicks);<b>return</b>{x:C,y:F};},addInvalidHandleType:<b>function </b>(C){<b>var </b>D=C.toUpperCase();<b>this</b>.invalidHandleTypes[D]=D;},addInvalidHandleId:<b>function </b>(C){<b>if </b>(<b>typeof </b>C!=="string"){C=B.generateId(C);}<b>this</b>.invalidHandleIds[C]=C;},addInvalidHandleClass:<b>function </b>(C){<b>this</b>.invalidHandleClasses.push(C);},removeInvalidHandleType:<b>function </b>(C){<b>var </b>D=C.toUpperCase();<b>delete </b><b>this</b>.invalidHandleTypes[D];},removeInvalidHandleId:<b>function </b>(C){<b>if </b>(<b>typeof </b>C!=="string"){C=B.generateId(C);}<b>delete </b><b>this</b>.invalidHandleIds[C];},removeInvalidHandleClass:<b>function </b>(D){<b>for </b>(<b>var </b>E=0,C=<b>this</b>.invalidHandleClasses.length;E&lt;C;++E){<b>if </b>(<b>this</b>.invalidHandleClasses[E]==D){<b>delete </b><b>this</b>.invalidHandleClasses[E];}}},isValidHandleChild:<b>function </b>(F){<b>var </b>E=<b>true</b>;<b>var </b>H;<b>try </b>{H=F.nodeName.toUpperCase();}<b>catch </b>(G){H=F.nodeName;}E=E&&!<b>this</b>.invalidHandleTypes[H];E=E&&!<b>this</b>.invalidHandleIds[F.id];<b>for </b>(<b>var </b>D=0,C=<b>this</b>.invalidHandleClasses.length;E&&D&lt;C;++D){E=!B.hasClass(F,<b>this</b>.invalidHandleClasses[D]);}<b>return</b> E;},setXTicks:<b>function </b>(F,C){<b>this</b>.xTicks=[];<b>this</b>.xTickSize=C;<b>var </b>E={};<b>for </b>(<b>var </b>D=<b>this</b>.initPageX;D&gt;=<b>this</b>.minX;D=D-C){<b>if </b>(!E[D]){<b>this</b>.xTicks[<b>this</b>.xTicks.length]=D;E[D]=<b>true</b>;}}<b>for </b>(D=<b>this</b>.initPageX;D&lt;=<b>this</b>.maxX;D=D+C){<b>if </b>(!E[D]){<b>this</b>.xTicks[<b>this</b>.xTicks.length]=D;E[D]=<b>true</b>;}}<b>this</b>.xTicks.sort(<b>this</b>.DDM.numericSort);},setYTicks:<b>function </b>(F,C){<b>this</b>.yTicks=[];<b>this</b>.yTickSize=C;<b>var </b>E={};<b>for </b>(<b>var </b>D=<b>this</b>.initPageY;D&gt;=<b>this</b>.minY;D=D-C){<b>if </b>(!E[D]){<b>this</b>.yTicks[<b>this</b>.yTicks.length]=D;E[D]=<b>true</b>;}}<b>for </b>(D=<b>this</b>.initPageY;D&lt;=<b>this</b>.maxY;D=D+C){<b>if </b>(!E[D]){<b>this</b>.yTicks[<b>this</b>.yTicks.length]=D;E[D]=<b>true</b>;}}<b>this</b>.yTicks.sort(<b>this</b>.DDM.numericSort);},setXConstraint:<b>function </b>(E,D,C){<b>this</b>.leftConstraint=parseInt(E,10);<b>this</b>.rightConstraint=parseInt(D,10);<b>this</b>.minX=<b>this</b>.initPageX-<b>this</b>.leftConstraint;<b>this</b>.maxX=<b>this</b>.initPageX+<b>this</b>.rightConstraint;<b>if </b>(C){<b>this</b>.setXTicks(<b>this</b>.initPageX,C);}<b>this</b>.constrainX=<b>true</b>;},clearConstraints:<b>function </b>(){<b>this</b>.constrainX=<b>false</b>;<b>this</b>.constrainY=<b>false</b>;<b>this</b>.clearTicks();},clearTicks:<b>function </b>(){<b>this</b>.xTicks=<b>null</b>;<b>this</b>.yTicks=<b>null</b>;<b>this</b>.xTickSize=0;<b>this</b>.yTickSize=0;},setYConstraint:<b>function </b>(C,E,D){<b>this</b>.topConstraint=parseInt(C,10);<b>this</b>.bottomConstraint=parseInt(E,10);<b>this</b>.minY=<b>this</b>.initPageY-<b>this</b>.topConstraint;<b>this</b>.maxY=<b>this</b>.initPageY+<b>this</b>.bottomConstraint;<b>if </b>(D){<b>this</b>.setYTicks(<b>this</b>.initPageY,D);
+}<b>this</b>.constrainY=<b>true</b>;},resetConstraints:<b>function </b>(){<b>if </b>(<b>this</b>.initPageX||<b>this</b>.initPageX===0){<b>var </b>D=(<b>this</b>.maintainOffset)?<b>this</b>.lastPageX-<b>this</b>.initPageX:0;<b>var </b>C=(<b>this</b>.maintainOffset)?<b>this</b>.lastPageY-<b>this</b>.initPageY:0;<b>this</b>.setInitPosition(D,C);}<b>else </b>{<b>this</b>.setInitPosition();}<b>if </b>(<b>this</b>.constrainX){<b>this</b>.setXConstraint(<b>this</b>.leftConstraint,<b>this</b>.rightConstraint,<b>this</b>.xTickSize);}<b>if </b>(<b>this</b>.constrainY){<b>this</b>.setYConstraint(<b>this</b>.topConstraint,<b>this</b>.bottomConstraint,<b>this</b>.yTickSize);}},getTick:<b>function </b>(I,F){<b>if </b>(!F){<b>return</b> I;}<b>else </b>{<b>if </b>(F[0]&gt;=I){<b>return</b> F[0];}<b>else </b>{<b>for </b>(<b>var </b>D=0,C=F.length;D&lt;C;++D){<b>var </b>E=D+1;<b>if </b>(F[E]&&F[E]&gt;=I){<b>var </b>H=I-F[D];<b>var </b>G=F[E]-I;<b>return</b>(G&gt;H)?F[D]:F[E];}}<b>return</b> F[F.length-1];}}},toString:<b>function </b>(){<b>return</b>("DragDrop "+<b>this</b>.id);}};YAHOO.augment(YAHOO.util.DragDrop,YAHOO.util.EventProvider);})();YAHOO.util.DD=<b>function </b>(C,A,B){<b>if </b>(C){<b>this</b>.init(C,A,B);}};YAHOO.extend(YAHOO.util.DD,YAHOO.util.DragDrop,{scroll:<b>true</b>,autoOffset:<b>function </b>(C,B){<b>var </b>A=C-<b>this</b>.startPageX;<b>var </b>D=B-<b>this</b>.startPageY;<b>this</b>.setDelta(A,D);},setDelta:<b>function </b>(B,A){<b>this</b>.deltaX=B;<b>this</b>.deltaY=A;},setDragElPos:<b>function </b>(C,B){<b>var </b>A=<b>this</b>.getDragEl();<b>this</b>.alignElWithMouse(A,C,B);},alignElWithMouse:<b>function </b>(C,G,F){<b>var </b>E=<b>this</b>.getTargetCoord(G,F);<b>if </b>(!<b>this</b>.deltaSetXY){<b>var </b>H=[E.x,E.y];YAHOO.util.Dom.setXY(C,H);<b>var </b>D=parseInt(YAHOO.util.Dom.getStyle(C,"left"),10);<b>var </b>B=parseInt(YAHOO.util.Dom.getStyle(C,"top"),10);<b>this</b>.deltaSetXY=[D-E.x,B-E.y];}<b>else </b>{YAHOO.util.Dom.setStyle(C,"left",(E.x+<b>this</b>.deltaSetXY[0])+"px");YAHOO.util.Dom.setStyle(C,"top",(E.y+<b>this</b>.deltaSetXY[1])+"px");}<b>this</b>.cachePosition(E.x,E.y);<b>var </b>A=<b>this</b>;setTimeout(<b>function </b>(){A.autoScroll.call(A,E.x,E.y,C.offsetHeight,C.offsetWidth);},0);},cachePosition:<b>function </b>(B,A){<b>if </b>(B){<b>this</b>.lastPageX=B;<b>this</b>.lastPageY=A;}<b>else </b>{<b>var </b>C=YAHOO.util.Dom.getXY(<b>this</b>.getEl());<b>this</b>.lastPageX=C[0];<b>this</b>.lastPageY=C[1];}},autoScroll:<b>function </b>(J,I,E,K){<b>if </b>(<b>this</b>.scroll){<b>var </b>L=<b>this</b>.DDM.getClientHeight();<b>var </b>B=<b>this</b>.DDM.getClientWidth();<b>var </b>N=<b>this</b>.DDM.getScrollTop();<b>var </b>D=<b>this</b>.DDM.getScrollLeft();<b>var </b>H=E+I;<b>var </b>M=K+J;<b>var </b>G=(L+N-I-<b>this</b>.deltaY);<b>var </b>F=(B+D-J-<b>this</b>.deltaX);<b>var </b>C=40;<b>var </b>A=(document.all)?80:30;<b>if </b>(H&gt;L&&G&lt;C){window.scrollTo(D,N+A);}<b>if </b>(I&lt;N&&N&gt;0&&I-N&lt;C){window.scrollTo(D,N-A);}<b>if </b>(M&gt;B&&F&lt;C){window.scrollTo(D+A,N);}<b>if </b>(J&lt;D&&D&gt;0&&J-D&lt;C){window.scrollTo(D-A,N);}}},applyConfig:<b>function </b>(){YAHOO.util.DD.superclass.applyConfig.call(<b>this</b>);<b>this</b>.scroll=(<b>this</b>.config.scroll!==<b>false</b>);},b4MouseDown:<b>function </b>(A){<b>this</b>.setStartPosition();<b>this</b>.autoOffset(YAHOO.util.Event.getPageX(A),YAHOO.util.Event.getPageY(A));},b4Drag:<b>function </b>(A){<b>this</b>.setDragElPos(YAHOO.util.Event.getPageX(A),YAHOO.util.Event.getPageY(A));},toString:<b>function </b>(){<b>return</b>("DD "+<b>this</b>.id);}});YAHOO.util.DDProxy=<b>function </b>(C,A,B){<b>if </b>(C){<b>this</b>.init(C,A,B);<b>this</b>.initFrame();}};YAHOO.util.DDProxy.dragElId="ygddfdiv";YAHOO.extend(YAHOO.util.DDProxy,YAHOO.util.DD,{resizeFrame:<b>true</b>,centerFrame:<b>false</b>,createFrame:<b>function </b>(){<b>var </b>B=<b>this</b>,A=document.body;<b>if </b>(!A||!A.firstChild){setTimeout(<b>function </b>(){B.createFrame();},50);<b>return</b>;}<b>var </b>F=<b>this</b>.getDragEl(),E=YAHOO.util.Dom;<b>if </b>(!F){F=document.createElement("div");F.id=<b>this</b>.dragElId;<b>var </b>D=F.style;D.position="absolute";D.visibility="hidden";D.cursor="move";D.border="2px solid #aaa";D.zIndex=999;D.height="25px";D.width="25px";<b>var </b>C=document.createElement("div");E.setStyle(C,"height","100%");E.setStyle(C,"width","100%");E.setStyle(C,"background-color","#ccc");E.setStyle(C,"opacity","0");F.appendChild(C);A.insertBefore(F,A.firstChild);}},initFrame:<b>function </b>(){<b>this</b>.createFrame();},applyConfig:<b>function </b>(){YAHOO.util.DDProxy.superclass.applyConfig.call(<b>this</b>);<b>this</b>.resizeFrame=(<b>this</b>.config.resizeFrame!==<b>false</b>);<b>this</b>.centerFrame=(<b>this</b>.config.centerFrame);<b>this</b>.setDragElId(<b>this</b>.config.dragElId||YAHOO.util.DDProxy.dragElId);},showFrame:<b>function </b>(E,D){<b>var </b>C=<b>this</b>.getEl();<b>var </b>A=<b>this</b>.getDragEl();<b>var </b>B=A.style;<b>this</b>._resizeProxy();<b>if </b>(<b>this</b>.centerFrame){<b>this</b>.setDelta(Math.round(parseInt(B.width,10)/2),Math.round(parseInt(B.height,10)/2));}<b>this</b>.setDragElPos(E,D);YAHOO.util.Dom.setStyle(A,"visibility","visible");},_resizeProxy:<b>function </b>(){<b>if </b>(<b>this</b>.resizeFrame){<b>var </b>H=YAHOO.util.Dom;<b>var </b>B=<b>this</b>.getEl();<b>var </b>C=<b>this</b>.getDragEl();<b>var </b>G=parseInt(H.getStyle(C,"borderTopWidth"),10);<b>var </b>I=parseInt(H.getStyle(C,"borderRightWidth"),10);<b>var </b>F=parseInt(H.getStyle(C,"borderBottomWidth"),10);<b>var </b>D=parseInt(H.getStyle(C,"borderLeftWidth"),10);<b>if </b>(isNaN(G)){G=0;}<b>if </b>(isNaN(I)){I=0;}<b>if </b>(isNaN(F)){F=0;}<b>if </b>(isNaN(D)){D=0;}<b>var </b>E=Math.max(0,B.offsetWidth-I-D);<b>var </b>A=Math.max(0,B.offsetHeight-G-F);H.setStyle(C,"width",E+"px");H.setStyle(C,"height",A+"px");}},b4MouseDown:<b>function </b>(B){<b>this</b>.setStartPosition();<b>var </b>A=YAHOO.util.Event.getPageX(B);<b>var </b>C=YAHOO.util.Event.getPageY(B);<b>this</b>.autoOffset(A,C);},b4StartDrag:<b>function </b>(A,B){<b>this</b>.showFrame(A,B);},b4EndDrag:<b>function </b>(A){YAHOO.util.Dom.setStyle(<b>this</b>.getDragEl(),"visibility","hidden");},endDrag:<b>function </b>(D){<b>var </b>C=YAHOO.util.Dom;<b>var </b>B=<b>this</b>.getEl();<b>var </b>A=<b>this</b>.getDragEl();C.setStyle(A,"visibility","");C.setStyle(B,"visibility","hidden");YAHOO.util.DDM.moveToEl(B,A);C.setStyle(A,"visibility","hidden");C.setStyle(B,"visibility","");},toString:<b>function </b>(){<b>return</b>("DDProxy "+<b>this</b>.id);}});YAHOO.util.DDTarget=<b>function </b>(C,A,B){<b>if </b>(C){<b>this</b>.initTarget(C,A,B);}};YAHOO.extend(YAHOO.util.DDTarget,YAHOO.util.DragDrop,{toString:<b>function </b>(){<b>return</b>("DDTarget "+<b>this</b>.id);}});YAHOO.register("dragdrop",YAHOO.util.DragDropMgr,{version:"2.8.1",build:"19"});
+
+js.util.DragDropMgr = YAHOO.util.DragDropMgr;
+js.util.DragDropMgr.getLocation = <b>function </b>(oDD) {
+    <b>var </b>rg = YAHOO.util.DragDropMgr.getLocation(oDD);
+    <b>if </b>(rg!=<b>null</b>) {
+        <b>return</b> {x:rg.x,y:rg.y,w:rg.width,h:rg.height};
+    }<b>else </b>{
+        <b>return</b> <b>null</b>;
+    }
+}
+
+js.util.DragDrop = YAHOO.util.DragDrop;
+
+js.util.DD = YAHOO.util.DD;
+js.util.DDProxy = YAHOO.util.DDProxy;
+js.util.DDTarget = YAHOO.util.DDTarget;
+
+<span class="multiComment">/**
+ * Defines the interface and base operation of items that that can be 
+ * dragged or can be drop targets.  It was designed to be extended, overriding
+ * the event handlers for startDrag, onDrag, onDragOver, onDragOut.
+ * 
+ * This class should not be instantiated until the onload event to ensure that
+ * the associated elements are available.
+ * The following would define a DragDrop obj that would interact with any 
+ * other DragDrop obj in the "group1" group:
+ * &lt;pre&gt;
+ *  dd = new js.util.DragDrop("div1", "group1");
+ * &lt;/pre&gt;
+ * Since none of the event handlers have been implemented, nothing would 
+ * actually happen if you were to run the code above.  Normally you would 
+ * override this class or one of the default implementations, but you can 
+ * also override the methods you want on an instance of the class...
+ * &lt;pre&gt;
+ *  dd.onDragDrop = function(e, id) {
+ *  &nbsp;&nbsp;alert("dd was dropped on " + id);
+ *  }
+ * &lt;/pre&gt;
+ * @class js.util.DragDrop
+ * @abstract
+ * @constructor
+ * @param {String} id of the element that is linked to this instance
+ * @param {String} sGroup:optional the group of related DragDrop objects
+ * @param {object} config:optional an object containing configurable attributes
+ *                Valid properties for DragDrop: 
+ *                    padding, isTarget, maintainOffset, primaryButtonOnly,
+ */</span>
+
+<span class="multiComment">/**
+ * The availabe property is false until the linked dom element is accessible. 
+ * @field {boolean} available
+ */</span>
+<span class="multiComment">/**
+ * Configuration attributes passed into the constructor
+ * @field {object} config
+ */</span>
+<span class="multiComment">/**
+ * Property that is assigned to a drag and drop object when testing to see if it is being targeted by another
+ *  dd object. This property can be used in intersect mode to help determine the focus of the mouse interaction. 
+ * DDM.getBestMatch uses this property first to determine the closest match in INTERSECT mode when multiple targets are part of the same interaction.
+ * @field {boolean} cursorIsOver
+ */</span>
+<span class="multiComment">/**
+ * If this flag is true, do not fire drop events. The element is a drag only element (for movement not dropping) 
+ * @field {boolean} dragOnly
+ */</span>
+<span class="multiComment">/**
+ * An Object Literal containing the events that we will be using: mouseDown, b4MouseDown, mouseUp, b4StartDrag
+ * , startDrag, b4EndDrag, endDrag, mouseUp, drag, b4Drag, invalidDrop, b4DragOut, dragOut, dragEnter, b4DragOver
+ * , dragOver, b4DragDrop, dragDrop By setting any of these to false, then event will not be fired. 
+ * @field {object} events
+ */</span>
+<span class="multiComment">/**
+ * The group defines a logical collection of DragDrop objects that are related. Instances only get events 
+ * when interacting with other DragDrop object in the same group. This lets us define multiple groups using a single DragDrop subclass if we want. 
+ * @field {string[]} groups
+ */</span>
+<span class="multiComment">/**
+ * By default, drags can only be initiated if the mousedown occurs in the region the linked element is. 
+ * This is done in part to work around a bug in some browsers that mis-report the mousedown if the previous 
+ * mouseup happened outside of the window. This property is set to true if outer handles are defined. 
+ * Default Value: false 
+ * @field {boolean} hasOuterHandles
+ */</span>
+<span class="multiComment">/**
+ * The id of the element associated with this object. This is what we refer to as the "linked element" 
+ * because the size and position of this element is used to determine when the drag and drop objects have interacted. 
+ * @field {string} id
+ */</span>
+<span class="multiComment">/**
+ * By default, all instances can be a drop target. This can be disabled by setting isTarget to false.
+ * @field {boolean} isTarget
+ */</span>
+<span class="multiComment">/**
+ * Maintain offsets when we resetconstraints. Set to true when you want the position of the element relative 
+ * to its parent to stay the same when the page changes 
+ * @field {boolean} maintainOffset
+ */</span>
+<span class="multiComment">/**
+ * The padding configured for this drag and drop object for calculating the drop zone intersection with this object. 
+ * @field {int[]} padding
+ */</span>
+<span class="multiComment">/**
+ * If this flag is true, a shim will be placed over the screen/viewable area to track mouse events. 
+ * Should help with dragging elements over iframes and other controls. 
+ * @field {boolean} useShim
+ */</span>
+<span class="multiComment">/**
+ * Array of pixel locations the element will snap to if we specified a horizontal graduation/interval. 
+ * This array is generated automatically when you define a tick interval. 
+ * @field {int[]} xTicks
+ */</span>
+<span class="multiComment">/**
+ * Array of pixel locations the element will snap to if we specified a vertical graduation/interval. 
+ * This array is generated automatically when you define a tick interval. 
+ * @field {int[]} yTicks
+ */</span>
+
+<span class="multiComment">/**
+ * Add this instance to a group of related drag/drop objects.  All 
+ * instances belong to at least one group, and can belong to as many 
+ * groups as needed.
+ * @method addToGroup
+ * @param {string} sGroup the name of the group
+ */</span>
+<span class="multiComment">/**
+ * Applies the configuration parameters that were passed into the constructor.
+ * This is supposed to happen at each level through the inheritance chain.  So
+ * a DDProxy implentation will execute apply config on DDProxy, DD, and 
+ * DragDrop in order to get all of the parameters that are available in
+ * each object.
+ * @method applyConfig
+ */</span>
+<span class="multiComment">/**
+ * Clears any constraints applied to this instance.  Also clears ticks
+ * since they can't exist independent of a constraint at this time.
+ * @method clearConstraints
+ */</span>
+<span class="multiComment">/**
+ * Clears any tick interval defined for this instance
+ * @method clearTicks
+ */</span>
+<span class="multiComment">/**
+ * Returns a reference to the actual element to drag.  By default this is
+ * the same as the html element, but it can be assigned to another 
+ * element. An example of this can be found in js.util.DDProxy
+ * @method getDragEl
+ * @return {HTMLElement} the html element 
+ */</span>
+<span class="multiComment">/**
+ * Returns a reference to the linked element
+ * @method getEl
+ * @return {HTMLElement} the html element 
+ */</span>
+<span class="multiComment">/**
+ * Sets up the DragDrop object.  Must be called in the constructor of any js.util.DragDrop subclass
+ * @method init
+ * @param {string} id the id of the linked element
+ * @param {string} sGroup:optional the group of related items
+ * @param {object} config:optional configuration attributes
+ */</span>
+<span class="multiComment">/**
+ * Initializes Targeting functionality only... the object does not
+ * get a mousedown handler.
+ * @method initTarget
+ * @param {string} id the id of the linked element
+ * @param {String} sGroup:optional the group of related items
+ * @param {object} config:optional configuration attributes
+ */</span>
+<span class="multiComment">/**
+ * Returns true if this instance is locked, or the drag drop mgr is locked
+ * (meaning that all drag/drop is disabled on the page.)
+ * @method isLocked
+ * @return {boolean} true if this obj or all drag/drop is locked, else false
+ */</span>
+<span class="multiComment">/**
+ * Lock this instance
+ * @method lock
+ */</span>
+<span class="multiComment">/**
+ * Unlock this instace
+ * @method unlock
+ */</span>
+<span class="multiComment">/**
+ * Shortcut for EventProvider.subscribe, see &lt;a href="js.core.EventProvider.html#subscribe"&gt;js.core.EventProvider.subscribe&lt;/a&gt;
+ * @method on
+ */</span>
+<span class="multiComment">/**
+ * Abstract method called during the onMouseMove event while dragging an object.
+ * @method onDrag
+ * @abstract
+ * @param {Event} e the mousemove event
+ */</span>
+<span class="multiComment">/**
+ * Abstract method called after a drag/drop object is clicked
+ * and the drag or mousedown time thresholds have beeen met.
+ * @method startDrag
+ * @abstract
+ * @param {int} X click location
+ * @param {int} Y click location
+ */</span>
+<span class="multiComment">/**
+ * Fired when we are done dragging the object
+ * @method endDrag
+ * @abstract
+ * @param {Event} e the mouseup event
+ */</span>
+<span class="multiComment">/**
+ * Abstract method called when this element fist begins hovering over 
+ * another DragDrop obj
+ * @method onDragEnter
+ * @abstract
+ * @param {Event} e the mousemove event
+ * @param {String|js.util.DragDrop[]} id In POINT mode, the element
+ * id this is hovering over.  In INTERSECT mode, an array of one or more 
+ * dragdrop items being hovered over.
+ */</span>
+<span class="multiComment">/**
+ * Abstract method called when this element is hovering over another 
+ * DragDrop obj
+ * @method onDragOver
+ * @abstract
+ * @param {Event} e the mousemove event
+ * @param {String|DragDrop[]} id In POINT mode, the element
+ * id this is hovering over.  In INTERSECT mode, an array of dd items 
+ * being hovered over.
+ */</span>
+<span class="multiComment">/**
+ * Abstract method called when we are no longer hovering over an element
+ * @method onDragOut
+ * @abstract
+ * @param {Event} e the mousemove event
+ * @param {String|js.util.DragDrop[]} id In POINT mode, the element
+ * id this was hovering over.  In INTERSECT mode, an array of dd items 
+ * that the mouse is no longer over.
+ */</span>
+<span class="multiComment">/**
+ * Abstract method called when this item is dropped on another DragDrop 
+ * obj
+ * @method onDragDrop
+ * @abstract
+ * @param {Event} e the mouseup event
+ * @param {String|js.util.DragDrop[]} id In POINT mode, the element
+ * id this was dropped on.  In INTERSECT mode, an array of dd items this 
+ * was dropped on.
+ */</span>
+<span class="multiComment">/**
+ * Abstract method called when this item is dropped on an area with no
+ * drop target
+ * @method onInvalidDrop
+ * @abstract
+ * @param {Event} e the mouseup event
+ */</span>
+<span class="multiComment">/**
+ * Event handler that fires when a drag/drop obj gets a mouseup
+ * @method onMouseUp
+ * @abstract
+ * @param {Event} e the mouseup event
+ */</span>
+<span class="multiComment">/**
+ * Event handler that fires when a drag/drop obj gets a mousedown
+ * @method onMouseDown
+ * @abstract
+ * @param {Event} e the mousedown event
+ */</span>
+<span class="multiComment">/**
+ * Remove's this instance from the supplied interaction group
+ * @method removeFromGroup
+ * @param {string}  sGroup  The group to drop
+ */</span>
+<span class="multiComment">/**
+ * resetConstraints must be called if you manually reposition a dd element.
+ * @method resetConstraints
+ */</span>
+<span class="multiComment">/**
+ * Allows you to specify that an element other than the linked element 
+ * will be moved with the cursor during a drag
+ * @method setDragElId
+ * @param id {string} the id of the element that will be used to initiate the drag
+ */</span>
+<span class="multiComment">/**
+ * Allows you to specify a child of the linked element that should be 
+ * used to initiate the drag operation.  An example of this would be if 
+ * you have a content div with text and links.  Clicking anywhere in the 
+ * content area would normally start the drag operation.  Use this method
+ * to specify that an element inside of the content div is the element 
+ * that starts the drag operation.
+ * @method setHandleElId
+ * @param {string} id the id of the element that will be used to 
+ * initiate the drag.
+ */</span>
+<span class="multiComment">/**
+ * Allows you to set an element outside of the linked element as a drag handle
+ * @method setOuterHandleElId
+ * @param {string} id the id of the element that will be used to initiate the drag
+ */</span>
+<span class="multiComment">/**
+ * Configures the padding for the target zone in px.  Effectively expands
+ * (or reduces) the virtual object size for targeting calculations.  
+ * Supports css-style shorthand; if only one parameter is passed, all sides
+ * will have that padding, and if only two are passed, the top and bottom
+ * will have the first param, the left and right the second.
+ * @method setPadding
+ * @param {int} iTop    Top pad
+ * @param {int} iRight  Right pad
+ * @param {int} iBot    Bot pad
+ * @param {int} iLeft   Left pad
+ */</span>
+<span class="multiComment">/**
+ * By default, the element can be dragged any place on the screen.  Use 
+ * this method to limit the horizontal travel of the element.  Pass in 
+ * 0,0 for the parameters if you want to lock the drag to the y axis.
+ * @method setXConstraint
+ * @param {int} iLeft the number of pixels the element can move to the left
+ * @param {int} iRight the number of pixels the element can move to the 
+ * right
+ * @param {int} iTickSize:optional optional parameter for specifying that the 
+ * element
+ * should move iTickSize pixels at a time.
+ */</span>
+<span class="multiComment">/**
+ * By default, the element can be dragged any place on the screen.  Set 
+ * this to limit the vertical travel of the element.  Pass in 0,0 for the
+ * parameters if you want to lock the drag to the x axis.
+ * @method setYConstraint
+ * @param {int} iUp the number of pixels the element can move up
+ * @param {int} iDown the number of pixels the element can move down
+ * @param {int} iTickSize:optional optional parameter for specifying that the 
+ * element should move iTickSize pixels at a time.
+ */</span>
+<span class="multiComment">/**
+ * toString method
+ * @method toString
+ * @return {string} string representation of the dd obj
+ */</span>
+<span class="multiComment">/**
+ * Remove all drag and drop hooks for this element
+ * @method unreg
+ */</span>
+
+
+<span class="multiComment">/**
+ * A DragDrop implementation where the linked element follows the 
+ * mouse cursor during a drag.
+ * @class js.util.DD
+ * @extends js.util.DragDrop
+ * @constructor
+ * @param {String} id the id of the linked element 
+ * @param {String} sGroup:optional the group of related DragDrop items
+ * @param {object} config:optional an object containing configurable attributes
+ *                Valid properties for DD: scroll
+ */</span>
+<span class="multiComment">/**
+ * When set to true, the utility automatically tries to scroll the browser
+ * window when a drag and drop element is dragged near the viewport boundary.
+ * Defaults to true.
+ * @field {boolean} scroll
+ */</span>
+<span class="multiComment">/**
+ * Sets the pointer offset to the distance between the linked element's top 
+ * left corner and the location the element was clicked
+ * @method autoOffset
+ * @param {int} iPageX the X coordinate of the click
+ * @param {int} iPageY the Y coordinate of the click
+ */</span>
+<span class="multiComment">/** 
+ * Sets the pointer offset.  You can call this directly to force the 
+ * offset to be in a particular location (e.g., pass in 0,0 to set it 
+ * to the center of the object, as done in YAHOO.widget.Slider)
+ * @method setDelta
+ * @param {int} iDeltaX the distance from the left
+ * @param {int} iDeltaY the distance from the top
+ */</span>
+<span class="multiComment">/**
+ * Sets the drag element to the location of the mousedown or click event, 
+ * maintaining the cursor location relative to the location on the element 
+ * that was clicked.  Override this if you want to place the element in a 
+ * location other than where the cursor is.
+ * @method setDragElPos
+ * @param {int} iPageX the X coordinate of the mousedown or drag event
+ * @param {int} iPageY the Y coordinate of the mousedown or drag event
+ */</span>
+<span class="multiComment">/**
+ * Sets the element to the location of the mousedown or click event, 
+ * maintaining the cursor location relative to the location on the element 
+ * that was clicked.  Override this if you want to place the element in a 
+ * location other than where the cursor is.
+ * @method alignElWithMouse
+ * @param {HTMLElement} el the element to move
+ * @param {int} iPageX the X coordinate of the mousedown or drag event
+ * @param {int} iPageY the Y coordinate of the mousedown or drag event
+ */</span>
+
+
+<span class="multiComment">/**
+ * A DragDrop implementation that inserts an empty, bordered div into
+ * the document that follows the cursor during drag operations.  At the time of
+ * the click, the frame div is resized to the dimensions of the linked html
+ * element, and moved to the exact location of the linked element.
+ *
+ * References to the "frame" element refer to the single proxy element that
+ * was created to be dragged in place of all DDProxy elements on the
+ * page.
+ *
+ * @class js.util.DDProxy
+ * @extends js.util.DD
+ * @constructor
+ * @param {String} id the id of the linked html element
+ * @param {String} sGroup:optional the group of related DragDrop objects
+ * @param {object} config:optional an object containing configurable attributes
+ *                Valid properties for DDProxy in addition to those in DragDrop: 
+ *                   resizeFrame, centerFrame, dragElId
+ */</span>
+<span class="multiComment">/**
+ * The id of the element that will be dragged.  By default this is same 
+ * as the linked element , but could be changed to another element.
+ * @field {boolean} dragElId
+ */</span>
+<span class="multiComment">/**
+ * By default we resize the drag frame to be the same size as the element
+ * we want to drag (this is to get the frame effect).  We can turn it off
+ * if we want a different behavior.
+ * @field {boolean} resizeFrame
+ */</span>
+<span class="multiComment">/**
+ * By default the frame is positioned exactly where the drag element is, so
+ * we use the cursor offset provided by YAHOO.util.DD.  Another option that works only if
+ * you do not have constraints on the obj is to have the drag frame centered
+ * around the cursor.  Set centerFrame to true for this effect.
+ * @field {boolean} centerFrame
+ */</span>
+
+<span class="multiComment">/**
+ * Creates the proxy element if it does not yet exist
+ * @method createFrame
+ */</span>
+<span class="multiComment">/**
+ * Initialization for the drag frame element.  Must be called in the
+ * constructor of all subclasses
+ * @method initFrame
+ */</span>
+
+
+<span class="multiComment">/**
+ * A DragDrop implementation that does not move, but can be a drop 
+ * target.  You would get the same result by simply omitting implementation 
+ * for the event callbacks, but this way we reduce the processing cost of the 
+ * event listener and the callbacks.
+ * @class js.util.DDTarget
+ * @extends js.util.DragDrop 
+ * @constructor
+ * @param {String} id the id of the element that is a drop target
+ * @param {String} sGroup:optional the group of related DragDrop objects
+ * @param {object} config:optional an object containing configurable attributes
+ *                 Valid properties for DDTarget in addition to those in DragDrop: none
+ */</span>
+
+
+<span class="multiComment">/**
+ * DragDropMgr is a singleton that tracks the element interaction for 
+ * all DragDrop items in the window.  Generally, you will not call 
+ * this class directly, but it does have helper methods that could 
+ * be useful in your DragDrop implementations.
+ * @class js.util.DragDropMgr
+ * @static
+ */</span>
+<span class="multiComment">/**
+ * This property is used to turn on global use of the shim element on all DragDrop instances, 
+ * defaults to false for backcompat. (Use: YAHOO.util.DDM.useShim = true)
+ * @field {Boolean} useShim
+ */</span>
+<span class="multiComment">/**
+ * Flag to determine if we should prevent the default behavior of the
+ * events we define. By default this is true, but this can be set to 
+ * false if you need the default behavior (not recommended)
+ * @field {Boolean} preventDefault
+ */</span>
+<span class="multiComment">/**
+ * Flag to determine if we should stop the propagation of the events 
+ * we generate. This is true by default but you may want to set it to
+ * false if the html element contains other features that require the
+ * mouse click.
+ * @field {Boolean} stopPropagation
+ */</span>
+<span class="multiComment">/**
+ * Provides additional information about the the current set of
+ * interactions.  Can be accessed from the event handlers. It
+ * contains the following properties:
+ *
+ *       out:       onDragOut interactions
+ *       enter:     onDragEnter interactions
+ *       over:      onDragOver interactions
+ *       drop:      onDragDrop interactions
+ *       point:     The location of the cursor
+ *       draggedRegion: The location of dragged element at the time
+ *                      of the interaction
+ *       sourceRegion: The location of the source elemtn at the time
+ *                     of the interaction
+ *       validDrop: boolean
+ * @field {Object} interactionInfo
+ */</span>
+
+<span class="multiComment">/**
+ * In point mode, drag and drop interaction is defined by the 
+ * location of the cursor during the drag/drop
+ * @constant {int} POINT
+ */</span>
+<span class="multiComment">/**
+ * In intersect mode, drag and drop interaction is defined by the 
+ * cursor position or the amount of overlap of two or more drag and 
+ * drop objects.
+ * @constant {int} INTERSECT
+ */</span>
+<span class="multiComment">/**
+ * In intersect mode, drag and drop interaction is defined only by the 
+ * overlap of two or more drag and drop objects.
+ * @constant {int} STRICT_INTERSECT
+ */</span>
+<span class="multiComment">/**
+ * The current drag and drop mode.  Default: POINT
+ * @field {int} mode
+ */</span>
+<span class="multiComment">/**
+ * Set useCache to false if you want to force object the lookup of each
+ * drag and drop linked element constantly during a drag.
+ * @field {boolean} useCache
+ */</span>
+<span class="multiComment">/**
+ * The number of pixels that the mouse needs to move after the 
+ * mousedown before the drag is initiated.  Default=3
+ * @field {int} clickPixelThresh
+ */</span>
+<span class="multiComment">/**
+ * The number of milliseconds after the mousedown event to initiate the
+ * drag if we don't get a mouseup event. Default=1000
+ * @field {int} clickTimeThresh
+ */</span>
+
+<span class="multiComment">/**
+ * Helper function for getting the best match from the list of drag 
+ * and drop objects returned by the drag and drop events when we are 
+ * in INTERSECT mode.  It returns either the first object that the 
+ * cursor is over, or the object that has the greatest overlap with 
+ * the dragged element.
+ * @method getBestMatch
+ * @param  {js.util.DragDrop[]} dds The array of drag and drop objects targeted
+ * @return {js.util.DragDrop}       The best single match
+ */</span>
+<span class="multiComment">/**
+ * Returns the DragDrop instance for a given id
+ * @method getDDById
+ * @param {String} id the id of the DragDrop object
+ * @return {js.util.DragDrop} the drag drop object, null if it is not found
+ */</span>
+<span class="multiComment">/**
+ * Returns a Region object containing the drag and drop element's position
+ * and size, including the padding configured for it
+ * @method getLocation
+ * @param {js.util.DragDrop} oDD the drag and drop object to get the 
+ *                       location for
+ * @return {js.math.Rect} a Region object representing the total area
+ *                             the element occupies, including any padding
+ *                             the instance is configured for.
+ */</span>
+<span class="multiComment">/**
+ * Returns the drag and drop instances that are in all groups the
+ * passed in instance belongs to.
+ * @method getRelated
+ * @param {js.util.DragDrop} p_oDD the obj to get related data for
+ * @param {boolean} bTargetsOnly if true, only return targetable objs
+ * @return {js.util.DragDrop[]} the related instances
+ */</span>
+<span class="multiComment">/**
+ * Utility function to determine if a given element has been 
+ * registered as a drag drop item.
+ * @method isDragDrop
+ * @param {String} id the element id to check
+ * @return {boolean} true if this element is a DragDrop item, false otherwise
+ */</span>
+<span class="multiComment">/**
+ * Utility function to determine if a given element has been 
+ * registered as a drag drop handle for the given Drag Drop object.
+ * @method isHandle
+ * @param {String} id the element id to check
+ * @return {boolean} true if this element is a DragDrop handle, false otherwise
+ */</span>
+<span class="multiComment">/**
+ * Returns true if the specified dd target is a legal target for 
+ * the specifice drag obj
+ * @method isLegalTarget
+ * @param {js.util.DragDrop} the drag obj
+ * @param {js.util.DragDrop} the target
+ * @return {boolean} true if the target is a legal target for the dd obj
+ */</span>
+<span class="multiComment">/**
+ * Is drag and drop locked?
+ * @method isLocked
+ * @return {boolean} True if drag and drop is locked, false otherwise.
+ */</span>
+<span class="multiComment">/**
+ * My goal is to be able to transparently determine if an object is
+ * typeof DragDrop, and the exact subclass of DragDrop.  typeof 
+ * returns "object", oDD.constructor.toString() always returns
+ * "DragDrop" and not the name of the subclass.  So for now it just
+ * evaluates a well-known variable in DragDrop.
+ * @method isTypeOfDD
+ * @param {Object} the object to evaluate
+ * @return {boolean} true if typeof oDD = js.util.DragDrop
+ */</span>
+<span class="multiComment">/**
+ * Lock all drag and drop functionality
+ * @method lock
+ */</span>
+<span class="multiComment">/**
+ * Unlock all drag and drop functionality
+ * @method unlock
+ */</span>
+<span class="multiComment">/**
+ * Each DragDrop instance must be registered with the DragDropMgr.  
+ * This is executed in DragDrop.init()
+ * @method regDragDrop
+ * @param {js.util.DragDrop} oDD the DragDrop object to register
+ * @param {String} sGroup the name of the group this element belongs to
+ */</span>
+<span class="multiComment">/**
+ * Each DragDrop handle element must be registered.  This is done
+ * automatically when executing DragDrop.setHandleElId()
+ * @method regHandle
+ * @param {String} sDDId the DragDrop id this element is a handle for
+ * @param {String} sHandleId the id of the element that is the drag handle
+ */</span>
+<span class="multiComment">/**
+ * Fired when either the drag pixel threshold or the mousedown hold 
+ * time threshold has been met.
+ * @method startDrag
+ * @param x {int} the X position of the original mousedown
+ * @param y {int} the Y position of the original mousedown
+ */</span>
+<span class="multiComment">/** 
+ * Ends the current drag, cleans up the state, and fires the endDrag
+ * and mouseUp events.  Called internally when a mouseup is detected
+ * during the drag.  Can be fired manually during the drag by passing
+ * either another event (such as the mousemove event received in onDrag)
+ * or a fake event with pageX and pageY defined (so that endDrag and
+ * onMouseUp have usable position data.).  Alternatively, pass true
+ * for the silent parameter so that the endDrag and onMouseUp events
+ * are skipped (so no event data is needed.)
+ *
+ * @method stopDrag
+ * @param {Event} e the mouseup event, another event (or a fake event) 
+ *                  with pageX and pageY defined, or nothing if the 
+ *                  silent parameter is true
+ * @param {boolean} silent:optional skips the enddrag and mouseup events if true
+ */</span>
+<span class="multiComment">/**
+ * Utility to stop event propagation and event default, if these 
+ * features are turned on.
+ * @method stopEvent
+ * @param {Event} e the event as returned by this.getEvent()
+ */</span>
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

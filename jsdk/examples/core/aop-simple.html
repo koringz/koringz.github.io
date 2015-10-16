@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * @author fengchun
+-->
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>JSDK Example</title>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-reflect.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-aop.js"></script>
+
+<style>
+</style>
+
+<script>
+var SYS = js.lang.System, D = js.core.Dom, $ = js.core.Dom.$;
+
+var PrimeNumber = function(){
+}
+
+PrimeNumber.prototype = {
+	calc: function(n){
+		if(n<2) return [];
+		
+		var all = [];
+		for(var i = 2;i <= n;i++){//slowly algorithm
+			var flag = true;
+			for(var j = 2;j < i;j++){
+				if(i%j==0) {
+					flag = false;
+					break;
+				}
+			}
+			if(flag) all.push(i);			
+	    }
+		return all;
+	}
+}
+
+var Sample = function(){
+	
+	return {
+		_clear: function(){
+			$('time').value = '';
+			$('result').innerHTML = '';
+			D.setStyle('result','color',SYS.randomColor());			
+		},
+		findWithAOP: function(){
+			this._clear();
+			var d1 = null, d2 = null, n = parseInt($('number').value);
+			if(!n) return;	
+			
+			js.aop.ClassProxy.reset('PrimeNumber', 'calc');
+			js.aop.ClassProxy.addAdvices('PrimeNumber', 'calc', {
+				'before':function(type, m_name, args){
+					d1 = new Date();
+					return args;
+				},
+				'after':function(type, m_name, rst){
+					d2 = new Date();
+					$('time').value = d2.getTime()-d1.getTime();
+					return rst;
+				}
+			});	
+			$('result').innerHTML = new PrimeNumber().calc(n);
+		},
+		findNoAOP: function(){
+			this._clear();
+			var n = parseInt($('number').value);
+			if(!n) return;	
+			
+			js.aop.ClassProxy.reset('PrimeNumber', 'calc');	
+			$('result').innerHTML = new PrimeNumber().calc(n);
+		}
+	}
+}();	
+</script>
+</head>
+
+<body>
+Max Integer:<input id="number" value="12345"/><br/>
+All Primes:<div id="result"></div><br/>
+With using AOP technology, we have the statistics of the total time-consuming:
+<br/>
+Time:<input id="time" value=""/>ms<br/>
+
+<button onclick="Sample.findNoAOP();">findNoAOP</button>
+<button onclick="Sample.findWithAOP();">findWithAOP</button>
+</body>
+</html>

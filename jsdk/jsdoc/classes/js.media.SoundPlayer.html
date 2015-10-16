@@ -1,0 +1,212 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.media.SoundPlayer</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-media.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.media</div>
+<div class="topic" title="js.media.SoundPlayer">
+Class: 
+SoundPlayer</div>
+
+<b>public static</b> SoundPlayer
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="setValue" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setValue">+ <b>setValue</b></span></span>(<span title="required"><b>k</b></span>:String, <span title="required"><b>v</b></span>:Object):void</span>
+<div id="setValue_detail" style="display: none;">
+<pre class="desc">Set the property with the value.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>v</b></span>  &lt;Object&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getValue" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getValue">+ <b>getValue</b></span></span>(<span title="required"><b>k</b></span>:String):Object</span>
+<div id="getValue_detail" style="display: none;">
+<pre class="desc">Return the value of the property.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object&gt; value</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="canPlayMIME" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static canPlayMIME">+ <b>canPlayMIME</b></span></span>(<span title="required"><b>mime</b></span>:String):Boolean</span>
+<div id="canPlayMIME_detail" style="display: none;">
+<pre class="desc">Returns a boolean indicating whether SoundPlayer can play the given MIME type：
+audio/mpeg, audio/mp3, audio/m4a, audio/aac</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>mime</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="canPlayURL" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static canPlayURL">+ <b>canPlayURL</b></span></span>(<span title="required"><b>url</b></span>:String):Boolean</span>
+<div id="canPlayURL_detail" style="display: none;">
+<pre class="desc">Returns a boolean indicating whether SoundPlayer can play the given URL.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>url</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isOK" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isOK">+ <b>isOK</b></span></span>():Boolean</span>
+<div id="isOK_detail" style="display: none;">
+<pre class="desc">Returns a boolean indicating whether SoundPlayer has attempted to and succeeded in initialising.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="reboot" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static reboot">+ <b>reboot</b></span></span>():void</span>
+<div id="reboot_detail" style="display: none;">
+<pre class="desc">Destroys any created Sound objects, unloads the flash movie (removing it from the DOM)
+and restarts the SM2 init process, retaining all currently-set properties.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="destroySounds" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static destroySounds">+ <b>destroySounds</b></span></span>(<span title="required"><b>id</b></span>:String):void</span>
+<div id="destroySounds_detail" style="display: none;">
+<pre class="desc">Stops, unloads and destroys a sound or all sounds.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getSounds" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getSounds">+ <b>getSounds</b></span></span>(<span title="required"><b>id</b></span>:String):Object|Array&lt;Object&gt;</span>
+<div id="getSounds_detail" style="display: none;">
+<pre class="desc">Returns a sound by id or all sounds.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object|Array&lt;Object&gt;&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getSoundIDs" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getSoundIDs">+ <b>getSoundIDs</b></span></span>():String[]</span>
+<div id="getSoundIDs_detail" style="display: none;">
+<pre class="desc">Returns array of all sounds's ID.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String[]&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="createSounds" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static createSounds">+ <b>createSounds</b></span></span>(<span title="required"><b>sounds</b></span>:Object|Object[]):void</span>
+<div id="createSounds_detail" style="display: none;">
+<pre class="desc">Creates a new sound or a array of sounds.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>sounds</b></span>  &lt;Object|Object[]&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="load" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static load">+ <b>load</b></span></span>(<span title="required"><b>id</b></span>:String, <span title="required"><b>options</b></span>:Object):void</span>
+<div id="load_detail" style="display: none;">
+<pre class="desc">Starts loading the sound by ID via HTTP, with options if specified.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>options</b></span>  &lt;Object&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="unload" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static unload">+ <b>unload</b></span></span>(<span title="required"><b>id</b></span>:String):void</span>
+<div id="unload_detail" style="display: none;">
+<pre class="desc">Stops loading the sound by ID.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="play" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static play">+ <b>play</b></span></span>(<span title="required"><b>id</b></span>:String, <i title="optional"><b>args</b></i>:Object):void</span>
+<div id="play_detail" style="display: none;">
+<pre class="desc">Plays the sound by ID.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>args</b></i>  &lt;Object&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="stop" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static stop">+ <b>stop</b></span></span>(<i title="optional"><b>id</b></i>:String):void</span>
+<div id="stop_detail" style="display: none;">
+<pre class="desc">Stops the sound by ID or all sounds.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>id</b></i>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="pause" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static pause">+ <b>pause</b></span></span>(<i title="optional"><b>id</b></i>:String):void</span>
+<div id="pause_detail" style="display: none;">
+<pre class="desc">Pauses the sound by ID or all sounds.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>id</b></i>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="resume" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static resume">+ <b>resume</b></span></span>(<i title="optional"><b>id</b></i>:String):void</span>
+<div id="resume_detail" style="display: none;">
+<pre class="desc">Resumes the sound by ID or all sounds.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>id</b></i>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="togglePause" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static togglePause">+ <b>togglePause</b></span></span>(<span title="required"><b>id</b></span>:String):void</span>
+<div id="togglePause_detail" style="display: none;">
+<pre class="desc">Toggles Pause/Resume the sound by ID.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="mute" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static mute">+ <b>mute</b></span></span>(<span title="required"><b>id</b></span>:String):void</span>
+<div id="mute_detail" style="display: none;">
+<pre class="desc">Mutes the sound by ID.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="unmute" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static unmute">+ <b>unmute</b></span></span>(<span title="required"><b>id</b></span>:String):void</span>
+<div id="unmute_detail" style="display: none;">
+<pre class="desc">Unmutes the sound by ID.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="toggleMute" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static toggleMute">+ <b>toggleMute</b></span></span>(<span title="required"><b>id</b></span>:String):void</span>
+<div id="toggleMute_detail" style="display: none;">
+<pre class="desc">Toggles Mute/Unmute the sound by ID.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setPan" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setPan">+ <b>setPan</b></span></span>(<span title="required"><b>id</b></span>:String, <span title="required"><b>volume</b></span>:Int):void</span>
+<div id="setPan_detail" style="display: none;">
+<pre class="desc">Sets the stereo pan (left/right bias) of the sound specified by ID.
+Accepted values: -100 to 100 (L/R, 0 = center.) Affects pan property.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>volume</b></span>  &lt;Int&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setPosition" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setPosition">+ <b>setPosition</b></span></span>(<span title="required"><b>id</b></span>:String, <span title="required"><b>msecOffset</b></span>:Int):void</span>
+<div id="setPosition_detail" style="display: none;">
+<pre class="desc">Seeeks to a given position within a sound, specified by miliseconds (1000 msec = 1 second).
+Affects position property.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>msecOffset</b></span>  &lt;Int&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setVolume" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setVolume">+ <b>setVolume</b></span></span>(<span title="required"><b>id</b></span>:String, <span title="required"><b>volume</b></span>:Int):void</span>
+<div id="setVolume_detail" style="display: none;">
+<pre class="desc">Sets the volume of the sound specified by ID.
+Accepted values: 0-100. Affects volume property.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>volume</b></span>  &lt;Int&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="on" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static on">+ <b>on</b></span></span>(<span title="required"><b>e</b></span>:String, <span title="required"><b>fn</b></span>:Function, <i title="optional"><b>scope</b></i>:Object):void</span>
+<div id="on_detail" style="display: none;">
+<pre class="desc">Event have 'error','load','ready','timeout'.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>e</b></span>  &lt;String&gt; values: load|error|ready|timeout</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>scope</b></i>  &lt;Object&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

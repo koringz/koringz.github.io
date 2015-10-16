@@ -1,0 +1,976 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">js2d\js-2d-core.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.3
+ * @author feng.chun
+ * @date 2011-01-05
+ * @date 2011-03-22
+ * @date 2011-05-18
+ * 
+ * @version 0.2
+ * @author feng.chun
+ * @date 2010-11-15
+ *
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-9-20
+ * 
+ * @requires /core/js-core.js
+ */</span>
+js.lang.System.namespace('js.d2');
+
+(<b>function </b>(){
+    <b>var </b>SYS = js.lang.System
+      , D = js.core.Dom
+      , $ = js.core.Dom.$
+      , B = js.core.Env
+      , E = js.core.Event;
+    
+<span class="multiComment">    /**
+     * @class js.d2.Canvas
+     * @constructor
+     * 
+     * @struct js.d2.Canvas$Config {
+     *         "description":""
+     *         ,"type":"object"
+     *         ,"properties":{
+     *             "id":{"type":"string"}
+     *             ,"html":{"type":"string"}
+     *             ,"title":{"type":"string"}
+     *             ,"cssName":{"type":"string"}
+     *             ,"x":{"type":"number"}
+     *             ,"y":{"type":"number"}
+     *             ,"z":{"type":"number"}
+     *             ,"opacity":{"type":"number"}
+     *             ,"width":{"type":"number"}
+     *             ,"height":{"type":"number"}
+     *             ,"background":{"type":"string"}
+     *             ,"viewWindow":{"type":"js.math.Rect"}    
+     *         }
+     * } 
+     * 
+     * @param {js.d2.Canvas$Config} config
+     */</span>
+    js.d2.Canvas = <b>function </b>(config){
+        <b>this</b>._config = {
+            id: config['id'] || SYS.getUUID(),
+            html: config['html'] || '',
+            title: config['title'] || '',
+            cssName: config['cssName'] || '',
+            x: config['x'] || 0,
+            y: config['y'] || 0,
+            z: config['z'] || 0,
+            opacity: SYS.isUndefined(config['opacity']) ? 1 : config['opacity'],
+            width: config['width'] || 0,
+            height: config['height'] || 0,
+            background: config['background'] || ''
+        };
+        <b>this</b>._config['viewWindow'] = config['viewWindow']||<b>this</b>.getBound();
+        
+        <b>this</b>._init();
+    };
+    js.d2.Canvas.prototype = {
+<span class="multiComment">        /**
+         * Sets the view window on the canvas.
+         * 
+         * @method setViewWindow
+         * @param {Number} x X coordinate relative to the canvas
+         * @param {Number} y X coordinate relative to the canvas
+         * @param {Number} w with
+         * @param {Number} h height
+         */</span>
+        setViewWindow: <b>function </b>(x, y, w, h){
+            <b>var </b>v = <b>this</b>.getViewWindow(),
+             hasX = !SYS.isUndefined(x), 
+             hasY = !SYS.isUndefined(y), 
+             hasW = !SYS.isUndefined(w), 
+             hasH = !SYS.isUndefined(h);
+            <b>if </b>(!hasX && !hasY && !hasW && !hasH) <b>return</b>;
+            
+            <b>if </b>(hasW) v['w'] = w;
+            <b>if </b>(hasH) v['h'] = h;                
+            
+            <b>if </b>(hasX) {
+                <b>this</b>._config['x']+= v['x'] - x;//update canvas' x
+                v['x'] = x;
+            }                
+            <b>if </b>(hasY) {
+                <b>this</b>._config['y']+= v['y'] - y;//update canvas' y
+                v['y'] = y;
+            }                
+                
+            <b>if </b>(hasX || hasY) 
+                D.updateEl(<b>this</b>._config['id'], <b>null</b>, {left:(-v['x'])+'px',top:(-v['y'])+'px'});                
+                
+            <b>if </b>(hasW || hasH) 
+                D.updateEl(<b>this</b>._config['id']+'_view_window', <b>null</b>, {width:v.w+'px',height:v.h+'px'});
+        },
+<span class="multiComment">        /**
+         * Move the view window in the limit bound.
+         * 
+         * @method moveViewPoint
+         * @param {Number} dx move distance in the X-axis
+         * @param {Number} dy move distance in the Y-axis
+         * @param {js.math.Rect} limitRect:optional
+         */</span>
+        moveViewPoint: <b>function </b>(dx, dy, limitRect){
+            <b>var </b>v = <b>this</b>.getViewWindow(), x = v['x']+dx, y = v['y']+dy;
+            
+<span class="singleComment">            //限制视窗区域</span>
+            <b>if </b>(limitRect){
+                <b>var </b>minX = limitRect['x'], maxX = limitRect['x']+limitRect['w']-v['w']
+                ,minY = limitRect['y'], maxY = limitRect['y']+limitRect['h']-v['h'];
+                
+                <b>if </b>(x &lt; minX) {
+                    x = minX;
+                }<b>else </b><b>if </b>(x &gt; maxX){
+                    x = maxX;
+                }
+                <b>if </b>(y &lt; minY) {
+                    y = minY;
+                }<b>else </b><b>if </b>(y &gt; maxY){
+                    y = maxY;
+                }
+            }                
+            
+            <b>this</b>.setViewWindow(x, y);
+        },
+<span class="multiComment">        /**
+         * Returns the view window.
+         * 
+         * @method getViewWindow
+         * @return {js.math.Rect}
+         */</span>
+        getViewWindow: <b>function </b>(){
+            <b>return</b> <b>this</b>._config['viewWindow'];
+        },
+<span class="multiComment">        /**
+         * Returns the value of the key.
+         * 
+         * @method getConfig
+         * @param {String} k:optional
+         * @return {js.d2.Canvas$Config} v
+         */</span>
+        getConfig: <b>function </b>(k){
+            <b>return</b> k ? <b>this</b>._config[k] : <b>this</b>._config;
+        },        
+        _setupView: <b>function </b>(){
+            <b>var </b>view = <b>this</b>.getViewWindow()
+            , s = 'left:' + <b>this</b>._config['x'] + 'px;top:' + <b>this</b>._config['y'] + 'px;z-index:' + <b>this</b>._config['z'] + ';';
+            s += 'width:' + view['w'] + 'px;height:' + view['h'] + 'px;';
+            s += 'position:absolute;overflow:hidden;';
+            
+            <b>this</b>._config['x']-= view['x'];//update canvas' x
+            <b>this</b>._config['y']-= view['y'];//update canvas' x
+            <b>return</b> s ? {
+                cssText: s
+            } : <b>null</b>;
+        },
+        _calcCanvasXY: <b>function </b>(){
+            <b>var </b>view = <b>this</b>.getViewWindow();
+            <b>return</b> [-view['x'], -view['y']];
+        },
+        _setupCanvas: <b>function </b>(){
+            <b>var </b>xy = <b>this</b>._calcCanvasXY();
+            <b>var </b>s = 'position:absolute;overflow:hidden;left:' + xy[0] + 'px;top:' + xy[1] + 'px;z-index:' + <b>this</b>._config['z'] + ';';
+            s += 'width:' + <b>this</b>._config['width'] + 'px;height:' + <b>this</b>._config['height'] + 'px;';
+<span class="singleComment">            //BUGFIX: ie7's filter style cause child element's z-index disorder.</span>
+            <b>if </b>(<b>this</b>._config['opacity'] &lt; 1) s += 'filter:alpha(opacity:' + <b>this</b>._config['opacity'] * 100 + '); opacity:' + <b>this</b>._config['opacity'] + ';';
+            s += 'background:' + <b>this</b>._config['background'] + ';';
+                
+            <b>return</b> s ? {
+                cssText: s
+            } : <b>null</b>;
+        },
+        _init: <b>function </b>(){
+            document.body.appendChild(D.createEl('div', {
+                id: <b>this</b>._config['id'] + '_view_window',
+                title: <b>this</b>._config['title']
+            }, <b>this</b>._setupView()));
+            
+            $(<b>this</b>._config['id'] + '_view_window').appendChild(D.createEl('div', {
+                id: <b>this</b>._config['id'],
+                cssName: <b>this</b>._config['cssName']
+            }, <b>this</b>._setupCanvas()));
+            <b>this</b>._el = $(<b>this</b>._config['id']);
+            
+            E.on(<b>this</b>._el, 'contextmenu', <b>function </b>(e){
+                E.stopEvent(e);
+            });
+        },
+<span class="multiComment">        /**
+         * Hide the canvas.
+         * 
+         * @method hide
+         */</span>
+        hide: <b>function </b>(){
+            <b>var </b>el = $(<b>this</b>._config['id'] + '_view_window');
+            <b>if </b>(el) el.style.display = 'none';
+        },
+<span class="multiComment">        /**
+         * Show the canvas.
+         * 
+         * @method show
+         */</span>
+        show: <b>function </b>(){
+            <b>var </b>el = $(<b>this</b>._config['id'] + '_view_window');
+            <b>if </b>(el) el.style.display = '';
+        },
+<span class="multiComment">        /**
+         * Returns the absolute Coordinates(Relative to the browser).
+         * 
+         * @method getXY
+         * @return {js.math.Point}
+         */</span>
+        getXY: <b>function </b>(){
+            <b>return</b> [<b>this</b>._config['x'],<b>this</b>._config['y']];
+        },
+<span class="multiComment">        /**
+         * Move the canvas in the browser.
+         * 
+         * @method move
+         * @param {Number} dx 
+         * @param {Number} dy 
+         */</span>
+        move: <b>function </b>(dx, dy){
+            <b>var </b>xy = <b>this</b>.getXY();
+            <b>if </b>(!SYS.isUndefined(dx)) xy[0]+=dx;
+            <b>if </b>(!SYS.isUndefined(dy)) xy[1]+=dy;
+            <b>this</b>.setXY(xy[0], xy[1]);            
+        },
+<span class="multiComment">        /**
+         * Sets the new absolute Coordinates(Relative to the browser).
+         * 
+         * @method setXY
+         * @param {Number} x
+         * @param {Number} y
+         */</span>
+        setXY: <b>function </b>(x, y){
+            <b>var </b>view = <b>this</b>.getViewWindow();    
+            <b>if </b>(!SYS.isUndefined(x)) {
+                <b>this</b>._config['x'] = x;
+                D.setStyle(<b>this</b>._config['id']+'_view_window', 'x', x);
+            }
+            <b>if </b>(!SYS.isUndefined(y)) {
+                <b>this</b>._config['y'] = y;
+                D.setStyle(<b>this</b>._config['id']+'_view_window', 'y', y);
+            }
+        },        
+<span class="multiComment">        /**
+         * Sets the size.
+         * 
+         * @method setSize
+         * @param {Number} w 
+         * @param {Number} h 
+         */</span>
+        setSize: <b>function </b>(w, h){
+            <b>if </b>(!SYS.isUndefined(w)) {
+                <b>this</b>._config['width'] = w;
+                D.setStyle(<b>this</b>._config['id'], 'width', w);
+            }
+            <b>if </b>(!SYS.isUndefined(h)) {
+                <b>this</b>._config['height'] = h;
+                D.setStyle(<b>this</b>._config['id'], 'height', h);
+            }
+        },
+<span class="multiComment">        /**
+         * Returns the size.
+         * 
+         * @method getSize
+         * @return {Array}
+         */</span>
+        getSize: <b>function </b>(){<b>return</b> [<b>this</b>._config['width'], <b>this</b>._config['height']];},
+<span class="multiComment">        /**
+         * Returns the bound relative to the canvas self.
+         * 
+         * @method getBound
+         * @return {js.math.Rect}
+         */        </span>
+        getBound: <b>function </b>(){
+            <b>return</b> {
+                x: 0,
+                y: 0,
+                w: <b>this</b>._config['width'],
+                h: <b>this</b>._config['height']
+            }
+        },
+<span class="multiComment">        /**
+         * Returns the canvas bound relative to the browser.
+         * 
+         * @method getScreenBound
+         * @return {js.math.Rect}
+         */    </span>
+        getScreenBound: <b>function </b>(){
+            <b>return</b> {
+                x: <b>this</b>._config['x'],
+                y: <b>this</b>._config['y'],
+                w: <b>this</b>._config['width'],
+                h: <b>this</b>._config['height']
+            }
+        },                
+        _updateTextElement: <b>function </b>(el, text){            
+            D.setStyle(el,'opacity',SYS.isUndefined(text['opacity']) ? 1:text['opacity']);
+            D.setStyle(el,'visible',SYS.isUndefined(text['visible'])?<b>true</b>:text['visible']);
+            
+            D.setStyle(el,'position','absolute');
+            D.setStyle(el,'overflow','hidden');
+            D.setStyle(el,'z',text['z']);
+            D.setStyle(el,'color',text['color']);
+            D.setStyle(el,'fontFamily',text['fontFamily']);
+            D.setStyle(el,'fontSize',text['fontSize']);
+            D.setStyle(el,'width',text['width']);
+            D.setStyle(el,'height',text['height']);
+            
+            <b>if </b>(text['align'] == 'center'){
+                D.setStyle(el,'left','50%');
+                D.setStyle(el,'marginLeft','-' + text['width'] / 2 + 'px');            
+            }<b>else </b>{
+                D.setStyle(el,'x',text['x']);                
+            }
+            <b>if </b>(text['valign'] == 'middle'){
+                D.setStyle(el,'top','50%');
+                D.setStyle(el,'marginTop','-' + text['height'] / 2 + 'px');            
+            }<b>else </b>{
+                D.setStyle(el,'y',text['y']);                
+            }
+            
+            D.setAttribute(el, 'cssName', text['cssName']);
+            <b>if </b>(text['text']) el.innerHTML = text['text'];                    
+        },
+<span class="multiComment">        /**
+         * Draw new text on the canvas.
+         * 
+         * @struct js.d2.Canvas$Text {
+         *         "description":""
+         *         ,"type":"object"
+         *         ,"properties":{
+         *             "id":{"type":"string"}
+         *             ,"opacity":{"type":"number"}
+         *             ,"visible":{"type":"boolean"}
+         *             ,"x":{"type":"number"}
+         *             ,"y":{"type":"number"}
+         *             ,"z":{"type":"number"}
+         *             ,"align":{"type":"string"}
+         *             ,"valign":{"type":"string"}
+         *             ,"width":{"type":"number"}
+         *             ,"height":{"type":"number"}
+         *             ,"cssName":{"type":"string"}
+         *             ,"text":{"type":"string"}
+         *             ,"fontFamily":{"type":"string"}
+         *             ,"fontSize":{"type":"string"}
+         *             ,"color":{"type":"string"}
+         *         }
+         * } 
+         * 
+         * @method drawText
+         * @param {js.d2.Canvas$Text} text
+         * @return {HTMLElement} the DOM Element
+         * @throws {TypeError} when the arguments is empty
+         */</span>
+        drawText: <b>function </b>(text){
+            <b>if </b>(!text) <b>throw </b><b>new </b>TypeError('[js.d2.Canvas#drawText]The arguments is empty.');
+            
+            <b>var </b>el = $(text['id']);            
+            <b>if </b>(el) {
+                <b>this</b>._updateTextElement(el, text);
+            }<b>else </b>{
+                el = <b>this</b>.createText(text);
+                <b>this</b>._el.appendChild(el);
+            }
+            
+            <b>return</b> el;
+        },
+<span class="multiComment">        /**
+         * @method createText
+         * @param {js.d2.Canvas$Text} text
+         * @return {HTMLElement} the DOM Element
+         * @throws {TypeError} when the arguments is empty
+         */</span>
+        createText: <b>function </b>(text){
+            <b>if </b>(!text) <b>throw </b><b>new </b>TypeError('[js.d2.Canvas#createText]The arguments is empty.');
+            
+            <b>var </b>el = document.createElement('div');
+            <b>this</b>._updateTextElement(el, text);            
+            D.setAttribute(el, 'id', text['id']||SYS.getUUID());
+            <b>return</b> el;
+        },
+<span class="multiComment">        /**
+         * Update old text on the canvas.
+         * @method updateText
+         * @param {js.d2.Canvas$Text} text
+         * @return {HTMLElement} the DOM Element
+         * @throws {TypeError} when the arguments is empty
+         * @throws {Error} when the element not found
+         */</span>
+        updateText: <b>function </b>(text){
+            <b>if </b>(!text) <b>throw </b><b>new </b>TypeError('[js.d2.Canvas#updateText]The arguments is empty.');
+            
+            <b>var </b>el = $(text['id']);
+            <b>if </b>(el) {
+                <b>this</b>._updateTextElement(el, text);
+            }<b>else </b>{
+                <b>throw </b><b>new </b>Error('[js.d2.Canvas#updateText]Text\'s element not found.');
+            }
+            <b>return</b> el;
+        },        
+        _updateImageElement: <b>function </b>(el, image){
+            <b>if </b>(image['src']) D.setStyle(el,'background','url(' + image['src'] + ') -' + (image['offsetX'] || 0) + 'px -' + (image['offsetY'] || 0) + 'px');
+            
+            D.setStyle(el,'opacity',SYS.isUndefined(image['opacity']) ? 1:image['opacity']);
+            D.setStyle(el,'visible',SYS.isUndefined(image['visible'])?<b>true</b>:image['visible']);
+            
+            D.setStyle(el,'position','absolute');
+            D.setStyle(el,'overflow','hidden');
+            
+            D.setStyle(el,'x',image['x']);
+            D.setStyle(el,'y',image['y']);
+            D.setStyle(el,'z',image['z']);
+            D.setStyle(el,'width',image['width']);
+            D.setStyle(el,'height',image['height']);
+            
+            D.setAttribute(el, 'cssName', image['cssName']);
+        },
+<span class="multiComment">        /**
+         * Draw new image on the canvas.
+         * 
+         * @struct js.d2.Canvas$Image {
+         *         "description":""
+         *         ,"type":"object"
+         *         ,"properties":{
+         *             "id":{"type":"string"}
+         *             ,"opacity":{"type":"number"}
+         *             ,"visible":{"type":"boolean"}
+         *             ,"x":{"type":"number"}
+         *             ,"y":{"type":"number"}
+         *             ,"z":{"type":"number"}
+         *             ,"src":{"type":"string"}
+         *             ,"offsetX":{"type":"number"}
+         *             ,"offsetY":{"type":"number"}
+         *             ,"width":{"type":"number"}
+         *             ,"height":{"type":"number"}
+         *             ,"cssName":{"type":"string"}
+         *         }
+         * } 
+         * 
+         * @method drawImage
+         * @param {js.d2.Canvas$Image} image
+         * @return {HTMLElement} the DOM Element
+         * @throws {TypeError} when the arguments is empty
+         */</span>
+        drawImage: <b>function </b>(image){
+            <b>if </b>(!image) <b>throw </b><b>new </b>Error('[js.d2.Canvas#drawImage]The arguments is empty.');
+                
+            <b>var </b>el = $(image['id']);
+            <b>if </b>(el) {
+                <b>this</b>._updateImageElement(el, image);
+            }<b>else </b>{
+                el = <b>this</b>.createImage(image);
+                <b>this</b>._el.appendChild(el);
+            }
+            
+            <b>return</b> el;
+        },
+<span class="multiComment">        /**
+         * @method createImage
+         * @param {js.d2.Canvas$Image} image
+         * @return {HTMLElement} the DOM Element
+         * @throws {TypeError} when the arguments is empty
+         */</span>
+        createImage: <b>function </b>(image){
+            <b>if </b>(!image) <b>throw </b><b>new </b>Error('[js.d2.Canvas#createImage]The arguments is empty.');
+            
+            <b>var </b>el = document.createElement('div');
+            <b>this</b>._updateImageElement(el, image);            
+            D.setAttribute(el, 'id', image['id']||SYS.getUUID());
+            <b>return</b> el;
+        },
+<span class="multiComment">        /**
+         * Update old image on the canvas.
+         * @method updateImage
+         * @param {js.d2.Canvas$Image} image
+         * @return {HTMLElement} the DOM Element
+         * @throws {TypeError} when the arguments is empty
+         * @throws {Error} when the element not found
+         */</span>
+        updateImage: <b>function </b>(image){
+            <b>if </b>(!image) <b>throw </b><b>new </b>Error('[js.d2.Canvas#updateImage]The arguments is empty.');
+            
+            <b>var </b>el = $(image['id']);
+            <b>if </b>(el) {
+                <b>this</b>._updateImageElement(el, image);
+            }<b>else </b>{
+                <b>throw </b><b>new </b>Error('[js.d2.Canvas#updateImage]Image\'s element not found.');
+            }
+            <b>return</b> el;
+        },
+<span class="multiComment">        /**
+         * Paint a new element on the canvas.
+         * 
+         * @method drawElement
+         * @param {String} tag
+         * @param {Object} attrs
+         * @param {Object} styles
+         * @param {String} html
+         */</span>
+        drawElement: <b>function </b>(tag, attrs, styles, html){
+            <b>if </b>(!styles) styles = {};
+            styles['position'] = 'absolute';
+            <b>var </b>el = D.createEl(tag, attrs, styles, html);
+            <b>this</b>._el.appendChild(el);
+            <b>return</b> el;
+        },
+<span class="multiComment">        /**
+         * Append a new element on the canvas.
+         * 
+         * @method appendElement
+         * @param {HTMLElement} el
+         */</span>
+        appendElement: <b>function </b>(el){
+            <b>if </b>(el) <b>this</b>._el.appendChild(el);
+        },
+<span class="multiComment">        /**
+         * Erase a dom element on the canvas.
+         * 
+         * @method erase
+         * @param {String|HTMLElement|Array} el
+         */</span>
+        erase: <b>function </b>(el){
+            <b>var </b>arr = SYS.isArray(el)?el:[el];
+            arr.forEach(<b>function </b>(a){
+                <b>var </b>ele = $(a);
+                <b>if </b>(ele) {
+                    E.purgeElement(ele, <b>true</b>);
+                    <b>this</b>._el.removeChild(ele);
+                }
+            },<b>this</b>);            
+        },
+<span class="multiComment">        /**
+         * Clear and Destory the canvas.
+         * 
+         * @method destory
+         */</span>
+        destory: <b>function </b>(){            
+<span class="singleComment">            //销毁DOM对象</span>
+            <b>if </b>(<b>this</b>._el && <b>this</b>._el.parentNode) {
+                E.purgeElement(<b>this</b>._el, <b>true</b>);
+                <b>this</b>._el.parentNode.removeChild(<b>this</b>._el);
+            }
+        },
+<span class="multiComment">        /**
+         * Clear all elements on the canvas and remove all event listeners.
+         * 
+         * @method clear
+         */</span>
+        clear: <b>function </b>(){
+<span class="singleComment">            //注销所有DOM事件</span>
+            E.purgeElement(<b>this</b>._el, <b>true</b>);
+            
+            <b>var </b>nodes = <b>this</b>._el.childNodes;
+            <b>if </b>(!nodes) <b>return</b>;
+            <b>while </b>(nodes.length &gt; 0) {
+                <b>var </b>node = <b>this</b>._el.childNodes[0];
+                <b>this</b>._el.removeChild(node);
+            }            
+        },
+<span class="multiComment">        /**
+         * Print FPS on the canvas for debug.
+         * 
+         * @method printFPS
+         * @param {Number} fps
+         */</span>
+        printFPS: <b>function </b>(fps){
+            <b>this</b>.drawText({
+                id:'fps',text:'FPS='+fps,z:99
+                ,x:<b>this</b>.getConfig('width')-100,y:0,color:'yellow',fontSize:'18px'
+            });
+        }
+    };
+    
+<span class="multiComment">/**
+ * @class js.d2.View
+ * @abstract
+ * @constructor 
+ * 
+ * @struct js.d2.View$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "id":{"type":"string", "required":false, "default":0}
+ *             ,"x":{"type":"number", "required":false, "default":0}
+ *             ,"y":{"type":"number", "required":false, "default":0}
+ *             ,"z":{"type":"number", "required":false, "default":0}
+ *             ,"width":{"type":"number", "required":false, "default":0}
+ *             ,"height":{"type":"number", "required":false, "default":0}
+ *             ,"visible":{"type":"boolean", "required":false, "default":true}
+ *             ,"movable":{"type":"boolean", "required":false, "default":true}
+ *             ,"opacity":{"type":"number", "required":false, "default":1}    
+ *         }
+ * } 
+ * 
+ * 
+ * @param {js.d2.View$Config} config
+ */</span>
+js.d2.View = <b>function </b>(config){
+<span class="multiComment">    /** 
+     * @field {String} _id  图层ID 
+     * @private
+     */</span>
+    <b>this</b>._id = config['id']||SYS.getUUID();
+<span class="multiComment">    /** 
+     * @field {Int} _x 图层X坐标（相对画布） 
+     * @private
+     */</span>
+    <b>this</b>._x = SYS.isUndefined(config['x'])?0:config['x'];
+<span class="multiComment">    /** 
+     * @field {Int} _y 图层Y坐标（相对画布）
+     * @private
+     */</span>
+    <b>this</b>._y = SYS.isUndefined(config['y'])?0:config['y'];
+<span class="multiComment">    /** 
+     * @field {Int} _z 图层Z坐标（相对画布）
+     * @private
+     */</span>
+    <b>this</b>._z = SYS.isUndefined(config['z'])?0:config['z'];;
+<span class="multiComment">    /** 
+     * @field {Int} _w 图层宽度 
+     * @private
+     */</span>
+    <b>this</b>._w = SYS.isUndefined(config['width'])?0:config['width'];
+<span class="multiComment">    /** 
+     * @field {Int} _h 图层高度
+     * @private
+     */</span>
+    <b>this</b>._h = SYS.isUndefined(config['height'])?0:config['height'];
+<span class="multiComment">    /** 
+     * @field {Boolean} _isV 是否可视
+     * @private
+     */</span>
+    <b>this</b>._isV = SYS.isUndefined(config['visible'])?<b>true</b>:config['visible'];
+<span class="multiComment">    /**
+     * @field {Boolean} _isD isDestoryed
+     * @private
+     */</span>
+    <b>this</b>._isD = <b>false</b>;
+<span class="multiComment">    /**
+     * @field {Boolean} _isM 是否可动
+     * @private
+     */    </span>
+    <b>this</b>._isM = SYS.isUndefined(config['movable'])?<b>true</b>:config['movable'];
+<span class="multiComment">    /**
+     * @field {Number} _opacity 透明
+     * @private
+     */    </span>
+    <b>this</b>._opacity = SYS.isUndefined(config['opacity'])?1:config['opacity'];
+    
+<span class="singleComment">    //事件初始化</span>
+<span class="multiComment">    /**
+     * @event painting {
+     *         "description":"fires before paint on the canvas"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.d2.View"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('painting');
+<span class="multiComment">    /**
+     * @event painted {
+     *         "description":"fires after paint on the canvas"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.d2.View"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('painted');    
+<span class="multiComment">    /**
+     * @event destorying {
+     *         "description":"fires before destory the layer once"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.d2.View"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('destorying', <b>true</b>);
+<span class="multiComment">    /**
+     * @event destoryed {
+     *         "description":"fires after destory the layer once"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.d2.View"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('destoryed', <b>true</b>);    
+<span class="multiComment">    /**
+     * @event moving {
+     *         "description":"fires before move the layer"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.d2.View"}
+     *      ,"arguments":{
+     *          "type":"array"
+     *          ,"items":[
+     *              {"type":"js.math.Point", "description":"the old position of the layer"}
+     *          ]
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('moving');
+<span class="multiComment">    /**
+     * @event moved {
+     *         "description":"fires after move the layer"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.d2.View"}
+     *      ,"arguments":{
+     *          "type":"array"
+     *          ,"items":[
+     *              {"type":"js.math.Point", "description":"the old position of the layer"}
+     *              ,{"type":"js.math.Point", "description":"the new position of the layer"}
+     *          ]
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('moved');
+};
+js.d2.View.prototype = {
+<span class="multiComment">    /**
+     * Returns the ID.
+     * 
+     * @method getId
+     * @return {String}
+     */</span>
+    getId: <b>function </b>(){<b>return</b> <b>this</b>._id;},
+<span class="multiComment">    /**
+     * Returns the bound relative to the canvas which this layer be painted on.
+     * 
+     * @method getBound
+     * @return {js.math.Rect} 
+     */</span>
+    getBound: <b>function </b>(){<b>return</b> {x: <b>this</b>._x, y: <b>this</b>._y, w: <b>this</b>._w, h: <b>this</b>._h}},
+<span class="multiComment">    /**
+     * Returns the bound relative to the browser.
+     * 
+     * @method getScreenBound
+     * @return {js.math.Rect} 
+     */</span>
+    getScreenBound: <b>function </b>(){
+        <b>var </b>xy = D.getXY(<b>this</b>._id);
+        <b>if </b>(xy){
+            <b>return</b> {x: xy[0], y: xy[1], w: <b>this</b>._w, h: <b>this</b>._h};
+        }
+        <b>return</b> <b>null</b>;
+    },
+<span class="multiComment">    /**
+     * Returns the width.
+     * 
+     * @method getWidth
+     * @return {Number} 
+     */</span>
+    getWidth: <b>function </b>(){<b>return</b> <b>this</b>._w},
+<span class="multiComment">    /**
+     * Returns the height.
+     * 
+     * @method getHeight
+     * @return {Number} 
+     */</span>
+    getHeight: <b>function </b>(){<b>return</b> <b>this</b>._h},
+<span class="multiComment">    /**
+     * Returns the size.
+     * 
+     * @method getSize
+     * @return {Array} [width,height]
+     */</span>
+    getSize: <b>function </b>(){<b>return</b> [<b>this</b>._w,<b>this</b>._h]},
+<span class="multiComment">    /**
+     * Sets the size.
+     * @param {Number} w
+     * @param {Number} h
+     */</span>
+    setSize: <b>function </b>(w,h){<b>this</b>._w = w;<b>this</b>._h = h;},
+<span class="multiComment">    /**
+     * Returns the X coordinate relative to the canvas which this layer be painted on.
+     * 
+     * @method getX
+     * @return {Number}
+     */</span>
+    getX: <b>function </b>(){<b>return</b> <b>this</b>._x},
+<span class="multiComment">    /**
+     * Returns the Y coordinate relative to the the canvas which this layer be painted on.
+     * 
+     * @method getY
+     * @return {Number}
+     */</span>
+    getY: <b>function </b>(){<b>return</b> <b>this</b>._y},
+<span class="multiComment">    /**
+     * Returns the layer's z-index.
+     * 
+     * @method getZ
+     * @return {Int}
+     */</span>
+    getZ: <b>function </b>(){<b>return</b> <b>this</b>._z},
+<span class="multiComment">    /**
+     * Sets the X coordinate relative to the the canvas which this layer be painted on.
+     * 
+     * @method setX
+     * @param {Number} x
+     */</span>
+    setX: <b>function </b>(x){<b>if </b>(!<b>this</b>.isMovable()) <b>return</b>;<b>this</b>._x = x},
+<span class="multiComment">    /**
+     * Sets the Y coordinate relative to the the canvas which this layer be painted on.
+     * 
+     * @method setY
+     * @param {Number} y
+     */</span>
+    setY: <b>function </b>(y){<b>if </b>(!<b>this</b>.isMovable()) <b>return</b>;<b>this</b>._y = y},
+<span class="multiComment">    /**
+     * Sets the z-index.
+     * 
+     * @method setZ
+     * @param {Int} z
+     */</span>
+    setZ: <b>function </b>(z){<b>if </b>(!<b>this</b>.isMovable()) <b>return</b>;<b>this</b>._z = z},    
+<span class="multiComment">    /**
+     * Sets the X and Y coordinates relative to the the canvas which this layer be painted on.
+     * 
+     * @method setXY
+     * @param {Number} x
+     * @param {Number} y
+     */</span>
+    setXY: <b>function </b>(x,y){<b>if </b>(!<b>this</b>.isMovable()) <b>return</b>;<b>this</b>._x=x;<b>this</b>._y=y;},
+<span class="multiComment">    /**
+     * Returns the X and Y coordinates relative to the the canvas which this layer be painted on.
+     * 
+     * @method getXY
+     * @return {js.math.Point}
+     */</span>
+    getXY: <b>function </b>(){<b>return</b> [<b>this</b>._x,<b>this</b>._y]},
+<span class="multiComment">    /**
+     * The layer is movable?
+     * 
+     * @method isMovable
+     * @return {Boolean}
+     */</span>
+    isMovable: <b>function </b>(){<b>return</b> <b>this</b>._isM;},
+<span class="multiComment">    /**
+     * Sets the layer is movable.
+     * 
+     * @method setMovable
+     * @param {Boolean} m
+     */</span>
+    setMovable: <b>function </b>(m){
+        <b>this</b>._isM = m;
+    },
+<span class="multiComment">    /**
+     * Sets the Opacity.
+     * 
+     * @method setOpacity
+     * @param {Number} opa The float is in [0,1].
+     */</span>
+    setOpacity : <b>function </b>(opa){
+        <b>this</b>._opacity = opa;
+    },
+<span class="multiComment">    /**
+     * Returns the Opacity.
+     * 
+     * @method getOpacity
+     * @return {Number}
+     */</span>
+    getOpacity : <b>function </b>(){
+        <b>return</b> <b>this</b>._opacity;
+    },
+<span class="multiComment">    /**
+     * Move the layer on the canvas.
+     * 
+     * @method move
+     * @param {Number} dx deltaX
+     * @param {Number} dy deltaY
+     */</span>
+    move: <b>function </b>(dx, dy){
+        <b>if </b>(!<b>this</b>.isMovable()) <b>return</b>;
+        <b>var </b>oldXY = [Number(<b>this</b>._x),Number(<b>this</b>._y)];        
+        <b>this</b>.fireEvent('moving', oldXY);
+        <b>this</b>._x+= dx;
+        <b>this</b>._y+= dy;    
+        <b>this</b>.fireEvent('moved', oldXY, [<b>this</b>._x,<b>this</b>._y]);    
+    },
+<span class="multiComment">    /**
+     * The layer is visible?
+     * 
+     * @method isVisible
+     * @return {Boolean}
+     */</span>
+    isVisible: <b>function </b>(){<b>return</b> <b>this</b>._isV},
+<span class="multiComment">    /**
+     * Sets the layer's visible.
+     * 
+     * @method setVisible
+     * @param {Boolean} v
+     */</span>
+    setVisible: <b>function </b>(v){
+        <b>this</b>._isV = v;
+    },
+<span class="multiComment">    /**
+     * The layer is destoryed?
+     * 
+     * @method isDestoryed
+     * @return {Boolean}
+     */</span>
+    isDestoryed: <b>function </b>(){
+        <b>return</b> <b>this</b>._isD;        
+    },
+<span class="multiComment">    /**
+     * Destory the layer.
+     * 
+     * @method destory
+     * @param {js.d2.Canvas} canvas
+     */</span>
+    destory: <b>function </b>(canvas){
+        <b>this</b>.fireEvent('destorying');
+        canvas.erase(<b>this</b>.getId());
+        <b>this</b>._isV = <b>false</b>;
+        <b>this</b>._isD = <b>true</b>;                
+        <b>this</b>.fireEvent('destoryed');
+<span class="singleComment">        //清除所有的事件</span>
+        <b>this</b>.unsubscribeAll();
+    }, 
+<span class="multiComment">    /**
+     * Paint the layer on the canvas.
+     * 
+     * @abstract
+     * @method paint
+     * @param {js.d2.Canvas} canvas
+     */</span>
+    paint: <b>function </b>(canvas){}
+};
+<span class="multiComment">/**
+ * @mix js.core.EventProvider
+ */</span>
+SYS.augment(js.d2.View, js.core.EventProvider);
+    
+}());
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

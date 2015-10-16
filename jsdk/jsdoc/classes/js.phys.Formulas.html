@@ -1,0 +1,74 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.phys.Formulas</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-mathphys.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.phys</div>
+<div class="topic" title="js.phys.Formulas">
+Class: 
+Formulas</div>
+
+<b>public static</b> Formulas
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="line" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static line">+ <b>line</b></span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>from</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>rad</b></span>:Number, <span title="required"><b>v</b></span>:Number):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="line_detail" style="display: none;">
+<pre class="desc">Linear motion formula.
+直线运动公式</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; 计时器</dd><br/>
+<dd><span title="required"><b>from</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; 起始点</dd><br/>
+<dd><span title="required"><b>rad</b></span>  &lt;Number&gt; 直线与X轴夹角的弧度</dd><br/>
+<dd><span title="required"><b>v</b></span>  &lt;Number&gt; 速度</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; 返回当前时间的点坐标</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="round" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static round">+ <b>round</b></span></span>(<span title="required"><b>t</b></span>:Number, <span title="required"><b>from</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>center</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>v</b></span>:Number, <span title="required"><b>f</b></span>:Int):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="round_detail" style="display: none;">
+<pre class="desc">Round motion formula.
+圆周运动公式</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Number&gt; 计时器</dd><br/>
+<dd><span title="required"><b>from</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; 起始点</dd><br/>
+<dd><span title="required"><b>center</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; 圆心</dd><br/>
+<dd><span title="required"><b>v</b></span>  &lt;Number&gt; 线速度</dd><br/>
+<dd><span title="required"><b>f</b></span>  &lt;Int&gt; 0:Clockwise(顺时针);1:Anticlockwise(逆时针)</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; 返回当前时间的点坐标</dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,146 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.input.KeyBufferProvider</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-input.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.input</div>
+<div class="topic" title="js.input.KeyBufferProvider">
+Class: 
+KeyBufferProvider</div>
+
+<b>public</b> KeyBufferProvider
+
+<hr/>
+
+<pre class="desc">
+KeyBufferProvider is designed to be used with js.lang.System.augment that allows key events to be subscribed to
+and fired by keycode.</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="KeyBufferProvider" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public KeyBufferProvider">+ KeyBufferProvider</span></span>()</span>
+<div id="KeyBufferProvider_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="resetKeyBuffer" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public resetKeyBuffer">+ resetKeyBuffer</span></span>():void</span>
+<div id="resetKeyBuffer_detail" style="display: none;">
+<pre class="desc">Reset the hold key buffer.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="getPressedKeyLog" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getPressedKeyLog">+ getPressedKeyLog</span></span>(<i title="optional"><b>n</b></i>:Int):<a href="js.input.KeyBufferProvider$PressedKey.html" title="js.input.KeyBufferProvider$PressedKey">KeyBufferProvider$PressedKey</a>[]</span>
+<div id="getPressedKeyLog_detail" style="display: none;">
+<pre class="desc">Returns from the first to the N records of pressed keys when isPressedKeyLoggable is true.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>n</b></i>  &lt;Int&gt; 0<n<=32</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.input.KeyBufferProvider$PressedKey.html" title="js.input.KeyBufferProvider$PressedKey">KeyBufferProvider$PressedKey</a>[]&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getHoldKeys" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getHoldKeys">+ getHoldKeys</span></span>(<i title="optional"><b>keys</b></i>:Array&lt;Int&gt;):Array&lt;Int&gt;</span>
+<div id="getHoldKeys_detail" style="display: none;">
+<pre class="desc">Returns all(Max is 32) records of holding keys, includes with the special keys.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>keys</b></i>  &lt;Array&lt;Int&gt;&gt; the special keys</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&lt;Int&gt;&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isKeyHold" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isKeyHold">+ isKeyHold</span></span>(<span title="required"><b>keyCodes</b></span>:Int|Array&lt;Int&gt;):Boolean</span>
+<div id="isKeyHold_detail" style="display: none;">
+<pre class="desc">Determines whether or not these keys be hold.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>keyCodes</b></span>  &lt;Int|Array&lt;Int&gt;&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isKeyLastest" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isKeyLastest">+ isKeyLastest</span></span>(<span title="required"><b>keyCodes</b></span>:Int|Array&lt;Int&gt;):Boolean</span>
+<div id="isKeyLastest_detail" style="display: none;">
+<pre class="desc">Determines whether or not these keys be pressed latest time.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>keyCodes</b></span>  &lt;Int|Array&lt;Int&gt;&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isKeyRepeat" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isKeyRepeat">+ isKeyRepeat</span></span>(<span title="required"><b>keyCode</b></span>:Int, <span title="required"><b>n</b></span>:Int):Boolean</span>
+<div id="isKeyRepeat_detail" style="display: none;">
+<pre class="desc">Determines whether or not the key be repeat pressed latest time.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>keyCode</b></span>  &lt;Int&gt; the repeat key code</dd><br/>
+<dd><span title="required"><b>n</b></span>  &lt;Int&gt; the repeat times: <=32</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setPressedKeyLoggable" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setPressedKeyLoggable">+ setPressedKeyLoggable</span></span>(<span title="required"><b>f</b></span>:Boolean):void</span>
+<div id="setPressedKeyLoggable_detail" style="display: none;">
+<pre class="desc">Lets log the pressed keys.
+The default value is false.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>f</b></span>  &lt;Boolean&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="isPressedKeyLoggable" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isPressedKeyLoggable">+ isPressedKeyLoggable</span></span>():Boolean</span>
+<div id="isPressedKeyLoggable_detail" style="display: none;">
+<pre class="desc">True is logging the pressed keys.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; the default value is false</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="onKeyHold" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public onKeyHold">+ onKeyHold</span></span>(<span title="required"><b>keyData</b></span>:Object, <i title="optional"><b>handlerKeyDown</b></i>:<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>, <i title="optional"><b>handlerKeyUp</b></i>:<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>):void</span>
+<div id="onKeyHold_detail" style="display: none;">
+<pre class="desc">Listen the keys hold.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>keyData</b></span>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>handlerKeyDown</b></i>  &lt;<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>&gt; </dd><br/>
+<dd><i title="optional"><b>handlerKeyUp</b></i>  &lt;<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="onKeyUp" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public onKeyUp">+ onKeyUp</span></span>(<span title="required"><b>keyData</b></span>:Array&lt;Int&gt;, <span title="required"><b>callback</b></span>:<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>):void</span>
+<div id="onKeyUp_detail" style="display: none;">
+<pre class="desc">Listen when keys released.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>keyData</b></span>  &lt;Array&lt;Int&gt;&gt; </dd><br/>
+<dd><span title="required"><b>callback</b></span>  &lt;<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="onKeyDown" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public onKeyDown">+ onKeyDown</span></span>(<span title="required"><b>keyData</b></span>:Array&lt;Int&gt;, <span title="required"><b>callback</b></span>:<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>):void</span>
+<div id="onKeyDown_detail" style="display: none;">
+<pre class="desc">Listening when keys pressed.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>keyData</b></span>  &lt;Array&lt;Int&gt;&gt; </dd><br/>
+<dd><span title="required"><b>callback</b></span>  &lt;<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="disableAllKeys" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public disableAllKeys">+ disableAllKeys</span></span>():void</span>
+<div id="disableAllKeys_detail" style="display: none;">
+<pre class="desc">Disables all keys's listening.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="enableAllKeys" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public enableAllKeys">+ enableAllKeys</span></span>():void</span>
+<div id="enableAllKeys_detail" style="display: none;">
+<pre class="desc">Enables all keys's listening.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="removeAllKeys" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public removeAllKeys">+ removeAllKeys</span></span>():void</span>
+<div id="removeAllKeys_detail" style="display: none;">
+<pre class="desc">Remove all keys's listening.</pre>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

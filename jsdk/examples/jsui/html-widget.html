@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * @author fengchun
+-->
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>HTML Widget Test</title>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-input.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/jsui/js-ui-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/jsui/js-ui-html.js"></script>
+
+<style>
+	BODY {
+		FONT: 14px arial, helvetica, clean, sans-serif;
+	}
+	
+</style>
+
+<script>
+var Test = function(){
+	var i = 0;
+	return {
+		addButton: function(){
+			i++;
+			var wgt = new js.ui.HTMLButton({
+				parent:'form1',
+				name:'button '+i,
+				text:'button '+i,
+				cssText:'width:100px;',				
+//				x:100,
+//				y:100,
+				offsetY: i*20
+			});
+			wgt.render();
+			
+			wgt.subscribe('moved', function(eName, args){
+				var toXY = args[0];
+				alert(this.WIDGET_NAME+'\nid:'+this.getId()+'\nmoveTo:['+toXY[0]+','+toXY[1]+']');				
+			});
+			wgt.attachEvent('click', function(){				
+//				this.alignTo(document.body,'cc',[0,this.get('offsetY')]);
+				alert(this.getEl().parentNode.innerHTML)
+			});
+			
+			wgt.onKeyDown({keys:js.input.KEY.LEFT}, function(){
+				this.hide();
+			});
+			wgt.onKeyDown({keys:js.input.KEY.RIGHT}, function(){
+				this.show();
+			});			
+		},
+		addImage: function(){
+			var wgt = new js.ui.HTMLImage({
+				src:'clock.gif'
+			});
+			wgt.render();
+		},
+		addInput: function(){
+			var wgt = new js.ui.HTMLTextbox({
+				parent:'form1',
+				value:i,x:10+100*i,y:150,
+				name:'input'+i
+			});
+			wgt.render();
+			
+			var wgt2 = new js.ui.HTMLButton({
+				parent:'form1',
+				text:'getValue'
+			});
+			wgt2.render();
+			wgt2.attachEvent('click', function(){	
+				alert(wgt.getValue());
+			});
+			i++;
+		},
+		addRadio: function(){
+			var wgt = new js.ui.HTMLRadio({
+				parent:'form1',
+				text:'a:',
+				value:'y'
+			});
+			wgt.render();
+			
+			var wgt2 = new js.ui.HTMLButton({
+				parent:'form1',
+				text:'getSelectedValue', y:wgt.getY()
+			});
+			wgt2.render();
+			wgt2.attachEvent('click', function(){	
+				alert(wgt.getSelectedValue());
+			});
+		},		
+		addCheckbox: function(){
+			var wgt = new js.ui.HTMLCheckbox({
+				parent:'form1',
+				text:'a:',
+				value:'check me'
+			});
+			wgt.render();
+			
+			var wgt2 = new js.ui.HTMLButton({
+				parent:'form1',
+				text:'getSelectedValue', y:wgt.getY()
+			});
+			wgt2.render();
+			wgt2.attachEvent('click', function(){	
+				alert(wgt.getSelectedValue());
+			});
+		},		
+		addSelect: function(){
+			var wgt = new js.ui.HTMLSelect({
+				parent:'form1',
+				options:[
+					{
+						group:[{text:'霸天虎', value:'a'},{text:'汽车人', value:'b'}],label:'变形金刚'
+					},
+					{
+						group:[{text:'上海', value:'shanghai'},{text:'杭州', value:'hangzhou'}],label:'城市'
+					}
+				], multiple:true, size:10
+			});
+			wgt.render();
+			
+			var wgt2 = new js.ui.HTMLButton({
+				parent:'form1',
+				text:'getSelectedValue', y:wgt.getY()
+			});
+			wgt2.render();
+			wgt2.attachEvent('click', function(){	
+				alert(wgt.getSelectedValue());
+			});
+		},
+		addFile: function(){
+			var wgt = new js.ui.HTMLFile({
+				parent:'form1'
+			});
+			wgt.render();
+			
+			var wgt2 = new js.ui.HTMLButton({
+				parent:'form1',
+				text:'getValue', y:wgt.getY()
+			});
+			wgt2.render();
+			wgt2.attachEvent('click', function(){	
+				alert(wgt.getValue());
+			});
+		},
+		addTextarea: function(){
+			var wgt = new js.ui.HTMLTextarea({
+				parent:'form1', width:300, height:300
+			});
+			wgt.render();
+			
+			var wgt2 = new js.ui.HTMLButton({
+				parent:'form1',
+				text:'getValue', y:wgt.getY()
+			});
+			wgt2.render();
+			wgt2.attachEvent('click', function(){	
+				alert(wgt.getValue());
+			});
+		},
+		addForm: function(){
+			var wgt = new js.ui.HTMLForm({
+				x:10+200*i, y:200,
+				action: 'www',
+				html:'FORM'		
+			});
+			
+			wgt.attachEvent('click', function(){
+				alert('click in form:\n' + this.getWidgetClass())
+			});
+			
+			wgt.addChildWidget([{
+				config:{widgetClass:'js.ui.HTMLButton', text:'button'+i+'-1', x:10}
+				,domEvents:[{name:'click',fn:function(){
+					alert('click on button:\n' + this.getWidgetClass())}}]
+			}, new js.ui.HTMLButton({parent:'form1',text:'button2'})]);
+			wgt.render();
+			
+			i++;			
+		}		
+		
+	}
+}();	
+</script>
+</head>
+
+<body onload = "" style="height:500px;">
+<button onclick='Test.addButton()'>addButton</button>
+<button onclick='Test.addImage()'>addImage</button>
+<button onclick='Test.addInput()'>addInput</button>
+<button onclick='Test.addRadio()'>addRadio</button>
+<button onclick='Test.addCheckbox()'>addCheckbox</button>
+<button onclick='Test.addSelect()'>addSelect</button>
+<button onclick='Test.addFile()'>addFile</button>
+<button onclick='Test.addTextarea()'>addTextarea</button>
+<button onclick='Test.addForm()'>addForm</button>
+
+<form id="form1">	
+</form>
+
+</body>
+</html>

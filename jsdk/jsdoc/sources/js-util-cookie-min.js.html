@@ -1,0 +1,31 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">util\js-util-cookie-min.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2007-8-30
+ * 
+ * @requires /core/js-core.js
+ */</span>
+js.util.Cookie=<b>function </b>(){<b>return</b>{write:<b>function </b>(b,c,a,e){<b>if </b>(!b){<b>return</b>;}<b>var </b>d=e?e:"/";<b>var </b>f=a?a.toGMTString():"Wed, 15 Apr 2099 00:00:00 GMT";document.cookie=js.util.Cookie.NAME_SPACE+b+"="+escape(""+c)+"; path="+d+"; expires="+f;},read:<b>function </b>(a){<b>var </b>b=<b>new </b>RegExp("(^| )"+js.util.Cookie.NAME_SPACE+a+"=([^;]*)(;|$)","gi");<b>var </b>c=b.exec(document.cookie);<b>return</b> c?unescape(c[2]):<b>null</b>;},clear:<b>function </b>(a){<b>this</b>.write(a,"");}};}();js.util.Cookie.NAME_SPACE="JSDK_";
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

@@ -1,0 +1,206 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.game.Game</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-game-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.game</div>
+<div class="topic" title="js.game.Game">
+Class: 
+Game</div>
+
+<b>public abstract</b> Game <b>mix</b> <a href="js.core.EventProvider.html" title="js.core.EventProvider">EventProvider</a>|<a href="js.input.KeyBufferProvider.html" title="js.input.KeyBufferProvider">KeyBufferProvider</a>|<a href="js.input.MouseProvider.html" title="js.input.MouseProvider">MouseProvider</a>
+
+<hr/>
+
+<pre class="desc">
+The base class of a game.</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="Game" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public Game">+ Game</span></span>(<span title="required"><b>config</b></span>:<a href="js.game.Game$Config.html" title="js.game.Game$Config">Game$Config</a>)</span>
+<div id="Game_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>config</b></span>  &lt;<a href="js.game.Game$Config.html" title="js.game.Game$Config">Game$Config</a>&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="getThread" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getThread">+ getThread</span></span>():<a href="js.lang.Thread.html" title="js.lang.Thread">Thread</a></span>
+<div id="getThread_detail" style="display: none;">
+<pre class="desc">Returns the main thread.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.lang.Thread.html" title="js.lang.Thread">Thread</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getConfig" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getConfig">+ getConfig</span></span>(<span title="required"><b>k</b></span>:String):<a href="js.game.Game$Config.html" title="js.game.Game$Config">Game$Config</a></span>
+<div id="getConfig_detail" style="display: none;">
+<pre class="desc">Returns the value by the key.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.game.Game$Config.html" title="js.game.Game$Config">Game$Config</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="watchFPS" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public watchFPS">+ watchFPS</span></span>(<span title="required"><b>canvas</b></span>:Boolean|<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>):void</span>
+<div id="watchFPS_detail" style="display: none;">
+<pre class="desc">Sets the context of the FPS callback function.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>canvas</b></span>  &lt;Boolean|<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getId" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getId">+ getId</span></span>():String</span>
+<div id="getId_detail" style="display: none;">
+<pre class="desc">Returns the ID.
+返回游戏ID</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCanvas" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getCanvas">+ getCanvas</span></span>():<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a></span>
+<div id="getCanvas_detail" style="display: none;">
+<pre class="desc">Returns the main canvas.
+返回游戏画布</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getStatus" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getStatus">+ getStatus</span></span>():Int</span>
+<div id="getStatus_detail" style="display: none;">
+<pre class="desc">Return the status.
+返回游戏状态</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isRunning" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isRunning">+ isRunning</span></span>():Boolean</span>
+<div id="isRunning_detail" style="display: none;">
+<pre class="desc">Determines whether or not the game is running.
+是否在游戏运行中</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isPaused" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isPaused">+ isPaused</span></span>():Boolean</span>
+<div id="isPaused_detail" style="display: none;">
+<pre class="desc">If paused.
+是否在游戏已暂停</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isEnded" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isEnded">+ isEnded</span></span>():Boolean</span>
+<div id="isEnded_detail" style="display: none;">
+<pre class="desc">If ended.
+是否在游戏已结束</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="start" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public start">+ start</span></span>():void</span>
+<div id="start_detail" style="display: none;">
+<pre class="desc">Starts the game.
+开始游戏</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="resume" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public resume">+ resume</span></span>():void</span>
+<div id="resume_detail" style="display: none;">
+<pre class="desc">Resumes the running.
+恢复运行</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="pause" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public pause">+ pause</span></span>():void</span>
+<div id="pause_detail" style="display: none;">
+<pre class="desc">Pause the game.
+暂停游戏</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="end" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public end">+ end</span></span>():void</span>
+<div id="end_detail" style="display: none;">
+<pre class="desc">End the game.
+结束游戏</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="run" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public abstract run">+ <i>run</i></span></span>():void</span>
+<div id="run_detail" style="display: none;">
+<pre class="desc">Main running method.
+游戏的主线程方法</pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Events</td></tr></thead><tr><td>
+<span id="@starting" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="starting">starting</span>
+<div id="@starting_detail" style="display: none;">
+<pre class="desc">{"description":"fires before start the game" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Game"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@started" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="started">started</span>
+<div id="@started_detail" style="display: none;">
+<pre class="desc">{"description":"fires after start the game" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Game"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@resuming" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="resuming">resuming</span>
+<div id="@resuming_detail" style="display: none;">
+<pre class="desc">{"description":"fires before resume the game to running" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Game"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@resumed" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="resumed">resumed</span>
+<div id="@resumed_detail" style="display: none;">
+<pre class="desc">{"description":"fires after resume the game to running" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Game"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@pausing" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="pausing">pausing</span>
+<div id="@pausing_detail" style="display: none;">
+<pre class="desc">{"description":"fires before pause the game" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Game"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@paused" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="paused">paused</span>
+<div id="@paused_detail" style="display: none;">
+<pre class="desc">{"description":"fires after pause the game" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Game"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@ending" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="ending">ending</span>
+<div id="@ending_detail" style="display: none;">
+<pre class="desc">{"description":"fires before finish the game" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Game"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@ended" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="ended">ended</span>
+<div id="@ended_detail" style="display: none;">
+<pre class="desc">{"description":"fires after finish the game" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Game"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr></table><br/>
+
+</BODY>
+</HTML>

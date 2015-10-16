@@ -1,0 +1,259 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.math.Vector2D</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-mathphys.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.math</div>
+<div class="topic" title="js.math.Vector2D">
+Class: 
+Vector2D</div>
+
+<b>public static</b> Vector2D
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="equals" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static equals">+ <b>equals</b></span></span>(<span title="required"><b>v1</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>v2</b></span>:<a href="js.math.vector.html" title="js.math.vector">vector</a>):Boolean</span>
+<div id="equals_detail" style="display: none;">
+<pre class="desc">Judge the equals of v1 and v2.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v1</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>v2</b></span>  &lt;<a href="js.math.vector.html" title="js.math.vector">vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toVector" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static toVector">+ <b>toVector</b></span></span>(<span title="required"><b>point1</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>point2</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="toVector_detail" style="display: none;">
+<pre class="desc">Returns a Vector(p1->p2).</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>point1</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>point2</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toPoint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static toPoint">+ <b>toPoint</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="toPoint_detail" style="display: none;">
+<pre class="desc">Returns the point of the vector.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toString" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static toString">+ <b>toString</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):String</span>
+<div id="toString_detail" style="display: none;">
+<pre class="desc">Returns the string representation of a vector.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getLength" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getLength">+ <b>getLength</b></span></span>(<span title="required"><b>v</b></span>:<a href="Vector.html" title="Vector">Vector</a>):Number</span>
+<div id="getLength_detail" style="display: none;">
+<pre class="desc">Returns the mod of the vector.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="Vector.html" title="Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setLength" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setLength">+ <b>setLength</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>len</b></span>:Number):void</span>
+<div id="setLength_detail" style="display: none;">
+<pre class="desc">Sets the new length to a vector.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>len</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="negate" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static negate">+ <b>negate</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="negate_detail" style="display: none;">
+<pre class="desc">Returns the negative of this vector.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="add" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static add">+ <b>add</b></span></span>(<span title="required"><b>v1</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>v2</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="add_detail" style="display: none;">
+<pre class="desc">Adds vector1 by vector2.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v1</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>v2</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="sub" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static sub">+ <b>sub</b></span></span>(<span title="required"><b>v1</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>v2</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="sub_detail" style="display: none;">
+<pre class="desc">Subtracts vector1 by vector2.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v1</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>v2</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="mul" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static mul">+ <b>mul</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>number</b></span>:Number):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="mul_detail" style="display: none;">
+<pre class="desc">Multiplies a vector by a number.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>number</b></span>  &lt;Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="div" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static div">+ <b>div</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>number</b></span>:Number):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="div_detail" style="display: none;">
+<pre class="desc">Divides a vector by a number.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>number</b></span>  &lt;Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when The argument<number> is zero</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="dot" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static dot">+ <b>dot</b></span></span>(<span title="required"><b>v1</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>v2</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):Number</span>
+<div id="dot_detail" style="display: none;">
+<pre class="desc">Calculates the dot product of vector1 with vector2.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v1</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>v2</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="cross" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static cross">+ <b>cross</b></span></span>(<span title="required"><b>v1</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>v2</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):Number</span>
+<div id="cross_detail" style="display: none;">
+<pre class="desc">Calculates the cross product of vector1 with vector2.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v1</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>v2</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isPerpTo" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isPerpTo">+ <b>isPerpTo</b></span></span>(<span title="required"><b>v1</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>v2</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):Boolean</span>
+<div id="isPerpTo_detail" style="display: none;">
+<pre class="desc">Judge the vector1 perpendicular to the vector2.
+向量1是否垂直于向量2.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v1</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>v2</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="interpolate" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static interpolate">+ <b>interpolate</b></span></span>(<span title="required"><b>beginVec</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>finalVec</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>changeAmnt</b></span>:Number):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="interpolate_detail" style="display: none;">
+<pre class="desc">Sets this vector to the interpolation by changeAmnt from this to the finalVec.
+= (1-changeAmnt) * beginVec + changeAmnt * finalVec</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>beginVec</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; The begining vector (delta=0)</dd><br/>
+<dd><span title="required"><b>finalVec</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; The final vector to interpolate towards (delta=1)</dd><br/>
+<dd><span title="required"><b>changeAmnt</b></span>  &lt;Number&gt; An amount between 0.0 - 1.0 representing a percentage change from beginVec towards finalVec</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="normalize" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static normalize">+ <b>normalize</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="normalize_detail" style="display: none;">
+<pre class="desc">Returns the unit vector of this vector.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; unit vector of this vector.</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getRadian" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getRadian">+ <b>getRadian</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):Number</span>
+<div id="getRadian_detail" style="display: none;">
+<pre class="desc">Returns the radian between this and v.
+原点到向量点的连线与X轴的夹角的弧度。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; radian</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setRadian" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setRadian">+ <b>setRadian</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>rad</b></span>:Number):void</span>
+<div id="setRadian_detail" style="display: none;">
+<pre class="desc">Sets the radian of this vector.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>rad</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="radianBetween" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static radianBetween">+ <b>radianBetween</b></span></span>(<span title="required"><b>v1</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>v2</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):Number</span>
+<div id="radianBetween_detail" style="display: none;">
+<pre class="desc">Returns the radian of v2 relative to v1.
+两个非零向量之间的夹角的弧度。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v1</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>v2</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="project" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static project">+ <b>project</b></span></span>(<span title="required"><b>v1</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>v2</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="project_detail" style="display: none;">
+<pre class="desc">Returns the vector which V1 projection on V2.
+求向量V1在向量V2上的投影向量：
+用V1和V2的单位向量vu2点积再乘以vu2，并且与V2的方向无关。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v1</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>v2</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="rotate" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static rotate">+ <b>rotate</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>rad</b></span>:Number):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="rotate_detail" style="display: none;">
+<pre class="desc">Returns a new rotated vector.
+以某个弧度旋转向量得到一个新向量。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>rad</b></span>  &lt;Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getNormal" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getNormal">+ <b>getNormal</b></span></span>(<span title="required"><b>v</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <i title="optional"><b>isLeftSide</b></i>:Boolean):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="getNormal_detail" style="display: none;">
+<pre class="desc">Returns normal vector.
+求向量的法向量。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><i title="optional"><b>isLeftSide</b></i>  &lt;Boolean&gt; True: The left side of vector is positive; False: The right side of vector is positive</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="rebound" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static rebound">+ <b>rebound</b></span></span>(<span title="required"><b>v1</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <span title="required"><b>v2</b></span>:<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>, <i title="optional"><b>isLeftSide</b></i>:Boolean):<a href="js.math.Vector.html" title="js.math.Vector">Vector</a></span>
+<div id="rebound_detail" style="display: none;">
+<pre class="desc">Returns the rebound vector when v1 move to v2.
+求向量V1碰撞V2后的反弹向量。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v1</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><span title="required"><b>v2</b></span>  &lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd><br/>
+<dd><i title="optional"><b>isLeftSide</b></i>  &lt;Boolean&gt; v1 enter from which side of v2</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Vector.html" title="js.math.Vector">Vector</a>&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

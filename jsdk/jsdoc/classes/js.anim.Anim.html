@@ -1,0 +1,165 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.anim.Anim</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-2d-anim.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.anim</div>
+<div class="topic" title="js.anim.Anim">
+Class: 
+Anim</div>
+
+<b>public</b> Anim <b>mix</b> <a href="js.core.EventProvider.html" title="js.core.EventProvider">EventProvider</a>
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="Anim" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public Anim">+ Anim</span></span>(<span title="required"><b>config</b></span>:<a href="js.anim.Anim$Config.html" title="js.anim.Anim$Config">Anim$Config</a>, <span title="required"><b>method</b></span>:Function)</span>
+<div id="Anim_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>config</b></span>  &lt;<a href="js.anim.Anim$Config.html" title="js.anim.Anim$Config">Anim$Config</a>&gt; </dd><br/>
+<dd><span title="required"><b>method</b></span>  &lt;Function&gt; The arguments:[currentCount, currentRepeat]</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="setConfig" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setConfig">+ setConfig</span></span>(<span title="required"><b>k</b></span>:String, <span title="required"><b>v</b></span>:Object):void</span>
+<div id="setConfig_detail" style="display: none;">
+<pre class="desc">Sets the config by key.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>v</b></span>  &lt;Object&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getConfig" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getConfig">+ getConfig</span></span>(<span title="required"><b>k</b></span>:String):Object</span>
+<div id="getConfig_detail" style="display: none;">
+<pre class="desc">Returns the config of the key.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getMaxTimes" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getMaxTimes">+ getMaxTimes</span></span>():Int</span>
+<div id="getMaxTimes_detail" style="display: none;">
+<pre class="desc">Returns the max repeat times.The default value is zero.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCurrentTimes" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getCurrentTimes">+ getCurrentTimes</span></span>():Int</span>
+<div id="getCurrentTimes_detail" style="display: none;">
+<pre class="desc">Returns the current repeat times.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCount" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getCount">+ getCount</span></span>():Int</span>
+<div id="getCount_detail" style="display: none;">
+<pre class="desc">Returns the current counter in this times.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isAnimated" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isAnimated">+ isAnimated</span></span>():Boolean</span>
+<div id="isAnimated_detail" style="display: none;">
+<pre class="desc">Returns True when the animation is started.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getStartTime" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getStartTime">+ getStartTime</span></span>():Date</span>
+<div id="getStartTime_detail" style="display: none;">
+<pre class="desc">Returns the start time.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Date&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="start" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public start">+ start</span></span>():void</span>
+<div id="start_detail" style="display: none;">
+<pre class="desc">Start the animation.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="resetCount" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public resetCount">+ resetCount</span></span>():void</span>
+<div id="resetCount_detail" style="display: none;">
+<pre class="desc">Reset the counter equals zero.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="run" style="cursor:pointer;" onclick="switchDesc(this);"><span title="protected run"># run</span></span>():void</span>
+<div id="run_detail" style="display: none;">
+<pre class="desc">Execute the main method when the main thread is running.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="complete" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public complete">+ complete</span></span>():void</span>
+<div id="complete_detail" style="display: none;">
+<pre class="desc">End the animation.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="stop" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public stop">+ stop</span></span>():void</span>
+<div id="stop_detail" style="display: none;">
+<pre class="desc">Stop the animation.</pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Events</td></tr></thead><tr><td>
+<span id="@started" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="started">started</span>
+<div id="@started_detail" style="display: none;">
+<pre class="desc">{"description": "fires when the animation started" 
+    ,"type":"function" 
+    ,"scope":{"type":"js.anim.Anim"} 
+    ,"arguments":{ 
+        "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@completed" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="completed">completed</span>
+<div id="@completed_detail" style="display: none;">
+<pre class="desc">{"description": "fires when the animation finished" 
+    ,"type":"function" 
+    ,"scope":{"type":"js.anim.Anim"} 
+    ,"arguments":{ 
+        "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@stoped" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="stoped">stoped</span>
+<div id="@stoped_detail" style="display: none;">
+<pre class="desc">{"description": "fires when the animation stoped" 
+    ,"type":"function" 
+    ,"scope":{"type":"js.anim.Anim"} 
+    ,"arguments":{ 
+        "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@looped" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="looped">looped</span>
+<div id="@looped_detail" style="display: none;">
+<pre class="desc">{"description": "fires when looped on same repeat" 
+    ,"type":"function" 
+    ,"scope":{"type":"js.anim.Anim"} 
+    ,"arguments":{ 
+        "type":"array" 
+        ,"items":[ 
+            {"type":"int", "description": "current counter number on current repeat"} 
+            ,{"type":"int", "description": "current repeat number"} 
+        ]} }</pre></div>
+</td></tr><tr><td>
+<span id="@repeated" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="repeated">repeated</span>
+<div id="@repeated_detail" style="display: none;">
+<pre class="desc">{"description": "fires when a repeat finished" 
+    ,"type":"function" 
+    ,"scope":{"type":"js.anim.Anim"} 
+    ,"arguments":{ 
+        "type":"null"} }</pre></div>
+</td></tr></table><br/>
+
+</BODY>
+</HTML>

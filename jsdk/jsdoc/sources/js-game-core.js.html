@@ -1,0 +1,1357 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">jsgf\js-game-core.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.2
+ * @author feng.chun
+ * @date 2010-11-15
+ * @date 2011-04-14
+ * @date 2011-10-19
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-10-6
+ * 
+ * @requires /core/js-core.js
+ * @requires /core/js-mathphys.js
+ * @requires /core/js-thread.js
+ * @requires /core/js-input.js
+ * @requires /js2d/js-2d-core.js
+ */</span>
+js.lang.System.namespace('js.game.collision');
+
+(<b>function </b>() {
+<b>var </b>SYS = js.lang.System,
+    D = js.core.Dom,
+    $ = js.core.Dom.$,
+    E = js.core.Event,
+    MT = js.math.MathTool,
+    G2D = js.math.Geom2D;
+
+<span class="multiComment">/**
+ * @class js.game.Sprite
+ * @abstract
+ * @extends js.d2.View
+ * @constructor
+ * 
+ * @struct js.game.SpriteFrame {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "id":{"type":"string"}
+ *             ,"src":{"type":"string"}
+ *             ,"x":{"type":"number"}
+ *             ,"y":{"type":"number"}
+ *             ,"offsetX":{"type":"number"}
+ *             ,"offsetY":{"type":"number"}
+ *             ,"opacity":{"type":"number","default":1,"required":false}
+ *             ,"width":{"type":"number"}
+ *             ,"height":{"type":"number"}
+ *             ,"visible":{"type":"boolean","default":false,"required":false}    
+ *         }
+ * }
+ * 
+ * @struct js.game.SpriteFrameSeq {
+ *         "description":""
+ *         ,"type":"array"
+ *         ,"items":[
+ *         {"description":"format is [offsetX,offsetY]","type":"js.math.Point"}
+ *      ]
+ * }
+ *  
+ * @struct js.game.Sprite$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "dir":{"type":"number"}
+ *             ,"imageSrc":{"type":"string"}
+ *             ,"frameSeqs":{"type":"object&lt;string,js.game.SpriteFrameSeq&gt;"}
+ *             ,"frameSeqKey":{"type":"string"}    
+ *         }
+ *         ,"extends":"js.d2.View$Config"
+ * }
+ * 
+ * @param {js.game.Sprite$Config} config
+ */</span>
+js.game.Sprite = <b>function </b>(config){
+    js.game.Sprite.superclass.constructor.apply(<b>this</b>, arguments);
+<span class="multiComment">    /**
+     * 方向:弧度计量
+     * @field {Number} _dir 
+     * @private
+     */</span>
+    <b>this</b>._dir = config['dir']||MT.RADIAN_0;
+<span class="multiComment">    /**
+     * 精灵帧的图片源URL
+     * @field {String} _imageSrc 
+     * @private
+     */</span>
+    <b>this</b>._imageSrc = config['imageSrc'];
+<span class="multiComment">    /**
+     * 多个精灵帧序列的集合
+     * @field {object&lt;string,js.game.SpriteFrameSeq&gt;} _frameSeqs
+     * @private
+     */</span>
+    <b>this</b>._frameSeqs = config['frameSeqs'];
+<span class="multiComment">    /**
+     * 当前帧序列的Key
+     * @field {String} _frameKey 
+     * @private
+     */</span>
+    <b>this</b>._frameKey = config['frameSeqKey'];
+<span class="multiComment">    /**
+     * 当前帧数组的索引指针
+     * @field {Int} _frameIndex 
+     * @private
+     */</span>
+    <b>this</b>._frameIndex = 0;    
+<span class="multiComment">    /**
+     * 碰撞用的AABB矩形，其X,Y坐标为相对于精灵帧图砖的坐标
+     * @field {Object&lt;js.game.collision.AABB&gt;} _aabbs
+     * @private
+     */</span>
+    <b>this</b>._aabbs = {};
+    
+<span class="multiComment">    /**@event turning */</span>
+    <b>this</b>.createEvent('turning');
+<span class="multiComment">    /**@event turned */</span>
+    <b>this</b>.createEvent('turned');
+};
+SYS.extend(js.game.Sprite, js.d2.View,{
+<span class="multiComment">    /**
+     * Return the image's url.
+     * 
+     * @method getImageSrc
+     * @return {String} 
+     */</span>
+    getImageSrc: <b>function </b>(){
+        <b>return</b> <b>this</b>._imageSrc;
+    },
+<span class="multiComment">    /**
+     * Paint the sprite on the canvas.
+     * 在画布上绘制精灵
+     * 
+     * @method paint
+     * @override
+     * @param {js.d2.Canvas} canvas
+     */</span>
+    paint: <b>function </b>(canvas){
+        <b>if </b>(<b>this</b>._isD) <b>return</b>;
+                
+        <b>this</b>.fireEvent('painting');
+        canvas.drawImage(<b>this</b>.getFrame());
+        <b>this</b>.fireEvent('painted');        
+    },
+<span class="multiComment">    /**
+     * Returns the current frame.
+     * 
+     * @method getFrame
+     * @param {Int} i:optional
+     * @param {String} key:optional
+     * @return {js.game.SpriteFrame} 
+     */</span>
+<span class="multiComment">    getFrame: function(/*i, key*/){
+        <b>var </b>i = SYS.isUndefined(arguments[0])? <b>this</b>._frameIndex:arguments[0]
+        , key = arguments[1]||<b>this</b>._frameKey;
+        
+        <b>var </b>d = <b>this</b>._frameSeqs[key];
+        <b>if </b>(!d) <b>throw </b><b>new </b>Error();
+        
+        <b>var </b>offset = d[i];
+        <b>if </b>(!offset) <b>throw </b><b>new </b>Error();    
+        
+        <b>if </b>(!<b>this</b>._isV){
+            <b>return</b> {
+                id: <b>this</b>._id, visible:<b>false</b>
+            }
+        }<b>else </b>{
+            <b>return</b> {
+                id: <b>this</b>._id, x: <b>this</b>._x, y: <b>this</b>._y, z: <b>this</b>._z, opacity: <b>this</b>._opacity
+                , src: <b>this</b>._imageSrc, offsetX: offset[0], offsetY: offset[1]
+                , width: <b>this</b>._w, height: <b>this</b>._h, visible:<b>true</b>
+            }
+        }
+    },
+<span class="multiComment">    /**
+     * Sets the current frame queue's index.
+     * 
+     * @method setFrameIndex
+     * @param {Int} i default value is zero
+     */</span>
+    setFrameIndex: <b>function </b>(i){
+        <b>if </b>(i<b> in </b><b>this</b>._frameSeqs[<b>this</b>._frameKey]) {
+            <b>this</b>._frameIndex = i;
+        }<b>else </b>{
+            <b>this</b>._frameIndex = 0;
+        }
+    },
+<span class="multiComment">    /**
+     * Sets the key of the current frame queue.
+     * 
+     * @method setFrameSeqKey
+     * @param {String} key
+     */</span>
+    setFrameSeqKey: <b>function </b>(key){
+        <b>if </b>(key<b> in </b><b>this</b>._frameSeqs) <b>this</b>._frameKey = key;
+    },
+<span class="multiComment">    /**
+     * Returns the key of the current frame queue.
+     * 
+     * @method getFrameSeqKey
+     * @return {String}
+     */</span>
+    getFrameSeqKey: <b>function </b>(){
+        <b>return</b> <b>this</b>._frameKey;
+    },
+<span class="multiComment">    /**
+     * Goto next frame.
+     * 
+     * @method nextFrame
+     */</span>
+    nextFrame: <b>function </b>(){
+        <b>var </b>f = <b>this</b>._frameSeqs[<b>this</b>._frameKey];
+        <b>if </b>(!f) <b>throw </b><b>new </b>Error();
+        <b>this</b>._frameIndex = <b>this</b>._frameIndex&gt;=(f.length-1)?0:<b>this</b>._frameIndex+1;
+    },
+<span class="multiComment">    /**
+     * Goto prev frame.
+     * 
+     * @method prevFrame
+     */</span>
+    prevFrame: <b>function </b>(){
+        <b>var </b>f = <b>this</b>._frameSeqs[<b>this</b>._frameKey];
+        <b>if </b>(!f) <b>throw </b><b>new </b>Error();
+        <b>this</b>._frameIndex = <b>this</b>._frameIndex&lt;=0?f.length-1:<b>this</b>._frameIndex-1;
+    },
+<span class="multiComment">    /**
+     * Returns the frame queue data by the key.
+     * 
+     * @method getFrameSeq
+     * @param {String} key 
+     * @return {js.game.SpriteFrameSeq} 
+     */</span>
+    getFrameSeq: <b>function </b>(key){<b>return</b> key?<b>this</b>._frameSeqs[key]:<b>this</b>._frameSeqs},
+<span class="multiComment">    /**
+     * Sets the frame queue data, like: [[offsetX1,offsetY1],...,[offsetXn,offsetYn]].
+     * 
+     * @method setFrameSeq
+     * @param {String} key 
+     * @param {js.game.SpriteFrameSeq} data 
+     */</span>
+    setFrameSeq: <b>function </b>(key, data){<b>return</b> <b>this</b>._frameSeqs[key] = data},     
+<span class="multiComment">    /**
+     * Return the diretory of the sprite.
+     * 
+     * @method getDir
+     * @return {Number} 弧度 
+     */</span>
+    getDir: <b>function </b>(){<b>return</b> <b>this</b>._dir},
+<span class="multiComment">    /**
+     * Turn the diretory of the sprite.
+     * 
+     * @method turn
+     * @param {Number} dir 弧度 
+     */</span>
+    turn: <b>function </b>(dir){
+        <b>if </b>(SYS.isUndefined(dir)) <b>return</b>;
+        <b>this</b>.fireEvent('turning', dir);
+        <b>this</b>._dir = dir;
+        <b>this</b>.fireEvent('turned', dir);        
+    },
+<span class="multiComment">    /**
+     * Move the sprite with a step by the diretory.
+     * 
+     * @method moveWith
+     * @param {Number} step
+     */</span>
+    moveWith: <b>function </b>(step){
+        <b>var </b>xy = MT.polar2XY(step, <b>this</b>.getDir());
+        <b>this</b>.move(xy[0],xy[1]);
+    },
+<span class="multiComment">    /**
+     * Sets a new AABB rectangle.
+     * 
+     * @method setAABB
+     * @param {String} key the name of the AABB
+     * @param {js.math.Rect} collisionRect relative to the sprite's frame
+     */</span>
+    setAABB: <b>function </b>(key, collisionRect){
+        <b>this</b>._aabbs[key] = <b>new </b>js.game.collision.AABB(<b>this</b>, collisionRect);
+    },
+<span class="multiComment">    /**
+     * Returns a AABB by name
+     * 
+     * @method getAABB
+     * @param {String} key
+     * @return {js.game.collision.AABB}
+     */</span>
+    getAABB: <b>function </b>(key){
+        <b>return</b> <b>this</b>._aabbs[key];
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.game.TiledLayer 
+ * @extends js.d2.View
+ * @constructor 
+ * 
+ * @struct js.game.TiledLayer$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "src":{"type":"string"}
+ *             ,"cell_size":{"type":"array", "items":[{"type":"number"}]}
+ *             ,"tile_set":{"type":"array", "items":[{"type":"js.math.Point"}]}
+ *         }
+ *         ,"extends":"js.d2.View$Config"
+ * }
+ * 
+ * @param {js.game.TiledLayer$Config} config
+ */    </span>
+js.game.TiledLayer = <b>function </b>(config){
+    js.game.TiledLayer.superclass.constructor.apply(<b>this</b>, arguments);
+<span class="singleComment">    //@field {String} 图砖的图像源文件路径</span>
+    <b>this</b>._src = config['src'];    
+<span class="singleComment">    //@field {Array} 图砖的尺寸</span>
+    <b>this</b>._cellSize = config['cell_size'];
+<span class="singleComment">    //@field {Array&lt;Point&gt;} 图砖的定义集合</span>
+    <b>this</b>._tileSet = config['tile_set'];
+<span class="singleComment">    //@field {Array[][]} 地图数据（二维数组）</span>
+    <b>this</b>._data = <b>null</b>;
+<span class="singleComment">    //@field {Rect} 当前绘制区域</span>
+    <b>this</b>._paintRect = <b>null</b>;
+    
+<span class="multiComment">    /**  
+     * @event painted {
+     *         "description":"fires after paint every cell"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.TiledLayer"}
+     *      ,"arguments":{
+     *          "type":"array"
+     *          ,"items":[
+     *              {"type":"HTMLElement", "description":"cell's element"}
+     *              ,{"type":"string|number", "description":"cell's value"}
+     *              ,{"type":"js.math.Point", "description":"cell's (x,y)"}
+     *          ]
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('painted');
+}    
+SYS.extend(js.game.TiledLayer, js.d2.View,{
+    _check: <b>function </b>(col, row, a){
+        <b>if </b>(!a || a.length&lt;1 || isNaN(col) || isNaN(row)) <b>return</b> <b>false</b>;
+        <b>var </b>size = [a[0].length, a.length];
+        <b>return</b> (col&lt;0 || col&gt;=size[0] || row&lt;0 || row&gt;=size[1])?<b>false</b>:<b>true</b>;
+    },
+    _getCellId: <b>function </b>(mapX,mapY){<b>return</b> <b>this</b>.getId()+'_'+mapX+'_'+mapY;},
+    _getImage: <b>function </b>(mapX,mapY,tileIndex){
+        <b>var </b>tile = <b>this</b>._tileSet?<b>this</b>._tileSet[tileIndex]:String(tileIndex).split(',')
+            ,w = <b>this</b>._cellSize[0]
+            ,h = <b>this</b>._cellSize[1];
+        
+        <b>return</b> {
+            id: <b>this</b>._getCellId(mapX,mapY)
+            ,src: <b>this</b>._src    ,width: w,height: h
+            ,offsetX:tile[0],offsetY:tile[1]
+            ,x: <b>this</b>._x+w*mapX, y: <b>this</b>._y+h*mapY
+        };
+    },
+<span class="multiComment">    /**
+     * Paint the layer on the canvas.
+     * 
+     * @method paint
+     * @override
+     * @param {js.d2.Canvas} canvas
+     */    </span>
+    paint: <b>function </b>(canvas){
+        <b>if </b>(!<b>this</b>.isVisible() || !<b>this</b>._data) <b>return</b>;
+<span class="singleComment">        //仅仅绘制指定区域</span>
+        <b>var </b>rect = G2D.intersectsRect(<b>this</b>.getPaintRect(),{x:0,y:0,w:<b>this</b>._data[0].length,h:<b>this</b>._data.length})
+        <b>if </b>(!rect) <b>return</b>;
+        <b>var </b>px = rect.x,py = rect.y,pw = rect.w,ph = rect.h;
+        
+        <b>var </b>layer = $(<b>this</b>.getId());
+        <b>if </b>(!layer) {
+            layer = canvas.drawElement('div',{id:<b>this</b>.getId()});
+        }
+        
+        <b>var </b>frag = document.createDocumentFragment();
+        <b>for </b>(<b>var </b>i=py,len1=py+ph;i&lt;len1;i++){
+            <b>for </b>(<b>var </b>j=px,len2=px+pw;j&lt;len2;j++){
+                <b>var </b>tileIndex = <b>this</b>.getCell(j,i);
+                <b>var </b>el = canvas.createImage(<b>this</b>._getImage(j,i,tileIndex));
+                el.setAttribute('jsdk_jsgf_tileIndex', tileIndex);                
+                frag.appendChild(el);
+                <b>this</b>.fireEvent('painted', el, tileIndex, [j,i]);
+            }
+        }
+        layer.appendChild(frag);
+    },
+<span class="multiComment">    /**
+     * Returns the bound of the cell(x,y).
+     * 
+     * @method getCellBound
+     * @param {Int} mapX 地图X坐标
+     * @param {Int} mapY 地图Y坐标
+     * @return {js.math.Rect} 
+     */</span>
+    getCellBound: <b>function </b>(mapX, mapY){
+        <b>var </b>wUint = <b>this</b>._cellSize[0], hUnit = <b>this</b>._cellSize[1];
+        <b>return</b> {
+            x:<b>this</b>._x+mapX*wUint,
+            y:<b>this</b>._y+mapY*hUnit,
+            w:wUint,
+            h:hUnit}
+    },
+<span class="multiComment">    /**
+     * Return the cell's size.
+     * 
+     * @method getCellSize
+     * @return {Array} [width,height]
+     */</span>
+    getCellSize: <b>function </b>(){<b>return</b> <b>this</b>._cellSize},    
+<span class="multiComment">    /**
+     * Returns the cell's value.
+     * 返回单元格的值
+     * 
+     * @method getCell
+     * @param {Int} col 列号：地图X坐标
+     * @param {Int} row 行号：地图Y坐标
+     * @return {String|Int} 
+     */    </span>
+    getCell: <b>function </b>(mapX, mapY){
+        <b>if </b>(!<b>this</b>._check(mapX, mapY, <b>this</b>._data)) {
+            <b>var </b>cell = $(<b>this</b>._getCellId(mapX,mapY));
+            <b>if </b>(cell){
+                <b>return</b> cell.getAttribute('jsdk_jsgf_tileIndex');
+            }<b>else </b>{
+                <b>return</b> <b>null</b>;
+            }
+        }
+        
+        <b>return</b> <b>this</b>._data[mapY][mapX];
+    },
+<span class="multiComment">    /**
+     * The cell if is visible.
+     * 
+     * @method isVisibleCell
+     * @param {Int} mapX 地图X坐标
+     * @param {Int} mapY 地图Y坐标
+     * @return {Boolean}
+     */    </span>
+    isVisibleCell: <b>function </b>(mapX, mapY){
+        <b>var </b>cell = $(<b>this</b>._getCellId(mapX,mapY));
+        <b>return</b> cell?<b>true</b>:<b>false</b>;
+    },
+<span class="multiComment">    /**
+     * Sets the cell's value.
+     * 
+     * @method setCell
+     * @param {Int} mapX       地图X坐标
+     * @param {Int} mapY       地图Y坐标
+     * @param {Int} tileIndex  图砖索引
+     */</span>
+    setCell: <b>function </b>(mapX, mapY, tileIndex){
+        <b>if </b>(!<b>this</b>._check(mapX,mapY,<b>this</b>._data)) <b>throw </b><b>new </b>Error();
+        <b>this</b>._data[mapY][mapX] = tileIndex;
+    },
+<span class="multiComment">    /**
+     * Fill many of cells.
+     * 
+     * @method fillCells
+     * @param {Int} mapX      地图X坐标
+     * @param {Int} mapY      地图Y坐标
+     * @param {Int} numCols   列数
+     * @param {Int} numRows   行数
+     * @param {Int} tileIndex 图砖索引
+     */</span>
+    fillCells: <b>function </b>(mapX, mapY,numCols,numRows,tileIndex){
+        <b>if </b>(!<b>this</b>._check(mapX+numCols,mapY+numRows,<b>this</b>._data)) <b>throw </b><b>new </b>Error();
+        <b>for </b>(<b>var </b>i = mapX; i&lt;numCols; i++){
+            <b>for </b>(<b>var </b>j = mapY; i&lt;numRows; i++){
+                <b>this</b>.setCell(i, j, tileIndex);
+            }    
+        }
+    },
+<span class="multiComment">    /**
+     * Returns the current paint rect of the layer.
+     * 
+     * @method getPaintRect
+     * @return {js.math.Rect}
+     */</span>
+    getPaintRect: <b>function </b>(){
+        <b>if </b>(!<b>this</b>._paintRect) <b>this</b>._paintRect = {x:0,y:0,w:<b>this</b>._w,h:<b>this</b>._h};        
+        <b>return</b> <b>this</b>._paintRect;
+    },
+    _setNumber: <b>function </b>(k, n, min, max){
+        <b>if </b>(!SYS.isUndefined(n)) <b>this</b>._paintRect[k] = n;
+    },
+<span class="multiComment">    /**
+     * Sets the current paint rect of the layer.
+     * 
+     * @method setPaintRect
+     * @param {Int} mapX 地图X坐标
+     * @param {Int} mapY 地图Y坐标
+     * @param {Int} cols 列数
+     * @param {Int} rows 行数
+     */</span>
+    setPaintRect: <b>function </b>(mapX, mapY, cols, rows){
+        <b>if </b>(!<b>this</b>._paintRect) <b>this</b>._paintRect = {x:0,y:0,w:<b>this</b>._w,h:<b>this</b>._h};
+        
+        <b>var </b>size = <b>this</b>.getSize();
+        <b>this</b>._setNumber('x', mapX);
+        <b>this</b>._setNumber('y', mapY);
+        <b>this</b>._setNumber('w', cols);
+        <b>this</b>._setNumber('h', rows);
+    },
+<span class="multiComment">    /**
+     * Moves the current paint rect of the layer.
+     * 
+     * @method movePaintRect
+     * @param {Number} dx 
+     * @param {Number} dy 
+     */</span>
+    movePaintRect: <b>function </b>(dx, dy){
+        <b>var </b>rect = <b>this</b>.getPaintRect();
+        <b>this</b>.setPaintRect(rect.x+dx,rect.y+dy);
+    },
+<span class="multiComment">    /**
+     * Sets the map data.
+     * 
+     * @method setData
+     * @param {Array[][]} data
+     */    </span>
+    setData: <b>function </b>(data){
+        <b>if </b>(!data || data.length&lt;1 || SYS.isUndefined(data[0][0])){
+            <b>this</b>._data = <b>null</b>;
+            <b>this</b>.setSize(0,0);    
+        }<b>else </b>{
+            <b>this</b>._data = data;
+            <b>this</b>.setSize(data[0].length, data.length);        
+        }         
+    },
+<span class="multiComment">    /**
+     * Returns the map data.
+     * 
+     * @method getData
+     * @return {Array[][]} data
+     */</span>
+    getData: <b>function </b>(){<b>return</b> <b>this</b>._data;},        
+<span class="multiComment">    /**
+     * Returns the cell' x and y by the canvas's X and Y
+     * 
+     * @method getCellXY
+     * @param {Number} x 画布x坐标
+     * @param {Number} y 画布y坐标
+     * @return {Array} [col,row]
+     */</span>
+    getCellXY: <b>function </b>(x, y){
+        <b>var </b>mapX = Math.floor((x-<b>this</b>._x)/<b>this</b>._cellSize[0])
+        , mapY = Math.floor((y-<b>this</b>._y)/<b>this</b>._cellSize[1]);
+        <b>return</b> [mapX,mapY];
+    },
+<span class="multiComment">    /**
+     * Returns the cell' value by the canvas's X and Y
+     * 
+     * @method getCellByXY
+     * @param {Number} x 画布x坐标
+     * @param {Number} y 画布y坐标
+     * @return {String|Number} 
+     */</span>
+    getCellByXY: <b>function </b>(x, y){
+        <b>var </b>xy = <b>this</b>.getCellXY(x,y);
+        <b>return</b> <b>this</b>.getCell(xy[0],xy[1]);
+    }
+});
+<span class="multiComment">/**
+ * @mix js.core.EventProvider
+ */</span>
+SYS.augment(js.game.TiledLayer, js.core.EventProvider);
+
+<span class="multiComment">/**
+ * AABB is Axis-Aligned Bounding Box, used by collision detection.
+ * 
+ * @class js.game.collision.AABB
+ * @constructor
+ * 
+ * @param {js.game.Sprite} sprite
+ * @param {js.math.Rect} collisionRect
+ */</span>
+js.game.collision.AABB = <b>function </b>(sprite, collisionRect){
+    <b>this</b>.sprite = sprite;
+    <b>this</b>.collisionRect = collisionRect?collisionRect:{x:0,y:0,w:sprite.getWidth(),h:sprite.getHeight()};
+};
+
+js.game.collision.AABB.prototype = {
+<span class="multiComment">    /**
+     * Returns the bounding box rectangle of the sprite.
+     * 
+     * @method getBoundingBox
+     * @return {js.math.Rect}
+     */</span>
+    getBoundingBox: <b>function </b>(){
+        <b>var </b>bound = <b>this</b>.sprite.getBound();
+        <b>return</b> {
+            x: bound.x+<b>this</b>.collisionRect.x, y: bound.y+<b>this</b>.collisionRect.y,
+            w: <b>this</b>.collisionRect.w, h: <b>this</b>.collisionRect.h
+        }
+    },
+<span class="multiComment">    /**
+     * @method isDestoryed
+     * @return {boolean}
+     */</span>
+    isDestoryed: <b>function </b>(){<b>return</b> <b>this</b>.sprite.isDestoryed()},
+<span class="multiComment">    /**
+     * Collision detection with an AABB or a Rect.
+     * 
+     * @method collidesWith
+     * @param {js.math.Rect|js.game.collision.AABB} aabb
+     * @return {Boolean}
+     */</span>
+    collidesWith: <b>function </b>(aabb){
+        <b>if </b>(!aabb || <b>this</b>.isDestoryed() || (aabb.isDestoryed && aabb.isDestoryed())) <b>return</b> <b>false</b>;
+        <b>var </b>bb = (aabb<b> instanceof </b>js.game.collision.AABB)?aabb.getBoundingBox():aabb;        
+        <b>return</b> G2D.intersectsRect(<b>this</b>.getBoundingBox(), bb)!=<b>null</b>;
+    },
+<span class="multiComment">    /**
+     * Collision detection with a tiled layer.
+     * 
+     * @method collidesWithTiles
+     * @param {js.game.TiledLayer} tiledLayer
+     * @param {Array} blockCells
+     * @return {Boolean}
+     */</span>
+    collidesWithTiles: <b>function </b>(tiledLayer, blockCells){
+        <b>if </b>(!tiledLayer || !blockCells || <b>this</b>.isDestoryed() || tiledLayer.isDestoryed()) <b>return</b> <b>false</b>;
+        
+        <b>var </b>bb = <b>this</b>.getBoundingBox(), dir = <b>this</b>.sprite.getDir()
+           ,points = G2D.getRectPoints(bb);
+           
+        <b>return</b> points.some(<b>function </b>(p, i){
+            <b>var </b>cellXY = tiledLayer.getCellXY(p[0],p[1]);
+            <b>if </b>(!tiledLayer.isVisibleCell(cellXY[0],cellXY[1])) <b>return</b> <b>false</b>;
+            
+            <b>var </b>cell = tiledLayer.getCell(cellXY[0],cellXY[1]);
+            <b>return</b> !SYS.isUndefined(cell) && blockCells.indexOf(cell)&gt;=0;                                    
+        }, <b>this</b>);
+    },
+<span class="multiComment">    /**
+     * Avoid to an AABB.
+     * 
+     * @method avoidTo
+     * @param {js.game.collision.AABB} aabb
+     * @return {Boolean}
+     */</span>
+    a<b>void</b>To: <b>function </b>(aabb){
+        <b>if </b>(!(aabb<b> instanceof </b>js.game.collision.AABB) || aabb.isDestoryed()) <b>return</b> <b>false</b>;
+        
+        <b>var </b>newXY = G2D.a<b>void</b>ToRect(<b>this</b>.getBoundingBox(), aabb.getBoundingBox(), <b>this</b>.sprite.getDir());
+        <b>if </b>(newXY) {
+            <b>this</b>.sprite.setXY(newXY[0]-<b>this</b>.collisionRect.x, newXY[1]-<b>this</b>.collisionRect.y);
+            <b>return</b> <b>true</b>;
+        }
+        <b>return</b> <b>false</b>;
+    },
+<span class="multiComment">    /**
+     * Avoid to a tiled layer.
+     * 
+     * @method avoidToTiles
+     * @param {js.game.TiledLayer} tiledLayer
+     * @param {Array} blockCells
+     * @return {Boolean}
+     */</span>
+    a<b>void</b>ToTiles: <b>function </b>(tiledLayer, blockCells){
+        <b>if </b>(!tiledLayer || !blockCells || <b>this</b>.isDestoryed() || tiledLayer.isDestoryed()) <b>return</b> <b>false</b>;
+        
+        <b>var </b>bb = <b>this</b>.getBoundingBox(), dir = <b>this</b>.sprite.getDir()
+           ,points = G2D.getRectPoints(bb);        
+           
+        <b>return</b> points.some(<b>function </b>(p, i){
+            <b>var </b>cellXY = tiledLayer.getCellXY(p[0],p[1]);
+            <b>if </b>(!tiledLayer.isVisibleCell(cellXY[0],cellXY[1])) <b>return</b> <b>false</b>;
+            
+            <b>var </b>cell = tiledLayer.getCell(cellXY[0],cellXY[1]);
+            <b>if </b>(SYS.isUndefined(cell) || blockCells.indexOf(cell)&lt;0) <b>return</b> <b>false</b>;
+                        
+            <b>var </b>newXY = G2D.a<b>void</b>ToRect(bb, tiledLayer.getCellBound(cellXY[0],cellXY[1]), dir);//避让CELL
+            <b>if </b>(newXY){
+                <b>this</b>.sprite.setXY(newXY[0]-<b>this</b>.collisionRect.x, newXY[1]-<b>this</b>.collisionRect.y);
+                <b>return</b> <b>true</b>;
+            }                        
+        }, <b>this</b>);
+    },
+<span class="multiComment">    /**
+     * Movement be limited in a rectangle.
+     * 
+     * @method limitIn
+     * @param {js.math.Rect} rect
+     * @return {Boolean}
+     */</span>
+    limitIn: <b>function </b>(rect){
+        <b>if </b>(!rect || <b>this</b>.isDestoryed()) <b>return</b> <b>false</b>;
+        
+        <b>var </b>bb = <b>this</b>.getBoundingBox();
+        
+        <b>if </b>(G2D.limitInRect(bb, rect)){
+            <b>this</b>.sprite.setXY(bb.x-<b>this</b>.collisionRect.x, bb.y-<b>this</b>.collisionRect.y);
+            <b>return</b> <b>true</b>;
+        };
+        <b>return</b> <b>false</b>;    
+    },
+<span class="multiComment">    /**
+     * @method isInBox
+     * @param {js.math.Rect|js.game.collision.AABB} rect
+     * @return {Boolean}
+     */</span>
+    isInBox: <b>function </b>(rect){
+        <b>if </b>(!rect || <b>this</b>.isDestoryed() || (rect.isDestoryed && rect.isDestoryed())) <b>return</b> <b>false</b>;
+        
+        <b>var </b>bb1 = <b>this</b>.getBoundingBox(), bb2 = (rect<b> instanceof </b>js.game.collision.AABB)?rect.getBoundingBox():rect;
+        <b>return</b> G2D.containsRect(bb2, bb1);
+    }
+}
+
+
+<span class="multiComment">/**
+ * @class js.game.GameStatus
+ * @static
+ * @final
+ */</span>
+js.game.GameStatus = {
+<span class="multiComment">    /**
+     * @constant {Int} UNSTART -1
+     */</span>
+    UNSTART:-1
+<span class="multiComment">    /**
+     * @constant {Int} RUNNING 1
+     */</span>
+    , RUNNING:1
+<span class="multiComment">    /**
+     * @constant {Int} PAUSED 2
+     */</span>
+    , PAUSED:2
+<span class="multiComment">    /**
+     * @constant {Int} ENDED 3
+     */</span>
+    , ENDED:3}
+<span class="multiComment">/**
+ * The base class of a game.
+ * 
+ * @class js.game.Game 
+ * @abstract
+ * @constructor
+ * 
+ * @struct js.game.Game$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "id":{"type":"string"}
+ *             ,"background":{"type":"string","required":false}
+ *             ,"viewWindow":{"type":"js.math.Rect","required":false}
+ *             ,"x":{"type":"number"}
+ *             ,"y":{"type":"number"}
+ *             ,"width":{"type":"number"}
+ *             ,"height":{"type":"number"}    
+ *         }
+ * }
+ *  
+ * @param {js.game.Game$Config} config
+ */</span>
+js.game.Game = <b>function </b>(config){
+<span class="singleComment">    //@field {String} 游戏类的ID</span>
+    <b>this</b>._id = config['id']||SYS.getUUID();
+<span class="singleComment">    //@field {Int} 游戏的状态</span>
+    <b>this</b>._status = js.game.GameStatus.UNSTART;
+<span class="singleComment">    //@field {JSONObject} 游戏类的配置参数</span>
+    <b>this</b>._config = config;
+    
+<span class="singleComment">    //创建事件</span>
+<span class="multiComment">    /**  
+     * @event starting {
+     *         "description":"fires before start the game"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Game"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('starting');
+<span class="multiComment">    /**
+     * @event started {
+     *         "description":"fires after start the game"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Game"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('started');
+<span class="multiComment">    /**
+     * @event resuming {
+     *         "description":"fires before resume the game to running"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Game"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('resuming');
+<span class="multiComment">    /**
+     * @event resumed {
+     *         "description":"fires after resume the game to running"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Game"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('resumed');
+<span class="multiComment">    /**
+     * @event pausing {
+     *         "description":"fires before pause the game"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Game"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('pausing');
+<span class="multiComment">    /**
+     * @event paused {
+     *         "description":"fires after pause the game"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Game"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('paused');
+<span class="multiComment">    /**
+     * @event ending {
+     *         "description":"fires before finish the game"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Game"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('ending');
+<span class="multiComment">    /**
+     * @event ended {
+     *         "description":"fires after finish the game"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Game"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('ended');
+    <b>this</b>._initCanvas();
+};
+js.game.Game.prototype = {
+    _initCanvas: <b>function </b>(){
+        <b>if </b>($(<b>this</b>.getId()+'_canvas')) <b>return</b>;        
+        <b>this</b>._canvas = <b>new </b>js.d2.Canvas({
+                id:<b>this</b>.getId()+'_canvas',background:<b>this</b>._config['background'],viewWindow:<b>this</b>._config['viewWindow']
+                ,x:<b>this</b>._config['x'],y:<b>this</b>._config['y'],width:<b>this</b>._config['width'],height:<b>this</b>._config['height']
+            });                                                    
+    },
+<span class="multiComment">    /**
+     * Returns the main thread.
+     * 
+     * @method getThread
+     * @return {js.lang.Thread}
+     */</span>
+    getThread: <b>function </b>(){<b>return</b> <b>this</b>._thread;},
+<span class="multiComment">    /**
+     * Returns the value by the key.
+     * 
+     * @method getConfig
+     * @param {String} k
+     * @return {js.game.Game$Config}
+     */</span>
+    getConfig: <b>function </b>(k){<b>return</b> SYS.isUndefined(k)?<b>this</b>._config:<b>this</b>._config[k]},
+<span class="multiComment">    /**
+     * Sets the context of the FPS callback function.
+     * 
+     * @method watchFPS
+     * @param {Boolean|js.d2.Canvas} canvas
+     */</span>
+    watchFPS: <b>function </b>(canvas){
+        <b>var </b>callback = {};
+        <b>if </b>(SYS.isBoolean(canvas)){
+            <b>if </b>(canvas){
+                callback['scope'] = <b>this</b>._canvas;
+                callback['fn'] = <b>function </b>(fps){<b>this</b>.printFPS(fps)};
+            }<b>else </b>{
+                callback = <b>null</b>;
+            }
+        }<b>else </b>{
+            callback['scope'] = canvas||<b>this</b>._canvas;
+            callback['fn'] = <b>function </b>(fps){<b>this</b>.printFPS(fps)};
+        }
+        <b>this</b>._config['fpsCallback'] = callback;
+        <b>if </b>(<b>this</b>._thread!=<b>null</b>) <b>this</b>._thread.setFPSCallback(callback);
+    },
+<span class="multiComment">    /**
+     * Returns the ID.
+     * 返回游戏ID
+     * 
+     * @method getId
+     * @return {String}
+     */</span>
+    getId: <b>function </b>(){<b>return</b> <b>this</b>._id;},
+<span class="multiComment">    /**
+     * Returns the main canvas.
+     * 返回游戏画布
+     * 
+     * @method getCanvas
+     * @return {js.d2.Canvas}
+     */</span>
+    getCanvas: <b>function </b>(){<b>return</b> <b>this</b>._canvas;},
+<span class="multiComment">    /**
+     * Return the status.
+     * 返回游戏状态
+     * 
+     * @method getStatus
+     * @return {Int}
+     */</span>
+    getStatus: <b>function </b>(){<b>return</b> <b>this</b>._status;},
+<span class="multiComment">    /**
+     * Determines whether or not the game is running.
+     * 是否在游戏运行中
+     * 
+     * @method isRunning
+     * @return {Boolean}
+     */</span>
+    isRunning: <b>function </b>(){<b>return</b> <b>this</b>.getStatus()==js.game.GameStatus.RUNNING},
+<span class="multiComment">    /**
+     * If paused.
+     * 是否在游戏已暂停
+     * 
+     * @method isPaused
+     * @return {Boolean}
+     */</span>
+    isPaused: <b>function </b>(){<b>return</b> <b>this</b>.getStatus()==js.game.GameStatus.PAUSED},
+<span class="multiComment">    /**
+     * If ended.
+     * 是否在游戏已结束
+     * 
+     * @method isEnded
+     * @return {Boolean}
+     */</span>
+    isEnded: <b>function </b>(){<b>return</b> <b>this</b>.getStatus()==js.game.GameStatus.ENDED},
+<span class="multiComment">    /**
+     * Starts the game.
+     * 开始游戏
+     * 
+     * @method start
+     */</span>
+    start: <b>function </b>(){
+        <b>this</b>._initCanvas();
+        
+        <b>this</b>.fireEvent('starting');    
+        <b>this</b>._thread = <b>new </b>SYS.Thread(<b>this</b>,{
+            interval:<b>this</b>._config['interval'],fpsMax:<b>this</b>._config['fpsMax']
+        });
+        <b>this</b>._thread.setFPSCallback(<b>this</b>._config['fpsCallback']);
+        <b>this</b>._thread.start();
+        <b>this</b>._status = js.game.GameStatus.RUNNING;
+        <b>this</b>.fireEvent('started');
+    },
+<span class="multiComment">    /**
+     * Resumes the running.
+     * 恢复运行
+     * 
+     * @method resume
+     */</span>
+    resume: <b>function </b>(){
+        <b>this</b>.fireEvent('resuming');    
+        <b>this</b>._status = js.game.GameStatus.RUNNING;
+        <b>this</b>._thread.resume();
+        <b>this</b>.fireEvent('resumed');    
+    },
+<span class="multiComment">    /**
+     * Pause the game.
+     * 暂停游戏
+     * 
+     * @method pause
+     */</span>
+    pause: <b>function </b>(){
+        <b>this</b>.fireEvent('pausing');    
+        <b>this</b>._status = js.game.GameStatus.PAUSED;
+        <b>this</b>._thread.suspend();
+        <b>this</b>.fireEvent('paused');    
+    },
+<span class="multiComment">    /**
+     * End the game.
+     * 结束游戏
+     * 
+     * @method end
+     */</span>
+    end: <b>function </b>(){
+        <b>this</b>.fireEvent('ending');    
+        <b>this</b>._status = js.game.GameStatus.ENDED;
+        <b>this</b>._thread.stop();<b>this</b>._thread = <b>null</b>;
+        <b>this</b>.fireEvent('ended');                    
+    },
+<span class="multiComment">    /**
+     * Main running method. 
+     * 游戏的主线程方法
+     * 
+     * @method run
+     * @abstract 
+     */</span>
+    run: <b>function </b>(){}
+}
+<span class="multiComment">/**
+ * @mix js.core.EventProvider
+ */</span>
+SYS.augment(js.game.Game, js.core.EventProvider);
+<span class="multiComment">/**
+ * @mix js.input.KeyBufferProvider
+ */</span>
+SYS.augment(js.game.Game, js.input.KeyBufferProvider);
+<span class="multiComment">/**
+ * @mix js.input.MouseProvider
+ */</span>
+SYS.augment(js.game.Game, js.input.MouseProvider);
+
+<span class="multiComment">/**
+ * A base class of mission.
+ * 
+ * @class js.game.Mission 
+ * @abstract
+ * @constructor
+ * 
+ * @param {object} config
+ */</span>
+js.game.Mission = <b>function </b>(config){
+<span class="singleComment">    //@field {Object}</span>
+    <b>this</b>._config = config;
+    <b>this</b>._s = <b>false</b>;
+    
+<span class="singleComment">    //创建事件</span>
+<span class="multiComment">    /**
+     * @event starting {
+     *         "description":"fires before start the mission"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Mission"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('starting');
+<span class="multiComment">    /**
+     * @event started {
+     *         "description":"fires after start the mission"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Mission"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('started');    
+<span class="multiComment">    /**
+     * @event running {
+     *         "description":"fires before run every cycle of the mission"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Mission"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('running');
+<span class="multiComment">    /**
+     * @event completed {
+     *         "description":"fires after finish the mission"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Mission"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('completed');
+<span class="multiComment">    /**
+     * @event failed {
+     *         "description":"fires after failure the mission"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Mission"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+    <b>this</b>.createEvent('failed');
+};
+js.game.Mission.prototype = {
+<span class="multiComment">    /**
+     * Returns the value by the key.
+     * 返回关卡配置参数
+     * 
+     * @method getConfig
+     * @param {String} k 参数的KEY
+     * @return {Object} 参数的Value
+     */</span>
+    getConfig: <b>function </b>(k){<b>return</b> k?<b>this</b>._config[k]:<b>this</b>._config},
+<span class="multiComment">    /**
+     * Mission if started.
+     * 
+     * @method isStarted
+     * @return {Boolean}
+     */</span>
+    isStarted: <b>function </b>(){<b>return</b> <b>this</b>._s},
+<span class="multiComment">    /**
+     * Sets the flag of start.
+     * 
+     * @method setStarted
+     * @param {Boolean} f
+     */</span>
+    setStarted: <b>function </b>(f){<b>return</b> <b>this</b>._s = f;},
+<span class="multiComment">    /**
+     * Start the mission.
+     * @abstarct
+     * @method start
+     * @param {js.game.Game} game
+     */</span>
+    start: <b>function </b>(game){    
+    },
+<span class="multiComment">    /**
+     * Running the mission.
+     * 
+     * @abstarct
+     * @method run
+     * @param {js.game.Game} game
+     */</span>
+    run: <b>function </b>(game){},
+<span class="multiComment">    /**
+     * Fail the mission.
+     * 
+     * @method fail
+     */</span>
+    fail: <b>function </b>(){
+        <b>this</b>._s = <b>false</b>;
+        <b>this</b>.fireEvent('failed');        
+    },
+<span class="multiComment">    /**
+     * Complete the mission.
+     * 
+     * @method complete
+     */</span>
+    complete: <b>function </b>(){
+        <b>this</b>._s = <b>false</b>;
+        <b>this</b>.fireEvent('completed');        
+    }
+}
+<span class="multiComment">/**
+ * @mix js.core.EventProvider
+ */</span>
+SYS.augment(js.game.Mission, js.core.EventProvider);
+
+<span class="multiComment">/**
+ * Manage all missions.
+ * 
+ * @class js.game.MissionManager 
+ * @constructor 
+ */</span>
+js.game.MissionManager = <b>function </b>(){
+    <b>this</b>._missions = [];
+    <b>this</b>._missionIndex = -1;
+    <b>this</b>._onMission = {};
+}
+js.game.MissionManager.prototype = {
+    _subscribeMission:<b>function </b>(mission, type){
+        <b>if </b>(!<b>this</b>._onMission) <b>return</b>;
+        <b>var </b>fn = <b>this</b>._onMission[type];
+        <b>if </b>(fn) {
+            mission.subscribe(type, fn);
+        }
+    },
+    _unsubscribeMission:<b>function </b>(mission, type){
+        <b>if </b>(!<b>this</b>._onMission) <b>return</b>;
+        <b>var </b>fn = <b>this</b>._onMission[type];
+        <b>if </b>(fn) {
+            mission.unsubscribe(type, fn);
+        }
+    },
+<span class="singleComment">    //Loads a mission.</span>
+<span class="singleComment">    //@method _loadMission</span>
+<span class="singleComment">    //@param {js.game.Mission} m</span>
+<span class="singleComment">    //@private</span>
+    _loadMission: <b>function </b>(m){
+        <b>if </b>(m) {
+<span class="singleComment">            //设置事件</span>
+            <b>this</b>._subscribeMission(m, 'starting');
+            <b>this</b>._subscribeMission(m, 'started');
+            <b>this</b>._subscribeMission(m, 'running');
+            <b>this</b>._subscribeMission(m, 'completed');
+            <b>this</b>._subscribeMission(m, 'failed');        
+            <b>this</b>._missions.push(m);
+        }
+    },
+<span class="multiComment">    /**
+     * Load missions.
+     * @method loadMissions
+     * @param {js.game.Mission|Array&lt;js.game.Mission&gt;} ms
+     */</span>
+    loadMissions: <b>function </b>(ms){
+        <b>if </b>(!SYS.isArray(ms)) {
+            <b>this</b>._loadMission(ms);
+        } <b>else </b>{
+            ms.forEach(<b>function </b>(m){
+                <b>this</b>._loadMission(m);
+            },<b>this</b>);    
+        }
+    },
+    _unloadMission: <b>function </b>(i){
+        <b>var </b>m = <b>this</b>._missions[i];
+        <b>if </b>(!m) <b>return</b>;
+        <b>this</b>._unsubscribeMission(m, 'starting');
+        <b>this</b>._unsubscribeMission(m, 'started');
+        <b>this</b>._unsubscribeMission(m, 'running');
+        <b>this</b>._unsubscribeMission(m, 'completed');
+        <b>this</b>._unsubscribeMission(m, 'failed');
+    },
+<span class="multiComment">    /**
+     * Unload missions.
+     * @method unloadMissions
+     */</span>
+    unloadMissions: <b>function </b>(){
+        <b>this</b>._missions.forEach(<b>function </b>(m, i){
+            <b>this</b>._unloadMission(i);
+        },<b>this</b>);
+        <b>this</b>._missions = [];
+    },
+<span class="multiComment">    /**
+     * Returns a mission by index.
+     * @method getMission 
+     * @param {Int} i:optional index
+     * @return {js.game.Mission}
+     */</span>
+    getMission: <b>function </b>(i){
+        <b>return</b> <b>this</b>._missions[SYS.isUndefined(i)?<b>this</b>._missionIndex:i];
+    },
+<span class="multiComment">    /**
+     * Returns next mission.
+     * @method getNextMission
+     * @return {js.game.Mission}
+     */</span>
+    getNextMission: <b>function </b>(){        ;
+        <b>return</b> <b>this</b>.getMission(++<b>this</b>._missionIndex);
+    },
+<span class="multiComment">    /**
+     * Determines whether or not has next mission.
+     * @method hasNextMission
+     * @return {Boolean}
+     */</span>
+    hasNextMission: <b>function </b>(){
+        <b>return</b> (<b>this</b>._missionIndex+1) &lt; <b>this</b>._missions.length;
+    },
+<span class="multiComment">    /**
+     * Sets the listeners on missions.
+     * 
+     * @method onMission
+     * @param {String} eName the event name
+     * @param {Function} fn
+     */</span>
+    on: <b>function </b>(eName, fn){<b>this</b>._onMission[eName] = fn;},
+<span class="multiComment">    /**
+     * Returns the current mission's index.
+     * 
+     * @method getMissionIndex
+     * @return {Int}
+     */</span>
+    getMissionIndex: <b>function </b>(){<b>return</b> <b>this</b>._missionIndex;},
+<span class="multiComment">    /**
+     * Reset the current mission's index to -1.
+     * 
+     * @method reset
+     */</span>
+    reset: <b>function </b>(){<b>this</b>._missionIndex = -1;}    
+    
+<span class="multiComment">    /**
+     * @event starting {
+     *         "description":"fires before start the mission"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Mission"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+<span class="multiComment">    /**
+     * @event started {
+     *         "description":"fires after start the mission"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Mission"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+<span class="multiComment">    /**
+     * @event running {
+     *         "description":"fires before run every cycle of the mission"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Mission"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+<span class="multiComment">    /**
+     * @event completed {
+     *         "description":"fires after finish the mission"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Mission"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+<span class="multiComment">    /**
+     * @event failed {
+     *         "description":"fires after failure the mission"
+     *         ,"type":"function"
+     *         ,"scope":{"type":"js.game.Mission"}
+     *      ,"arguments":{
+     *          "type":"null"
+     *      }
+     * }
+     */</span>
+}
+
+}());
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

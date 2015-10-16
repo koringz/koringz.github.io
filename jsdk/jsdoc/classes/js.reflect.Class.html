@@ -1,0 +1,166 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.reflect.Class</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-reflect.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.reflect</div>
+<div class="topic" title="js.reflect.Class">
+Class: 
+Class</div>
+
+<b>public final</b> Class
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="Class" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final Class">+ Class</span></span>(<span title="required"><b>className</b></span>:String, <i title="optional"><b>instance</b></i>:Object)</span>
+<div id="Class_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>className</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>instance</b></i>  &lt;Object&gt; </dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the class name not found</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="getName" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getName">+ getName</span></span>():String</span>
+<div id="getName_detail" style="display: none;">
+<pre class="desc">Returns the full class name.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; classname</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getSimpleName" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getSimpleName">+ getSimpleName</span></span>():String</span>
+<div id="getSimpleName_detail" style="display: none;">
+<pre class="desc">Returns the simple class name.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; classname</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getNamespace" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getNamespace">+ getNamespace</span></span>():String</span>
+<div id="getNamespace_detail" style="display: none;">
+<pre class="desc">Returns the package name.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; packagename</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getSuperclass" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getSuperclass">+ getSuperclass</span></span>():Function</span>
+<div id="getSuperclass_detail" style="display: none;">
+<pre class="desc">Returns the super class.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Function&gt; superclass</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getConstructor" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getConstructor">+ getConstructor</span></span>():Function</span>
+<div id="getConstructor_detail" style="display: none;">
+<pre class="desc">Returns the constructor function.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Function&gt; constructor function</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getClass" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getClass">+ getClass</span></span>():Function</span>
+<div id="getClass_detail" style="display: none;">
+<pre class="desc">Returns this class.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Function&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="newInstance" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final newInstance">+ newInstance</span></span>():Object</span>
+<div id="newInstance_detail" style="display: none;">
+<pre class="desc">Returns a new instance of the class.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;Error&gt; when create new instance failure</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getField" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getField">+ getField</span></span>(<span title="required"><b>name</b></span>:String):<a href="js.reflect.Field.html" title="js.reflect.Field">Field</a></span>
+<div id="getField_detail" style="display: none;">
+<pre class="desc">Returns the Field by name. If the name not exist return null.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>name</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.reflect.Field.html" title="js.reflect.Field">Field</a>&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the field not be found</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getFields" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getFields">+ getFields</span></span>():<a href="js.reflect.Field.html" title="js.reflect.Field">Field</a>[]</span>
+<div id="getFields_detail" style="display: none;">
+<pre class="desc">Return all Fields.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.reflect.Field.html" title="js.reflect.Field">Field</a>[]&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getMethod" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getMethod">+ getMethod</span></span>(<span title="required"><b>name</b></span>:String):<a href="js.reflect.Method.html" title="js.reflect.Method">Method</a></span>
+<div id="getMethod_detail" style="display: none;">
+<pre class="desc">Returns the Method by name. If the name not exist return null.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>name</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.reflect.Method.html" title="js.reflect.Method">Method</a>&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the method not be found</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getMethods" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getMethods">+ getMethods</span></span>():<a href="js.reflect.Method.html" title="js.reflect.Method">Method</a>[]</span>
+<div id="getMethods_detail" style="display: none;">
+<pre class="desc">Return all Methods.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.reflect.Method.html" title="js.reflect.Method">Method</a>[]&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isMember" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final isMember">+ isMember</span></span>(<span title="required"><b>name</b></span>:String):Boolean</span>
+<div id="isMember_detail" style="display: none;">
+<pre class="desc">Is a method or field of the class.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>name</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isField" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final isField">+ isField</span></span>(<span title="required"><b>name</b></span>:String):Boolean</span>
+<div id="isField_detail" style="display: none;">
+<pre class="desc">Is a field of the class.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>name</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isMethod" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final isMethod">+ isMethod</span></span>(<span title="required"><b>name</b></span>:String):Boolean</span>
+<div id="isMethod_detail" style="display: none;">
+<pre class="desc">Is a method of the class.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>name</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="forName" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static forName">+ <b>forName</b></span></span>(<span title="required"><b>name</b></span>:String):<a href="js.reflect.Class.html" title="js.reflect.Class">Class</a></span>
+<div id="forName_detail" style="display: none;">
+<pre class="desc">Returns a Class by name.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>name</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.reflect.Class.html" title="js.reflect.Class">Class</a>&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

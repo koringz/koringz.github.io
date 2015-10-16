@@ -1,0 +1,280 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-thread.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.3
+ * @author feng.chun
+ * @date 2011-04-08
+ * @date 2011-04-14
+ * 
+ * @version 0.2
+ * @author feng.chun
+ * @date 2011-03-23
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2007-10-24
+ * 
+ * @requires /core/js-core.js
+ */</span>
+js.lang.System.namespace('js.lang');
+(<b>function </b>(){
+<span class="multiComment">/**
+ * Five status: unstart|running|waiting|suspended|stopped.
+ * 
+ * @class js.lang.ThreadStatus
+ * @static
+ */        </span>
+js.lang.ThreadStatus = {UNSTART:-1,RUNNING:0,WAITING:1,SUSPENDED:2,STOPPED:3}
+<span class="multiComment">/** @constant {Int} UNSTART */</span>
+<span class="multiComment">/** @constant {Int} RUNNING */</span>
+<span class="multiComment">/** @constant {Int} WAITING */</span>
+<span class="multiComment">/** @constant {Int} SUSPENDED */</span>
+<span class="multiComment">/** @constant {Int} STOPPED */</span>
+
+<b>var </b>SYS = js.lang.System, TS = js.lang.ThreadStatus;
+
+<span class="multiComment">/**
+ * @class js.lang.Thread
+ * @constructor
+ * 
+ * @struct js.lang.Thread$Config {
+ *         "description":"the config argument"
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "interval":{"description":"the default value is 0", "type":"number", "required":false}
+ *             ,"scope":{"description":"", "type":"object", "required":false}
+ *             ,"fpsMax":{"description":"the default value is null", "type":"number", "required":false}
+ *             ,"fpsCount":{"description":"the default value is 30", "type":"number", "required":false}
+ *         }
+ * }
+ * 
+ * @param {Object|Array&lt;Object&gt;} targets the object must has a method named "run"
+ * @param {js.lang.Thread$Config} config
+ */</span>
+js.lang.Thread = <b>function </b>(targets, config){
+    <b>if </b>(!targets) targets = [];
+    <b>if </b>(!config) config = {};    
+    
+    <b>this</b>._targets = SYS.isArray(targets)?targets:[targets];
+    <b>this</b>._interval = config['interval']||0;
+    <b>this</b>._wait = <b>null</b>;
+    <b>this</b>._status = TS.UNSTART;
+    <b>this</b>._timer = <b>null</b>;
+    <b>this</b>._scope = config['scope'];
+    
+    <b>var </b>count = config['fpsCount'];
+    <b>this</b>._max_count = (<b>typeof </b>count==="number" && isFinite(count) && count&gt;0)?count:30;
+    <b>this</b>._skip = <b>false</b>;
+    <b>this</b>.setMaxFPS(config['fpsMax']);        
+}
+
+js.lang.Thread.prototype = {
+<span class="multiComment">    /**
+     * @method setFPSCallback
+     * @param {js.lang.Callback} callback The arguments: [fps, maxFPS]
+     */    </span>
+    setFPSCallback: <b>function </b>(callback){
+        <b>if </b>(callback){
+            <b>this</b>._fnFPS = callback['fn'];
+            <b>this</b>._ctxFPS = callback['scope']||<b>this</b>;        
+        }<b>else </b>{
+            <b>this</b>._fnFPS = <b>null</b>;
+            <b>this</b>._ctxFPS = <b>null</b>;
+        }
+    },
+    _clear: <b>function </b>(){
+        <b>if </b>(<b>this</b>._timer) window.clearTimeout(<b>this</b>._timer);
+        <b>this</b>._timer = <b>null</b>;
+        <b>this</b>._wait = <b>null</b>;    
+    },
+    _run: <b>function </b>(){
+        <b>if </b>(<b>this</b>._targets && <b>this</b>._status == TS.RUNNING){
+            <b>for </b>(<b>var </b>i=0,len=<b>this</b>._targets.length;i&lt;len;i++){
+                <b>var </b>target = <b>this</b>._targets[i];
+                <b>if </b>(target && SYS.isFunction(target['run'])) {
+                    <b>this</b>._watchFPS(target, <b>this</b>._fnFPS, <b>this</b>._ctxFPS);
+                }
+            }    
+        }
+        
+        <b>if </b>(<b>this</b>._timer) window.clearTimeout(<b>this</b>._timer);        
+        <b>if </b>(<b>this</b>._status == TS.RUNNING || <b>this</b>._status == TS.WAITING) {
+            <b>var </b>me = <b>this</b>;
+            <b>this</b>._timer = window.setTimeout(<b>function </b>(){
+                me._run();
+                me._wait = <b>null</b>;
+            }, <b>this</b>._wait || <b>this</b>._interval);
+        }
+    },
+    _ready: <b>function </b>(){
+        <b>this</b>._time = 0, <b>this</b>._frameCount = 0, <b>this</b>._fps = 0;
+        <b>this</b>._time = <b>new </b>Date().getTime();
+    },
+    _watchFPS: <b>function </b>(target, callback, context){
+        <b>if </b>(<b>this</b>._max_fps) <b>var </b>cycleStartTime = <b>new </b>Date().getTime();
+        
+        <b>if </b>(!<b>this</b>._skip) target.run.call(<b>this</b>._scope||target);
+        
+        <b>if </b>(<b>this</b>._max_fps) {
+            <b>var </b>cycleEndTime = <b>new </b>Date().getTime(), cycleTime = cycleEndTime - cycleStartTime, mspf = 1000 / <b>this</b>._max_fps;
+            <b>if </b>(cycleTime &lt; mspf) {
+                <b>this</b>._skip = <b>false</b>;
+                <b>this</b>.wait(Math.ceil(mspf - cycleTime));//为限制帧速，线程休眠一段时间
+            }
+            <b>else </b>{//如果循环时间过大则跳过下一帧
+                <b>this</b>._skip = <b>true</b>;
+            }
+        }        
+        
+        <b>if </b>(callback) <b>this</b>._frameCount++;         
+        <b>if </b>(callback && <b>this</b>._frameCount % <b>this</b>._max_count == 0){   
+            <b>var </b>now = <b>new </b>Date().getTime();   
+            <b>this</b>._fps = Math.round(100000 * <b>this</b>._frameCount / (now - <b>this</b>._time))/100;//保留两位小数   
+               
+            <b>this</b>._frameCount = 0; 
+            <b>this</b>._time = now;
+            callback.call(context, <b>this</b>._fps, <b>this</b>._max_fps);   
+        }                
+    },
+<span class="multiComment">    /**
+     * Sets the limited value of FPS.
+     * 
+     * @method setMaxFPS
+     * @param {Number} fps
+     */</span>
+    setMaxFPS: <b>function </b>(fps){
+        <b>this</b>._max_fps = Number(fps)||<b>null</b>;
+    },
+<span class="multiComment">    /**
+     * Returns the limited value of FPS.
+     * 
+     * @method getMaxFPS
+     * @return {Number}
+     */</span>
+    getMaxFPS: <b>function </b>(){
+        <b>return</b> <b>this</b>._max_fps;
+    },
+<span class="multiComment">    /**
+     * Returns the current FPS.
+     * 
+     * @method getFPS
+     * @return {Number}
+     */</span>
+    getFPS: <b>function </b>(){
+        <b>return</b> <b>this</b>._fps;
+    },
+<span class="multiComment">    /**
+     * Sets the interval time(milliseconds) of each cycle.
+     * 
+     * @method setInterval
+     * @param {Int} interval
+     */</span>
+    setInterval: <b>function </b>(interval){
+        <b>this</b>._interval = interval||0;
+    },
+<span class="multiComment">    /**
+     * Returns the interval time(milliseconds) of each cycle.
+     * 
+     * @method getInterval
+     * @return {Int}
+     */</span>
+    getInterval: <b>function </b>(){
+        <b>return</b> <b>this</b>._interval;
+    },
+<span class="multiComment">    /**
+     * Returns the current status of the thread.
+     * 
+     * @method getStatus
+     * @return {Int}
+     */    </span>
+    getStatus: <b>function </b>(){<b>return</b> <b>this</b>._status},
+<span class="multiComment">    /**
+     * Returns all targets of the thread.
+     * 
+     * @method getTargets
+     * @return {Object[]}
+     */</span>
+    getTargets: <b>function </b>(){<b>return</b> <b>this</b>._targets;},
+<span class="multiComment">    /**
+     * Starts the thread.
+     * 
+     * @method start
+     */</span>
+    start: <b>function </b>(){
+        <b>if </b>(<b>this</b>.isWorking()) <b>return</b>;
+        <b>this</b>._status = TS.RUNNING;
+        <b>this</b>._clear();
+        <b>this</b>._ready();
+        <b>this</b>._run();        
+    },
+<span class="multiComment">    /**
+     * Is working.
+     * 
+     * @method isWorking
+     * @return {Boolean}
+     */    </span>
+    isWorking: <b>function </b>(){
+        <b>return</b> <b>this</b>._status &gt; TS.UNSTART && <b>this</b>._status &lt; TS.STOPPED;
+    },
+<span class="multiComment">    /**
+     * Stops the running temporarily.
+     * 
+     * @method suspend
+     */</span>
+    suspend: <b>function </b>(){
+        <b>if </b>(!<b>this</b>.isWorking()) <b>return</b>;
+        <b>this</b>._status = TS.SUSPENDED;            
+    },
+<span class="multiComment">    /**
+     * Continue the running.
+     * 
+     * @method resume
+     */</span>
+    resume: <b>function </b>(){
+        <b>if </b>(!<b>this</b>.isWorking()) <b>return</b>;
+        <b>this</b>._status = TS.RUNNING;    
+        <b>this</b>._clear();
+        <b>this</b>._ready();
+        <b>this</b>._run();        
+    },
+<span class="multiComment">    /**
+     * Finish the running.
+     * 
+     * @method stop
+     */</span>
+    stop: <b>function </b>(){
+        <b>this</b>._status = TS.STOPPED;
+        <b>this</b>._clear();    
+    },
+<span class="multiComment">    /**
+     * Wait some milliseconds and continue.
+     * 
+     * @method wait
+     * @param {Int} n Unit:milliseconds
+     */</span>
+    wait: <b>function </b>(n){
+        <b>if </b>(<b>this</b>.isWorking()) <b>this</b>._wait = n;
+    }
+};
+})();
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

@@ -1,0 +1,328 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-reflect.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2007-7-20
+ * 
+ * @requires /core/js-core.js
+ */</span>
+js.lang.System.namespace('js.reflect');
+
+<span class="multiComment">/**
+ * @class js.reflect.Class
+ * @final
+ * @constructor
+ * @param {String} className
+ * @param {Object} instance:optional
+ * @throws {TypeError} when the class name not found
+ */</span>
+js.reflect.Class = <b>function </b>(className, instance){
+    <b>if </b>(!js.lang.System.isString(className)) 
+        <b>throw </b><b>new </b>TypeError('[js.reflect.Class]The reflect className not a string.');
+    
+    <b>this</b>._name = className||'';    
+    <b>this</b>._simpleName = <b>this</b>._name.slice(<b>this</b>._name.lastIndexOf('.')+1);
+    <b>this</b>._namespace = <b>this</b>._name.slice(0, <b>this</b>._name.lastIndexOf('.'));
+    <b>if </b>(<b>this</b>._namespace.startsWith('js.reflect')) 
+        <b>throw </b><b>new </b>TypeError('[js.reflect.Class]The reflect classes not be reflected.');
+    
+    <b>this</b>._class = eval(className);
+    <b>if </b>(!<b>this</b>._name || !<b>this</b>._class || <b>typeof </b><b>this</b>._class != 'function') 
+        <b>throw </b><b>new </b>TypeError('[js.reflect.Class]The Class&lt;'+<b>this</b>._name+'&gt; not found.');
+    
+    <b>try </b>{
+        <b>this</b>._instance = instance||<b>this</b>.newInstance();
+    } <b>catch </b>(e) {        
+        <b>this</b>._instance = {}, <b>this</b>._mode = 'mock';
+        
+        <b>var </b>string = <b>this</b>._class.toString()
+        , matches = string.match(/<b>this</b>.\S+\s*=\s*function|<b>this</b>.\S+\s*=/gi);
+        
+        <b>if </b>(matches){
+            <b>for </b>(<b>var </b>i=0, len = matches.length;i &lt; len ; i++) {                
+                <b>this</b>._instance[matches[i].between('<b>this</b>.','=').trim()] = matches[i].endsWith('function')?'function':'field';
+           }
+        }
+        
+        <b>var </b>pt = <b>this</b>._class.prototype;
+        <b>for </b>(k<b> in </b>pt){
+            <b>if </b>(k != 'constructor') {
+                <b>this</b>._instance[k] = <b>typeof </b>pt[k] == 'function'?'function':'field';
+            }
+          }
+    }    
+};
+
+js.reflect.Class.prototype = (<b>function </b>(){    
+    <b>return</b> {
+<span class="multiComment">        /**
+         * Returns the full class name.
+         * 
+         * @method getName
+         * @return {String} classname
+         */</span>
+        getName: <b>function </b>(){<b>return</b> <b>this</b>._name},
+<span class="multiComment">        /**
+         * Returns the simple class name.
+         * 
+         * @method getSimpleName
+         * @return {String} classname
+         */        </span>
+        getSimpleName: <b>function </b>(){<b>return</b> <b>this</b>._simpleName},
+<span class="multiComment">        /**
+         * Returns the package name.
+         * 
+         * @method getNamespace
+         * @return {String} packagename
+         */    </span>
+        getNamespace: <b>function </b>(){<b>return</b> <b>this</b>._namespace},
+<span class="multiComment">        /**
+         * Returns the super class.
+         * 
+         * @method getSuperclass
+         * @return {Function} superclass
+         */</span>
+        getSuperclass: <b>function </b>(){
+            <b>return</b> <b>this</b>._class.superclass;
+        },
+<span class="multiComment">        /**
+         * Returns the constructor function.
+         * 
+         * @method getConstructor
+         * @return {Function} constructor function
+         */</span>
+        getConstructor: <b>function </b>(){
+            <b>return</b> <b>this</b>._class.constructor;
+        },
+<span class="multiComment">        /**
+         * Returns this class.
+         * 
+         * @method getClass
+         * @return {Function}
+         */</span>
+        getClass: <b>function </b>(){<b>return</b> <b>this</b>._class;},
+<span class="multiComment">        /**
+         * Returns a new instance of the class.
+         * 
+         * @method newInstance
+         * @return {Object}
+         * @throws {Error} when create new instance failure
+         */</span>
+        newInstance: <b>function </b>(){        
+            <b>var </b>f = <b>function </b>(){};
+            f.prototype = <b>this</b>._class.prototype;
+            <b>var </b>obj = <b>new </b>f();
+            <b>this</b>._class.apply(obj, arguments);
+            <b>return</b> obj;
+        },
+<span class="multiComment">        /**
+         * Returns the Field by name. If the name not exist return null.
+         * 
+         * @method getField
+         * @param {String} name
+         * @return {js.reflect.Field}
+         * @throws {TypeError} when the field not be found
+         */</span>
+        getField: <b>function </b>(name){
+            <b>if </b>(!<b>this</b>.isField(name)) <b>throw </b><b>new </b>TypeError('[js.reflect.Class#getField]The Field&lt;'+name+'&gt; not be found.');
+            <b>return</b> <b>new </b>js.reflect.Field(name, <b>this</b>);
+        },
+<span class="multiComment">        /**
+         * Return all Fields.
+         * 
+         * @method getFields
+         * @return {Array&lt;js.reflect.Field&gt;}
+         */</span>
+        getFields: <b>function </b>(){
+            <b>var </b>arr = [];
+            <b>for </b>(k<b> in </b><b>this</b>._instance){
+                <b>if </b>(<b>this</b>._isField(k)){
+                    arr.push(<b>new </b>js.reflect.Field(k, <b>this</b>));
+                }
+            }
+            <b>return</b> arr;
+        },
+<span class="multiComment">        /**
+         * Returns the Method by name. If the name not exist return null.
+         * 
+         * @method getMethod
+         * @param {String} name
+         * @return {js.reflect.Method}
+         * @throws {TypeError} when the method not be found
+         */</span>
+        getMethod: <b>function </b>(name){
+            <b>if </b>(!<b>this</b>.isMethod(name)) <b>throw </b><b>new </b>TypeError('[js.reflect.Class#getMethod]The Method&lt;'+name+'&gt; not be found.');
+            <b>return</b> <b>new </b>js.reflect.Method(name, <b>this</b>);
+        },
+<span class="multiComment">        /**
+         * Return all Methods.
+         * 
+         * @method getMethods
+         * @return {Array&lt;js.reflect.Method&gt;}
+         */</span>
+        getMethods: <b>function </b>(){
+            <b>var </b>arr = [];
+            <b>for </b>(k<b> in </b><b>this</b>._instance){
+                <b>if </b>(<b>this</b>._isMethod(k)){
+                    arr.push(<b>new </b>js.reflect.Method(k, <b>this</b>));
+                }
+            }
+            <b>return</b> arr;
+        },
+<span class="multiComment">        /**
+         * Is a method or field of the class.
+         * 
+         * @method isMember
+         * @param {String} name
+         * @return {Boolean}
+         */    </span>
+        isMember: <b>function </b>(name){
+            <b>if </b>(!name || name=='constructor') <b>return</b> <b>false</b>;
+            <b>return</b> name<b> in </b><b>this</b>._instance;
+        },
+        _isField: <b>function </b>(name){
+            <b>return</b> <b>this</b>._mode == 'mock'? <b>this</b>._instance[name]=='field':<b>typeof </b><b>this</b>._instance[name]!='function';
+        },
+        _isMethod: <b>function </b>(name){
+            <b>if </b>(name=='constructor') <b>return</b> <b>false</b>;
+            <b>return</b> <b>this</b>._mode == 'mock'? <b>this</b>._instance[name]=='function':<b>typeof </b><b>this</b>._instance[name]=='function';
+        },
+<span class="multiComment">        /**
+         * Is a field of the class.
+         * 
+         * @method isField
+         * @param {String} name
+         * @return {Boolean}
+         */</span>
+        isField: <b>function </b>(name){
+            <b>if </b>(!<b>this</b>.isMember(name)) <b>return</b> <b>false</b>;            
+            <b>return</b> <b>this</b>._isField(name);
+        },
+<span class="multiComment">        /**
+         * Is a method of the class.
+         * 
+         * @method isMethod
+         * @param {String} name
+         * @return {Boolean}
+         */</span>
+        isMethod: <b>function </b>(name){
+            <b>if </b>(!<b>this</b>.isMember(name)) <b>return</b> <b>false</b>;
+            <b>return</b> <b>this</b>._isMethod(name);
+        }
+    }
+})();
+<span class="multiComment">/**
+ * Returns a Class by name.
+ * 
+ * @static
+ * @method forName
+ * @param {String} name
+ * @return {js.reflect.Class}
+ */</span>
+js.reflect.Class.forName = <b>function </b>(name){
+    <b>return</b> <b>new </b>js.reflect.Class(name);
+}
+
+<span class="multiComment">/**
+ * @class js.reflect.Method
+ * @final
+ * @constructor
+ * @param {String} name
+ * @throws {TypeError} if the name is empty  
+ */</span>
+js.reflect.Method = <b>function </b>(name){
+    <b>if </b>(!name) 
+        <b>throw </b><b>new </b>TypeError('[js.reflect.Method]The Method must not empty.');
+    <b>this</b>._name = name;
+};
+js.reflect.Method.prototype = {
+<span class="multiComment">    /**
+     * Returns the name.
+     * 
+     * @method getName
+     * @return {String}
+     */</span>
+    getName: <b>function </b>(){<b>return</b> <b>this</b>._name},
+<span class="multiComment">    /**
+     * Invoke the method. 
+     * 
+     * @method invoke
+     * @param {Object} obj the instance
+     * @param {Object..} args
+     * @throws {TypeError} when the object is null or the method not be found
+     */    </span>
+    invoke: <b>function </b>(obj, args){
+        <b>if </b>(!obj) <b>throw </b><b>new </b>TypeError('[js.reflect.Method#invoke]The object is <b>null</b>.');
+        <b>if </b>(!<b>this</b>._name<b> in </b>obj) <b>throw </b><b>new </b>TypeError('[js.reflect.Method#invoke]The Method&lt;'+<b>this</b>._name+'&gt; not be found.');
+        <b>return</b> obj[<b>this</b>._name].apply(obj, [].slice.call(arguments, 1));
+    }
+};
+<span class="multiComment">/**
+ * @class js.reflect.Field
+ * @final
+ * @constructor
+ * @param {String} name
+ * @throws {TypeError} if the name is empty 
+ */</span>
+js.reflect.Field = <b>function </b>(name){
+    <b>if </b>(!name) 
+        <b>throw </b><b>new </b>TypeError('[js.reflect.Field]The Field must not empty.');
+    <b>this</b>._name = name;
+};
+js.reflect.Field.prototype = {
+<span class="multiComment">    /**
+     * Returns the name.
+     * 
+     * @method getName
+     * @return {String}
+     */</span>
+    getName: <b>function </b>(){<b>return</b> <b>this</b>._name},
+<span class="multiComment">    /**
+     * Sets the field. 
+     * 
+     * @method set
+     * @param {Object} obj the instance
+     * @param {Object} value
+     * @throws {TypeError} when the object is null or the field not be found
+     */</span>
+    set: <b>function </b>(obj, value){
+        <b>if </b>(!obj) <b>throw </b><b>new </b>TypeError('[js.reflect.Field#set]The object is <b>null</b>.');
+        <b>if </b>(!<b>this</b>._name<b> in </b>obj) <b>throw </b><b>new </b>TypeError('[js.reflect.Field#set]The Field&lt;'+<b>this</b>._name+'&gt; not be found.');
+        obj[<b>this</b>._name] = value;
+    },
+<span class="multiComment">    /**
+     * Gets the field. 
+     * 
+     * @method get
+     * @param {Object} obj
+     * @return {Object} value
+     * @throws {TypeError} when the object is null or the field not be found
+     */</span>
+    get: <b>function </b>(obj){
+        <b>if </b>(!obj) <b>throw </b><b>new </b>TypeError('[js.reflect.Field#get]The object is <b>null</b>.');
+        <b>if </b>(!<b>this</b>._name<b> in </b>obj) <b>throw </b><b>new </b>TypeError('[js.reflect.Field#set]The Field&lt;'+<b>this</b>._name+'&gt; not be found.');
+        <b>return</b> obj[<b>this</b>._name];
+    }
+};
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

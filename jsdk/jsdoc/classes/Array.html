@@ -1,0 +1,192 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>Array</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div></div>
+<div class="topic" title="Array">
+Native: 
+Array</div>
+
+<b>public final</b> Array
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="indexOf" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final indexOf">+ indexOf</span></span>(<span title="required"><b>elt</b></span>:Object, <i title="optional"><b>fn</b></i>:Function, <i title="optional"><b>thisp</b></i>:Object, <i title="optional"><b>from</b></i>:Int):Int</span>
+<div id="indexOf_detail" style="display: none;">
+<pre class="desc">Returns the index of a item in the array by asc order.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>elt</b></span>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>fn</b></i>  &lt;Function&gt; The compare function</dd><br/>
+<dd><i title="optional"><b>thisp</b></i>  &lt;Object&gt; The function's this</dd><br/>
+<dd><i title="optional"><b>from</b></i>  &lt;Int&gt; The default is Zero</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; returns -1 when not found</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="lastIndexOf" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final lastIndexOf">+ lastIndexOf</span></span>(<span title="required"><b>elt</b></span>:Object, <i title="optional"><b>fn</b></i>:Function, <i title="optional"><b>thisp</b></i>:Object, <i title="optional"><b>from</b></i>:Int):Int</span>
+<div id="lastIndexOf_detail" style="display: none;">
+<pre class="desc">Returns the index of a item in the array by desc order.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>elt</b></span>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>fn</b></i>  &lt;Function&gt; The equals function</dd><br/>
+<dd><i title="optional"><b>thisp</b></i>  &lt;Object&gt; The function's this</dd><br/>
+<dd><i title="optional"><b>from</b></i>  &lt;Int&gt; The default is length-1</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; returns -1 when not found</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="forEach" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final forEach">+ forEach</span></span>(<span title="required"><b>fn</b></span>:Function, <i title="optional"><b>thisp</b></i>:Object):void</span>
+<div id="forEach_detail" style="display: none;">
+<pre class="desc">Execute the callback function for every item.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>thisp</b></i>  &lt;Object&gt; the function's this</dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; The argument<fn> is not function</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="toMap" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final toMap">+ toMap</span></span>(<span title="required"><b>fn</b></span>:Function, <i title="optional"><b>thisp</b></i>:Object):Object</span>
+<div id="toMap_detail" style="display: none;">
+<pre class="desc">Returns a JSONObject of all items for callback.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; returns a array like [key,value]</dd><br/>
+<dd><i title="optional"><b>thisp</b></i>  &lt;Object&gt; the function's this</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; The argument<fn> is not function</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="every" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final every">+ every</span></span>(<span title="required"><b>fn</b></span>:Function, <i title="optional"><b>thisp</b></i>:Object):Boolean</span>
+<div id="every_detail" style="display: none;">
+<pre class="desc">If all items passed the function's test, then return true.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>thisp</b></i>  &lt;Object&gt; the function's this</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; The argument<fn> is not function</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="some" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final some">+ some</span></span>(<span title="required"><b>fn</b></span>:Function, <i title="optional"><b>thisp</b></i>:Object):Boolean</span>
+<div id="some_detail" style="display: none;">
+<pre class="desc">If one item passed the function's test, then return true.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>thisp</b></i>  &lt;Object&gt; the function's this</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; The argument<fn> is not function</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="filter" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final filter">+ filter</span></span>(<span title="required"><b>fn</b></span>:Function, <i title="optional"><b>thisp</b></i>:Object):Array</span>
+<div id="filter_detail" style="display: none;">
+<pre class="desc">Filter all items to a new Array by the function's test.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>thisp</b></i>  &lt;Object&gt; the function's this</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; The argument<fn> is not function</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="clear" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final clear">+ clear</span></span>():void</span>
+<div id="clear_detail" style="display: none;">
+<pre class="desc">Clear all items to empty.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="clone" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final clone">+ clone</span></span>():Array</span>
+<div id="clone_detail" style="display: none;">
+<pre class="desc">Clone to a new Array.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="contains" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final contains">+ contains</span></span>(<span title="required"><b>item</b></span>:Object, <i title="optional"><b>fn</b></i>:Function, <i title="optional"><b>thisp</b></i>:Object, <i title="optional"><b>from</b></i>:Int):Boolean</span>
+<div id="contains_detail" style="display: none;">
+<pre class="desc">Determines whether or not the item be contains in the array.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>item</b></span>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>fn</b></i>  &lt;Function&gt; the compare function</dd><br/>
+<dd><i title="optional"><b>thisp</b></i>  &lt;Object&gt; the function's this</dd><br/>
+<dd><i title="optional"><b>from</b></i>  &lt;Int&gt; the from index</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="splice" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final splice">+ splice</span></span>(<span title="required"><b>index</b></span>:Object, <span title="required"><b>item</b></span>:Object...):void</span>
+<div id="splice_detail" style="display: none;">
+<pre class="desc">Insert some items after the position.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>index</b></span>  &lt;Object&gt; </dd><br/>
+<dd><span title="required"><b>item</b></span>  &lt;Object...&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="remove" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final remove">+ remove</span></span>(<span title="required"><b>item</b></span>:Object, <i title="optional"><b>fn</b></i>:Function, <i title="optional"><b>thisp</b></i>:Object, <i title="optional"><b>from</b></i>:Int):Boolean</span>
+<div id="remove_detail" style="display: none;">
+<pre class="desc">If contains the item in the array, then removes it.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>item</b></span>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>fn</b></i>  &lt;Function&gt; the compare function</dd><br/>
+<dd><i title="optional"><b>thisp</b></i>  &lt;Object&gt; the function's this</dd><br/>
+<dd><i title="optional"><b>from</b></i>  &lt;Int&gt; the from index</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="removeAt" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final removeAt">+ removeAt</span></span>(<span title="required"><b>index</b></span>:Int):Boolean</span>
+<div id="removeAt_detail" style="display: none;">
+<pre class="desc">Removes one item on the index position.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>index</b></span>  &lt;Int&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="compact" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final compact">+ compact</span></span>():Array</span>
+<div id="compact_detail" style="display: none;">
+<pre class="desc">Returns a new version of the array, without any null/undefined values.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="uniq" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final uniq">+ uniq</span></span>(<i title="optional"><b>fn</b></i>:Function, <i title="optional"><b>thisp</b></i>:Object):Array</span>
+<div id="uniq_detail" style="display: none;">
+<pre class="desc">Returns a new array without repeat items.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>fn</b></i>  &lt;Function&gt; the equals function</dd><br/>
+<dd><i title="optional"><b>thisp</b></i>  &lt;Object&gt; the function's this</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toJSONString" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final toJSONString">+ toJSONString</span></span>():String</span>
+<div id="toJSONString_detail" style="display: none;">
+<pre class="desc">Returns a JSON String of the array.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

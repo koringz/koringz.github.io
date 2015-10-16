@@ -1,0 +1,94 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.util.DDProxy</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-util-dragdrop.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.util</div>
+<div class="topic" title="js.util.DDProxy">
+Class: 
+DDProxy</div>
+<div><a href="js.util.DD.html">js.util.DD</a></div>
+<div>&nbsp;&nbsp;<img src="../inc/inherit.gif">js.util.DDProxy</div><br/>
+
+<b>public</b> DDProxy <b>extends</b> <a href="js.util.DD.html" title="js.util.DD">DD</a>
+
+<hr/>
+
+<pre class="desc">
+A DragDrop implementation that inserts an empty, bordered div into
+the document that follows the cursor during drag operations.  At the time of
+the click, the frame div is resized to the dimensions of the linked html
+element, and moved to the exact location of the linked element.
+References to the "frame" element refer to the single proxy element that
+was created to be dragged in place of all DDProxy elements on the
+page.</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="DDProxy" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public DDProxy">+ DDProxy</span></span>(<span title="required"><b>id</b></span>:String, <i title="optional"><b>sGroup</b></i>:String, <i title="optional"><b>config</b></i>:object)</span>
+<div id="DDProxy_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; the id of the linked html element</dd><br/>
+<dd><i title="optional"><b>sGroup</b></i>  &lt;String&gt; the group of related DragDrop objects</dd><br/>
+<dd><i title="optional"><b>config</b></i>  &lt;object&gt; an object containing configurable attributes 
+               Valid properties for DDProxy in addition to those in DragDrop: 
+                  resizeFrame, centerFrame, dragElId</dd><br/>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="dragElId" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public dragElId">+ dragElId</span></span>: boolean</span>
+<div id="dragElId_detail" style="display: none;">
+<pre class="desc">The id of the element that will be dragged.  By default this is same
+as the linked element , but could be changed to another element.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="resizeFrame" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public resizeFrame">+ resizeFrame</span></span>: boolean</span>
+<div id="resizeFrame_detail" style="display: none;">
+<pre class="desc">By default we resize the drag frame to be the same size as the element
+we want to drag (this is to get the frame effect).  We can turn it off
+if we want a different behavior.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="centerFrame" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public centerFrame">+ centerFrame</span></span>: boolean</span>
+<div id="centerFrame_detail" style="display: none;">
+<pre class="desc">By default the frame is positioned exactly where the drag element is, so
+we use the cursor offset provided by YAHOO.util.DD.  Another option that works only if
+you do not have constraints on the obj is to have the drag frame centered
+around the cursor.  Set centerFrame to true for this effect.</pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="createFrame" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public createFrame">+ createFrame</span></span>():void</span>
+<div id="createFrame_detail" style="display: none;">
+<pre class="desc">Creates the proxy element if it does not yet exist</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="initFrame" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public initFrame">+ initFrame</span></span>():void</span>
+<div id="initFrame_detail" style="display: none;">
+<pre class="desc">Initialization for the drag frame element.  Must be called in the
+constructor of all subclasses</pre>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

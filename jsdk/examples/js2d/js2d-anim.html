@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * @author fengchun
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Anim Test</title>
+        <script language="JavaScript" type="text/javascript" src="../../source/core/js-core.js"></script>
+        <script language="JavaScript" type="text/javascript" src="../../source/core/js-thread.js"></script>
+		<script language="JavaScript" type="text/javascript" src="../../source/core/js-mathphys.js"></script>
+		<script language="JavaScript" type="text/javascript" src="../../source/js2d/js-2d-core.js"></script>
+        <script language="JavaScript" type="text/javascript" src="../../source/js2d/js-2d-anim.js"></script>
+        <script language="JavaScript" type="text/javascript" src="../../source/util/js-util-logger.js"></script>
+		
+        <style>
+            BODY {
+                FONT: 14px arial, helvetica, clean, sans-serif
+            }
+            
+        </style>
+        <script>
+            var CanvasTest = function(){
+            	var canvas = null, anim1 = anim2 = anim3 = anim4 = null, th = null;  
+				
+				return {
+            		main: function(){
+						canvas = new js.d2.Canvas({
+            				id:'canvas2',x:0,y:50,title:'CANVAS',z:1
+            				,width:300,height:300
+            				,background:'green'
+            			});
+						
+						anim1 = new js.anim.Film({
+            				canvas:canvas, src:'anim.png', width:65, height:65
+            				,frameSeq:[[0,0],[66,0],[131,0],[196,0],[261,0],[326,0],[391,0]]
+							,target:[
+							{x:50,y:50},{x:150,y:150}
+							],repeat:1,interval:50
+            			});	
+						
+						anim2 = new js.anim.Motion({
+            				target:'test', repeat:1, step:10
+							, points: {
+								from:[0,0]
+								, to:[300,150]
+							},interval:10
+            			});
+						
+						anim3 = new js.anim.Motion({
+            				target:'test', repeat:1, step:10
+							, points: {
+								from:[0,0]
+								, to:[300,150]
+								, path:[[0,150],[300,0]]
+							},interval:20
+            			});
+						
+						anim4 = new js.anim.Flicker({
+            				target:'test'
+							, repeat:10, step:10
+							, opacity: {
+								from:0, 
+								to:1
+							},interval:10
+            			});					
+            		},
+            		frameAnim: function(){
+            			anim1.start();
+            		},
+					moveAnim: function(){
+						anim2.start();
+					},
+					pathAnim: function(){
+						anim3.start();
+					},
+					flickAnim: function(){
+						anim4.start();
+					},
+					roundAnim: function(){
+						js.util.Logger.show();
+						
+						var t = 0, from = js.core.Dom.getXY('test')
+						, center = [200,200];
+						js.util.Logger.info(parseInt(from[0])+','+parseInt(from[1]));
+												
+						th = new js.lang.Thread([{
+							run: function(){
+								xy = js.phys.Formulas.round(t, from, center, 10);
+																
+								js.util.Logger.info(parseInt(xy[0])+','+parseInt(xy[1]));
+								js.core.Dom.setStyle('test', 'left', xy[0] + 'px');
+								js.core.Dom.setStyle('test', 'top', xy[1] + 'px');
+								t++;								
+							}
+						}],{interval:100});
+						th.start();						
+					},
+					stop: function(){
+						anim1.stop();
+						anim2.stop();
+						anim3.stop();
+						anim4.stop();
+						th.stop();						
+					}
+            	}
+            }();	
+        </script>
+    </head>
+    <body onload ="CanvasTest.main();">
+        <button onclick='CanvasTest.frameAnim()'>
+            film
+        </button>
+		<button id="" onclick='CanvasTest.moveAnim()'>
+            move1
+        </button>
+		<button id="" onclick='CanvasTest.pathAnim()'>
+            move2
+        </button>
+		<button id="" onclick='CanvasTest.flickAnim()'>
+            flick
+        </button>
+		<button id="" onclick='CanvasTest.roundAnim()'>
+            round
+        </button>
+        <button onclick="CanvasTest.stop()">stop</button>
+<div id="test" style="z-index:9;position:absolute;overflow:hidden;background:yellow;filter:alpha(opacity:100);opacity:0.8;left:300px;top:300px;width:100px;height:100px;">
+	<span>Animation</span>
+</div>
+
+    </body>
+</html>

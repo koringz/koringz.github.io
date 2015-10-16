@@ -1,0 +1,185 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.core.CustomEvent</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.core</div>
+<div class="topic" title="js.core.CustomEvent">
+Class: 
+CustomEvent</div>
+
+<b>public</b> CustomEvent
+
+<hr/>
+
+<pre class="desc">
+The CustomEvent class lets you define events for your application
+that can be subscribed to by one or more independent component.</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="CustomEvent" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public CustomEvent">+ CustomEvent</span></span>(<span title="required"><b>type</b></span>:String, <span title="required"><b>context</b></span>:Object, <span title="required"><b>silent</b></span>:boolean, <span title="required"><b>signature</b></span>:int, <span title="required"><b>fireOnce</b></span>:boolean)</span>
+<div id="CustomEvent_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>type</b></span>  &lt;String&gt; The type of event, which is passed to the callback 
+                 when the event fires</dd><br/>
+<dd><span title="required"><b>context</b></span>  &lt;Object&gt; The context the event will fire from.  "this" will 
+                 refer to this object in the callback.  Default value: 
+                 the window object.  The listener can override this.</dd><br/>
+<dd><span title="required"><b>silent</b></span>  &lt;boolean&gt; pass true to prevent the event from writing to 
+                 the debugsystem</dd><br/>
+<dd><span title="required"><b>signature</b></span>  &lt;int&gt; the signature that the custom event subscriber 
+                 will receive. js.core.CustomEvent.LIST or 
+                 js.core.CustomEvent.FLAT.  The default is 
+                 js.core.CustomEvent.LIST.</dd><br/>
+<dd><span title="required"><b>fireOnce</b></span>  &lt;boolean&gt; If configured to fire once, the custom event 
+will only notify subscribers a single time regardless of how many times 
+the event is fired.  In addition, new subscribers will be notified 
+immediately if the event has already been fired.</dd><br/>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="type" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public type">+ type</span></span>: string</span>
+<div id="type_detail" style="display: none;">
+<pre class="desc">The type of event, returned to subscribers when the event fires</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="scope" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public scope">+ scope</span></span>: object</span>
+<div id="scope_detail" style="display: none;">
+<pre class="desc">The context the event will fire from by default. Defaults to the window obj.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="silent" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public silent">+ silent</span></span>: boolean</span>
+<div id="silent_detail" style="display: none;">
+<pre class="desc">By default all custom events are logged in the debug build. Set silent to true
+to disable debug output for this event.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="fireOnce" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public fireOnce">+ fireOnce</span></span>: boolean</span>
+<div id="fireOnce_detail" style="display: none;">
+<pre class="desc">If configured to fire once, the custom event will only notify subscribers
+a single time regardless of how many times the event is fired.  In addition,
+new subscribers will be notified immediately if the event has already been
+fired.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="fired" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public fired">+ fired</span></span>: boolean</span>
+<div id="fired_detail" style="display: none;">
+<pre class="desc">Indicates whether or not this event has ever been fired.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="signature" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public signature">+ signature</span></span>: int</span>
+<div id="signature_detail" style="display: none;">
+<pre class="desc">Custom events support two styles of arguments provided to the event
+subscribers.
+<ul>
+<li>js.core.CustomEvent.LIST:
+  <ul>
+  <li>param1: event name</li>
+  <li>param2: array of arguments sent to fire</li>
+  <li>param3: <optional> a custom object supplied by the subscriber</li>
+  </ul>
+</li>
+<li>js.core.CustomEvent.FLAT
+  <ul>
+  <li>param1: the first argument passed to fire.  If you need to
+          pass multiple parameters, use and array or object literal</li>
+  <li>param2: <optional> a custom object supplied by the subscriber</li>
+  </ul>
+</li>
+</ul></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="lastError" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public lastError">+ lastError</span></span>: Error</span>
+<div id="lastError_detail" style="display: none;">
+<pre class="desc">In order to make it possible to execute the rest of the subscriber
+stack when one thows an exception, the subscribers exceptions are
+caught.  The most recent exception is stored in this property</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="LIST" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static LIST">+ <b>LIST</b></span></span>: int</span>
+<div id="LIST_detail" style="display: none;">
+<pre class="desc">Subscriber listener sigature constant.  The LIST type returns three
+parameters: the event type, the array of args passed to fire, and
+the optional custom object</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="FLAT" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static FLAT">+ <b>FLAT</b></span></span>: int</span>
+<div id="FLAT_detail" style="display: none;">
+<pre class="desc">Subscriber listener sigature constant.  The FLAT type returns two
+parameters: the first argument passed to fire and the optional
+custom object</pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="subscribe" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public subscribe">+ subscribe</span></span>(<span title="required"><b>fn</b></span>:Function, <span title="required"><b>obj</b></span>:Object, <i title="optional"><b>overrideContext</b></i>:boolean|Object):void</span>
+<div id="subscribe_detail" style="display: none;">
+<pre class="desc">Subscribes the caller to this event</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; The function to execute</dd><br/>
+<dd><span title="required"><b>obj</b></span>  &lt;Object&gt; An object to be passed along when the event fires.</dd><br/>
+<dd><i title="optional"><b>overrideContext</b></i>  &lt;boolean|Object&gt; If true, the obj passed in becomes the execution 
+context of the listener. If an object, that object becomes the execution context.</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="unsubscribe" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public unsubscribe">+ unsubscribe</span></span>(<span title="required"><b>fn</b></span>:Function, <i title="optional"><b>obj</b></i>:Object):boolean</span>
+<div id="unsubscribe_detail" style="display: none;">
+<pre class="desc">Unsubscribes subscribers.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; The subscribed function to remove, if not supplied 
+                      all will be removed</dd><br/>
+<dd><i title="optional"><b>obj</b></i>  &lt;Object&gt; The custom object passed to subscribe.  This is 
+                       optional, but if supplied will be used to 
+                       disambiguate multiple listeners that are the same 
+                       (e.g., you subscribe many object using a function 
+                       that lives on the prototype)</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;boolean&gt; True if the subscriber was found and detached.</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="fire" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public fire">+ fire</span></span>(<i title="optional"><b>arguments</b></i>:Object..):boolean</span>
+<div id="fire_detail" style="display: none;">
+<pre class="desc">Notifies the subscribers.  The callback functions will be executed
+from the context specified when the event was created, and with the
+following parameters:
+  <ul>
+  <li>The type of event</li>
+  <li>All of the arguments fire() was executed with as an array</li>
+  <li>The custom object (if any) that was passed into the subscribe()
+      method</li>
+  </ul></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>arguments</b></i>  &lt;Object..&gt; an arbitrary set of parameters to pass to 
+                           the handler.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;boolean&gt; if one of the subscribers returned false, true otherwise</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="unsubscribeAll" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public unsubscribeAll">+ unsubscribeAll</span></span>():int</span>
+<div id="unsubscribeAll_detail" style="display: none;">
+<pre class="desc">Removes all listeners</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;int&gt; The number of listeners unsubscribed</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toString" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public toString">+ toString</span></span>():String</span>
+<div id="toString_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,132 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.lang.Thread</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-thread.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.lang</div>
+<div class="topic" title="js.lang.Thread">
+Class: 
+Thread</div>
+
+<b>public</b> Thread
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="Thread" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public Thread">+ Thread</span></span>(<span title="required"><b>targets</b></span>:Object|Array&lt;Object&gt;, <span title="required"><b>config</b></span>:<a href="js.lang.Thread$Config.html" title="js.lang.Thread$Config">Thread$Config</a>)</span>
+<div id="Thread_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>targets</b></span>  &lt;Object|Array&lt;Object&gt;&gt; the object must has a method named "run"</dd><br/>
+<dd><span title="required"><b>config</b></span>  &lt;<a href="js.lang.Thread$Config.html" title="js.lang.Thread$Config">Thread$Config</a>&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="setFPSCallback" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setFPSCallback">+ setFPSCallback</span></span>(<span title="required"><b>callback</b></span>:<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>):void</span>
+<div id="setFPSCallback_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>callback</b></span>  &lt;<a href="js.lang.Callback.html" title="js.lang.Callback">Callback</a>&gt; The arguments: [fps, maxFPS]</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setMaxFPS" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setMaxFPS">+ setMaxFPS</span></span>(<span title="required"><b>fps</b></span>:Number):void</span>
+<div id="setMaxFPS_detail" style="display: none;">
+<pre class="desc">Sets the limited value of FPS.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>fps</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getMaxFPS" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getMaxFPS">+ getMaxFPS</span></span>():Number</span>
+<div id="getMaxFPS_detail" style="display: none;">
+<pre class="desc">Returns the limited value of FPS.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getFPS" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getFPS">+ getFPS</span></span>():Number</span>
+<div id="getFPS_detail" style="display: none;">
+<pre class="desc">Returns the current FPS.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setInterval" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setInterval">+ setInterval</span></span>(<span title="required"><b>interval</b></span>:Int):void</span>
+<div id="setInterval_detail" style="display: none;">
+<pre class="desc">Sets the interval time(milliseconds) of each cycle.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>interval</b></span>  &lt;Int&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getInterval" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getInterval">+ getInterval</span></span>():Int</span>
+<div id="getInterval_detail" style="display: none;">
+<pre class="desc">Returns the interval time(milliseconds) of each cycle.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getStatus" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getStatus">+ getStatus</span></span>():Int</span>
+<div id="getStatus_detail" style="display: none;">
+<pre class="desc">Returns the current status of the thread.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getTargets" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getTargets">+ getTargets</span></span>():Object[]</span>
+<div id="getTargets_detail" style="display: none;">
+<pre class="desc">Returns all targets of the thread.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object[]&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="start" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public start">+ start</span></span>():void</span>
+<div id="start_detail" style="display: none;">
+<pre class="desc">Starts the thread.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="isWorking" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isWorking">+ isWorking</span></span>():Boolean</span>
+<div id="isWorking_detail" style="display: none;">
+<pre class="desc">Is working.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="suspend" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public suspend">+ suspend</span></span>():void</span>
+<div id="suspend_detail" style="display: none;">
+<pre class="desc">Stops the running temporarily.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="resume" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public resume">+ resume</span></span>():void</span>
+<div id="resume_detail" style="display: none;">
+<pre class="desc">Continue the running.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="stop" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public stop">+ stop</span></span>():void</span>
+<div id="stop_detail" style="display: none;">
+<pre class="desc">Finish the running.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="wait" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public wait">+ wait</span></span>(<span title="required"><b>n</b></span>:Int):void</span>
+<div id="wait_detail" style="display: none;">
+<pre class="desc">Wait some milliseconds and continue.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>n</b></span>  &lt;Int&gt; Unit:milliseconds</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

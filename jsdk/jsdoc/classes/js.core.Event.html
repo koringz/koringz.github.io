@@ -1,0 +1,265 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.core.Event</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.core</div>
+<div class="topic" title="js.core.Event">
+Class: 
+Event</div>
+
+<b>public static</b> Event
+
+<hr/>
+
+<pre class="desc">
+The event utility provides functions to add and remove event listeners,
+event cleansing.  It also tries to automatically remove listeners it
+registers during the unload event.</pre>
+<hr/><br/>
+
+
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="lastError" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static lastError">+ <b>lastError</b></span></span>: Error</span>
+<div id="lastError_detail" style="display: none;">
+<pre class="desc">addListener/removeListener can throw errors in unexpected scenarios.
+These errors are suppressed, the method returns false, and this property is set.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="DOMReady" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static DOMReady">+ <b>DOMReady</b></span></span>: boolean</span>
+<div id="DOMReady_detail" style="display: none;">
+<pre class="desc">True when the document is initially usable.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="throwErrors" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static throwErrors">+ <b>throwErrors</b></span></span>: boolean</span>
+<div id="throwErrors_detail" style="display: none;">
+<pre class="desc">Errors thrown by subscribers of custom events are caught
+and the error message is written to the debug console.  If
+this property is set to true, it will also re-throw the
+error. The default is false.</pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="onAvailable" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static onAvailable">+ <b>onAvailable</b></span></span>(<span title="required"><b>id</b></span>:string|string[], <span title="required"><b>fn</b></span>:function, <i title="optional"><b>obj</b></i>:object, <i title="optional"><b>overrideContext</b></i>:boolean|object, <i title="optional"><b>checkContent</b></i>:boolean):void</span>
+<div id="onAvailable_detail" style="display: none;">
+<pre class="desc">Executes the supplied callback when the item with the supplied
+id is found.  This is meant to be used to execute behavior as
+soon as possible as the page loads.  If you use this after the
+initial page load it will poll for a fixed time for the element.
+The number of times it will poll and the frequency are
+configurable.  By default it will poll for 10 seconds.
+<p>The callback is executed with a single parameter:
+the custom object parameter, if provided.</p></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;string|string[]&gt; the id of the element, or an array of ids to look for.</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;function&gt; what to execute when the element is found.</dd><br/>
+<dd><i title="optional"><b>obj</b></i>  &lt;object&gt; an optional object to be passed back as a parameter to fn.</dd><br/>
+<dd><i title="optional"><b>overrideContext</b></i>  &lt;boolean|object&gt; If set to true, fn will execute 
+                  in the context of obj, if set to an object it 
+                  will execute in the context of that object</dd><br/>
+<dd><i title="optional"><b>checkContent</b></i>  &lt;boolean&gt; check child node readiness (onContentReady)</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="onContentReady" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static onContentReady">+ <b>onContentReady</b></span></span>(<span title="required"><b>id</b></span>:string, <span title="required"><b>fn</b></span>:function, <i title="optional"><b>obj</b></i>:object, <i title="optional"><b>overrideContext</b></i>:boolean|object):void</span>
+<div id="onContentReady_detail" style="display: none;">
+<pre class="desc">Works the same way as onAvailable, but additionally checks the
+state of sibling elements to determine if the content of the
+available element is safe to modify.
+<p>The callback is executed with a single parameter:
+the custom object parameter, if provided.</p></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;string&gt; the id of the element to look for.</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;function&gt; what to execute when the element is ready.</dd><br/>
+<dd><i title="optional"><b>obj</b></i>  &lt;object&gt; an optional object to be passed back as 
+                  a parameter to fn.</dd><br/>
+<dd><i title="optional"><b>overrideContext</b></i>  &lt;boolean|object&gt; If set to true, fn will execute 
+                  in the context of obj.  If an object, fn will 
+                  exectute in the context of that object</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="onDOMReady" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static onDOMReady">+ <b>onDOMReady</b></span></span>(<span title="required"><b>fn</b></span>:function, <i title="optional"><b>obj</b></i>:object, <i title="optional"><b>overrideContext</b></i>:boolean|object):void</span>
+<div id="onDOMReady_detail" style="display: none;">
+<pre class="desc">Executes the supplied callback when the DOM is first usable.  This
+will execute immediately if called after the DOMReady event has
+fired.   @todo the DOMContentReady event does not fire when the
+script is dynamically injected into the page.  This means the
+DOMReady custom event will never fire in FireFox or Opera when the
+library is injected.  It _will_ fire in Safari, and the IE
+implementation would allow for us to fire it if the defered script
+is not available.  We want this to behave the same in all browsers.
+Is there a way to identify when the script has been injected
+instead of included inline?  Is there a way to know whether the
+window onload event has fired without having had a listener attached
+to it when it did so?
+<p>The callback is a CustomEvent, so the signature is:</p>
+<p>type &lt;string&gt;, args &lt;array&gt;, customobject &lt;object&gt;</p>
+<p>For DOMReady events, there are no fire argments, so the
+signature is:</p>
+<p>"DOMReady", [], obj</p></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>fn</b></span>  &lt;function&gt; what to execute when the element is found.</dd><br/>
+<dd><i title="optional"><b>obj</b></i>  &lt;object&gt; an optional object to be passed back as 
+                  a parameter to fn.</dd><br/>
+<dd><i title="optional"><b>overrideContext</b></i>  &lt;boolean|object&gt; If set to true, fn will execute 
+                  in the context of obj, if set to an object it 
+                  will execute in the context of that object</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="addListener" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static addListener">+ <b>addListener</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array&lt;HTMLElement&gt;, <span title="required"><b>sType</b></span>:String, <span title="required"><b>fn</b></span>:Function, <i title="optional"><b>obj</b></i>:Object, <i title="optional"><b>overrideContext</b></i>:Boolean|object):Boolean</span>
+<div id="addListener_detail" style="display: none;">
+<pre class="desc">Appends an event handler</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&lt;HTMLElement&gt;&gt; An id, an element 
+ reference, or a collection of ids and/or elements to assign the 
+ listener to.</dd><br/>
+<dd><span title="required"><b>sType</b></span>  &lt;String&gt; The type of event to append</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; The method the event invokes</dd><br/>
+<dd><i title="optional"><b>obj</b></i>  &lt;Object&gt; An arbitrary object that will be 
+                            passed as a parameter to the handler</dd><br/>
+<dd><i title="optional"><b>overrideContext</b></i>  &lt;Boolean|object&gt; If true, the obj passed in becomes 
+                            the execution context of the listener. If an 
+                            object, this object becomes the execution 
+                            context.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; True if the action was successful or defered,</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="on" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static on">+ <b>on</b></span></span>():void</span>
+<div id="on_detail" style="display: none;">
+<pre class="desc">an alias for addListener</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCharCode" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getCharCode">+ <b>getCharCode</b></span></span>(<span title="required"><b>ev</b></span>:Event):int</span>
+<div id="getCharCode_detail" style="display: none;">
+<pre class="desc">Returns the charcode for an event</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ev</b></span>  &lt;Event&gt; the dom event</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;int&gt; the event's charCode</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getListeners" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getListeners">+ <b>getListeners</b></span></span>(<span title="required"><b>el</b></span>:HTMLElement|string, <i title="optional"><b>sType</b></i>:string):Object</span>
+<div id="getListeners_detail" style="display: none;">
+<pre class="desc">Returns all listeners attached to the given element via addListener.
+Optionally, you can specify a specific type of event to return.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;HTMLElement|string&gt; the element or element id to inspect</dd><br/>
+<dd><i title="optional"><b>sType</b></i>  &lt;string&gt; type of listener to return. If 
+left out, all listeners will be returned</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object&gt; Contains the following fields:</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getPageX" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getPageX">+ <b>getPageX</b></span></span>(<span title="required"><b>ev</b></span>:Event):int</span>
+<div id="getPageX_detail" style="display: none;">
+<pre class="desc">Returns the event's pageX</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ev</b></span>  &lt;Event&gt; the dom event</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;int&gt; the event's pageX</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getPageY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getPageY">+ <b>getPageY</b></span></span>(<span title="required"><b>ev</b></span>:Event):int</span>
+<div id="getPageY_detail" style="display: none;">
+<pre class="desc">Returns the event's pageY</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ev</b></span>  &lt;Event&gt; the dom event</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;int&gt; the event's pageY</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getXY">+ <b>getXY</b></span></span>(<span title="required"><b>ev</b></span>:Event):Array</span>
+<div id="getXY_detail" style="display: none;">
+<pre class="desc">Returns the pageX and pageY properties as an indexed array.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ev</b></span>  &lt;Event&gt; the dom event</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; the pageX and pageY properties of the event</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getRelatedTarget" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getRelatedTarget">+ <b>getRelatedTarget</b></span></span>(<span title="required"><b>ev</b></span>:Event):HTMLElement</span>
+<div id="getRelatedTarget_detail" style="display: none;">
+<pre class="desc">Returns the event's related target</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ev</b></span>  &lt;Event&gt; the dom event</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; the event's relatedTarget</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getTarget" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getTarget">+ <b>getTarget</b></span></span>(<span title="required"><b>ev</b></span>:Event):HTMLElement</span>
+<div id="getTarget_detail" style="display: none;">
+<pre class="desc">Returns the event's target element.  Safari sometimes provides
+a text node, and this is automatically resolved to the text
+node's parent so that it behaves like other browsers.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ev</b></span>  &lt;Event&gt; the event</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; the event's target</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getTime" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getTime">+ <b>getTime</b></span></span>(<span title="required"><b>ev</b></span>:Event):Date</span>
+<div id="getTime_detail" style="display: none;">
+<pre class="desc">Returns the time of the event.  If the time is not included, the
+event is modified using the current time.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ev</b></span>  &lt;Event&gt; the dom event</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Date&gt; the time of the event</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="preventDefault" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static preventDefault">+ <b>preventDefault</b></span></span>(<span title="required"><b>ev</b></span>:Event):void</span>
+<div id="preventDefault_detail" style="display: none;">
+<pre class="desc">Prevents the default behavior of the event</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ev</b></span>  &lt;Event&gt; the dom event</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="purgeElement" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static purgeElement">+ <b>purgeElement</b></span></span>(<span title="required"><b>el</b></span>:HTMLElement, <i title="optional"><b>recurse</b></i>:boolean, <i title="optional"><b>sType</b></i>:string):void</span>
+<div id="purgeElement_detail" style="display: none;">
+<pre class="desc">Removes all listeners attached to the given element via addListener.
+Optionally, the node's children can also be purged.
+Optionally, you can specify a specific type of event to remove.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;HTMLElement&gt; the element to purge</dd><br/>
+<dd><i title="optional"><b>recurse</b></i>  &lt;boolean&gt; recursively purge this element's children 
+as well.  Use with caution.</dd><br/>
+<dd><i title="optional"><b>sType</b></i>  &lt;string&gt; type of listener to purge. If 
+left out, all listeners will be removed</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="removeListener" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static removeListener">+ <b>removeListener</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array|HTMLElement[], <span title="required"><b>sType</b></span>:String, <i title="optional"><b>fn</b></i>:Function):boolean</span>
+<div id="removeListener_detail" style="display: none;">
+<pre class="desc">Removes an event listener</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array|HTMLElement[]&gt; An id, an element 
+ reference, or a collection of ids and/or elements to remove 
+ the listener from.</dd><br/>
+<dd><span title="required"><b>sType</b></span>  &lt;String&gt; the type of event to remove.</dd><br/>
+<dd><i title="optional"><b>fn</b></i>  &lt;Function&gt; the method the event invokes.  If fn is 
+ undefined, then all event handlers for the type of event are 
+ removed.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;boolean&gt; true if the unbind was successful, false</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="stopEvent" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static stopEvent">+ <b>stopEvent</b></span></span>(<span title="required"><b>ev</b></span>:Event):void</span>
+<div id="stopEvent_detail" style="display: none;">
+<pre class="desc">Convenience method for stopPropagation + preventDefault</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ev</b></span>  &lt;Event&gt; the dom event</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="stopPropagation" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static stopPropagation">+ <b>stopPropagation</b></span></span>(<span title="required"><b>ev</b></span>:Event):void</span>
+<div id="stopPropagation_detail" style="display: none;">
+<pre class="desc">Stops event propagation</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ev</b></span>  &lt;Event&gt; the dom event</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

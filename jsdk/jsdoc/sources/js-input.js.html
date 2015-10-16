@@ -1,0 +1,545 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-input.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2011-03-24
+ * @date 2011-04-14
+ * @date 2011-09-05
+ *  
+ * @requires /core/js-core.js
+ */</span>
+js.lang.System.namespace('js.input');
+
+<span class="multiComment">/**
+ * @class js.input.KEY
+ * @static
+ */</span>
+js.input.KEY = {
+<span class="multiComment">    BACK_SPACE   : 8,   /** @constant {Int} BACK_SPACE */</span>
+<span class="multiComment">    TAB          : 9,   /** @constant {Int} TAB */</span>
+<span class="multiComment">    ENTER        : 13,  /** @constant {Int} ENTER */</span>
+<span class="multiComment">    SHIFT        : 16,  /** @constant {Int} SHIFT */</span>
+<span class="multiComment">    CONTROL      : 17,  /** @constant {Int} CONTROL */</span>
+<span class="multiComment">    ALT          : 18,  /** @constant {Int} ALT */</span>
+<span class="multiComment">    PAUSE        : 19,  /** @constant {Int} PAUSE */</span>
+<span class="multiComment">    CAPS_LOCK    : 20,  /** @constant {Int} CAPS_LOCK */</span>
+<span class="multiComment">    ESCAPE       : 27,  /** @constant {Int} ESCAPE */</span>
+<span class="multiComment">    SPACE        : 32,  /** @constant {Int} SPACE */</span>
+<span class="multiComment">    PAGE_UP      : 33,  /** @constant {Int} PAGE_UP */ </span>
+<span class="multiComment">    PAGE_DOWN    : 34,  /** @constant {Int} PAGE_DOWN */</span>
+<span class="multiComment">    END          : 35,  /** @constant {Int} END */</span>
+<span class="multiComment">    HOME         : 36,  /** @constant {Int} HOME */</span>
+<span class="multiComment">    LEFT         : 37,  /** @constant {Int} LEFT */</span>
+<span class="multiComment">    UP           : 38,  /** @constant {Int} UP */</span>
+<span class="multiComment">    RIGHT        : 39,  /** @constant {Int} RIGHT */</span>
+<span class="multiComment">    DOWN         : 40,  /** @constant {Int} DOWN */</span>
+<span class="multiComment">    PRINTSCREEN  : 44,  /** @constant {Int} PRINTSCREEN */</span>
+<span class="multiComment">    INSERT       : 45,  /** @constant {Int} INSERT */</span>
+<span class="multiComment">    DELETE       : 46,  /** @constant {Int} DELETE */</span>
+    
+<span class="multiComment">    NUMPAD0      : 96,  /** @constant {Int} NUMPAD0 */</span>
+<span class="multiComment">    NUMPAD1      : 97,  /** @constant {Int} NUMPAD1 */</span>
+<span class="multiComment">    NUMPAD2      : 98,  /** @constant {Int} NUMPAD2 */</span>
+<span class="multiComment">    NUMPAD3      : 99,  /** @constant {Int} NUMPAD3 */</span>
+<span class="multiComment">    NUMPAD4      : 100, /** @constant {Int} NUMPAD4 */</span>
+<span class="multiComment">    NUMPAD5      : 101, /** @constant {Int} NUMPAD5 */</span>
+<span class="multiComment">    NUMPAD6      : 102, /** @constant {Int} NUMPAD6 */</span>
+<span class="multiComment">    NUMPAD7      : 103, /** @constant {Int} NUMPAD7 */</span>
+<span class="multiComment">    NUMPAD8      : 104, /** @constant {Int} NUMPAD8 */</span>
+<span class="multiComment">    NUMPAD9      : 105, /** @constant {Int} NUMPAD9 */</span>
+    
+<span class="multiComment">    MULTIPLY     : 106, /** @constant {Int} MULTIPLY */</span>
+<span class="multiComment">    PLUS         : 107, /** @constant {Int} PLUS */</span>
+<span class="multiComment">    SUBTRACT     : 109, /** @constant {Int} SUBTRACT */</span>
+<span class="multiComment">    DECIMAL      : 110, /** @constant {Int} DECIMAL */</span>
+<span class="multiComment">    DIVIDE       : 111, /** @constant {Int} DIVIDE */</span>
+    
+<span class="multiComment">    F1           : 112, /** @constant {Int} F1 */</span>
+<span class="multiComment">    F2           : 113, /** @constant {Int} F2 */</span>
+<span class="multiComment">    F3           : 114, /** @constant {Int} F3 */</span>
+<span class="multiComment">    F4           : 115, /** @constant {Int} F4 */</span>
+<span class="multiComment">    F5           : 116, /** @constant {Int} F5 */</span>
+<span class="multiComment">    F6           : 117, /** @constant {Int} F6 */</span>
+<span class="multiComment">    F7           : 118, /** @constant {Int} F7 */</span>
+<span class="multiComment">    F8           : 119, /** @constant {Int} F8 */</span>
+<span class="multiComment">    F9           : 120, /** @constant {Int} F9 */</span>
+<span class="multiComment">    F10          : 121, /** @constant {Int} F10 */</span>
+<span class="multiComment">    F11          : 122, /** @constant {Int} F11 */</span>
+<span class="multiComment">    F12          : 123, /** @constant {Int} F12 */</span>
+    
+<span class="multiComment">    NUM_LOCK     : 144, /** @constant {Int} NUM_LOCK */</span>
+<span class="multiComment">    SCROLL_LOCK  : 145, /** @constant {Int} SCROLL_LOCK */</span>
+<span class="multiComment">    META         : 224  /** @constant {Int} META */</span>
+}
+
+<span class="multiComment">/**
+ * KeyBufferProvider is designed to be used with js.lang.System.augment that allows key events to be subscribed to 
+ * and fired by keycode.
+ * @class js.input.KeyBufferProvider
+ * @constructor
+ */    </span>
+js.input.KeyBufferProvider = <b>function </b>(){};
+js.input.KeyBufferProvider.prototype = {
+<span class="multiComment">    /**
+     * Reset the hold key buffer.
+     * 
+     * @method resetKeyBuffer
+     */</span>
+    resetKeyBuffer: <b>function </b>(){        
+        <b>this</b>._KEY_MARK = {};
+        <b>this</b>._holdBuffer = 0;//32位二进制整数结构。从低位到高位，每一位顺序的对应需要记录的键值数组的一个键值。
+        <b>this</b>._holdKeys = [];//数组结构。顺序且不重复的记录了正被按下的键值。最大记录32个。        
+        <b>this</b>._keyLog = [];
+    },
+<span class="multiComment">    /**
+     * Returns from the first to the N records of pressed keys when isPressedKeyLoggable is true.
+     * 
+     * @struct js.input.KeyBufferProvider$PressedKey {
+     *      "description": "a key log object"
+     *      ,"type":"object"
+     *      ,"properties":{
+     *          "code":{"type":"int","required":true}
+     *          ,"time":{"type":"date","required":true}
+     *      }
+     * }
+     * 
+     * @see js.input.KeyBufferProvider#isPressedKeyLoggable
+     * @method getPressedKeyLog
+     * @param {Int} n:optional 0&lt;n&lt;=32
+     * @return {Array&lt;js.input.KeyBufferProvider$PressedKey&gt;} 
+     */</span>
+    getPressedKeyLog: <b>function </b>(n){
+        <b>if </b>(!<b>this</b>._keyLog) <b>return</b> <b>null</b>;
+        <b>var </b>len = <b>this</b>._keyLog.length;
+        <b>if </b>(len==0) <b>return</b> <b>null</b>;
+        n = (!n)?len:(n&gt;len?len:n);
+        <b>return</b> <b>this</b>._keyLog.slice(0,n);
+    },
+<span class="multiComment">    /**
+     * Returns all(Max is 32) records of holding keys, includes with the special keys. 
+     * 
+     * @method getHoldKeys
+     * @param {Array&lt;Int&gt;} keys:optional the special keys
+     * @return {Array&lt;Int&gt;} 
+     */</span>
+    getHoldKeys: <b>function </b>(keys){
+        <b>if </b>(!<b>this</b>._holdKeys) <b>return</b> <b>null</b>;
+        <b>if </b>(!keys) <b>return</b> <b>this</b>._holdKeys;
+        
+        <b>var </b>keysString = keys.join(',')+',';
+        <b>return</b> <b>this</b>._holdKeys.filter(<b>function </b>(keyCode){            
+            <b>return</b> keysString.indexOf(keyCode+',')&gt;-1;
+        });
+    },
+    _isKeyHold: <b>function </b>(keyCode){
+        <b>if </b>(!<b>this</b>._KEY_MARK) <b>return</b> <b>false</b>;
+        <b>return</b> (<b>this</b>._holdBuffer & <b>this</b>._KEY_MARK[keyCode])!=0;
+    },
+<span class="multiComment">    /**
+     * Determines whether or not these keys be hold.
+     * @method isKeyHold
+     * @param {Int|Array&lt;Int&gt;} keyCodes 
+     * @return {Boolean}
+     */</span>
+    isKeyHold: <b>function </b>(keyCodes){
+        <b>if </b>(js.lang.System.isArray(keyCodes)){
+            <b>return</b> keyCodes.every(<b>function </b>(keyCode){
+                <b>return</b> <b>this</b>._isKeyHold(keyCode);
+            }, <b>this</b>);
+        }<b>else </b>{
+            <b>return</b> <b>this</b>._isKeyHold(keyCodes);
+        }
+    },
+<span class="multiComment">    /**
+     * Determines whether or not these keys be pressed latest time.
+     * 
+     * @method isKeyLastest
+     * @param {Int|Array&lt;Int&gt;} keyCodes 
+     * @return {Boolean}
+     */</span>
+    isKeyLastest: <b>function </b>(keyCodes){
+        <b>if </b>(!<b>this</b>._keyLog) <b>return</b> <b>false</b>;
+        <b>var </b>len = <b>this</b>._keyLog.length;
+        <b>if </b>(len==0) <b>return</b> <b>false</b>;
+        <b>var </b>n = (js.lang.System.isArray(keyCodes))?keyCodes.length:1;
+        <b>if </b>(len &lt; n) <b>return</b> <b>false</b>;
+        
+        <b>var </b>keys = <b>this</b>._keyLog.slice(0,n);
+        <b>return</b> keys && keys.toString()==keyCodes.toString(); 
+    },
+<span class="multiComment">    /**
+     * Determines whether or not the key be repeat pressed latest time.
+     * 
+     * @method isKeyRepeat
+     * @param {Int} keyCode the repeat key code
+     * @param {Int} n the repeat times: &lt;=32
+     * @return {Boolean}
+     */</span>
+    isKeyRepeat: <b>function </b>(keyCode, n){
+        <b>var </b>keys = <b>this</b>.getLastestKeys(n);
+        <b>if </b>(keys.length!=n) <b>return</b> <b>false</b>;
+        <b>return</b> keys.every(<b>function </b>(key){<b>return</b> key.code==keyCode;});
+    },
+<span class="multiComment">    /**
+     * Lets log the pressed keys.
+     * The default value is false.
+     * 
+     * @method setPressedKeyLoggable
+     * @param {Boolean} f
+     */</span>
+    setPressedKeyLoggable: <b>function </b>(f){<b>this</b>._keyLoggable = f},        
+<span class="multiComment">    /**
+     * True is logging the pressed keys.
+     * 
+     * @method isPressedKeyLoggable
+     * @return {Boolean} the default value is false
+     */</span>
+    isPressedKeyLoggable: <b>function </b>(){<b>return</b> <b>this</b>._keyLoggable?<b>true</b>:<b>false</b>},    
+<span class="multiComment">    /**
+     * Listen the keys hold.
+     * 
+     * @method onKeyHold
+     * @param {Object} keyData
+     * @param {js.lang.Callback} handlerKeyDown:optional 
+     * @param {js.lang.Callback} handlerKeyUp:optional 
+     */ </span>
+    onKeyHold: <b>function </b>(keyData, handlerKeyDown, handlerKeyUp){
+        <b>if </b>(!keyData) <b>return</b>;
+        <b>if </b>(!<b>this</b>._KEY_MARK) <b>this</b>.resetKeyBuffer();
+        
+        <b>var </b>fnKeyDown = <b>null</b>, contextKeyDown = <b>null</b>
+        , fnKeyUp = <b>null</b>, contextKeyUp = <b>null</b>;        
+        <b>if </b>(handlerKeyDown) {
+            fnKeyDown = handlerKeyDown['fn'];
+            contextKeyDown = handlerKeyDown['scope'];
+        }//, argsKeyDown = handlerKeyDown['args'],
+        <b>if </b>(handlerKeyUp) {
+            fnKeyUp = handlerKeyUp['fn'];
+            contextKeyUp = handlerKeyUp['scope'];
+        }//, argsKeyUp = handlerKeyUp['args'];
+        
+        <b>var </b>keys = keyData['keys'], noKeys = !keys||keys.length==0;    
+        <b>if </b>(noKeys) {
+            keyData['keys'] = [];
+            keys = [];
+            <b>if </b>(keyData['shift']) {
+                keyData['keys'].push(js.input.KEY.SHIFT); //Fix bug for YUI's KeyListener
+                keys.push(js.input.KEY.SHIFT);
+            }
+            <b>if </b>(keyData['alt']) {
+                keyData['keys'].push(js.input.KEY.ALT);
+                keys.push(js.input.KEY.ALT);
+            }                
+            <b>if </b>(keyData['ctrl']) {
+                keyData['keys'].push(js.input.KEY.CONTROL);
+                keys.push(js.input.KEY.CONTROL);
+            }                
+        }
+                
+        <b>for </b>(<b>var </b>i=0,len=keys.length;i&lt;len;i++){
+            <b>this</b>._KEY_MARK[keys[i]] = 1&lt;&lt;i;
+        }
+        
+        <b>this</b>.onKeyDown(
+            keyData,
+            {fn:<b>function </b>(type, args){
+                <b>this</b>._holdBuffer|= <b>this</b>._KEY_MARK[args[0]];//键值对应bit设置为1
+                <b>if </b>(!<b>this</b>._holdKeys.contains(args[0])) <b>this</b>._holdKeys.push(args[0]);//(不重复地)按时间顺序记录Hold键
+                
+                <b>if </b>(<b>this</b>._keyLoggable){
+                    <b>if </b>(<b>this</b>._keyLog.length&gt;=32) <b>this</b>._keyLog.shift();//只记录最近32个按键的信息
+                    <b>this</b>._keyLog.insertAt(0, {code:args[0],time:<b>new </b>Date()});                                        
+                }
+                                
+                <b>if </b>(fnKeyDown) fnKeyDown.call(contextKeyDown||<b>this</b>, args[0]);
+            }} 
+        );
+        
+        <b>var </b>newKeyData = {};
+        <b>if </b>(noKeys) {
+            newKeyData['keys'] = keyData['keys'];
+            <b>if </b>(keyData['shift']) {
+                newKeyData['shift'] = <b>false</b>; //Fix bug for YUI's KeyListener
+            }
+            <b>if </b>(keyData['alt']) {
+                newKeyData['alt'] = <b>false</b>;
+            }
+            <b>if </b>(keyData['ctrl']) {
+                newKeyData['ctrl'] = <b>false</b>;
+            }                
+        }        
+        <b>this</b>.onKeyUp(
+            noKeys?newKeyData:keyData,
+            {fn:<b>function </b>(type, args){
+                <b>var </b>k = Math.log(<b>this</b>._KEY_MARK[args[0]])/Math.log(2);//键值对应bit设置为0
+                <b>this</b>._holdBuffer&= ~(1 &lt;&lt; k) 
+                <b>this</b>._holdKeys.remove(args[0]);//删除原记录
+                
+                <b>if </b>(fnKeyUp) fnKeyUp.call(contextKeyUp||<b>this</b>, args[0]);
+            }}
+        );
+    },
+    _addKeyListener: <b>function </b>(type, keyData, callback){
+        <b>if </b>(!callback) <b>throw </b><b>new </b>TypeError();
+        <b>var </b>fn = callback['fn'], args = callback['args'], scope = callback['scope']||<b>this</b>;
+        <b>if </b>(!fn) <b>throw </b><b>new </b>TypeError();
+        
+        <b>var </b>k = <b>new </b>js.util.KeyListener(document, keyData, {
+            'fn': fn,
+            'scope': args,
+            'correctScope': scope
+        }, type);
+        k.enable();
+        
+        <b>if </b>(!<b>this</b>._keyListeners) <b>this</b>._keyListeners = {};
+        <b>this</b>._keyListeners[js.lang.System.getUUID()] = k;
+    },
+<span class="multiComment">    /**
+     * Listen when keys released.
+     * 
+     * @method onKeyUp
+     * @param {Array&lt;Int&gt;} keyData
+     * @param {js.lang.Callback} callback
+     */</span>
+    onKeyUp: <b>function </b>(keyData, callback){
+        <b>this</b>._addKeyListener('keyup', keyData, callback);
+    },
+<span class="multiComment">    /**
+     * Listening when keys pressed.
+     * 
+     * @method onKeyDown
+     * @param {Array&lt;Int&gt;} keyData
+     * @param {js.lang.Callback} callback
+     */</span>
+    onKeyDown: <b>function </b>(keyData, callback){
+        <b>this</b>._addKeyListener('keydown', keyData, callback);
+    },
+<span class="multiComment">    /**
+     * Disables all keys's listening.
+     * 
+     * @method disableAllKeys
+     */</span>
+    disableAllKeys: <b>function </b>(){
+        <b>for </b>(k<b> in </b><b>this</b>._keyListeners) {
+            <b>var </b>l = <b>this</b>._keyListeners[k];
+            <b>if </b>(l) l.disable();
+        }            
+    },
+<span class="multiComment">    /**
+     * Enables all keys's listening.
+     * 
+     * @method enableAllKeys
+     */</span>
+    enableAllKeys: <b>function </b>(){
+        <b>for </b>(k<b> in </b><b>this</b>._keyListeners) {
+            <b>var </b>l = <b>this</b>._keyListeners[k];
+            <b>if </b>(l) l.enable();
+        }
+    },
+<span class="multiComment">    /**
+     * Remove all keys's listening.
+     * 
+     * @method removeAllKeys
+     */</span>
+    removeAllKeys: <b>function </b>(){
+        <b>this</b>.disableAllKeys();
+        <b>this</b>._keyListeners = {};
+    }
+}
+<span class="multiComment">/**
+ * @class js.input.Mouse
+ * @static
+ */</span>
+js.input.Mouse = {LEFT: 0, CENTER: 1, RIGHT: 2};
+<span class="multiComment">/** @constant {Int} LEFT */</span>
+<span class="multiComment">/** @constant {Int} CENTER */</span>
+<span class="multiComment">/** @constant {Int} RIGHT */</span>
+
+<span class="multiComment">/**
+ * @class js.input.MouseProvider
+ */</span>
+js.input.MouseProvider = <b>function </b>(){};
+js.input.MouseProvider.prototype = {
+    _getCacheIndex4Mouse: <b>function </b>(el, sType, fn, button) {
+        <b>var </b>a = <b>this</b>._mouseCache;
+        <b>for </b>(<b>var </b>i=0, l=a.length; i&lt;l; i++) {
+            <b>var </b>li = a[i];
+            <b>if </b>( li && li['fn'] == fn  && li['el'] == el  && li['type'] == sType  && li['button'] == button) {
+                <b>return</b> i;
+            }
+        }
+        <b>return</b> -1;
+    },
+    _cacheMouseFn: <b>function </b>(el, sType, fn, wfn, button) {
+        <b>if </b>(!<b>this</b>._mouseCache) <b>this</b>._mouseCache = [];
+        <b>this</b>._mouseCache.push({
+            'fn':fn,
+            'type':sType,
+            'el':el,
+            'button':button,
+            'wfn':wfn
+        });
+    },
+    _clearCacheItem4Mouse: <b>function </b>(index){
+        <b>delete </b><b>this</b>._mouseCache[index]['wfn'];
+        <b>delete </b><b>this</b>._mouseCache[index]['fn'];
+        <b>this</b>._mouseCache.splice(index, 1);
+    },
+    _fixMouseButton: <b>function </b>(button){
+        <b>if </b>(js.lang.System.isUndefined(button)) button = 0;
+        <b>if </b>(js.core.Env.ie){
+            <b>switch </b>(button) {
+            <b>case </b>1:
+                <b>return</b> 4;
+            <b>case </b>2:
+                <b>return</b> 2;
+            default:
+                <b>return</b> 1;
+            }
+        }
+        <b>return</b> button;
+    },
+<span class="multiComment">    /**
+     * @method onMouseShift
+     * @param {String|HTMLElement} el
+     * @param {String} evtName over|out|move|...
+     * @param {Function} fn
+     * @param {Object} args:optional
+     * @param {Object|Boolean} context:optional 
+     * @return {Boolean}
+     */</span>
+    onMouseShift: <b>function </b>(el, evtName, fn, args, context){
+        <b>return</b> js.core.Event.addListener(el, 'mouse'+evtName, fn, args, context||<b>this</b>);
+    },
+<span class="multiComment">    /**
+     * @method onMouseTap
+     * @param {String|HTMLElement} el
+     * @param {String} evtName up|down
+     * @param {Function} fn
+     * @param {Object} args:optional
+     * @param {Object|Boolean} context:optional 
+     * @param {Int} button:optional 0:left|1:center|2:right. The default value is 0. 
+     * @return {Boolean}
+     */</span>
+    onMouseTap: <b>function </b>(el, evtName, fn, args, context, button){
+        el = js.core.Dom.$(el);
+        <b>if </b>(!el || !evtName || !fn) <b>return</b> <b>false</b>;
+        button = <b>this</b>._fixMouseButton(button);
+        
+        <b>var </b>wfn = <b>function </b>(e, a){
+            <b>if </b>(e.button == button) <b>return</b> fn.call(<b>this</b>, e, a);
+        };
+        <b>this</b>._cacheMouseFn(el, evtName, fn, wfn, button);
+        
+        <b>return</b> js.core.Event.addListener(el, (evtName=='click'||evtName=='dblclick')?evtName:('mouse'+evtName), wfn, args, context||<b>this</b>);
+    },
+<span class="multiComment">    /**
+     * @method onMouseLeftTap
+     * @param {String|HTMLElement} el
+     * @param {String} evtName up|down
+     * @param {Function} fn
+     * @param {Object} args:optional
+     * @param {Object|Boolean} context:optional 
+     * @return {Boolean}
+     */</span>
+    onMouseLeftTap: <b>function </b>(el, evtName, fn, args, context){
+        <b>return</b> <b>this</b>.onMouseTap(el, evtName, fn, args, context, 0);
+    },
+<span class="multiComment">    /**
+     * @method onMouseCenterTap
+     * @param {String|HTMLElement} el
+     * @param {String} evtName up|down
+     * @param {Function} fn
+     * @param {Object} args:optional
+     * @param {Object|Boolean} context:optional 
+     * @return {Boolean}
+     */</span>
+    onMouseCenterTap: <b>function </b>(el, evtName, fn, args, context){
+        <b>return</b> <b>this</b>.onMouseTap(el, evtName, fn, args, context, 1);
+    },
+<span class="multiComment">    /**
+     * @method onMouseRightTap
+     * @param {String|HTMLElement} el
+     * @param {String} evtName up|down
+     * @param {Function} fn
+     * @param {Object} args:optional
+     * @param {Object|Boolean} context:optional 
+     * @return {Boolean}
+     */</span>
+    onMouseRightTap: <b>function </b>(el, evtName, fn, args, context){
+        <b>return</b> <b>this</b>.onMouseTap(el, evtName, fn, args, context, 2);
+    },
+<span class="multiComment">    /**
+     * @method rmMouseTap
+     * @param {String|HTMLElement} el
+     * @param {String} evtName
+     * @param {Function} fn
+     * @param {Int} button:optional 0:left|1:center|2:right. The default value is 0.
+     * @return {Boolean}
+     */</span>
+    rmMouseTap: <b>function </b>(el, evtName, fn, button){
+        el = js.core.Dom.$(el);
+        <b>if </b>(!el || !evtName || !fn) <b>return</b> <b>false</b>;
+        button = <b>this</b>._fixMouseButton(button);
+        
+        <b>var </b>index = <b>this</b>._getCacheIndex4Mouse(el, evtName, fn, button);
+        <b>if </b>(index == -1) <b>return</b> <b>false</b>;
+        
+        <b>var </b>rst = js.core.Event.removeListener(el, (evtName=='click'||evtName=='dblclick')?evtName:('mouse'+evtName), <b>this</b>._mouseCache[index]);
+        <b>this</b>._clearCacheItem4Mouse(index);
+        <b>return</b> rst;
+    },
+<span class="multiComment">    /**
+     * @method rmMouseLeftTap
+     * @param {String|HTMLElement} el
+     * @param {String} evtName
+     * @param {Function} fn
+     * @return {Boolean}
+     */</span>
+    rmMouseLeftTap: <b>function </b>(el, evtName, fn, context){
+        <b>return</b> <b>this</b>.rmMouseTap(el, evtName, fn, 0);
+    },
+<span class="multiComment">    /**
+     * @method rmMouseCenterTap
+     * @param {String|HTMLElement} el
+     * @param {String} evtName
+     * @param {Function} fn
+     * @return {Boolean}
+     */</span>
+    rmMouseCenterTap: <b>function </b>(el, evtName, fn, context){
+        <b>return</b> <b>this</b>.rmMouseTap(el, evtName, fn, 1);
+    },
+<span class="multiComment">    /**
+     * @method rmMouseRightTap
+     * @param {String|HTMLElement} el
+     * @param {String} evtName
+     * @param {Function} fn
+     * @return {Boolean}
+     */</span>
+    rmMouseRightTap: <b>function </b>(el, evtName, fn, context){
+        <b>return</b> <b>this</b>.rmMouseTap(el, evtName, fn, 2);
+    }
+}
+            
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

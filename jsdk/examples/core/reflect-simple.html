@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * @author fengchun
+-->
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>JSDK Example</title>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-reflect.js"></script>
+
+<style>
+</style>
+
+<script>
+var MyClass = function(name){
+	this.name = name;
+}
+MyClass.prototype = {
+	toClassString: function(){
+		return '<MyClass>:'+this.name;
+	}	
+}
+
+var Main = function(){
+	return {
+		test: function(){
+			try{
+				var clazz = js.reflect.Class.forName('MyClass');
+				var obj = clazz.newInstance('test!');
+				alert(clazz.getMethod('toClassString').invoke(obj));
+				alert(clazz.getField('name').get(obj));				
+			}catch(e){
+				alert(e);
+			}
+		}	
+	}
+}();	
+</script>
+</head>
+
+<body>
+<button onclick="Main.test();">test</button>
+</body>
+</html>

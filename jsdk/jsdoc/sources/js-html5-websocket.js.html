@@ -1,0 +1,113 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">util\js-html5-websocket.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2011-9-28
+ * 
+ * @browsers FF 4+;Chrome 8+
+ */</span>
+js.lang.System.namespace('js.html5');
+
+<span class="multiComment">/**
+ * URI format: scheme://user:passward@host:port/path?query#fragment
+ * 
+ * @class js.html5.WebSocket
+ * @constructor
+ * @param {String} host:optional
+ * @param {Int} port:optional
+ * @param {String} path:optional
+ * @throws {Error} when the browser not support HTML5's WebSocket
+ */</span>
+js.html5.WebSocket = <b>function </b>(host, port, path){
+    <b>if </b>(!window.WebSocket) <b>throw </b><b>new </b>Error("[js.html5.WebSocket]The browser not support HTML5's WebSocket");
+    
+<span class="multiComment">    /**
+     * @field {String} host
+     */</span>
+    <b>this</b>.host = host?host:'localhost';
+<span class="multiComment">    /**
+     * @field {Int} port
+     */</span>
+    <b>this</b>.port = port?port:80;
+<span class="multiComment">    /**
+     * @field {String} path
+     */</span>
+    <b>this</b>.path = path?(path.startsWith('/')?path:'/'+path):'';
+    
+    <b>this</b>._events = {};
+    
+}    
+<span class="multiComment">/**
+ * @event open
+ * @event message
+ * @event close
+ * @event error
+ */</span>
+js.html5.WebSocket.prototype = {
+<span class="multiComment">    /**
+     * @method getStatus
+     * @return {Int} status
+     */</span>
+    getStatus: <b>function </b>(){        
+        <b>return</b> <b>this</b>._socket?<b>this</b>._socket.readyState:-1;
+    },
+<span class="multiComment">    /**
+     * @method connect
+     */</span>
+    connect: <b>function </b>(){    
+        <b>this</b>._socket = <b>null</b>;
+        <b>this</b>._socket = <b>new </b>WebSocket('ws://'+<b>this</b>.host+':'+<b>this</b>.port+<b>this</b>.path);
+        
+        <b>for </b>(k<b> in </b><b>this</b>._events){
+            <b>this</b>._socket['on'+k] = <b>this</b>._events[k];
+        }        
+    },
+<span class="multiComment">    /**
+     * @method on
+     * @param {String} eName values: open|message|close|error
+     * @param {Function} fn
+     */</span>
+    on: <b>function </b>(eName, fn){
+        <b>if </b>(['open','message','close','error'].indexOf(eName) &lt; 0) <b>return</b>;        
+        
+        <b>if </b>(!fn) <b>return</b>;
+        <b>this</b>._events[eName] = fn;
+    },
+<span class="multiComment">    /**
+     * @method send
+     * @param {String} data
+     */</span>
+    send: <b>function </b>(data){
+        <b>if </b>(!<b>this</b>._socket) <b>throw </b><b>new </b>Error("[js.html5.WebSocket]WebSocket not connect!");        
+        <b>this</b>._socket.send(data);
+    },
+<span class="multiComment">    /**
+     * @method close
+     */</span>
+    close: <b>function </b>(){
+        <b>if </b>(<b>this</b>._socket) <b>this</b>._socket.close(); 
+        <b>this</b>._socket = <b>null</b>;
+    }    
+}
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

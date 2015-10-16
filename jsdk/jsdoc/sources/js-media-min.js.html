@@ -1,0 +1,32 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-media-min.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2011-04-21
+ * @date 2011-04-25
+ * 
+ * @requires /library/sm2/soundmanager2.js
+ */</span>
+js.lang.System.namespace("js.media");js.core.Event.on(window,"load",<b>function </b>(){js.lang.Loader.loadLib({js:"/library/sm2/soundmanager2.js"},<b>function </b>(){<b>var </b>a=soundManager;a.url=js.lang.Loader.SOURCE_ROOT_DIR+"/library/sm2/";a.flashVersion=9;a.useHighPerformance=<b>true</b>;a.beginDelayedInit();js.media.SoundPlayer=<b>function </b>(){<b>return</b>{setValue:<b>function </b>(c,b){a[c]=b;},getValue:<b>function </b>(b){<b>return</b> a[b];},canPlayMIME:<b>function </b>(b){<b>return</b> a.canPlayMIME(b);},canPlayURL:<b>function </b>(b){<b>return</b> a.canPlayURL(b);},isOK:<b>function </b>(){<b>return</b> a.ok();},reboot:<b>function </b>(){a.reboot();},destroySounds:<b>function </b>(c){<b>if </b>(c){a.destroySound(c);}<b>else </b>{<b>var </b>b=getSoundIDs();<b>if </b>(b&&b.length&gt;0){b.forEach(<b>function </b>(d){a.destroySound(d);});}}},getSounds:<b>function </b>(b){<b>if </b>(b){<b>return</b> a.getSoundById(b);}<b>return</b> a.sounds;},getSoundIDs:<b>function </b>(){<b>return</b> a.soundIDs;},createSounds:<b>function </b>(b){<b>if </b>(js.lang.System.isArray(b)){b.forEach(<b>function </b>(c){a.createSound(c);});}<b>else </b>{a.createSound(b);}},load:<b>function </b>(c,b){a.load(c,b);},unload:<b>function </b>(b){a.unload(b);},play:<b>function </b>(c,b){a.play(c,b);},stop:<b>function </b>(b){<b>if </b>(b){a.stop(b);}<b>else </b>{a.stopAll();}},pause:<b>function </b>(b){<b>if </b>(b){a.pause(b);}<b>else </b>{a.pauseAll();}},resume:<b>function </b>(b){<b>if </b>(b){a.resume(b);}<b>else </b>{a.resumeAll();}},togglePause:<b>function </b>(b){a.togglePause(b);},mute:<b>function </b>(b){a.mute(b);},unmute:<b>function </b>(b){a.unmute(b);},toggleMute:<b>function </b>(b){a.toggleMute(b);},setPan:<b>function </b>(c,b){a.setPan(c,b);},setPosition:<b>function </b>(c,b){a.setPosition(c,b);},setVolume:<b>function </b>(c,b){a.setVolume(c,b);},on:<b>function </b>(d,c,b){a["on"+d](c,b||<b>this</b>);}};}();});});
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

@@ -1,0 +1,236 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.d2.Canvas</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-2d-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.d2</div>
+<div class="topic" title="js.d2.Canvas">
+Class: 
+Canvas</div>
+
+<b>public</b> Canvas
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="Canvas" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public Canvas">+ Canvas</span></span>(<span title="required"><b>config</b></span>:<a href="js.d2.Canvas$Config.html" title="js.d2.Canvas$Config">Canvas$Config</a>)</span>
+<div id="Canvas_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>config</b></span>  &lt;<a href="js.d2.Canvas$Config.html" title="js.d2.Canvas$Config">Canvas$Config</a>&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="setViewWindow" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setViewWindow">+ setViewWindow</span></span>(<span title="required"><b>x</b></span>:Number, <span title="required"><b>y</b></span>:Number, <span title="required"><b>w</b></span>:Number, <span title="required"><b>h</b></span>:Number):void</span>
+<div id="setViewWindow_detail" style="display: none;">
+<pre class="desc">Sets the view window on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>x</b></span>  &lt;Number&gt; X coordinate relative to the canvas</dd><br/>
+<dd><span title="required"><b>y</b></span>  &lt;Number&gt; X coordinate relative to the canvas</dd><br/>
+<dd><span title="required"><b>w</b></span>  &lt;Number&gt; with</dd><br/>
+<dd><span title="required"><b>h</b></span>  &lt;Number&gt; height</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="moveViewPoint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public moveViewPoint">+ moveViewPoint</span></span>(<span title="required"><b>dx</b></span>:Number, <span title="required"><b>dy</b></span>:Number, <i title="optional"><b>limitRect</b></i>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):void</span>
+<div id="moveViewPoint_detail" style="display: none;">
+<pre class="desc">Move the view window in the limit bound.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>dx</b></span>  &lt;Number&gt; move distance in the X-axis</dd><br/>
+<dd><span title="required"><b>dy</b></span>  &lt;Number&gt; move distance in the Y-axis</dd><br/>
+<dd><i title="optional"><b>limitRect</b></i>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getViewWindow" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getViewWindow">+ getViewWindow</span></span>():<a href="js.math.Rect.html" title="js.math.Rect">Rect</a></span>
+<div id="getViewWindow_detail" style="display: none;">
+<pre class="desc">Returns the view window.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getConfig" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getConfig">+ getConfig</span></span>(<i title="optional"><b>k</b></i>:String):<a href="js.d2.Canvas$Config.html" title="js.d2.Canvas$Config">Canvas$Config</a></span>
+<div id="getConfig_detail" style="display: none;">
+<pre class="desc">Returns the value of the key.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>k</b></i>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.d2.Canvas$Config.html" title="js.d2.Canvas$Config">Canvas$Config</a>&gt; v</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="hide" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public hide">+ hide</span></span>():void</span>
+<div id="hide_detail" style="display: none;">
+<pre class="desc">Hide the canvas.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="show" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public show">+ show</span></span>():void</span>
+<div id="show_detail" style="display: none;">
+<pre class="desc">Show the canvas.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="getXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getXY">+ getXY</span></span>():<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getXY_detail" style="display: none;">
+<pre class="desc">Returns the absolute Coordinates(Relative to the browser).</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="move" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public move">+ move</span></span>(<span title="required"><b>dx</b></span>:Number, <span title="required"><b>dy</b></span>:Number):void</span>
+<div id="move_detail" style="display: none;">
+<pre class="desc">Move the canvas in the browser.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>dx</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>dy</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setXY">+ setXY</span></span>(<span title="required"><b>x</b></span>:Number, <span title="required"><b>y</b></span>:Number):void</span>
+<div id="setXY_detail" style="display: none;">
+<pre class="desc">Sets the new absolute Coordinates(Relative to the browser).</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>x</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>y</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setSize" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setSize">+ setSize</span></span>(<span title="required"><b>w</b></span>:Number, <span title="required"><b>h</b></span>:Number):void</span>
+<div id="setSize_detail" style="display: none;">
+<pre class="desc">Sets the size.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>w</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>h</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getSize" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getSize">+ getSize</span></span>():Array</span>
+<div id="getSize_detail" style="display: none;">
+<pre class="desc">Returns the size.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getBound" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getBound">+ getBound</span></span>():<a href="js.math.Rect.html" title="js.math.Rect">Rect</a></span>
+<div id="getBound_detail" style="display: none;">
+<pre class="desc">Returns the bound relative to the canvas self.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getScreenBound" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getScreenBound">+ getScreenBound</span></span>():<a href="js.math.Rect.html" title="js.math.Rect">Rect</a></span>
+<div id="getScreenBound_detail" style="display: none;">
+<pre class="desc">Returns the canvas bound relative to the browser.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="drawText" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public drawText">+ drawText</span></span>(<span title="required"><b>text</b></span>:<a href="js.d2.Canvas$Text.html" title="js.d2.Canvas$Text">Canvas$Text</a>):HTMLElement</span>
+<div id="drawText_detail" style="display: none;">
+<pre class="desc">Draw new text on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>text</b></span>  &lt;<a href="js.d2.Canvas$Text.html" title="js.d2.Canvas$Text">Canvas$Text</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; the DOM Element</dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the arguments is empty</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="createText" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public createText">+ createText</span></span>(<span title="required"><b>text</b></span>:<a href="js.d2.Canvas$Text.html" title="js.d2.Canvas$Text">Canvas$Text</a>):HTMLElement</span>
+<div id="createText_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>text</b></span>  &lt;<a href="js.d2.Canvas$Text.html" title="js.d2.Canvas$Text">Canvas$Text</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; the DOM Element</dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the arguments is empty</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="updateText" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public updateText">+ updateText</span></span>(<span title="required"><b>text</b></span>:<a href="js.d2.Canvas$Text.html" title="js.d2.Canvas$Text">Canvas$Text</a>):HTMLElement</span>
+<div id="updateText_detail" style="display: none;">
+<pre class="desc">Update old text on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>text</b></span>  &lt;<a href="js.d2.Canvas$Text.html" title="js.d2.Canvas$Text">Canvas$Text</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; the DOM Element</dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the arguments is empty</dd><br/>
+<dd> &lt;Error&gt; when the element not found</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="drawImage" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public drawImage">+ drawImage</span></span>(<span title="required"><b>image</b></span>:<a href="js.d2.Canvas$Image.html" title="js.d2.Canvas$Image">Canvas$Image</a>):HTMLElement</span>
+<div id="drawImage_detail" style="display: none;">
+<pre class="desc">Draw new image on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>image</b></span>  &lt;<a href="js.d2.Canvas$Image.html" title="js.d2.Canvas$Image">Canvas$Image</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; the DOM Element</dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the arguments is empty</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="createImage" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public createImage">+ createImage</span></span>(<span title="required"><b>image</b></span>:<a href="js.d2.Canvas$Image.html" title="js.d2.Canvas$Image">Canvas$Image</a>):HTMLElement</span>
+<div id="createImage_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>image</b></span>  &lt;<a href="js.d2.Canvas$Image.html" title="js.d2.Canvas$Image">Canvas$Image</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; the DOM Element</dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the arguments is empty</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="updateImage" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public updateImage">+ updateImage</span></span>(<span title="required"><b>image</b></span>:<a href="js.d2.Canvas$Image.html" title="js.d2.Canvas$Image">Canvas$Image</a>):HTMLElement</span>
+<div id="updateImage_detail" style="display: none;">
+<pre class="desc">Update old image on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>image</b></span>  &lt;<a href="js.d2.Canvas$Image.html" title="js.d2.Canvas$Image">Canvas$Image</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; the DOM Element</dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the arguments is empty</dd><br/>
+<dd> &lt;Error&gt; when the element not found</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="drawElement" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public drawElement">+ drawElement</span></span>(<span title="required"><b>tag</b></span>:String, <span title="required"><b>attrs</b></span>:Object, <span title="required"><b>styles</b></span>:Object, <span title="required"><b>html</b></span>:String):void</span>
+<div id="drawElement_detail" style="display: none;">
+<pre class="desc">Paint a new element on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>tag</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>attrs</b></span>  &lt;Object&gt; </dd><br/>
+<dd><span title="required"><b>styles</b></span>  &lt;Object&gt; </dd><br/>
+<dd><span title="required"><b>html</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="appendElement" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public appendElement">+ appendElement</span></span>(<span title="required"><b>el</b></span>:HTMLElement):void</span>
+<div id="appendElement_detail" style="display: none;">
+<pre class="desc">Append a new element on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;HTMLElement&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="erase" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public erase">+ erase</span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array):void</span>
+<div id="erase_detail" style="display: none;">
+<pre class="desc">Erase a dom element on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="destory" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public destory">+ destory</span></span>():void</span>
+<div id="destory_detail" style="display: none;">
+<pre class="desc">Clear and Destory the canvas.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="clear" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public clear">+ clear</span></span>():void</span>
+<div id="clear_detail" style="display: none;">
+<pre class="desc">Clear all elements on the canvas and remove all event listeners.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="printFPS" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public printFPS">+ printFPS</span></span>(<span title="required"><b>fps</b></span>:Number):void</span>
+<div id="printFPS_detail" style="display: none;">
+<pre class="desc">Print FPS on the canvas for debug.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>fps</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

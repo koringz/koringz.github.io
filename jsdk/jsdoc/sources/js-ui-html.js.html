@@ -1,0 +1,804 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">jsui\js-ui-html.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.2
+ * @author feng.chun
+ * @date 2011-09-05
+ * @date 2011-09-14
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-8-15
+ */</span>
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLButton
+ * @constructor
+ * @extends js.ui.Widget
+ * 
+ * @param {js.ui.Widget$Config} config
+ */</span>
+js.ui.HTMLButton = <b>function </b>(config){
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLButton';
+    js.ui.HTMLButton.superclass.constructor.apply(<b>this</b>, [config]);        
+};  
+js.lang.System.extend(js.ui.HTMLButton, js.ui.Widget, {
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        <b>this</b>.set('type','button'); //fix auto submit<b> in </b>form by FF
+        <b>this</b>.set('html',<b>this</b>.get('text')); 
+        <b>this</b>._renderHTMLWidget('button');
+        <b>this</b>.fireEvent('rendered');        
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLImage
+ * @constructor
+ * @extends js.ui.Widget
+ * 
+ * @struct js.ui.HTMLImage$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "src":{"type":"string"}                
+ *         }
+ *      ,"extends":"js.ui.Widget$Config"
+ * }
+ * @param {js.ui.HTMLImage$Config} config
+ */</span>
+js.ui.HTMLImage = <b>function </b>(config){
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLImage';
+    js.ui.HTMLImage.superclass.constructor.apply(<b>this</b>, [config]);        
+};  
+js.lang.System.extend(js.ui.HTMLImage, js.ui.Widget, {
+    DOM_ATTRIBUTES: {
+        id:1,
+        name:1,
+        title:1,
+        type:1,
+        cssName:1,
+        cssText:1,
+        src:1,
+        widgetClass:1
+    },
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        <b>this</b>._renderHTMLWidget('img');
+        <b>this</b>.fireEvent('rendered');        
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLTextbox
+ * @constructor
+ * @extends js.ui.Widget 
+ * @param {js.ui.Widget$Config} config
+ */</span>
+js.ui.HTMLTextbox = <b>function </b>(config){ 
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLTextbox';
+    js.ui.HTMLTextbox.superclass.constructor.apply(<b>this</b>, [config]);
+};  
+js.lang.System.extend(js.ui.HTMLTextbox, js.ui.Widget, {
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        <b>this</b>.set('type','text');
+        <b>this</b>._renderHTMLWidget('input');
+        <b>this</b>.fireEvent('rendered');        
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLPassword
+ * @constructor
+ * @extends js.ui.Widget 
+ * @param {js.ui.Widget$Config} config
+ */</span>
+js.ui.HTMLPassword = <b>function </b>(config){ 
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLPassword';
+    js.ui.HTMLPassword.superclass.constructor.apply(<b>this</b>, [config]);
+};  
+js.lang.System.extend(js.ui.HTMLPassword, js.ui.Widget, {
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        <b>this</b>.set('type','password');
+        <b>this</b>._renderHTMLWidget('input');
+        <b>this</b>.fireEvent('rendered');        
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLHidden
+ * @constructor
+ * @extends js.ui.Widget 
+ * @param {js.ui.Widget$Config} config
+ */</span>
+js.ui.HTMLHidden = <b>function </b>(config){ 
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLHidden';
+    js.ui.HTMLHidden.superclass.constructor.apply(<b>this</b>, [config]);
+};  
+js.lang.System.extend(js.ui.HTMLHidden, js.ui.Widget, {
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        <b>this</b>.set('type','hidden');
+        <b>this</b>._renderHTMLWidget('input');
+        <b>this</b>.fireEvent('rendered');        
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLRadio
+ * @constructor
+ * @extends js.ui.Widget 
+ * @param {js.ui.Widget$Config} config
+ */</span>
+js.ui.HTMLRadio = <b>function </b>(config){ 
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLRadio';
+    js.ui.HTMLRadio.superclass.constructor.apply(<b>this</b>, [config]);
+};  
+js.lang.System.extend(js.ui.HTMLRadio, js.ui.Widget, {
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        <b>this</b>.set('type','radio');
+        <b>this</b>._renderHTMLWidget('input');
+        <b>this</b>.fireEvent('rendered');        
+    },
+<span class="multiComment">    /**
+     * @method select
+     */</span>
+    select:<b>function </b>(){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b>;
+        
+        <b>this</b>.set('checked', <b>true</b>);
+        el.checked = <b>true</b>;
+    },
+<span class="multiComment">    /**
+     * @method unselect
+     */</span>
+    unselect:<b>function </b>(){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b>;
+        
+        <b>this</b>.set('checked', <b>false</b>);
+        el.checked = <b>false</b>;
+    },
+<span class="multiComment">    /**
+     * @method isSelected
+     * @return {Boolean}
+     */</span>
+    isSelected:<b>function </b>(){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b> <b>null</b>;
+        
+        <b>return</b> el.checked;
+    },
+<span class="multiComment">    /**
+     * @method getSelectedValue
+     * @return {String}
+     */</span>
+    getSelectedValue:<b>function </b>(){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b> <b>null</b>;
+        
+        <b>return</b> <b>this</b>.isSelected()?<b>this</b>.getValue():<b>null</b>;
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLCheckbox
+ * @constructor
+ * @extends js.ui.Widget 
+ * @param {js.ui.Widget$Config} config
+ */</span>
+js.ui.HTMLCheckbox = <b>function </b>(config){ 
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLCheckbox';
+    js.ui.HTMLCheckbox.superclass.constructor.apply(<b>this</b>, [config]);    
+};  
+js.lang.System.extend(js.ui.HTMLCheckbox, js.ui.Widget, {
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        <b>this</b>.set('type','checkbox');
+        <b>this</b>._renderHTMLWidget('input');
+        <b>this</b>.fireEvent('rendered');        
+    },
+<span class="multiComment">    /**
+     * @method select
+     */</span>
+    select:<b>function </b>(){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b>;
+        
+        <b>this</b>.set('checked', <b>true</b>);
+        el.checked = <b>true</b>;
+    },
+<span class="multiComment">    /**
+     * @method unselect
+     */</span>
+    unselect:<b>function </b>(){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b>;
+        
+        <b>this</b>.set('checked', <b>false</b>);
+        el.checked = <b>false</b>;
+    },
+<span class="multiComment">    /**
+     * @method isSelected
+     * @return {Boolean}
+     */</span>
+    isSelected:<b>function </b>(){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b> <b>null</b>;
+        
+        <b>return</b> el.checked;
+    },
+<span class="multiComment">    /**
+     * @method getSelectedValue
+     * @return {Boolean}
+     */</span>
+    getSelectedValue:<b>function </b>(){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b> <b>null</b>;
+        
+        <b>return</b> <b>this</b>.isSelected()?<b>this</b>.getValue():<b>null</b>;
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLSelect
+ * @constructor
+ * @extends js.ui.Widget 
+ * 
+ * @struct js.ui.HTMLSelect$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             ,"multiple":{"type":"boolean"}
+ *             ,"size":{"type":"string"} *                               
+ *         }
+ *      ,"extends":"js.ui.Widget$Config"
+ * }
+ * @param {js.ui.HTMLSelect$Config} config
+ */</span>
+js.ui.HTMLSelect = <b>function </b>(config){ 
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLSelect';
+    js.ui.HTMLSelect.superclass.constructor.apply(<b>this</b>, [config]);    
+};  
+js.lang.System.extend(js.ui.HTMLSelect, js.ui.Widget, {
+    DOM_ATTRIBUTES: {
+        id:1,
+        name:1,
+        title:1,
+        cssName:1,
+        cssText:1,
+        multiple:1,
+        size:1,
+        validate:1,
+        widgetClass:1
+    },
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        <b>this</b>._renderHTMLWidget('select');        
+        <b>this</b>.addOption(<b>this</b>.get('options'));
+        <b>this</b>.fireEvent('rendered');        
+    },
+<span class="multiComment">    /**
+     * @method getSelectedValue
+     * @return {String}
+     */</span>
+    getSelectedValue: <b>function </b>(){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b> <b>null</b>;
+        
+        <b>var </b>sIndex = el.selectedIndex;
+        <b>if </b>(sIndex &lt; 0) <b>return</b> <b>null</b>;
+        
+        <b>if </b>(!<b>this</b>.get('multiple')) <b>return</b> [el.options[sIndex].value];
+        
+        <b>var </b>v = [], options = el.options;
+        <b>for </b>(<b>var </b>i=0, len=options.length;i&lt;len;i++){
+            <b>var </b>opt = options[i];
+            <b>if </b>(opt.selected) v.push(opt.value);
+        }
+        <b>return</b> v;
+    },
+    _addOption: <b>function </b>(el, optionGroup, optData){
+        <b>if </b>(optionGroup) {
+            <b>var </b>option = <b>new </b>Option(); 
+            option.value = optData['value']; 
+            option.innerHTML = optData['text']; 
+            optionGroup.appendChild(option);
+        }<b>else </b>{
+            el.options.add(<b>new </b>Option(optData['text'], optData['value'])); 
+        }
+    },
+    _addOptionGroup: <b>function </b>(el, group, label){
+        <b>var </b>optionGroup = <b>null</b>;
+        <b>if </b>(label){
+            optionGroup = document.createElement('optgroup'); 
+            optionGroup.label = label; 
+            el.appendChild(optionGroup);    
+        };
+        
+        <b>for </b>(<b>var </b>i = 0, len = group.length; i &lt; len; i++) {
+            <b>this</b>._addOption(el, optionGroup, group[i]);
+        }
+    },
+<span class="multiComment">    /**
+     * @method addOption
+     * 
+     * @struct js.ui.HTMLSelect$Option {
+     *         "description":""
+     *         ,"type":"object"
+     *         ,"properties":{
+     *             "label":{"type":"string"}
+     *             ,"group":{
+     *                 "type":"array"
+     *                 ,"items":[{
+     *                     "type":"object"
+     *                     ,"properties":{
+     *                         "text":{"type":"string"}
+     *                         ,"value":{"type":"string"}
+     *                     }
+     *                 }]
+     *             }                 
+     *         }
+     * }
+     * @param {js.ui.HTMLSelect$Option|js.ui.HTMLSelect$Option[]} opts
+     */</span>
+    addOption: <b>function </b>(opts){
+        <b>if </b>(!opts) <b>return</b>;
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b>;
+        
+        <b>if </b>(js.lang.System.isArray(opts)) {
+            <b>for </b>(<b>var </b>i=0, len=opts.length;i&lt;len;i++){
+                <b>var </b>opt = opts[i];
+                <b>this</b>._addOptionGroup(el, opt['group'], opt['label']);
+            }
+        }<b>else </b>{
+            <b>this</b>._addOptionGroup(el, opts['group'], opts['label']);
+        }        
+    },
+<span class="multiComment">    /**
+     * @method removeAt
+     * @param {Int} i
+     */</span>
+    removeAt: <b>function </b>(i){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b> <b>false</b>;
+        
+        <b>var </b>options = el.options;
+        <b>if </b>(i&lt;0 || i&gt;options.length) <b>return</b> <b>false</b>;
+        
+        <b>if </b>(js.core.Env.ie){
+            options.remove(i);
+        }<b>else </b>{
+            options[i] = <b>null</b>;
+        }
+        <b>return</b> <b>true</b>; 
+    },
+<span class="multiComment">    /**
+     * @method removeBy
+     * @param {String} value
+     */</span>
+    removeBy: <b>function </b>(value){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(!el) <b>return</b> <b>false</b>;
+        
+        <b>if </b>(js.lang.System.isUndefined(value)) <b>return</b> <b>false</b>;
+        
+        <b>var </b>options = el.options;
+        <b>for </b>(<b>var </b>i=0, len=options.length;i&lt;len;i++){
+            <b>if </b>(options[i].value==value) {
+                <b>if </b>(js.core.Env.ie){
+                    options.remove(i);
+                }<b>else </b>{
+                    options[i] = <b>null</b>;
+                }
+                <b>return</b> <b>true</b>;
+            }
+        }
+        <b>return</b> <b>false</b>;
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLFile
+ * @constructor
+ * @extends js.ui.Widget 
+ * 
+ * @param {js.ui.Widget$Config} config
+ */</span>
+js.ui.HTMLFile = <b>function </b>(config){ 
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLFile';
+    js.ui.HTMLFile.superclass.constructor.apply(<b>this</b>, [config]);    
+}
+js.lang.System.extend(js.ui.HTMLFile, js.ui.Widget, {
+    STYLE_ATTRIBUTES: {
+        display:1
+    },
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');        
+        <b>this</b>.set('type','file');
+        <b>this</b>._renderHTMLWidget('input');
+        <b>this</b>.fireEvent('rendered');        
+    }    
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLTextarea
+ * @constructor
+ * @extends js.ui.Widget 
+ * 
+ * @param {js.ui.Widget$Config} config
+ */</span>
+js.ui.HTMLTextarea = <b>function </b>(config){
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLTextarea';
+    js.ui.HTMLTextarea.superclass.constructor.apply(<b>this</b>, [config]);        
+};  
+js.lang.System.extend(js.ui.HTMLTextarea, js.ui.Widget, {
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');        
+        <b>this</b>._renderHTMLWidget('textarea');
+        <b>this</b>.fireEvent('rendered');        
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLForm
+ * @constructor
+ * @extends js.ui.Widget 
+ * 
+ * @struct js.ui.HTMLForm$Config {
+ *         "description":""
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "method":{"type":"string"}
+ *             ,"action":{"type":"string"}
+ *             ,"target":{"type":"string"}
+ *             ,"enctype":{"type":"string"}        
+ *         }
+ *      "extends":"js.ui.Widget$Config"
+ * }
+ * @param {js.ui.HTMLForm$Config} config
+ */</span>
+js.ui.HTMLForm = <b>function </b>(config){
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLForm';    
+    js.ui.HTMLForm.superclass.constructor.apply(<b>this</b>, [config]);    
+}
+<span class="multiComment">/**
+ * @constant {String} NORMAL_TYPE
+ */</span>
+js.ui.HTMLForm.NORMAL_TYPE = 'application/x-www-form-urlencoded';
+<span class="multiComment">/**
+ * @constant {String} UPLOAD_TYPE
+ */</span>
+js.ui.HTMLForm.UPLOAD_TYPE = 'multipart/form-data';
+<span class="multiComment">/**
+ * @constant {String} GET_METHOD
+ */</span>
+js.ui.HTMLForm.GET_METHOD = 'get';
+<span class="multiComment">/**
+ * @constant {String} POST_METHOD
+ */</span>
+js.ui.HTMLForm.POST_METHOD = 'post';
+
+js.lang.System.extend(js.ui.HTMLForm, js.ui.Widget, {
+    DOM_ATTRIBUTES: {
+        id:1,
+        name:1,
+        title:1,
+        type:1,
+        cssName:1,
+        cssText:1,
+        method:1,
+        action:1,
+        target:1,
+        enctype:1,
+        widgetClass:1
+    },
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        
+        <b>if </b>(!<b>this</b>.get().hasOwnProperty('method')) <b>this</b>.set('method',js.ui.HTMLForm.GET_METHOD);    
+        <b>if </b>(!<b>this</b>.get().hasOwnProperty('enctype')) <b>this</b>.set('enctype',js.ui.HTMLForm.NORMAL_TYPE);    
+        <b>this</b>._renderHTMLWidget('form');
+        
+        <b>this</b>.fireEvent('rendered');        
+    },
+<span class="multiComment">    /**
+     * @method submit
+     */</span>
+    submit: <b>function </b>(){
+        <b>var </b>el = <b>this</b>.getEl();
+        <b>if </b>(el) el.submit();
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLRadioGroup
+ * @constructor
+ * @extends js.ui.Widget 
+ * @param {js.ui.Widget$Config} config
+ */</span>
+js.ui.HTMLRadioGroup = <b>function </b>(){     
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLRadioGroup';
+    js.ui.HTMLRadioGroup.superclass.constructor.apply(<b>this</b>, [config]);
+};  
+js.lang.System.extend(js.ui.HTMLRadioGroup, js.ui.Widget, {
+<span class="multiComment">    /**
+     * @method addChildWidget
+     * @override
+     * @param {js.ui.HTMLRadio|js.ui.HTMLRadio[]} wgts
+     */</span>
+    addChildWidget: <b>function </b>(wgts){
+        <b>var </b>arr = js.lang.System.isArray(wgts)?wgts:[wgts], name = <b>this</b>.get('name');
+        arr.forEach(<b>function </b>(a){
+            a.set('name', name);
+        });
+        
+        <b>this</b>.addChildWidget(wgts, 'js.ui.HTMLRadio');    
+    },
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        
+        <b>var </b>chidren = <b>this</b>.getChildWidget();
+        <b>for </b>(k<b> in </b>chidren){
+            chidren[k].render();
+        }
+        <b>this</b>.fireEvent('rendered');        
+    },
+<span class="multiComment">    /**
+     * @method select
+     * @param {String} id
+     */</span>
+    select:<b>function </b>(id){
+        <b>var </b>wgt = <b>this</b>.getChildWidget(id);
+        <b>if </b>(!wgt) <b>return</b>;        
+        wgt.select();
+    },
+<span class="multiComment">    /**
+     * @method unselect
+     * @param {String} id:optional
+     */</span>
+    unselect:<b>function </b>(id){
+        <b>if </b>(id){
+            <b>var </b>wgt = <b>this</b>.getChildWidget(id);
+            <b>if </b>(!wgt) <b>return</b>;        
+            wgt.unselect();
+        }<b>else </b>{
+            <b>var </b>wgts = <b>this</b>.getChildWidget();
+            <b>if </b>(!wgts) <b>return</b>;        
+            <b>for </b>(k<b> in </b>wgts){
+                wgts[k].unselect();
+            }    
+        }
+    },
+<span class="multiComment">    /**
+     * @method isSelected
+     * @param {String} id:optional
+     * @return {Boolean}
+     */</span>
+    isSelected:<b>function </b>(id){
+        <b>if </b>(id){
+            <b>var </b>wgt = <b>this</b>.getChildWidget(id);
+            <b>return</b> wgt && wgt.isSelected();
+        }<b>else </b>{
+            <b>var </b>chidren = <b>this</b>.getChildWidget();
+            <b>if </b>(!chidren) <b>return</b> <b>false</b>;
+            
+            <b>for </b>(k<b> in </b>chidren){
+                <b>if </b>(chidren[k].isSelected()) {
+                    <b>return</b> <b>true</b>;
+                }
+            }        
+            <b>return</b> <b>false</b>;
+        }
+    },
+<span class="multiComment">    /**
+     * @method getSelectedValue
+     * @return {String}
+     */</span>
+    getSelectedValue:<b>function </b>(){
+        <b>var </b>chidren = <b>this</b>.getChildWidget();
+        <b>for </b>(k<b> in </b>chidren){
+            <b>var </b>v = chidren[k].getSelectedValue();
+            <b>if </b>(v!=<b>null</b>) <b>return</b> v;
+        }        
+        <b>return</b> <b>null</b>;
+    }
+});
+
+<span class="multiComment">/**
+ * @class js.ui.HTMLCheckboxGroup
+ * @constructor
+ * @extends js.ui.Widget 
+ * @param {js.ui.Widget$Config} config
+ */</span>
+js.ui.HTMLCheckboxGroup = <b>function </b>(){     
+    config = config||{};
+    config['widgetClass'] = 'js.ui.HTMLCheckboxGroup';
+    js.ui.HTMLCheckboxGroup.superclass.constructor.apply(<b>this</b>, [config]);
+};  
+js.lang.System.extend(js.ui.HTMLCheckboxGroup, js.ui.Widget, {
+<span class="multiComment">    /**
+     * @method addChildWidget
+     * @override
+     * @param {js.ui.HTMLCheckbox|js.ui.HTMLCheckbox[]} wgts
+     */</span>
+    addChildWidget: <b>function </b>(wgts){
+        <b>var </b>arr = js.lang.System.isArray(wgts)?wgts:[wgts], name = <b>this</b>.get('name');
+        arr.forEach(<b>function </b>(a){
+            a.set('name', name);
+        });
+        
+        <b>this</b>.addChildWidget(wgts, 'js.ui.HTMLCheckbox');    
+    },
+<span class="multiComment">    /**
+     * @method render
+     * @override
+     */</span>
+    render: <b>function </b>(){
+        <b>this</b>.fireEvent('rendering');
+        
+        <b>var </b>chidren = <b>this</b>.getChildWidget();
+        <b>for </b>(k<b> in </b>chidren){
+            chidren[k].render();
+        }
+        <b>this</b>.fireEvent('rendered');        
+    },
+<span class="multiComment">    /**
+     * @method select
+     * @param {String} id:optional
+     */</span>
+    select:<b>function </b>(id){
+        <b>if </b>(id){
+            <b>var </b>wgt = <b>this</b>.getChildWidget(id);
+            <b>if </b>(!wgt) <b>return</b>;        
+            wgt.select();
+        }<b>else </b>{
+            <b>var </b>wgts = <b>this</b>.getChildWidget();
+            <b>if </b>(!wgts) <b>return</b>;        
+            <b>for </b>(k<b> in </b>wgts){
+                wgts[k].unselect();
+            }
+        }        
+    },
+<span class="multiComment">    /**
+     * @method unselect
+     * @param {String} id:optional
+     */</span>
+    unselect:<b>function </b>(id){
+        <b>if </b>(id){
+            <b>var </b>wgt = <b>this</b>.getChildWidget(id);
+            <b>if </b>(!wgt) <b>return</b>;        
+            wgt.unselect();
+        }<b>else </b>{
+            <b>var </b>wgts = <b>this</b>.getChildWidget();
+            <b>if </b>(!wgts) <b>return</b>;        
+            <b>for </b>(k<b> in </b>wgts){
+                wgts[k].unselect();
+            }    
+        }
+    },
+<span class="multiComment">    /**
+     * @method isSelected
+     * @param {String} id:optional
+     * @return {Boolean}
+     */</span>
+    isSelected:<b>function </b>(id){
+        <b>if </b>(id){
+            <b>var </b>wgt = <b>this</b>.getChildWidget(id);
+            <b>return</b> wgt && wgt.isSelected();
+        }<b>else </b>{
+            <b>var </b>chidren = <b>this</b>.getChildWidget();
+            <b>if </b>(!chidren) <b>return</b> <b>false</b>;
+            
+            <b>for </b>(k<b> in </b>chidren){
+                <b>if </b>(chidren[k].isSelected()) {
+                    <b>return</b> <b>true</b>;
+                }
+            }        
+            <b>return</b> <b>false</b>;
+        }        
+    },
+<span class="multiComment">    /**
+     * @method getSelectedValue
+     * @return {Array&lt;String&gt;}
+     */</span>
+    getSelectedValue:<b>function </b>(){
+        <b>var </b>chidren = <b>this</b>.getChildWidget(), v = <b>null</b>;
+        <b>if </b>(!chidren) <b>return</b> v;
+        
+        <b>for </b>(k<b> in </b>chidren){
+            <b>var </b>ch = chidren[k];
+            <b>if </b>(ch.isSelected()) {
+                <b>if </b>(!v) v = [];
+                v.push(ch.getValue());
+            }
+        }        
+        <b>return</b> v;
+    }
+});
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

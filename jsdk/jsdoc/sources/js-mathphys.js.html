@@ -1,0 +1,1248 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-mathphys.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.3
+ * @author feng.chun
+ * @date 2011-01-05
+ * @date 2011-05-25
+ * 
+ * @version 0.2
+ * @author feng.chun
+ * @date 2010-11-15
+ *
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-9-20
+ * 
+ * @requires /core/js-core.js
+ * 
+ * 
+ * @struct js.math.Point {
+ *         "description":"a cartesian coordinate, like: [x, y]"
+ *         ,"type":"array"
+ *         ,"items":[
+ *             {"id":"x","type":"number"}
+ *          {"id":"y","type":"number"}
+ *         ]
+ * }
+ * 
+ * @struct js.math.Polar {
+ *         "description":"a polar coordinate, like: [len, rad]"
+ *         ,"type":"array"
+ *         ,"items":[
+ *             {"id":"length","type":"number"}
+ *          {"id":"radian","type":"number"}
+ *         ]
+ * }
+ * 
+ * @struct js.math.Line {
+ *         "description":"a line from (x1,y1) to (x2,y2), like: [[x1,y1], [x2,y2]]"
+ *         ,"type":"array"
+ *         ,"items":[
+ *             {"id":"p1","type":"js.math.Point"}
+ *          {"id":"p2","type":"js.math.Point"}
+ *         ]
+ * }
+ * 
+ * @struct js.math.Rect {
+ *         "description":"a rectangle, like: {x:111,y:222,w:333,h:444}"
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "x":{"type":"number","required":true}
+ *             ,"y":{"type":"number","required":true}
+ *             ,"w":{"type":"number","required":true}
+ *             ,"h":{"type":"number","required":true}
+ *         }
+ * }
+ * 
+ * @struct js.math.Vector {
+ *         "description":"a vector, like: {vx:111, vy:111}"
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "vx":{"type":"number","required":true}
+ *             ,"vy":{"type":"number","required":true}
+ *         }
+ * }
+ * 
+ * 
+ */</span>
+js.lang.System.namespace('js.math');
+js.lang.System.namespace('js.phys');
+
+(<b>function </b>(){
+<span class="multiComment">    /**
+     * @class js.math.MathTool
+     * @static
+     */</span>
+    js.math.MathTool = {
+<span class="singleComment">        // 顺时针十六个方向的弧度值</span>
+<span class="multiComment">        /** @constant {Number} RADIAN_0 */</span>
+        RADIAN_0:0,
+<span class="multiComment">        /** @constant {Number} RADIAN_1 */</span>
+        RADIAN_1:0.125*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_2 */</span>
+        RADIAN_2:0.25*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_3 */</span>
+        RADIAN_3:0.375*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_4 */</span>
+        RADIAN_4:0.5*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_5 */</span>
+        RADIAN_5:0.625*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_6 */</span>
+        RADIAN_6:0.75*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_7 */</span>
+        RADIAN_7:0.875*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_8 */</span>
+        RADIAN_8:Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_9 */</span>
+        RADIAN_9:1.125*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_10 */</span>
+        RADIAN_10:1.25*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_11 */</span>
+        RADIAN_11:1.375*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_12 */</span>
+        RADIAN_12:1.5*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_13 */</span>
+        RADIAN_13:1.625*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_14 */</span>
+        RADIAN_14:1.75*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_15 */</span>
+        RADIAN_15:1.875*Math.PI,
+<span class="multiComment">        /** @constant {Number} RADIAN_16 */</span>
+        RADIAN_16:2*Math.PI,
+<span class="multiComment">        /**
+         * Determine the equals of two float numbers approximatively.
+         * 
+         * @method equals
+         * @param {Number} n1
+         * @param {Number} n2
+         * @return {Boolean}
+         */</span>
+        equals: <b>function </b>(n1, n2){
+            <b>return</b> Math.abs(n1 - n2) &lt; 0.0001;
+        },
+<span class="multiComment">        /**
+         * The radian of the Segment P2P1.
+         * 计算两点P2、P1间连线的弧度，即线段P2P1与X轴的夹角
+         * 
+         * @method calcRadian
+         * @param {js.math.Point} p1
+         * @param {js.math.Point} p2:optional If is null then P2 is the origin point.
+         * @return {Number}
+         */</span>
+        calcRadian: <b>function </b>(p1, p2){
+            <b>if </b>(!p2) p2 = [0,0];
+            <b>var </b>x1 = p1[0], y1 = p1[1], x2 = p2[0], y2 = p2[1];
+            <b>if </b>(x1==0 && y1==0 && x2==0 && y2==0) <b>return</b> 0;
+            
+            <b>var </b>rad = Math.atan2(y1-y2, x1-x2);
+            <b>return</b> rad&lt;0?<b>this</b>.RADIAN_16+rad:rad;
+        },        
+<span class="multiComment">        /**
+         * Transfer a radian number to a angle number.
+         * 弧度转角度
+         * 
+         * @method radian2Angle
+         * @param {Number} rad
+         * @return {Number}
+         */</span>
+        radian2Angle: <b>function </b>(rad){
+            <b>return</b> rad*180/Math.PI;
+        },
+<span class="multiComment">        /**
+         * Transfer a angle number to a radian number.
+         * 角度转弧度
+         * 
+         * @method angle2Radian
+         * @param {Number} ang
+         * @return {Number}
+         */</span>
+        angle2Radian: <b>function </b>(ang){
+            <b>return</b> ang*Math.PI/180; 
+        },
+<span class="multiComment">        /**
+         * Transfer a point from Polar coordinate to Cartesian coordinate.
+         * 极坐标（p,rad）转化为直角坐标（x,y）
+         * 
+         * @method polar2XY
+         * @param {Number} p
+         * @param {Number} rad
+         * @return {js.math.Point}
+         */</span>
+        polar2XY: <b>function </b>(p, rad){
+            <b>switch </b>(rad/Math.PI) {
+                <b>case </b>0: <b>return</b> [p,0];
+                <b>case </b>0.5: <b>return</b> [0,p];
+                <b>case </b>1: <b>return</b> [-1*p,0];
+                <b>case </b>1.5: <b>return</b> [0,-1*p];
+                <b>case </b>2: <b>return</b> [p,0];                
+                default: 
+                    <b>return</b> [p*Math.cos(rad),p*Math.sin(rad)];
+            }
+        },
+<span class="multiComment">        /**
+         * Transfer a point from Cartesian coordinate to Polar coordinate.
+         * 直角坐标（x,y）转化为极坐标（p,rad）
+         * 
+         * @method xy2Polar
+         * @param {Number} x
+         * @param {Number} y
+         * @return {js.math.Polar}
+         */</span>
+        xy2Polar: <b>function </b>(x, y){
+            <b>return</b> [Math.sqrt(Math.pow(x,2)+Math.pow(y,2)),<b>this</b>.calcRadian([x,y])]
+        },
+<span class="multiComment">        /**
+         * Returns a new point by rotate around the origin.
+         * 将某个点围绕坐标原点旋转一定的弧度，得到一个新点坐标。
+         * 
+         * @method rotateAroundOrigin
+         * @param {js.math.Point} point
+         * @param {Number} rad
+         * @return {js.math.Point}
+         */</span>
+        rotateAroundOrigin: <b>function </b>(point, rad){
+            <b>var </b>x = point[0], y = point[1], sc = <b>this</b>.polar2XY(1,rad);
+            <b>return</b> [
+                x*sc[0]-y*sc[1],
+                x*sc[1]+y*sc[0]
+            ]
+        },
+<span class="multiComment">        /**
+         * Return a new coordinates in a new Cartesian Coordinate System(CCS).
+         * 
+         * @method translateCCS
+         * @param {js.math.Point} xy the old coordinates
+         * @param {js.math.Point} origin the coordinates of the old CCS's origin in the new CCS
+         */</span>
+        translateCCS: <b>function </b>(xy, origin){
+            <b>return</b> [xy[0]+origin[0],xy[1]+origin[1]];
+        },
+<span class="multiComment">        /**
+         * Return a anti-direction.
+         * @method getAntiDir
+         * @param {Number} rad
+         * @return {Number}
+         */</span>
+        getAntiDir: <b>function </b>(rad){
+            <b>return</b> rad &lt; Math.PI?rad + Math.PI:rad - Math.PI;
+        }
+    }
+    <b>var </b>MT = js.math.MathTool;    
+    
+<span class="multiComment">    /**
+     * @class js.math.Vector2D
+     * @static
+     */</span>
+    js.math.Vector2D = {
+<span class="multiComment">        /**
+         * Judge the equals of v1 and v2.
+         * 
+         * @method equals
+         * @param {js.math.Vector} v1
+         * @param {js.math.vector} v2
+         * @return {Boolean}
+         */</span>
+        equals: <b>function </b>(v1, v2){
+            <b>return</b> MT.equals(v1.vx,v2.vx) && MT.equals(v1.vy,v2.vy);
+        },
+<span class="multiComment">        /**
+         * Returns a Vector(p1-&gt;p2).
+         * 
+         * @method toVector
+         * @param {js.math.Point} point1
+         * @param {js.math.Point} point2
+         * @return {js.math.Vector}
+         */</span>
+        toVector: <b>function </b>(point1, point2){
+            <b>if </b>(!point1) point1 = [0,0];
+            <b>return</b> {vx:point2[0]-point1[0], vy:point2[1]-point1[1]}
+        },
+<span class="multiComment">        /**
+         * Returns the point of the vector.
+         * 
+         * @method toPoint
+         * @param {js.math.Vector} v
+         * @return {js.math.Point}
+         */</span>
+        toPoint: <b>function </b>(v){
+            <b>return</b> [v.vx, v.vy];
+        },
+<span class="multiComment">        /**
+         * Returns the string representation of a vector.
+         * 
+         * @method toString
+         * @param {js.math.Vector} v
+         * @return {String}
+         */</span>
+        toString: <b>function </b>(v){
+            <b>return</b> '('+v.vx+','+v.vy+')';
+        },
+<span class="multiComment">        /**
+         * Returns the mod of the vector.
+         * 
+         * @method getLength
+         * @param {Vector} v
+         * @return {Number}
+         */</span>
+        getLength: <b>function </b>(v){
+            <b>if </b>(v.vx==0 && v.vy==0) <b>return</b> 0;
+            <b>return</b> Math.sqrt(v.vx*v.vx + v.vy*v.vy);
+        },
+<span class="multiComment">        /**
+         * Sets the new length to a vector.
+         * 
+         * @method setLength
+         * @param {js.math.Vector} v
+         * @param {Number} len
+         */</span>
+        setLength: <b>function </b>(v, len){
+            <b>var </b>length = <b>this</b>.getLength();
+            <b>if </b>(length!=0) <b>this</b>.mul(len/length);
+        },
+<span class="multiComment">        /**
+         * Returns the negative of this vector.
+         * 
+         * @method negate
+         * @param {js.math.Vector} v
+         * @return {js.math.Vector}
+         */</span>
+        negate: <b>function </b>(v){
+            <b>return</b> <b>this</b>.mul(v, -1);
+        },
+<span class="multiComment">        /**
+         * Adds vector1 by vector2.
+         * 
+         * @method add
+         * @param {js.math.Vector} v1
+         * @param {js.math.Vector} v2
+         * @return {js.math.Vector}
+         */</span>
+        add: <b>function </b>(v1, v2){
+            <b>return</b> {
+                vx: v1.vx + v2.vx,
+                vy: v1.vy + v2.vy
+            };
+        },
+<span class="multiComment">        /**
+         * Subtracts vector1 by vector2.
+         * 
+         * @method sub
+         * @param {js.math.Vector} v1
+         * @param {js.math.Vector} v2
+         * @return {js.math.Vector}
+         */</span>
+        sub: <b>function </b>(v1, v2){
+            <b>return</b> {
+                vx: v1.vx - v2.vx,
+                vy: v1.vy - v2.vy
+            };
+        },
+<span class="multiComment">        /**
+         * Multiplies a vector by a number.
+         * 
+         * @method mul
+         * @param {js.math.Vector} v
+         * @param {Number} number
+         * @return {js.math.Vector}
+         */</span>
+        mul: <b>function </b>(v, number){
+            <b>return</b> {
+                vx: v.vx*number, vy: v.vy*number
+            }
+        },
+<span class="multiComment">        /**
+         * Divides a vector by a number.
+         * 
+         * @method div
+         * @param {js.math.Vector} v
+         * @param {Number} number
+         * @return {js.math.Vector}
+         * @throws {TypeError} when The argument&lt;number&gt; is zero
+         */</span>
+        div: <b>function </b>(v, number){
+            <b>if </b>(number==0) <b>throw </b><b>new </b>TypeError('[js.math.Vector2D#div]The argument&lt;number&gt; is zero.');
+            <b>return</b> {
+                vx: v.vx/number, vy: v.vy/number
+            }
+        },
+<span class="multiComment">        /**
+         * Calculates the dot product of vector1 with vector2.
+         * 
+         * @method dot
+         * @param {js.math.Vector} v1
+         * @param {js.math.Vector} v2
+         * @return {Number}
+         */</span>
+        dot: <b>function </b>(v1, v2){
+            <b>return</b> v1.vx*v2.vx + v1.vy*v2.vy;
+        },
+<span class="multiComment">        /**
+         * Calculates the cross product of vector1 with vector2.
+         * 
+         * @method cross
+         * @param {js.math.Vector} v1
+         * @param {js.math.Vector} v2
+         * @return {Number}
+         */</span>
+        cross: <b>function </b>(v1, v2){
+            <b>return</b> v1.vx*v2.vy - v2.vx*v1.vy;
+        },
+<span class="multiComment">        /**
+         * Judge the vector1 perpendicular to the vector2.
+         * 向量1是否垂直于向量2.
+         * 
+         * @method isPerpTo
+         * @param {js.math.Vector} v1
+         * @param {js.math.Vector} v2
+         * @return {Boolean}
+         */</span>
+        isPerpTo: <b>function </b>(v1, v2){
+            <b>return</b> <b>this</b>.dot(v1,v2)==0;
+        },
+<span class="multiComment">        /**
+         * Sets this vector to the interpolation by changeAmnt from this to the finalVec. 
+         * = (1-changeAmnt) * beginVec + changeAmnt * finalVec
+         * 
+         * @method interpolate
+         * @param {js.math.Vector} beginVec The begining vector (delta=0)    
+         * @param {js.math.Vector} finalVec The final vector to interpolate towards (delta=1)
+         * @param {Number} changeAmnt An amount between 0.0 - 1.0 representing a percentage change from beginVec towards finalVec
+         * @return {js.math.Vector}
+         */</span>
+        interpolate: <b>function </b>(beginVec, finalVec, changeAmnt){
+            <b>var </b>x = (1 - changeAmnt) * beginVec.vx + changeAmnt * finalVec.vx
+            ,y = (1 - changeAmnt) * beginVec.vy + changeAmnt * finalVec.vy;
+            <b>return</b> {vx:x,vy:y};
+        },
+<span class="multiComment">        /**
+         * Returns the unit vector of this vector.
+         * 
+         * @method normalize
+         * @param {js.math.Vector} v
+         * @return {js.math.Vector} unit vector of this vector.
+         */</span>
+        normalize: <b>function </b>(v){
+             <b>var </b>length = <b>this</b>.getLength(v);
+             <b>return</b> MT.equals(length,0)? <b>this</b>.div(v, length):{vx:0,vy:0};
+        },
+<span class="multiComment">        /**
+         * Returns the radian between this and v.
+         * 原点到向量点的连线与X轴的夹角的弧度。
+         * 
+         * @method getRadian
+         * @param {js.math.Vector} v
+         * @return {Number} radian
+         */</span>
+        getRadian: <b>function </b>(v){
+            <b>return</b> MT.calcRadian([v.vx,v.vy]);
+        },
+<span class="multiComment">        /**
+         * Sets the radian of this vector.
+         * 
+         * @method setRadian
+         * @param {js.math.Vector} v
+         * @param {Number} rad
+         */</span>
+        setRadian: <b>function </b>(v, rad){
+            <b>var </b>mod = <b>this</b>.getLength(v);
+            <b>if </b>(mod==0) <b>return</b>;
+            <b>return</b> MT.polar2XY(mod, rad);
+        },
+<span class="multiComment">        /**
+         * Returns the radian of v2 relative to v1.
+         * 两个非零向量之间的夹角的弧度。
+         * 
+         * @method radianBetween
+         * @param {js.math.Vector} v1
+         * @param {js.math.Vector} v2
+         * @return {Number} 
+         */</span>
+        radianBetween: <b>function </b>(v1, v2){
+            <b>var </b>rad = <b>this</b>.getRadian(v2) - <b>this</b>.getRadian(v1);
+            <b>return</b> rad&lt;0?Math.abs(rad):rad;
+        },
+<span class="multiComment">        /**
+         * Returns the vector which V1 projection on V2.
+         * 求向量V1在向量V2上的投影向量：
+         * 用V1和V2的单位向量vu2点积再乘以vu2，并且与V2的方向无关。
+         * 
+         * @method project
+         * @param {js.math.Vector} v1
+         * @param {js.math.Vector} v2
+         * @return {js.math.Vector}
+         */</span>
+        project: <b>function </b>(v1, v2){
+            <b>var </b>dp = <b>this</b>.dot(v1,v2), vv = v2.vx*v2.vx + v2.vy*v2.vy;
+            <b>return</b> {vx:(dp/vv)*v2.vx, vy:(dp/vv)*v2.vy};
+        },
+<span class="multiComment">        /**
+         * Returns a new rotated vector.
+         * 以某个弧度旋转向量得到一个新向量。
+         * 
+         * @method rotate
+         * @param {js.math.Vector} v
+         * @param {Number} rad
+         * @return {js.math.Vector}
+         */</span>
+        rotate: <b>function </b>(v, rad){  
+            <b>var </b>sc = MT.polar2XY(1,rad);    
+            <b>return</b> {
+                vx: v.vx * sc[0] - v.vy * sc[1], vy: v.vx * sc[1] + v.vy * sc[0]
+            }
+        },
+<span class="multiComment">        /**
+         * Returns normal vector.
+         * 求向量的法向量。
+         * 
+         * @method getNormal
+         * @param {js.math.Vector} v
+         * @param {Boolean} isLeftSide:optional True: The left side of vector is positive; False: The right side of vector is positive
+         * @return {js.math.Vector}
+         */</span>
+        getNormal: <b>function </b>(v, isLeftSide){
+            <b>return</b> isLeftSide?{'vx':v.vy,'vy':-1*v.vx}:{'vx':-1*v.vy,'vy':v.vx};
+        },
+<span class="multiComment">        /**
+         * Returns the rebound vector when v1 move to v2.
+         * 求向量V1碰撞V2后的反弹向量。
+         * 
+         * @method rebound
+         * @param {js.math.Vector} v1
+         * @param {js.math.Vector} v2
+         * @param {Boolean} isLeftSide:optional v1 enter from which side of v2
+         * @return {js.math.Vector}
+         */</span>
+        rebound: <b>function </b>(v1, v2, isLeftSide){
+            <b>var </b>normal = <b>this</b>.getNormal(v2, isLeftSide);
+            <b>if </b>(<b>this</b>.isPerpTo(v1,normal)) <b>return</b> <b>null</b>;
+            <b>var </b>n = <b>this</b>.project(v1, normal);
+            <b>return</b> <b>this</b>.sub(<b>this</b>.mul(<b>this</b>.add(n, v1),2),v1);
+        }
+    } 
+    <b>var </b>V2D = js.math.Vector2D;
+    
+<span class="multiComment">    /**
+     * @class js.math.Geom2D
+     * @static
+     */</span>
+    js.math.Geom2D = {
+<span class="multiComment">        /************************* Triangle Methods *************************/</span>
+        
+<span class="multiComment">        /**
+         * P1 equals P2
+         * P1，P2是否为同一点
+         *
+         * @method equalsPoint
+         * @param {js.math.Point} p1
+         * @param {js.math.Point} p2
+         * @return {Boolean}
+         */</span>
+        equalsPoint: <b>function </b>(p1, p2){
+            <b>return</b> MT.equals(p1[0], p2[0]) && MT.equals(p1[1], p2[1])
+        },
+<span class="multiComment">        /**
+         * Move point towards the radian.
+         * 
+         * @method movePoint
+         * @param {js.math.Point} p
+         * @param {Number} rad
+         * @param {Number} step
+         * @return {js.math.Point}
+         */</span>
+        movePoint: <b>function </b>(p, rad, step){
+            <b>var </b>p0 = MT.polar2XY(step, rad);            
+            <b>return</b> [p0[0]+p[0],p0[1]+p[1]];
+        },        
+<span class="multiComment">        /**
+         * Caculate the slope of Segment P1P2.
+         * 计算线段(p1,p2)的斜率。当线段与X轴垂直时，斜率不存在
+         * 
+         * @method getSlope
+         * @param {js.math.Point} p1
+         * @param {js.math.Point} p2
+         * @return {Number} when P1P2 perpendicular to the X, then return null.
+         */</span>
+        getSlope: <b>function </b>(p1, p2){
+            <b>var </b>a = p1[0] - p2[0];
+            <b>var </b>b = p1[1] - p2[1];
+            <b>return</b> a == 0 ? <b>null</b> : b / a;
+        },
+<span class="multiComment">        /**
+         * P1,P2,P3 if collinear.
+         * 三点是否共线
+         * 
+         * @method isCollinear
+         * @param {js.math.Point} p1
+         * @param {js.math.Point} p2
+         * @param {js.math.Point} p3
+         * @return {Boolean}
+         */</span>
+        isCollinear: <b>function </b>(p1, p2, p3){
+            <b>if </b>(<b>this</b>.equalsPoint(p1,p2) || <b>this</b>.equalsPoint(p2,p3) || <b>this</b>.equalsPoint(p1,p3)) <b>return</b> <b>true</b>;
+            <b>return</b> <b>this</b>.posPointAndLine(p3, [p1,p2])==0;
+        },
+<span class="multiComment">        /**
+         * Judge a point's position by a line vector.
+         * 判断点与直线的位置关系
+         * 
+         * @method posPointAndLine
+         * @param {js.math.Point} p
+         * @param {js.math.Line} line
+         * @return {Int} -1 is LEFT; 1 is RIGHT; 0 is COLLINEAR; 
+         */</span>
+        posPointAndLine: <b>function </b>(p, line){
+            <b>var </b>v1 = V2D.toVector(line[0], p), v2 = V2D.toVector(line[1], p)
+            , rst = V2D.cross(v1, v2);
+            
+            <b>if </b>(MT.equals(0,Math.abs(rst))) <b>return</b> 0;
+            <b>if </b>(rst&lt;0) <b>return</b> -1;
+            <b>if </b>(rst&gt;0) <b>return</b> 1;
+        },
+<span class="multiComment">        /**
+         * Round the point by four decimal length.
+         * 
+         * @method roundPoint
+         * @param {js.math.Point} p
+         * @return {js.math.Point}
+         */</span>
+        roundPoint: <b>function </b>(p){
+            <b>return</b> [p[0].toFixed(4),p[1].toFixed(4)];
+        },
+<span class="singleComment">        //判断p是否在p1p2为对角点的矩形内 </span>
+        _isInPointsBound: <b>function </b>(p, p1, p2){
+            <b>if </b>(<b>this</b>.equalsPoint(p,p1) || <b>this</b>.equalsPoint(p,p2)) <b>return</b> <b>true</b>;
+            
+            p = <b>this</b>.roundPoint(p),p1 = <b>this</b>.roundPoint(p1),p2 = <b>this</b>.roundPoint(p2);//bugfix                        
+            <b>return</b> Math.min(p1[0],p2[0]) &lt;= p[0] && p[0] &lt;= Math.max(p1[0],p2[0])
+             && Math.min(p1[1],p2[1]) &lt;= p[1] && p[1] &lt;= Math.max(p1[1],p2[1]);
+        },
+<span class="multiComment">        /**
+         * The point if on the segment.
+         * 
+         * @method isPointOnSegment
+         * @param {js.math.Point} p
+         * @param {js.math.Line} segment
+         * @return {Boolean}
+         */</span>
+        isPointOnSegment: <b>function </b>(p, segment){
+            <b>return</b> <b>this</b>.posPointAndLine(p, segment)==0 && <b>this</b>._isInPointsBound(p, segment[0], segment[1]);
+        },
+<span class="multiComment">        /**
+         * Returns the relation of Line P1P2 and Line P3P4.
+         * 直线1与直线2的位置关系。
+         * 
+         * @method posLines
+         * @param {js.math.Line} line1
+         * @param {js.math.Line} line2
+         * @return {Int} 0 is Parallel;1 is Collinear;2 is Cross and not Vertical；3 is Cross and Vertical.
+         */</span>
+        posLines: <b>function </b>(line1, line2){
+            <b>var </b>p1 = line1[0], p2 = line1[1], p3 = line2[0], p4 = line2[1]
+            k1 = <b>this</b>.getSlope(p1, p2), k2 = <b>this</b>.getSlope(p3, p4);
+            <b>if </b>(MT.equals(k1, k2)) {//平行
+                <b>return</b> <b>this</b>.isCollinear(p1, p2, p3)? 1 : 0;
+            }
+            <b>else </b>{//相交
+                <b>var </b>isVertical = <b>false</b>;
+                <b>if </b>(!k1 && MT.equals(k2, 0)) {
+                    <b>return</b> 3;
+                }
+                <b>else </b>
+                    <b>if </b>(!k2 && MT.equals(k1, 0)) {
+                        <b>return</b> 3;
+                    }
+                    <b>else </b>
+                        <b>if </b>(MT.equals(k1 * k2, -1)) {
+                            <b>return</b> 3;
+                        }
+                <b>return</b> 2;
+            };
+        },
+<span class="multiComment">        /**
+         * Returns a vertical cross point of Line P1P2 and P3.
+         * 求点P3与线段（P1,P2）所在直线的垂直交点
+         * 
+         * @method getVCPOfPointAndLine
+         * @param {js.math.Point} p3
+         * @param {js.math.Line} line
+         * @return {js.math.Point}
+         */</span>
+        getVCPOfPointAndLine: <b>function </b>(p3, line){
+            <b>var </b>p1 = line[0], p2 = line[1], 
+            a = p2[0] - p1[0], b = p2[1] - p1[1];
+            <b>if </b>(a != 0 && b != 0) {
+                <b>var </b>a2 = Math.pow(a, 2), b2 = Math.pow(b, 2)
+                ,x0 = (a2 * p3[0] + b2 * p1[0] + a * b * (p3[1] - p1[1])) / (a2 + b2)
+                ,y0 = (b * (x0 - p1[0]) + b * p1[1]) / a;
+                <b>return</b> [x0,y0];
+            }
+            <b>else </b>{
+                <b>return</b> p1;
+            }
+        },
+<span class="multiComment">        /**
+         * Returns the lastest distance of Line P1P2 and P3.
+         * 求点P3与线段（P1,P2）所在直线的最短距离
+         * 
+         * @method getLDOfPointAndLine
+         * @param {js.math.Point} p3
+         * @param {js.math.Line} line
+         * @return {Number}
+         */</span>
+        getLDOfPointAndLine: <b>function </b>(p3, line){
+            <b>var </b>cp = <b>this</b>.getVCPOfPointAndLine(p3, line);
+            <b>return</b> <b>this</b>.getPointsDistance(cp, p3);
+        },
+<span class="multiComment">        /**
+         * Returns a cross point of Line P1P2 and Line P3P4.
+         * 直线(p1,p2)与直线(p3,p4)的交点。
+         * 
+         * @method getCPOfLines
+         * @param {js.math.Line} line1
+         * @param {js.math.Line} line2
+         * @return {js.math.Point} If Line P1P2 is parallel to Line P1P2, then return null.
+         */</span>
+        getCPOfLines: <b>function </b>(line1, line2){
+            <b>var </b>p1 = line1[0], p2 = line1[1], p3 = line2[0], p4 = line2[1],
+            x1 = p1[0], y1 = p1[1], x2 = p2[0], y2 = p2[1], x3 = p3[0], y3 = p3[1], x4 = p4[0], y4 = p4[1];
+            <b>var </b>d = (y2 - y1)*(x4 - x3) - (y4 - y3)*(x2 - x1);
+            <b>if </b>(MT.equals(d, 0)) 
+                <b>return</b> <b>null</b>;
+            
+            <b>var </b>x0 = ((x2 - x1) * (x4 - x3) * (y3 - y1) + (y2 - y1) * (x4 - x3) * x1 - (y4 - y3) * (x2 - x1) * x3) / d
+            , y0 = ((y2 - y1) * (y4 - y3) * (x3 - x1) + (x2 - x1) * (y4 - y3) * y1 - (x4 - x3) * (y2 - y1) * y3) / (-d);
+            
+            <b>return</b> [x0,y0];
+        },
+<span class="multiComment">        /**
+         * Returns a cross point of Segment P1P2 and Segment P3P4.
+         * 线段(p1,p2)与线段(p3,p4)的交点。
+         * 
+         * @method getCPOfSegments
+         * @param {js.math.Line} segment1
+         * @param {js.math.Line} segment2
+         * @return {js.math.Point} If the cross point is not exist, then return null.
+         */</span>
+        getCPOfSegments: <b>function </b>(segment1, segment2){
+            <b>var </b>p1 = segment1[0], p2 = segment1[1], p3 = segment2[0], p4 = segment2[1],
+            p = <b>this</b>.getCPOfLines([p1, p2], [p3, p4]);
+            <b>if </b>(!p) 
+                <b>return</b> <b>null</b>;
+            
+            <b>return</b> (<b>this</b>._isInPointsBound(p, p1, p2) && <b>this</b>._isInPointsBound(p, p3, p4))? p : <b>null</b>;
+        },
+<span class="multiComment">        /**
+         * Returns the cross point between a ray and a segment.
+         * 射线与线段的交点。
+         * 
+         * @method getCPOfRayAndSegment
+         * @param {js.math.Point} p
+         * @param {Number} rad
+         * @param {js.math.Line} segment
+         * @return {js.math.Point}
+         */</span>
+        getCPOfRayAndSegment: <b>function </b>(p, rad, segment){
+            <b>var </b>cp = <b>this</b>.getCPOfLines([p, <b>this</b>.movePoint(p, rad, 10)], segment);
+            <b>if </b>(!cp) <b>return</b> <b>null</b>;
+            
+            <b>return</b> <b>this</b>._isInPointsBound(cp, segment[0], segment[1])? cp: <b>null</b>;
+        },
+<span class="multiComment">        /**
+         * Returns the cross point between a ray and a line.
+         * 射线与直线的交点。
+         * 
+         * @method getCPOfRayAndLine
+         * @param {js.math.Point} p
+         * @param {Number} rad
+         * @param {js.math.Line} line
+         * @return {js.math.Point}
+         */</span>
+        getCPOfRayAndLine: <b>function </b>(p, rad, line){
+            <b>return</b> <b>this</b>.getCPOfLines([p, <b>this</b>.movePoint(p, rad, 10)], line);
+        },
+<span class="multiComment">        /**
+         * Returns the distance of P1 and P2.
+         * 返回两点间的距离
+         * 
+         * @method getPointsDistance
+         * @param {js.math.Point} p1
+         * @param {js.math.Point} p2
+         * @return {Number}
+         */</span>
+        getPointsDistance: <b>function </b>(p1, p2){
+            <b>return</b> Math.sqrt(Math.pow(p2[0] - p1[0], 2) + Math.pow(p2[1] - p1[1], 2));
+        },
+<span class="multiComment">        /**
+         * Compare the distances of p to array of points.
+         * 比较点p分别到点p1~点pN的距离。
+         * 
+         * @method getNearestPoint
+         * @param {js.math.Point} point
+         * @param {Array&lt;js.math.Point&gt;} points
+         * @return {Int} 
+         */</span>
+        getNearestPoint: <b>function </b>(point, points){
+            <b>var </b>index = -1;
+            <b>if </b>(!points || points.length&lt;=0) <b>return</b> index;
+            <b>if </b>(points.length == 1) <b>return</b> 0;
+            
+            <b>var </b>d = <b>null</b>;
+            points.forEach(<b>function </b>(p, i){
+                <b>var </b>dis = Math.pow(p[0] - point[0], 2) + Math.pow(p[1] - point[1], 2);
+                <b>if </b>(d==<b>null</b> || dis &lt; d){
+                    d = dis;
+                    index = i;
+                }                
+            });
+            
+            <b>return</b> index;
+        },
+<span class="multiComment">        /**
+         * Returns the ratio point of Segment P1P2.
+         * 定比分点公式
+         * 
+         * @method getRatioPoint
+         * @param {js.math.Line} segment
+         * @param {Number} ratio Must not equals -1.
+         * @return {js.math.Point}
+         */</span>
+        getRatioPoint: <b>function </b>(segment, ratio){
+            <b>return</b> [(segment[0][0] + ratio * segment[1][0]) / (1 + ratio),
+                    (segment[0][1] + ratio * segment[1][1]) / (1 + ratio)];
+        },
+<span class="multiComment">        /**
+         * Returns the middle point of Segment P1P2.
+         * 求两点间的中点
+         * 
+         * @method getMidpoint
+         * @param {js.math.Line} segment
+         * @return {js.math.Point}
+         */</span>
+        getMidpoint: <b>function </b>(segment){
+            <b>return</b> <b>this</b>.getRatioPoint(segment, 1);
+        },
+                
+<span class="multiComment">        /************************* Triangle Methods *************************/</span>
+        
+<span class="multiComment">        /**
+         * P is in Triangle(P1,P2,P3).
+         * P是否在三角形(P1,P2,P3)之内
+         * 
+         * @method isPointInTri
+         * @param {js.math.Point} p
+         * @param {js.math.Point} p1
+         * @param {js.math.Point} p2
+         * @param {js.math.Point} p3
+         * @return {Boolean}
+         */</span>
+        isPointInTri: <b>function </b>(p, p1, p2, p3){
+<span class="singleComment">            //向量叉乘法判定</span>
+            <b>var </b>v12 = V2D.toVector(p1, p2)
+              , v23 = V2D.toVector(p2, p3)
+              , v31 = V2D.toVector(p3, p1)
+              , v12_X_v23 = V2D.cross(v12, v23)
+              , v23_X_v31 = V2D.cross(v23, v31)
+              , v31_X_v12 = V2D.cross(v31, v12);
+            
+<span class="singleComment">            //如果三组叉乘结果都为正或都为负,则表示P在三条边（向量）的同侧，即P在三角形内部</span>
+            <b>return</b> (v12_X_v23 &gt; 0 && v23_X_v31 &gt; 0 && v31_X_v12 &gt; 0) || (v12_X_v23 &lt; 0 && v23_X_v31 &lt; 0 && v31_X_v12 &lt; 0);
+        },
+<span class="multiComment">        /**
+         * Returns the center of gravity.
+         * 求三角形的重心
+         * 
+         * @method getTriCGPoint
+         * @param {js.math.Point} p1
+         * @param {js.math.Point} p2
+         * @param {js.math.Point} p3
+         * @return {js.math.Point}
+         */</span>
+        getTriCGPoint: <b>function </b>(p1, p2, p3){
+            <b>return</b> {
+                x: (p1[0] + p2[0] + p3[0]) / 3,
+                y: (p1[1] + p2[1] + p3[1]) / 3
+            };
+        },
+<span class="multiComment">        /**
+         * Returns the length.
+         * 求三角形的周长
+         * 
+         * @method getTriLength
+         * @param {js.math.Point} p1
+         * @param {js.math.Point} p2
+         * @param {js.math.Point} p3
+         * @return {Number}
+         */</span>
+        getTriLength: <b>function </b>(p1, p2, p3){
+            <b>var </b>a = G2D.getPointsDistance(p1, p2), b = G2D.getPointsDistance(p2, p3), c = G2D.getPointsDistance(p3, p1);
+            <b>return</b> a + b + c;
+        },
+<span class="multiComment">        /**
+         * Returns the area.
+         * 求三角形的面积
+         * 
+         * @method getTriArea
+         * @param {js.math.Point} p1
+         * @param {js.math.Point} p2
+         * @param {js.math.Point} p3
+         * @return {Number}
+         */</span>
+        getTriArea: <b>function </b>(p1, p2, p3){
+            <b>var </b>a = G2D.getPointsDistance(p1, p2), b = G2D.getPointsDistance(p2, p3), c = G2D.getPointsDistance(p3, p1)
+            , p = (a + b + c) / 2;
+            <b>return</b> Math.sqrt(p * (p - a) * (p - b) * (p - c));
+        },
+        
+<span class="multiComment">        /************************* Rectangle Methods *************************/</span>
+<span class="multiComment">        /**
+         * P if is in the Rectangle.
+         * P是否在rect之内
+         *
+         * @method isPointInRect
+         * @param {js.math.Point} p
+         * @param {js.math.Rect} rect
+         * @return {Boolean}
+         */</span>
+        isPointInRect: <b>function </b>(p, rect){
+            <b>var </b>x = p[0], y = p[1];
+            <b>return</b> x &gt;= rect.x && x &lt;= (rect.x + rect.w) && y &gt;= rect.y && y &lt;= (rect.y + rect.h);
+        },
+<span class="multiComment">        /**
+         * P if is on the border of the Rectangle.
+         * P是否在Rect的边上
+         * 
+         * @method isPointOnRect
+         * @param {js.math.Point} p
+         * @param {js.math.Rect} rect
+         * @return {Boolean}
+         */</span>
+        isPointOnRect: <b>function </b>(p, rect){
+            <b>return</b> (p[0] == rect.x && (p[1] &gt;= rect.y || p[1] &lt;= (rect.y + rect.h)) ||
+            p[0] == (rect.x + rect.w) && (p[1] &gt;= rect.y || p[1] &lt;= (rect.y + rect.h)) ||
+            p[1] == rect.y && (p[0] &gt;= rect.x || p[0] &lt;= (rect.x + rect.w)) ||
+            p[1] == (rect.y + rect.h) && (p[0] &gt;= rect.x || p[0] &lt;= (rect.x + rect.w)))
+        },    
+<span class="multiComment">        /**
+         * Rectangle1 if contains Rectangle2.
+         * 矩形1是否包含矩形2
+         *
+         * @method containsRect
+         * @param {js.math.Rect} rect1
+         * @param {js.math.Rect} rect2
+         * @return {Boolean}
+         */</span>
+        containsRect: <b>function </b>(rect1, rect2){
+            <b>return</b> (rect2.x &gt;= rect1.x && rect2.y &gt;= rect1.y &&
+            (rect2.x + rect2.w) &lt;= (rect1.x + rect1.w) &&
+            (rect2.y + rect2.h) &lt;= (rect1.y + rect1.h));
+        },
+<span class="multiComment">        /**
+         * Returns the intersection rectangle of Rectangle1 and Rectangle2.
+         * 矩形1与2的相交区域
+         *
+         * @method intersectsRect
+         * @param {js.math.Rect} rect1
+         * @param {js.math.Rect} rect2
+         * @return {js.math.Rect} If not intersects, then return null.
+         */</span>
+        intersectsRect: <b>function </b>(rect1, rect2){
+            <b>var </b>t = Math.max(rect1.y, rect2.y), r = Math.min(rect1.x + rect1.w, rect2.x + rect2.w)
+            , b = Math.min(rect1.y + rect1.h, rect2.y + rect2.h), l = Math.max(rect1.x, rect2.x);
+            
+            <b>if </b>(b &gt; t && r &gt; l) {
+                <b>return</b> {
+                    x: l,
+                    y: t,
+                    w: r - l,
+                    h: b - t
+                };
+            }
+            <b>else </b>{
+                <b>return</b> <b>null</b>;
+            }
+        },
+<span class="multiComment">        /**
+         * Returns the center point of a rect.
+         * 
+         * @method getRectCenter
+         * @param {js.math.Rect} rect
+         * @return {js.math.Point}
+         */</span>
+        getRectCenter: <b>function </b>(rect){
+            <b>return</b> [rect.w/2+rect.x, rect.h/2+rect.y];
+        },
+<span class="multiComment">        /**
+         * set Rectangle1 center to Rectangle2.
+         * 矩形1相对于矩形2居中
+         * 
+         * @method centerToRect
+         * @param {js.math.Rect} rect1
+         * @param {js.math.Rect} rect2
+         */</span>
+        centerToRect: <b>function </b>(rect1, rect2){
+            <b>var </b>w1 = rect1['w'], h1 = rect1['h'], w2 = rect2['w'], h2 = rect2['h'];
+            rect1.x = rect2.x + (w2-w1)/2;
+            rect1.y = rect2.y + (h2-h1)/2;
+        },  
+<span class="multiComment">        /**
+         * Limit Rectangle1 in Rectangle2.
+         * 矩形1限制在矩形2的范围内
+         * 
+         * @method limitInRect
+         * @param {js.math.Rect} rect1
+         * @param {js.math.Rect} rect2
+         * @return {Boolean} Return true when Rectangle1 cross-border
+         */</span>
+        limitInRect: <b>function </b>(rect1, rect2){
+            <b>var </b>isChange = <b>false</b>;
+            <b>if </b>(rect1.x &lt; rect2.x) {
+                rect1.x = rect2.x;
+                isChange = <b>true</b>;
+            }
+            <b>else </b>
+                <b>if </b>(rect1.x &gt; (rect2.x + rect2.w - rect1.w)) {
+                    rect1.x = rect2.x + rect2.w - rect1.w;
+                    isChange = <b>true</b>;
+                };
+            <b>if </b>(rect1.y &lt; rect2.y) {
+                rect1.y = rect2.y;
+                isChange = <b>true</b>;
+            }
+            <b>else </b>
+                <b>if </b>(rect1.y &gt; (rect2.y + rect2.h - rect1.h)) {
+                    rect1.y = rect2.y + rect2.h - rect1.h;
+                    isChange = <b>true</b>;
+                };
+            <b>return</b> isChange;
+        },
+<span class="multiComment">        /**
+         * Returns four borders of the Rectangle.
+         * 
+         * @method getRectBorders
+         * @param {js.math.Rect} rect
+         * @return {Array&lt;js.math.Line&gt;}
+         */</span>
+        getRectBorders: <b>function </b>(rect){    
+            <b>var </b>point4 = <b>this</b>.getRectPoints(rect);
+            
+            <b>return</b> [
+                    [point4[0],point4[1]]
+                    ,[point4[1],point4[2]]
+                    ,[point4[2],point4[3]]
+                    ,[point4[3],point4[0]]
+                    ];
+        },
+<span class="multiComment">        /**
+         * Return a new position of Rect1 when Rect1 avoid to Rect2.
+         * 矩形1避让矩形2
+         * 
+         * @method avoidToRect
+         * @param {js.math.Rect} rect1
+         * @param {js.math.Rect} rect2
+         * @param {Number} rad the radian of rect1's movment
+         * @return {js.math.Point} new XY of the rect1
+         */</span>
+        a<b>void</b>ToRect: <b>function </b>(rect1, rect2, rad){
+            <b>var </b>iRect = G2D.intersectsRect(rect1, rect2);
+            
+            <b>if </b>(iRect != <b>null</b>) {
+                <b>var </b>center1 = <b>this</b>.getRectCenter(rect1)
+                ,points = <b>this</b>.getRectPoints(rect2)
+                ,oldpoint0 = points[0],oldpoint1 = points[1],oldpoint2 = points[2],oldpoint3 = points[3]
+                ,point0 = [oldpoint0[0]-rect1.w/2, oldpoint0[1]-rect1.h/2]
+                ,point1 = [oldpoint1[0]+rect1.w/2, oldpoint1[1]-rect1.h/2]
+                ,point2 = [oldpoint2[0]+rect1.w/2, oldpoint2[1]+rect1.h/2]
+                ,point3 = [oldpoint3[0]-rect1.w/2, oldpoint3[1]+rect1.h/2]
+                ,segment4 = [
+                    [point0,point1],[point1,point2],[point2,point3],[point3,point0]
+                ]
+                , antiDir = MT.getAntiDir(rad);
+                
+                <b>var </b>crossPoints = [];
+                segment4.some(<b>function </b>(line){
+                    <b>var </b>cp = <b>this</b>.getCPOfRayAndSegment(center1,antiDir,line);
+                    <b>if </b>(cp) {//找到rect1的新的中心点
+                        crossPoints.push(cp);
+                    }
+                },<b>this</b>);
+                <b>var </b>index = <b>this</b>.getNearestPoint(center1, crossPoints)
+                , crossPoint = crossPoints[index];
+                <b>return</b> [crossPoint[0]-rect1.w/2, crossPoint[1]-rect1.h/2];
+            } <b>else </b>{
+                <b>return</b> <b>null</b>;
+            }
+        },
+<span class="multiComment">        /**
+         * Returns four points of a rect.
+         * 
+         * @method getRectPoints
+         * @param {js.math.Rect} rect
+         * @return {Array&lt;js.math.Point&gt;}
+         */ </span>
+        getRectPoints: <b>function </b>(rect){
+            <b>return</b> [
+                [rect.x, rect.y], [rect.x+rect.w, rect.y], [rect.x+rect.w, rect.y+rect.h], [rect.x, rect.y+rect.h]
+            ]
+        },
+<span class="multiComment">        /**
+         * Returns the positionship of a rect and a line.
+         * @method posRectAndLine
+         * @param {js.math.Rect} rect
+         * @param {js.math.Line} line
+         * @return {Int} -1: is right; 0 is on; 1 is left
+         */       </span>
+        posRectAndLine: <b>function </b>(rect, line){
+            <b>var </b>points = <b>this</b>.getRectPoints(rect)
+            , a1 = <b>this</b>.posPointAndLine(points[0], line)
+            , a2 = <b>this</b>.posPointAndLine(points[1], line)
+            , a3 = <b>this</b>.posPointAndLine(points[2], line)
+            , a4 = <b>this</b>.posPointAndLine(points[3], line)
+            
+            <b>if </b>(a1==-1 && a2==-1 && a3==-1 && a4==-1) <b>return</b> -1;
+            <b>if </b>(a1==1 && a2==1 && a3==1 && a4==1) <b>return</b> 1;
+            <b>return</b> 0;
+        },
+<span class="multiComment">        /************************* Round Methods *************************/        </span>
+<span class="multiComment">        /**
+         * Returns the length of a round.
+         * 已知半径，求圆的周长
+         * 
+         * @method getRoundLength
+         * @param {Number} r 半径
+         * @return {Number} 
+         */</span>
+        getRoundLength: <b>function </b>(r){<b>return</b> 2*r*Math.PI},
+<span class="multiComment">        /**
+         * Returns the area of a round.
+         * 已知半径，求圆的面积
+         * 
+         * @method getRoundArea
+         * @param {Number} r 半径
+         * @return {Number}
+         */</span>
+        getRoundArea: <b>function </b>(r){<b>return</b> Math.PI*Math.pow(r,2)},
+<span class="multiComment">        /**
+         * Point P if is on the round.
+         * 点P是否在圆上
+         * 
+         * @method isOnRound
+         * @param {js.math.Point} c
+         * @param {Number} r
+         * @param {js.math.Point} p
+         * @return {Boolean}
+         */</span>
+        isOnRound: <b>function </b>(c, r, p){
+            <b>var </b>v1 = Math.pow(p[0]-c[0],2)
+              , v2 = Math.pow(p[1]-c[1],2)
+              , v3 = Math.pow(r,2);
+            <b>return</b> MT.equals(v1+v2-v3,0);  
+        },
+<span class="multiComment">        /**
+         * Returns the center point of a round.
+         * 已知圆上两点与半径，求圆心坐标
+         * 
+         * @method getRoundCenter
+         * @param {js.math.Point} p1 
+         * @param {js.math.Point} p2 
+         * @param {Number} r 
+         * @return {js.math.Point} 
+         */</span>
+        getRoundCenter: <b>function </b>(p1,p2,r){
+            <b>var </b>d = G2D.getPointsDistance(p1, p2);
+            <b>if </b>(d &gt; 2*r) <b>return</b> <b>null</b>;
+            
+            <b>var </b>m = G2D.getMidpoint([p1, p2]), a = MT.calcRadian(p1,p2)//p2p1与X轴的夹角
+            , c = Math.sqrt(Math.pow(r,2)-Math.pow(d/2,2))//中点到圆心的距离            
+            , x1y1 = MT.polar2XY(c, MT.RADIAN_4+a), x2y2 = MT.polar2XY(c, -1*(MT.RADIAN_4+a));//以中点为原点的极坐标系
+            <b>return</b> [
+                [m[0]+x1y1[0],m[1]+x1y1[1]]
+                , [m[0]+x2y2[0],m[1]+x2y2[1]]
+            ];
+        }
+    }
+    <b>var </b>G2D = js.math.Geom2D;
+        
+<span class="multiComment">    /**
+     * @class js.phys.Motion2D
+     * @static
+     */</span>
+    js.phys.Motion2D = {
+<span class="multiComment">        /**
+         * Calc the merge velocity.
+         * 求合速度
+         *
+         * @method mergeVelocity
+         * @param {Number} vx
+         * @param {Number} vy
+         * @return {Number}
+         */</span>
+        mergeVelocity: <b>function </b>(vx, vy){
+            <b>return</b> (Math.pow(vx, 2) + Math.pow(vy, 2)) / 2;
+        }
+    }
+<span class="multiComment">    /**
+     * @class js.phys.Formulas
+     * @static
+     */</span>
+    js.phys.Formulas = {            
+<span class="multiComment">        /**
+         * Linear motion formula. 
+         * 直线运动公式
+         * 
+         * @method line
+         * @param {Int} t 计时器
+         * @param {js.math.Point} from 起始点
+         * @param {Number} rad 直线与X轴夹角的弧度
+         * @param {Number} v 速度
+         * @return {js.math.Point} 返回当前时间的点坐标
+         */</span>
+        line: <b>function </b>(t, from, rad, v){
+            <b>if </b>(!from) <b>throw </b><b>new </b>Error();
+            
+            <b>var </b>vxy = MT.polar2XY(v, rad);        
+            <b>return</b> [vxy[0]*t+from[0], vxy[1]*t+from[1]];
+        },
+<span class="multiComment">        /**
+         * Round motion formula.
+         * 圆周运动公式
+         * 
+         * @method round
+         * @param {Number} t 计时器 
+         * @param {js.math.Point} from 起始点
+         * @param {js.math.Point} center 圆心
+         * @param {Number} v 线速度
+         * @param {Int} f 0:Clockwise(顺时针);1:Anticlockwise(逆时针)
+         * @return {js.math.Point} 返回当前时间的点坐标
+         */</span>
+        round: <b>function </b>(t, from, center, v, f){
+            <b>if </b>(!from || !center) <b>throw </b><b>new </b>Error();
+            <b>if </b>(G2D.equalsPoint(from,center)) <b>return</b> from;            
+            
+            <b>var </b>r = G2D.getPointsDistance(from, center),w = v/r, wt = w*t+MT.calcRadian(from, center)
+            ,sc = f?[Math.sin(wt),Math.cos(wt)]:[Math.cos(wt),Math.sin(wt)];
+            <b>return</b> [center[0]+r*sc[0], center[1]+r*sc[1]];
+        }
+    }    
+}());
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

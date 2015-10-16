@@ -1,0 +1,120 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>String</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div></div>
+<div class="topic" title="String">
+Native: 
+String</div>
+
+<b>public final</b> String
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="trim" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final trim">+ trim</span></span>():String</span>
+<div id="trim_detail" style="display: none;">
+<pre class="desc">Trim the String's left and right empty chars.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="trimLeft" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final trimLeft">+ trimLeft</span></span>():String</span>
+<div id="trimLeft_detail" style="display: none;">
+<pre class="desc">Trim the String's left empty chars.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="trimRight" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final trimRight">+ trimRight</span></span>():String</span>
+<div id="trimRight_detail" style="display: none;">
+<pre class="desc">Trim the String's right empty chars.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="between" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final between">+ between</span></span>(<i title="optional"><b>startWord</b></i>:String, <i title="optional"><b>endWord</b></i>:String):String</span>
+<div id="between_detail" style="display: none;">
+<pre class="desc">Returns the text between start word and end word.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>startWord</b></i>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>endWord</b></i>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="endsWith" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final endsWith">+ endsWith</span></span>(<span title="required"><b>str</b></span>:String):Boolean</span>
+<div id="endsWith_detail" style="display: none;">
+<pre class="desc">Ends with the string.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="startsWith" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final startsWith">+ startsWith</span></span>(<span title="required"><b>str</b></span>:String):Boolean</span>
+<div id="startsWith_detail" style="display: none;">
+<pre class="desc">Starts with the string.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="byteLength" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final byteLength">+ byteLength</span></span>(<i title="optional"><b>byteSize</b></i>:Int):Int</span>
+<div id="byteLength_detail" style="display: none;">
+<pre class="desc">Returns the byte length in UTF-8 encoding. If the byteSize is null then the default byteSize is 3.
+UTF-8
+The 8-bit encoding of Unicode. It is a variable-width encoding.
+One Unicode character can be 1 byte, 2 bytes, 3 bytes, or 4 bytes in UTF-8 encoding.
+Characters from the European scripts are represented in either 1 or 2 bytes.
+Characters from most Asian scripts are represented in 3 bytes.
+Supplementary characters are represented in 4 bytes.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>byteSize</b></i>  &lt;Int&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toNumber" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final toNumber">+ toNumber</span></span>(<i title="optional"><b>defaultNum</b></i>:Number):Number</span>
+<div id="toNumber_detail" style="display: none;">
+<pre class="desc">Transfer the string to a number. The default number is Zero when failed.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>defaultNum</b></i>  &lt;Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toJSONString" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final toJSONString">+ toJSONString</span></span>():String</span>
+<div id="toJSONString_detail" style="display: none;">
+<pre class="desc">Returns a json string.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

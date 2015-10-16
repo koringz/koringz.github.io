@@ -1,0 +1,415 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.math.Geom2D</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-mathphys.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.math</div>
+<div class="topic" title="js.math.Geom2D">
+Class: 
+Geom2D</div>
+
+<b>public static</b> Geom2D
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="equalsPoint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static equalsPoint">+ <b>equalsPoint</b></span></span>(<span title="required"><b>p1</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p2</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):Boolean</span>
+<div id="equalsPoint_detail" style="display: none;">
+<pre class="desc">P1 equals P2
+P1，P2是否为同一点</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p1</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p2</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="movePoint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static movePoint">+ <b>movePoint</b></span></span>(<span title="required"><b>p</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>rad</b></span>:Number, <span title="required"><b>step</b></span>:Number):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="movePoint_detail" style="display: none;">
+<pre class="desc">Move point towards the radian.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>rad</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>step</b></span>  &lt;Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getSlope" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getSlope">+ <b>getSlope</b></span></span>(<span title="required"><b>p1</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p2</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):Number</span>
+<div id="getSlope_detail" style="display: none;">
+<pre class="desc">Caculate the slope of Segment P1P2.
+计算线段(p1,p2)的斜率。当线段与X轴垂直时，斜率不存在</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p1</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p2</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; when P1P2 perpendicular to the X, then return null.</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isCollinear" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isCollinear">+ <b>isCollinear</b></span></span>(<span title="required"><b>p1</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p2</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p3</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):Boolean</span>
+<div id="isCollinear_detail" style="display: none;">
+<pre class="desc">P1,P2,P3 if collinear.
+三点是否共线</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p1</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p2</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p3</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="posPointAndLine" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static posPointAndLine">+ <b>posPointAndLine</b></span></span>(<span title="required"><b>p</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>line</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):Int</span>
+<div id="posPointAndLine_detail" style="display: none;">
+<pre class="desc">Judge a point's position by a line vector.
+判断点与直线的位置关系</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>line</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; -1 is LEFT; 1 is RIGHT; 0 is COLLINEAR;</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="roundPoint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static roundPoint">+ <b>roundPoint</b></span></span>(<span title="required"><b>p</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="roundPoint_detail" style="display: none;">
+<pre class="desc">Round the point by four decimal length.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isPointOnSegment" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isPointOnSegment">+ <b>isPointOnSegment</b></span></span>(<span title="required"><b>p</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>segment</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):Boolean</span>
+<div id="isPointOnSegment_detail" style="display: none;">
+<pre class="desc">The point if on the segment.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>segment</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="posLines" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static posLines">+ <b>posLines</b></span></span>(<span title="required"><b>line1</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>, <span title="required"><b>line2</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):Int</span>
+<div id="posLines_detail" style="display: none;">
+<pre class="desc">Returns the relation of Line P1P2 and Line P3P4.
+直线1与直线2的位置关系。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>line1</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<dd><span title="required"><b>line2</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; 0 is Parallel;1 is Collinear;2 is Cross and not Vertical；3 is Cross and Vertical.</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getVCPOfPointAndLine" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getVCPOfPointAndLine">+ <b>getVCPOfPointAndLine</b></span></span>(<span title="required"><b>p3</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>line</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getVCPOfPointAndLine_detail" style="display: none;">
+<pre class="desc">Returns a vertical cross point of Line P1P2 and P3.
+求点P3与线段（P1,P2）所在直线的垂直交点</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p3</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>line</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getLDOfPointAndLine" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getLDOfPointAndLine">+ <b>getLDOfPointAndLine</b></span></span>(<span title="required"><b>p3</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>line</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):Number</span>
+<div id="getLDOfPointAndLine_detail" style="display: none;">
+<pre class="desc">Returns the lastest distance of Line P1P2 and P3.
+求点P3与线段（P1,P2）所在直线的最短距离</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p3</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>line</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCPOfLines" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getCPOfLines">+ <b>getCPOfLines</b></span></span>(<span title="required"><b>line1</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>, <span title="required"><b>line2</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getCPOfLines_detail" style="display: none;">
+<pre class="desc">Returns a cross point of Line P1P2 and Line P3P4.
+直线(p1,p2)与直线(p3,p4)的交点。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>line1</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<dd><span title="required"><b>line2</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; If Line P1P2 is parallel to Line P1P2, then return null.</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCPOfSegments" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getCPOfSegments">+ <b>getCPOfSegments</b></span></span>(<span title="required"><b>segment1</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>, <span title="required"><b>segment2</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getCPOfSegments_detail" style="display: none;">
+<pre class="desc">Returns a cross point of Segment P1P2 and Segment P3P4.
+线段(p1,p2)与线段(p3,p4)的交点。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>segment1</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<dd><span title="required"><b>segment2</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; If the cross point is not exist, then return null.</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCPOfRayAndSegment" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getCPOfRayAndSegment">+ <b>getCPOfRayAndSegment</b></span></span>(<span title="required"><b>p</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>rad</b></span>:Number, <span title="required"><b>segment</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getCPOfRayAndSegment_detail" style="display: none;">
+<pre class="desc">Returns the cross point between a ray and a segment.
+射线与线段的交点。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>rad</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>segment</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCPOfRayAndLine" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getCPOfRayAndLine">+ <b>getCPOfRayAndLine</b></span></span>(<span title="required"><b>p</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>rad</b></span>:Number, <span title="required"><b>line</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getCPOfRayAndLine_detail" style="display: none;">
+<pre class="desc">Returns the cross point between a ray and a line.
+射线与直线的交点。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>rad</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>line</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getPointsDistance" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getPointsDistance">+ <b>getPointsDistance</b></span></span>(<span title="required"><b>p1</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p2</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):Number</span>
+<div id="getPointsDistance_detail" style="display: none;">
+<pre class="desc">Returns the distance of P1 and P2.
+返回两点间的距离</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p1</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p2</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getNearestPoint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getNearestPoint">+ <b>getNearestPoint</b></span></span>(<span title="required"><b>point</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>points</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>[]):Int</span>
+<div id="getNearestPoint_detail" style="display: none;">
+<pre class="desc">Compare the distances of p to array of points.
+比较点p分别到点p1~点pN的距离。</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>point</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>points</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>[]&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getRatioPoint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getRatioPoint">+ <b>getRatioPoint</b></span></span>(<span title="required"><b>segment</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>, <span title="required"><b>ratio</b></span>:Number):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getRatioPoint_detail" style="display: none;">
+<pre class="desc">Returns the ratio point of Segment P1P2.
+定比分点公式</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>segment</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<dd><span title="required"><b>ratio</b></span>  &lt;Number&gt; Must not equals -1.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getMidpoint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getMidpoint">+ <b>getMidpoint</b></span></span>(<span title="required"><b>segment</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getMidpoint_detail" style="display: none;">
+<pre class="desc">Returns the middle point of Segment P1P2.
+求两点间的中点</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>segment</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isPointInTri" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isPointInTri">+ <b>isPointInTri</b></span></span>(<span title="required"><b>p</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p1</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p2</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p3</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):Boolean</span>
+<div id="isPointInTri_detail" style="display: none;">
+<pre class="desc">P is in Triangle(P1,P2,P3).
+P是否在三角形(P1,P2,P3)之内</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p1</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p2</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p3</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getTriCGPoint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getTriCGPoint">+ <b>getTriCGPoint</b></span></span>(<span title="required"><b>p1</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p2</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p3</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getTriCGPoint_detail" style="display: none;">
+<pre class="desc">Returns the center of gravity.
+求三角形的重心</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p1</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p2</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p3</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getTriLength" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getTriLength">+ <b>getTriLength</b></span></span>(<span title="required"><b>p1</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p2</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p3</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):Number</span>
+<div id="getTriLength_detail" style="display: none;">
+<pre class="desc">Returns the length.
+求三角形的周长</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p1</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p2</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p3</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getTriArea" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getTriArea">+ <b>getTriArea</b></span></span>(<span title="required"><b>p1</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p2</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p3</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):Number</span>
+<div id="getTriArea_detail" style="display: none;">
+<pre class="desc">Returns the area.
+求三角形的面积</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p1</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p2</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p3</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isPointInRect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isPointInRect">+ <b>isPointInRect</b></span></span>(<span title="required"><b>p</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>rect</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):Boolean</span>
+<div id="isPointInRect_detail" style="display: none;">
+<pre class="desc">P if is in the Rectangle.
+P是否在rect之内</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>rect</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isPointOnRect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isPointOnRect">+ <b>isPointOnRect</b></span></span>(<span title="required"><b>p</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>rect</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):Boolean</span>
+<div id="isPointOnRect_detail" style="display: none;">
+<pre class="desc">P if is on the border of the Rectangle.
+P是否在Rect的边上</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>rect</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="containsRect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static containsRect">+ <b>containsRect</b></span></span>(<span title="required"><b>rect1</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>, <span title="required"><b>rect2</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):Boolean</span>
+<div id="containsRect_detail" style="display: none;">
+<pre class="desc">Rectangle1 if contains Rectangle2.
+矩形1是否包含矩形2</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect1</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<dd><span title="required"><b>rect2</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="intersectsRect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static intersectsRect">+ <b>intersectsRect</b></span></span>(<span title="required"><b>rect1</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>, <span title="required"><b>rect2</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):<a href="js.math.Rect.html" title="js.math.Rect">Rect</a></span>
+<div id="intersectsRect_detail" style="display: none;">
+<pre class="desc">Returns the intersection rectangle of Rectangle1 and Rectangle2.
+矩形1与2的相交区域</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect1</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<dd><span title="required"><b>rect2</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; If not intersects, then return null.</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getRectCenter" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getRectCenter">+ <b>getRectCenter</b></span></span>(<span title="required"><b>rect</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getRectCenter_detail" style="display: none;">
+<pre class="desc">Returns the center point of a rect.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="centerToRect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static centerToRect">+ <b>centerToRect</b></span></span>(<span title="required"><b>rect1</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>, <span title="required"><b>rect2</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):void</span>
+<div id="centerToRect_detail" style="display: none;">
+<pre class="desc">set Rectangle1 center to Rectangle2.
+矩形1相对于矩形2居中</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect1</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<dd><span title="required"><b>rect2</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="limitInRect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static limitInRect">+ <b>limitInRect</b></span></span>(<span title="required"><b>rect1</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>, <span title="required"><b>rect2</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):Boolean</span>
+<div id="limitInRect_detail" style="display: none;">
+<pre class="desc">Limit Rectangle1 in Rectangle2.
+矩形1限制在矩形2的范围内</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect1</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<dd><span title="required"><b>rect2</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; Return true when Rectangle1 cross-border</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getRectBorders" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getRectBorders">+ <b>getRectBorders</b></span></span>(<span title="required"><b>rect</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):<a href="js.math.Line.html" title="js.math.Line">Line</a>[]</span>
+<div id="getRectBorders_detail" style="display: none;">
+<pre class="desc">Returns four borders of the Rectangle.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>[]&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="avoidToRect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static avoidToRect">+ <b>avoidToRect</b></span></span>(<span title="required"><b>rect1</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>, <span title="required"><b>rect2</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>, <span title="required"><b>rad</b></span>:Number):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="avoidToRect_detail" style="display: none;">
+<pre class="desc">Return a new position of Rect1 when Rect1 avoid to Rect2.
+矩形1避让矩形2</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect1</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<dd><span title="required"><b>rect2</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<dd><span title="required"><b>rad</b></span>  &lt;Number&gt; the radian of rect1's movment</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; new XY of the rect1</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getRectPoints" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getRectPoints">+ <b>getRectPoints</b></span></span>(<span title="required"><b>rect</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):<a href="js.math.Point.html" title="js.math.Point">Point</a>[]</span>
+<div id="getRectPoints_detail" style="display: none;">
+<pre class="desc">Returns four points of a rect.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>[]&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="posRectAndLine" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static posRectAndLine">+ <b>posRectAndLine</b></span></span>(<span title="required"><b>rect</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>, <span title="required"><b>line</b></span>:<a href="js.math.Line.html" title="js.math.Line">Line</a>):Int</span>
+<div id="posRectAndLine_detail" style="display: none;">
+<pre class="desc">Returns the positionship of a rect and a line.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<dd><span title="required"><b>line</b></span>  &lt;<a href="js.math.Line.html" title="js.math.Line">Line</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; -1: is right; 0 is on; 1 is left</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getRoundLength" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getRoundLength">+ <b>getRoundLength</b></span></span>(<span title="required"><b>r</b></span>:Number):Number</span>
+<div id="getRoundLength_detail" style="display: none;">
+<pre class="desc">Returns the length of a round.
+已知半径，求圆的周长</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>r</b></span>  &lt;Number&gt; 半径</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getRoundArea" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getRoundArea">+ <b>getRoundArea</b></span></span>(<span title="required"><b>r</b></span>:Number):Number</span>
+<div id="getRoundArea_detail" style="display: none;">
+<pre class="desc">Returns the area of a round.
+已知半径，求圆的面积</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>r</b></span>  &lt;Number&gt; 半径</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isOnRound" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isOnRound">+ <b>isOnRound</b></span></span>(<span title="required"><b>c</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>r</b></span>:Number, <span title="required"><b>p</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):Boolean</span>
+<div id="isOnRound_detail" style="display: none;">
+<pre class="desc">Point P if is on the round.
+点P是否在圆上</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>c</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>r</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>p</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getRoundCenter" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getRoundCenter">+ <b>getRoundCenter</b></span></span>(<span title="required"><b>p1</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>p2</b></span>:<a href="js.math.Point.html" title="js.math.Point">Point</a>, <span title="required"><b>r</b></span>:Number):<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getRoundCenter_detail" style="display: none;">
+<pre class="desc">Returns the center point of a round.
+已知圆上两点与半径，求圆心坐标</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>p1</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>p2</b></span>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+<dd><span title="required"><b>r</b></span>  &lt;Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,383 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.core.Dom</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.core</div>
+<div class="topic" title="js.core.Dom">
+Class: 
+Dom</div>
+
+<b>public static</b> Dom
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="$" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static $">+ <b>$</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array):HTMLElement|Array</span>
+<div id="$_detail" style="display: none;">
+<pre class="desc">Returns an HTMLElement reference.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; Accepts a string to use as an ID for getting a DOM reference, an actual DOM reference, or an Array of IDs and/or HTMLElements.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement|Array&gt; A DOM reference to an HTML element or an array of HTMLElements.</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="replaceHtml" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static replaceHtml">+ <b>replaceHtml</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>html</b></span>:String):HTMLElement</span>
+<div id="replaceHtml_detail" style="display: none;">
+<pre class="desc">Better performance than "innerHTML".</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>html</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setCursorStyle" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setCursorStyle">+ <b>setCursorStyle</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>style</b></span>:String):void</span>
+<div id="setCursorStyle_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>style</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getDocumentHeight" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getDocumentHeight">+ <b>getDocumentHeight</b></span></span>(<i title="optional"><b>win</b></i>:HTMLElement):Int</span>
+<div id="getDocumentHeight_detail" style="display: none;">
+<pre class="desc">Returns the height of the window.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>win</b></i>  &lt;HTMLElement&gt; the window object</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; The height of the actual document (which includes the body and its margin).</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getDocumentWidth" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getDocumentWidth">+ <b>getDocumentWidth</b></span></span>(<i title="optional"><b>win</b></i>:HTMLElement):Int</span>
+<div id="getDocumentWidth_detail" style="display: none;">
+<pre class="desc">Returns the width of the window.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>win</b></i>  &lt;HTMLElement&gt; the window object</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; The width of the actual document (which includes the body and its margin).</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getViewportHeight" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getViewportHeight">+ <b>getViewportHeight</b></span></span>(<i title="optional"><b>win</b></i>:HTMLElement):Int</span>
+<div id="getViewportHeight_detail" style="display: none;">
+<pre class="desc">Returns the current view height of the window.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>win</b></i>  &lt;HTMLElement&gt; the window object</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; The height of the viewable area of the page (excludes scrollbars).</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getViewportWidth" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getViewportWidth">+ <b>getViewportWidth</b></span></span>(<i title="optional"><b>win</b></i>:HTMLElement):Int</span>
+<div id="getViewportWidth_detail" style="display: none;">
+<pre class="desc">Returns the current view width of the window.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>win</b></i>  &lt;HTMLElement&gt; the window object</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; The width of the viewable area of the page (excludes scrollbars).</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setAttribute" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setAttribute">+ <b>setAttribute</b></span></span>(<span title="required"><b>el</b></span>:String|Array&lt;HTMLElement&gt;, <span title="required"><b>attr</b></span>:String, <span title="required"><b>val</b></span>:String):void</span>
+<div id="setAttribute_detail" style="display: none;">
+<pre class="desc">Set the elements 's attribute.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|Array&lt;HTMLElement&gt;&gt; the elements</dd><br/>
+<dd><span title="required"><b>attr</b></span>  &lt;String&gt; the attribute name</dd><br/>
+<dd><span title="required"><b>val</b></span>  &lt;String&gt; the attribute value</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setAttributes" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setAttributes">+ <b>setAttributes</b></span></span>(<span title="required"><b>el</b></span>:String|Array&lt;HTMLElement&gt;, <span title="required"><b>attrs</b></span>:Object):void</span>
+<div id="setAttributes_detail" style="display: none;">
+<pre class="desc">Set many attributes of the element.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|Array&lt;HTMLElement&gt;&gt; the elements</dd><br/>
+<dd><span title="required"><b>attrs</b></span>  &lt;Object&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setStyle" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setStyle">+ <b>setStyle</b></span></span>(<span title="required"><b>el</b></span>:String|Array&lt;HTMLElement&gt;, <span title="required"><b>k</b></span>:String, <span title="required"><b>val</b></span>:String|Number):void</span>
+<div id="setStyle_detail" style="display: none;">
+<pre class="desc">Set the elements 's style.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|Array&lt;HTMLElement&gt;&gt; the elements</dd><br/>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; the style's key</dd><br/>
+<dd><span title="required"><b>val</b></span>  &lt;String|Number&gt; the style's value</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getStyle" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getStyle">+ <b>getStyle</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array, <span title="required"><b>property</b></span>:String):String|Array</span>
+<div id="getStyle_detail" style="display: none;">
+<pre class="desc">Normalizes currentStyle and ComputedStyle.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements.</dd><br/>
+<dd><span title="required"><b>property</b></span>  &lt;String&gt; The style property whose value is returned.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String|Array&gt; The current value of the style property for the element(s).</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setStyles" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setStyles">+ <b>setStyles</b></span></span>(<span title="required"><b>el</b></span>:String|Array&lt;HTMLElement&gt;, <span title="required"><b>styles</b></span>:Object):void</span>
+<div id="setStyles_detail" style="display: none;">
+<pre class="desc">Set many styles of the element.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|Array&lt;HTMLElement&gt;&gt; the elements</dd><br/>
+<dd><span title="required"><b>styles</b></span>  &lt;Object&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="updateEl" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static updateEl">+ <b>updateEl</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <i title="optional"><b>attrs</b></i>:Object, <i title="optional"><b>styles</b></i>:Object, <i title="optional"><b>html</b></i>:String):HTMLElement</span>
+<div id="updateEl_detail" style="display: none;">
+<pre class="desc">Update the element's attributs, styles and innerHTML.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><i title="optional"><b>attrs</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>styles</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>html</b></i>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the element not exist</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="createEl" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static createEl">+ <b>createEl</b></span></span>(<span title="required"><b>tag</b></span>:String, <i title="optional"><b>attrs</b></i>:Object, <i title="optional"><b>styles</b></i>:Object, <i title="optional"><b>html</b></i>:String):HTMLElement</span>
+<div id="createEl_detail" style="display: none;">
+<pre class="desc">Creates a new element by attributs, styles and innerHTML.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>tag</b></span>  &lt;String&gt; the created element's tag name</dd><br/>
+<dd><i title="optional"><b>attrs</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>styles</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>html</b></i>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when The tag is empty</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="addClass" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static addClass">+ <b>addClass</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array, <span title="required"><b>className</b></span>:String):Boolean|Array</span>
+<div id="addClass_detail" style="display: none;">
+<pre class="desc">Adds a class name to a given element or collection of elements.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; The element or collection to add the class to</dd><br/>
+<dd><span title="required"><b>className</b></span>  &lt;String&gt; the class name to add to the class attribute</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean|Array&gt; A pass/fail boolean or array of booleans</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="removeClass" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static removeClass">+ <b>removeClass</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array, <span title="required"><b>className</b></span>:String):Boolean|Array</span>
+<div id="removeClass_detail" style="display: none;">
+<pre class="desc">Removes a class name from a given element or collection of elements.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; The element or collection to remove the class from</dd><br/>
+<dd><span title="required"><b>className</b></span>  &lt;String&gt; the class name to remove from the class attribute</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean|Array&gt; A pass/fail boolean or array of booleans</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="replaceClass" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static replaceClass">+ <b>replaceClass</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array, <span title="required"><b>oldClassName</b></span>:String, <span title="required"><b>newClassName</b></span>:String):Boolean|Array</span>
+<div id="replaceClass_detail" style="display: none;">
+<pre class="desc">Replace a class with another class for a given element or collection of elements.
+If no oldClassName is present, the newClassName is simply added.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; The element or collection to remove the class from</dd><br/>
+<dd><span title="required"><b>oldClassName</b></span>  &lt;String&gt; the class name to be replaced</dd><br/>
+<dd><span title="required"><b>newClassName</b></span>  &lt;String&gt; the class name that will be replacing the old class name</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean|Array&gt; A pass/fail boolean or array of booleans</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="hasClass" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static hasClass">+ <b>hasClass</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array, <span title="required"><b>className</b></span>:String):Boolean|Array</span>
+<div id="hasClass_detail" style="display: none;">
+<pre class="desc">Determines whether an HTMLElement has the given className.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; The element or collection to test</dd><br/>
+<dd><span title="required"><b>className</b></span>  &lt;String&gt; the class name to search for</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean|Array&gt; A boolean value or array of boolean values</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getAttribute" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getAttribute">+ <b>getAttribute</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>attr</b></span>:String):String</span>
+<div id="getAttribute_detail" style="display: none;">
+<pre class="desc">Provides a normalized attribute interface.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; The target element for the attribute.</dd><br/>
+<dd><span title="required"><b>attr</b></span>  &lt;String&gt; The attribute to get.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; The current value of the attribute.</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getChildren" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getChildren">+ <b>getChildren</b></span></span>(<span title="required"><b>node</b></span>:String|HTMLElement):Array</span>
+<div id="getChildren_detail" style="display: none;">
+<pre class="desc">Returns an array of HTMLElement childNodes.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>node</b></span>  &lt;String|HTMLElement&gt; The HTMLElement or an ID to use as the starting point</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; A static array of HTMLElements</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getChildrenBy" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getChildrenBy">+ <b>getChildrenBy</b></span></span>(<span title="required"><b>node</b></span>:HTMLElement, <span title="required"><b>method</b></span>:Function):Array</span>
+<div id="getChildrenBy_detail" style="display: none;">
+<pre class="desc">Returns an array of HTMLElement childNodes that pass the test method.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>node</b></span>  &lt;HTMLElement&gt; The HTMLElement to start from</dd><br/>
+<dd><span title="required"><b>method</b></span>  &lt;Function&gt; A boolean function used to test children that receives the node being tested as its only argument</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; A static array of HTMLElements</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getDocumentScrollLeft" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getDocumentScrollLeft">+ <b>getDocumentScrollLeft</b></span></span>(<i title="optional"><b>document</b></i>:HTMLElement):Int</span>
+<div id="getDocumentScrollLeft_detail" style="display: none;">
+<pre class="desc">Returns the left scroll value of the document</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>document</b></i>  &lt;HTMLElement&gt; The document to get the scroll value of</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; The amount that the document is scrolled to the left</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getDocumentScrollTop" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getDocumentScrollTop">+ <b>getDocumentScrollTop</b></span></span>(<i title="optional"><b>document</b></i>:HTMLElement):Int</span>
+<div id="getDocumentScrollTop_detail" style="display: none;">
+<pre class="desc">Returns the top scroll value of the document</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>document</b></i>  &lt;HTMLElement&gt; The document to get the scroll value of</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; The amount that the document is scrolled to the top</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getElementBy" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getElementBy">+ <b>getElementBy</b></span></span>(<span title="required"><b>method</b></span>:Function, <i title="optional"><b>tag</b></i>:String, <i title="optional"><b>root</b></i>:String|HTMLElement):HTMLElement</span>
+<div id="getElementBy_detail" style="display: none;">
+<pre class="desc">Returns the first HTMLElement that passes the test applied by the supplied boolean method.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>method</b></span>  &lt;Function&gt; - A boolean method for testing elements which receives the element as its only argument.</dd><br/>
+<dd><i title="optional"><b>tag</b></i>  &lt;String&gt; The tag name of the elements being collected</dd><br/>
+<dd><i title="optional"><b>root</b></i>  &lt;String|HTMLElement&gt; The HTMLElement or an ID to use as the starting point</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getElementsBy" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getElementsBy">+ <b>getElementsBy</b></span></span>(<span title="required"><b>method</b></span>:Function, <i title="optional"><b>tag</b></i>:String, <i title="optional"><b>root</b></i>:String|HTMLElement, <i title="optional"><b>apply</b></i>:Function, <i title="optional"><b>o</b></i>:Object, <i title="optional"><b>overrides</b></i>:Boolean):Array</span>
+<div id="getElementsBy_detail" style="display: none;">
+<pre class="desc">Returns an array of HTMLElements that pass the test applied by supplied boolean method.
+For optimized performance, include a tag and/or root node when possible.
+Note: This method operates against a live collection, so modifying the
+collection in the callback (removing/appending nodes, etc.) will have
+side effects.  Instead you should iterate the returned nodes array,
+as you would with the native "getElementsByTagName" method.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>method</b></span>  &lt;Function&gt; - A boolean method for testing elements which receives the element as its only argument.</dd><br/>
+<dd><i title="optional"><b>tag</b></i>  &lt;String&gt; The tag name of the elements being collected</dd><br/>
+<dd><i title="optional"><b>root</b></i>  &lt;String|HTMLElement&gt; The HTMLElement or an ID to use as the starting point</dd><br/>
+<dd><i title="optional"><b>apply</b></i>  &lt;Function&gt; A function to apply to each element when found</dd><br/>
+<dd><i title="optional"><b>o</b></i>  &lt;Object&gt; An optional arg that is passed to the supplied method</dd><br/>
+<dd><i title="optional"><b>overrides</b></i>  &lt;Boolean&gt; Whether or not to override the scope of "method" with "o"</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; Array of HTMLElements</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getElementsByClassName" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getElementsByClassName">+ <b>getElementsByClassName</b></span></span>(<span title="required"><b>className</b></span>:String, <i title="optional"><b>tag</b></i>:String, <i title="optional"><b>root</b></i>:String|HTMLElement, <i title="optional"><b>apply</b></i>:Function, <i title="optional"><b>o</b></i>:Object, <i title="optional"><b>overrides</b></i>:Boolean):Array</span>
+<div id="getElementsByClassName_detail" style="display: none;">
+<pre class="desc">Returns an array of HTMLElements with the given class.
+For optimized performance, include a tag and/or root node when possible.
+Note: This method operates against a live collection, so modifying the
+collection in the callback (removing/appending nodes, etc.) will have
+side effects.  Instead you should iterate the returned nodes array,
+as you would with the native "getElementsByTagName" method.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>className</b></span>  &lt;String&gt; The class name to match against</dd><br/>
+<dd><i title="optional"><b>tag</b></i>  &lt;String&gt; The tag name of the elements being collected</dd><br/>
+<dd><i title="optional"><b>root</b></i>  &lt;String|HTMLElement&gt; The HTMLElement or an ID to use as the starting point. This element is not included in the className scan.</dd><br/>
+<dd><i title="optional"><b>apply</b></i>  &lt;Function&gt; A function to apply to each element when found</dd><br/>
+<dd><i title="optional"><b>o</b></i>  &lt;Object&gt; An optional arg that is passed to the supplied method</dd><br/>
+<dd><i title="optional"><b>overrides</b></i>  &lt;Boolean&gt; Whether or not to override the scope of "method" with "o"</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; An array of elements that have the given class name</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getXY">+ <b>getXY</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array):Array</span>
+<div id="getXY_detail" style="display: none;">
+<pre class="desc">Gets the current position of an element based on page coordinates.
+Element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; Accepts a string to use as an ID, an actual DOM 
+reference, or an Array of IDs and/or HTMLElements</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; The XY position of the element(s)</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getX" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getX">+ <b>getX</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array):Number|Array</span>
+<div id="getX_detail" style="display: none;">
+<pre class="desc">Gets the current X position of an element based on page coordinates.  The element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number|Array&gt; The X position of the element(s)</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getY">+ <b>getY</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array):Number|Array</span>
+<div id="getY_detail" style="display: none;">
+<pre class="desc">Gets the current Y position of an element based on page coordinates.  Element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number|Array&gt; The Y position of the element(s)</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setXY">+ <b>setXY</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array, <span title="required"><b>pos</b></span>:Array, <span title="required"><b>noRetry</b></span>:Boolean):void</span>
+<div id="setXY_detail" style="display: none;">
+<pre class="desc">Set the position of an html element in page coordinates, regardless of how the element is positioned.
+The element(s) must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements</dd><br/>
+<dd><span title="required"><b>pos</b></span>  &lt;Array&gt; Contains X & Y values for new position (coordinates are page-based)</dd><br/>
+<dd><span title="required"><b>noRetry</b></span>  &lt;Boolean&gt; By default we try and set the position a second time if the first fails</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setX" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setX">+ <b>setX</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array, <span title="required"><b>x</b></span>:Int):void</span>
+<div id="setX_detail" style="display: none;">
+<pre class="desc">Set the X position of an html element in page coordinates, regardless of how the element is positioned.
+The element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements.</dd><br/>
+<dd><span title="required"><b>x</b></span>  &lt;Int&gt; The value to use as the X coordinate for the element(s).</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static setY">+ <b>setY</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement|Array, <span title="required"><b>x</b></span>:Int):void</span>
+<div id="setY_detail" style="display: none;">
+<pre class="desc">Set the Y position of an html element in page coordinates, regardless of how the element is positioned.
+The element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement|Array&gt; Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements.</dd><br/>
+<dd><span title="required"><b>x</b></span>  &lt;Int&gt; To use as the Y coordinate for the element(s).</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="inDocument" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static inDocument">+ <b>inDocument</b></span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <i title="optional"><b>doc</b></i>:Object):Boolean</span>
+<div id="inDocument_detail" style="display: none;">
+<pre class="desc">Determines whether an HTMLElement is present in the current document.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; The element to search for</dd><br/>
+<dd><i title="optional"><b>doc</b></i>  &lt;Object&gt; An optional document to search, defaults to element's owner document</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; Whether or not the element is present in the current document</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="insertAfter" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static insertAfter">+ <b>insertAfter</b></span></span>(<span title="required"><b>newNode</b></span>:String|HTMLElement, <span title="required"><b>referenceNode</b></span>:String|HTMLElement):HTMLElement</span>
+<div id="insertAfter_detail" style="display: none;">
+<pre class="desc">Inserts the new node as the next sibling of the reference node</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>newNode</b></span>  &lt;String|HTMLElement&gt; The node to be inserted</dd><br/>
+<dd><span title="required"><b>referenceNode</b></span>  &lt;String|HTMLElement&gt; The node to insert the new node after</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; The node that was inserted (or null if insert fails)</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="insertBefore" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static insertBefore">+ <b>insertBefore</b></span></span>(<span title="required"><b>newNode</b></span>:String|HTMLElement, <span title="required"><b>referenceNode</b></span>:String|HTMLElement):HTMLElement</span>
+<div id="insertBefore_detail" style="display: none;">
+<pre class="desc">Inserts the new node as the previous sibling of the reference node</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>newNode</b></span>  &lt;String|HTMLElement&gt; The node to be inserted</dd><br/>
+<dd><span title="required"><b>referenceNode</b></span>  &lt;String|HTMLElement&gt; The node to insert the new node before</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; The node that was inserted (or null if insert fails)</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isAncestor" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isAncestor">+ <b>isAncestor</b></span></span>(<span title="required"><b>haystack</b></span>:String|HTMLElement, <span title="required"><b>needle</b></span>:String|HTMLElement):Boolean</span>
+<div id="isAncestor_detail" style="display: none;">
+<pre class="desc">Determines whether an HTMLElement is an ancestor of another HTML element in the DOM hierarchy.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>haystack</b></span>  &lt;String|HTMLElement&gt; The possible ancestor</dd><br/>
+<dd><span title="required"><b>needle</b></span>  &lt;String|HTMLElement&gt; The possible descendent</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; Whether or not the haystack is an ancestor of needle</dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,76 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="inc/stylesheet.css">
+<script type="text/javascript">
+function $(id){
+	return document.getElementById(id);
+}
+function getClassName(id){
+	return $(id).getAttribute(document.all?'className':'class');
+}
+function setClassName(id, v){
+	return $(id).setAttribute(document.all?'className':'class', v);
+}
+
+function setupMenu(id){
+	if(id=='overview'){
+		setClassName('overview', 'menuitem_selected');
+		setClassName('package', 'menuitem_unselect');
+		setClassName('class', 'menuitem_unselect');
+	}else if(id=='package'){
+		setClassName('overview', 'menuitem');
+		setClassName('package', 'menuitem_selected');
+		setClassName('class', 'menuitem_unselect');
+	}else if(id=='class'){
+		setClassName('overview', 'menuitem');
+		setClassName('package', 'menuitem');
+		setClassName('class', 'menuitem_selected');
+	}
+}
+
+function getAfter(string, keyword){
+	return string.slice(string.indexOf(keyword)+keyword.length);
+}
+function getBefore(string, keyword){
+	return string.substring(0, string.lastIndexOf(keyword));
+}
+function clickMenu(id){
+	if(getClassName(id)=='menuitem_unselect' || getClassName(id)=='menuitem_selected') return;
+	
+	setupMenu(id);	
+	if(id=='overview'){
+		parent.viewFrame.location.href = 'overview.html';
+	}else if(id=='package'){
+		var url = parent.viewFrame.location.href;
+		if(url.indexOf('classes/')>-1){
+			var className = getBefore(getAfter(url, '/classes/'), '.html');
+			parent.viewFrame.location.href = 'packages/' + parent.JsdocxApp.getPackageNameByClass(className);
+		}		
+	}	
+}
+</script>
+</HEAD>
+
+<body style="margin:5px;padding:5px;">
+<div style="float:left;">
+<span class="logo">JSDK
+0.6.2</span>
+
+<span class="menubar">
+<span id="overview" class="menuitem_selected" onclick="clickMenu('overview')">Overview</span>
+<span id="package" class="menuitem_unselect" onclick="clickMenu('package')">Package</span>
+<span id="class" class="menuitem_unselect" onclick="clickMenu('class')">Class</span>
+</span>
+</div>
+
+<div style="float:right;margin-top:10px;">
+<I>Generated on 2012-05-02 13:42:06 by 
+<a title="version: 1.1.0_20120110" href="http://jsdocx.sourceforge.net/" target="_blank">Jsdocx</a></I>
+</div>
+<hr/>
+</body>
+
+</HTML>

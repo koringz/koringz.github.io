@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * @author fengchun
+-->
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Web Storage</title>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/util/js-html5-webstorage.js"></script>
+
+<style>
+	BODY {
+		FONT: 14px arial, helvetica, clean, sans-serif;
+		background: white;
+	}
+	
+</style>
+
+<script>
+var $ = js.core.Dom.$;	
+var Test = function(){
+	return {
+		getSession: function(){			
+			return js.html5.SessionStorage.get('mydata');				
+		},
+		setSession: function(data){
+			js.html5.SessionStorage.set('mydata', data);
+		},
+		getLocal: function(){			
+			return js.html5.LocalStorage.get('mydata');				
+		},
+		setLocal: function(data){
+			js.html5.LocalStorage.set('mydata', data);
+		},
+		listen: function(){
+			js.html5.SessionStorage.subscribe('changed', function(e, k){
+				alert(k)
+			});
+		}
+	}
+}();	
+</script>
+</head>
+
+<body onload="">
+<input id=data1></input><button onclick="Test.setSession($('data1').value)">setSession</button><br/>
+<button onclick="$('output').value = Test.getSession()">getSession</button>
+<button onclick="Test.listen()">listen</button>
+
+<br/>
+
+<input id=data2></input><button onclick="Test.setLocal($('data2').value)">setLocal</button><br/>
+<button onclick="$('output').value = Test.getLocal()">getLocal</button><br/>
+
+<input id=output></input>
+<br/>
+
+</body>
+</html>

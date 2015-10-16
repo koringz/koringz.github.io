@@ -1,0 +1,113 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.html5.LocalStorage</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-html5-webstorage.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.html5</div>
+<div class="topic" title="js.html5.LocalStorage">
+Class: 
+LocalStorage</div>
+
+<b>public static</b> LocalStorage <b>mix</b> <a href="js.core.EventProvider.html" title="js.core.EventProvider">EventProvider</a>
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="get" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static get">+ <b>get</b></span></span>(<span title="required"><b>k</b></span>:String):Object</span>
+<div id="get_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="set" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static set">+ <b>set</b></span></span>(<span title="required"><b>k</b></span>:String, <span title="required"><b>v</b></span>:Object):void</span>
+<div id="set_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>v</b></span>  &lt;Object&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="remove" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static remove">+ <b>remove</b></span></span>(<span title="required"><b>k</b></span>:String):void</span>
+<div id="remove_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="clear" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static clear">+ <b>clear</b></span></span>():void</span>
+<div id="clear_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="getLength" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getLength">+ <b>getLength</b></span></span>():Int</span>
+<div id="getLength_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Events</td></tr></thead><tr><td>
+<span id="@changed" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="changed">changed</span>
+<div id="@changed_detail" style="display: none;">
+<pre class="desc">{"description":"fires after change a item" 
+	   ,"type":"function" 
+    ,"scope":{"type":"js.html5.SessionStorage"} 
+    ,"arguments":{ 
+        "type":"array" 
+        ,items:[ 
+            {"type":"string","description":"item 's key"} 
+            ,{"type":"object","description":"item 's old value"} 
+            ,{"type":"object","description":"item 's new value"} 
+        ]} }</pre></div>
+</td></tr><tr><td>
+<span id="@removed" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="removed">removed</span>
+<div id="@removed_detail" style="display: none;">
+<pre class="desc">{"description":"fires after remove a item" 
+	   ,"type":"function" 
+    ,"scope":{"type":"js.html5.SessionStorage"} 
+    ,"arguments":{ 
+        "type":"array" 
+        ,items:[ 
+            {"type":"string","description":"item 's key"} 
+            ,{"type":"object","description":"item 's value"} 
+        ]} }</pre></div>
+</td></tr><tr><td>
+<span id="@cleared" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="cleared">cleared</span>
+<div id="@cleared_detail" style="display: none;">
+<pre class="desc">{"description":"fires after clear all items" 
+	   ,"type":"function" 
+    ,"scope":{"type":"js.html5.SessionStorage"} 
+    ,"arguments":null 
+}</pre></div>
+</td></tr></table><br/>
+
+</BODY>
+</HTML>

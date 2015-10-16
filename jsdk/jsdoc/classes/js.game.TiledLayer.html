@@ -1,0 +1,180 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.game.TiledLayer</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-game-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.game</div>
+<div class="topic" title="js.game.TiledLayer">
+Class: 
+TiledLayer</div>
+<div><a href="js.d2.View.html">js.d2.View</a></div>
+<div>&nbsp;&nbsp;<img src="../inc/inherit.gif">js.game.TiledLayer</div><br/>
+
+<b>public</b> TiledLayer <b>extends</b> <a href="js.d2.View.html" title="js.d2.View">View</a> <b>mix</b> <a href="js.core.EventProvider.html" title="js.core.EventProvider">EventProvider</a>
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="TiledLayer" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public TiledLayer">+ TiledLayer</span></span>(<span title="required"><b>config</b></span>:<a href="js.game.TiledLayer$Config.html" title="js.game.TiledLayer$Config">TiledLayer$Config</a>)</span>
+<div id="TiledLayer_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>config</b></span>  &lt;<a href="js.game.TiledLayer$Config.html" title="js.game.TiledLayer$Config">TiledLayer$Config</a>&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="paint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public paint">+ paint</span></span>(<span title="required"><b>canvas</b></span>:<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>):void</span>
+<div id="paint_detail" style="display: none;">
+<pre class="desc">Paint the layer on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>canvas</b></span>  &lt;<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCellBound" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getCellBound">+ getCellBound</span></span>(<span title="required"><b>mapX</b></span>:Int, <span title="required"><b>mapY</b></span>:Int):<a href="js.math.Rect.html" title="js.math.Rect">Rect</a></span>
+<div id="getCellBound_detail" style="display: none;">
+<pre class="desc">Returns the bound of the cell(x,y).</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>mapX</b></span>  &lt;Int&gt; 地图X坐标</dd><br/>
+<dd><span title="required"><b>mapY</b></span>  &lt;Int&gt; 地图Y坐标</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCellSize" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getCellSize">+ getCellSize</span></span>():Array</span>
+<div id="getCellSize_detail" style="display: none;">
+<pre class="desc">Return the cell's size.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; [width,height]</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCell" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getCell">+ getCell</span></span>(<span title="required"><b>col</b></span>:Int, <span title="required"><b>row</b></span>:Int):String|Int</span>
+<div id="getCell_detail" style="display: none;">
+<pre class="desc">Returns the cell's value.
+返回单元格的值</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>col</b></span>  &lt;Int&gt; 列号：地图X坐标</dd><br/>
+<dd><span title="required"><b>row</b></span>  &lt;Int&gt; 行号：地图Y坐标</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String|Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isVisibleCell" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isVisibleCell">+ isVisibleCell</span></span>(<span title="required"><b>mapX</b></span>:Int, <span title="required"><b>mapY</b></span>:Int):Boolean</span>
+<div id="isVisibleCell_detail" style="display: none;">
+<pre class="desc">The cell if is visible.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>mapX</b></span>  &lt;Int&gt; 地图X坐标</dd><br/>
+<dd><span title="required"><b>mapY</b></span>  &lt;Int&gt; 地图Y坐标</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setCell" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setCell">+ setCell</span></span>(<span title="required"><b>mapX</b></span>:Int, <span title="required"><b>mapY</b></span>:Int, <span title="required"><b>tileIndex</b></span>:Int):void</span>
+<div id="setCell_detail" style="display: none;">
+<pre class="desc">Sets the cell's value.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>mapX</b></span>  &lt;Int&gt; 地图X坐标</dd><br/>
+<dd><span title="required"><b>mapY</b></span>  &lt;Int&gt; 地图Y坐标</dd><br/>
+<dd><span title="required"><b>tileIndex</b></span>  &lt;Int&gt; 图砖索引</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="fillCells" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public fillCells">+ fillCells</span></span>(<span title="required"><b>mapX</b></span>:Int, <span title="required"><b>mapY</b></span>:Int, <span title="required"><b>numCols</b></span>:Int, <span title="required"><b>numRows</b></span>:Int, <span title="required"><b>tileIndex</b></span>:Int):void</span>
+<div id="fillCells_detail" style="display: none;">
+<pre class="desc">Fill many of cells.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>mapX</b></span>  &lt;Int&gt; 地图X坐标</dd><br/>
+<dd><span title="required"><b>mapY</b></span>  &lt;Int&gt; 地图Y坐标</dd><br/>
+<dd><span title="required"><b>numCols</b></span>  &lt;Int&gt; 列数</dd><br/>
+<dd><span title="required"><b>numRows</b></span>  &lt;Int&gt; 行数</dd><br/>
+<dd><span title="required"><b>tileIndex</b></span>  &lt;Int&gt; 图砖索引</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getPaintRect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getPaintRect">+ getPaintRect</span></span>():<a href="js.math.Rect.html" title="js.math.Rect">Rect</a></span>
+<div id="getPaintRect_detail" style="display: none;">
+<pre class="desc">Returns the current paint rect of the layer.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setPaintRect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setPaintRect">+ setPaintRect</span></span>(<span title="required"><b>mapX</b></span>:Int, <span title="required"><b>mapY</b></span>:Int, <span title="required"><b>cols</b></span>:Int, <span title="required"><b>rows</b></span>:Int):void</span>
+<div id="setPaintRect_detail" style="display: none;">
+<pre class="desc">Sets the current paint rect of the layer.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>mapX</b></span>  &lt;Int&gt; 地图X坐标</dd><br/>
+<dd><span title="required"><b>mapY</b></span>  &lt;Int&gt; 地图Y坐标</dd><br/>
+<dd><span title="required"><b>cols</b></span>  &lt;Int&gt; 列数</dd><br/>
+<dd><span title="required"><b>rows</b></span>  &lt;Int&gt; 行数</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="movePaintRect" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public movePaintRect">+ movePaintRect</span></span>(<span title="required"><b>dx</b></span>:Number, <span title="required"><b>dy</b></span>:Number):void</span>
+<div id="movePaintRect_detail" style="display: none;">
+<pre class="desc">Moves the current paint rect of the layer.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>dx</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>dy</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setData" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setData">+ setData</span></span>(<span title="required"><b>data</b></span>:Array[][]):void</span>
+<div id="setData_detail" style="display: none;">
+<pre class="desc">Sets the map data.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>data</b></span>  &lt;Array[][]&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getData" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getData">+ getData</span></span>():Array[][]</span>
+<div id="getData_detail" style="display: none;">
+<pre class="desc">Returns the map data.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array[][]&gt; data</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCellXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getCellXY">+ getCellXY</span></span>(<span title="required"><b>x</b></span>:Number, <span title="required"><b>y</b></span>:Number):Array</span>
+<div id="getCellXY_detail" style="display: none;">
+<pre class="desc">Returns the cell' x and y by the canvas's X and Y</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>x</b></span>  &lt;Number&gt; 画布x坐标</dd><br/>
+<dd><span title="required"><b>y</b></span>  &lt;Number&gt; 画布y坐标</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; [col,row]</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getCellByXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getCellByXY">+ getCellByXY</span></span>(<span title="required"><b>x</b></span>:Number, <span title="required"><b>y</b></span>:Number):String|Number</span>
+<div id="getCellByXY_detail" style="display: none;">
+<pre class="desc">Returns the cell' value by the canvas's X and Y</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>x</b></span>  &lt;Number&gt; 画布x坐标</dd><br/>
+<dd><span title="required"><b>y</b></span>  &lt;Number&gt; 画布y坐标</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String|Number&gt; </dd>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Events</td></tr></thead><tr><td>
+<span id="@painted" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="painted">painted</span>
+<div id="@painted_detail" style="display: none;">
+<pre class="desc">{"description":"fires after paint every cell" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.TiledLayer"} 
+     ,"arguments":{ 
+         "type":"array" 
+         ,"items":[ 
+             {"type":"HTMLElement", "description":"cell's element"} 
+             ,{"type":"string|number", "description":"cell's value"} 
+             ,{"type":"js.math.Point", "description":"cell's (x,y)"} 
+         ]} }</pre></div>
+</td></tr></table><br/>
+
+</BODY>
+</HTML>

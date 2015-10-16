@@ -1,0 +1,318 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-media.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2011-04-21
+ * @date 2011-04-25
+ * 
+ * @requires /library/sm2/soundmanager2.js
+ */</span>
+js.lang.System.namespace('js.media');
+
+js.core.Event.on(window, 'load',
+<b>function </b>(){
+<span class="singleComment">//BUGFIX: Safely lazy-load sm2 on window loaded for FF, Chrome</span>
+<span class="singleComment">//See: http://www.schillmania.com/projects/soundmanager2/demo/template/deferred-example.html</span>
+js.lang.Loader.loadLib(
+{js:'/library/sm2/soundmanager2.js'}
+,<b>function </b>(){
+<b>var </b>sm = soundManager;
+sm.url = js.lang.Loader.SOURCE_ROOT_DIR + '/library/sm2/';//auto setting the dir of the .swf
+sm.flashVersion = 9;//more better support for some mp3 formats than flash8
+sm.useHighPerformance = <b>true</b>;
+sm.beginDelayedInit();
+
+<span class="multiComment">/**
+ * @class js.media.SoundPlayer
+ * @static 
+ */</span>
+js.media.SoundPlayer = <b>function </b>(){    
+    <b>return</b> {        
+<span class="multiComment">        /**
+         * Set the property with the value.
+         * 
+         * @method setValue
+         * @param {String} k
+         * @param {Object} v
+         */</span>
+        setValue: <b>function </b>(k, v){
+            sm[k] = v;
+        },
+<span class="multiComment">        /**
+         * Return the value of the property.
+         * 
+         * @method getValue
+         * @param {String} k
+         * @return {Object} value
+         */</span>
+        getValue: <b>function </b>(k){
+            <b>return</b> sm[k];
+        },
+<span class="multiComment">        /**
+         * Returns a boolean indicating whether SoundPlayer can play the given MIME type：
+         * audio/mpeg, audio/mp3, audio/m4a, audio/aac
+         * 
+         * @method canPlayMIME
+         * @param {String} mime
+         * @return {Boolean}
+         */</span>
+        canPlayMIME: <b>function </b>(mime){
+            <b>return</b> sm.canPlayMIME(mime);
+        },
+<span class="multiComment">        /**
+         * Returns a boolean indicating whether SoundPlayer can play the given URL.
+         * 
+         * @method canPlayURL
+         * @param {String} url
+         * @return {Boolean}
+         */</span>
+        canPlayURL: <b>function </b>(url){
+            <b>return</b> sm.canPlayURL(url);
+        },
+<span class="multiComment">        /**
+         * Returns a boolean indicating whether SoundPlayer has attempted to and succeeded in initialising. 
+         * 
+         * @method isOK
+         * @return {Boolean}
+         */</span>
+        isOK: <b>function </b>(){
+            <b>return</b> sm.ok();
+        },
+<span class="multiComment">        /**
+         * Destroys any created Sound objects, unloads the flash movie (removing it from the DOM) 
+         * and restarts the SM2 init process, retaining all currently-set properties. 
+         * 
+         * @method reboot
+         */</span>
+        reboot: <b>function </b>(){
+            sm.reboot();
+        },
+<span class="multiComment">        /**
+         * Stops, unloads and destroys a sound or all sounds.
+         * 
+         * @method destroySounds
+         * @param {String} id
+         */</span>
+        destroySounds: <b>function </b>(id){
+            <b>if </b>(id) {
+                sm.destroySound(id);
+            }<b>else </b>{
+                <b>var </b>ids = getSoundIDs();
+                <b>if </b>(ids && ids.length &gt; 0){
+                    ids.forEach(<b>function </b>(id){
+                        sm.destroySound(id);
+                    });
+                }
+            }
+        },
+<span class="multiComment">        /**
+         * Returns a sound by id or all sounds.
+         * 
+         * @method getSounds
+         * @param {String} id
+         * @return {Object|Array&lt;Object&gt;}
+         */</span>
+        getSounds: <b>function </b>(id){
+            <b>if </b>(id) <b>return</b> sm.getSoundById(id);
+            <b>return</b> sm.sounds;
+        },
+<span class="multiComment">        /**
+         * Returns array of all sounds's ID.
+         * 
+         * @method getSoundIDs
+         * @return {String[]}
+         */</span>
+        getSoundIDs: <b>function </b>(){
+            <b>return</b> sm.soundIDs;
+        },
+<span class="multiComment">        /**
+         * Creates a new sound or a array of sounds.
+         * 
+         * @method createSounds
+         * @param {Object|Object[]} sounds
+         */        </span>
+        createSounds: <b>function </b>(sounds){
+            <b>if </b>(js.lang.System.isArray(sounds)){
+                sounds.forEach(<b>function </b>(sound){
+                    sm.createSound(sound);                
+                });
+            }<b>else </b>{
+                sm.createSound(sounds);
+            }
+        },
+<span class="multiComment">        /**
+         * Starts loading the sound by ID via HTTP, with options if specified. 
+         * 
+         * @method load
+         * @param {String} id
+         * @param {Object} options
+         */    </span>
+        load: <b>function </b>(id, options){
+            sm.load(id, options);
+        },
+<span class="multiComment">        /**
+         * Stops loading the sound by ID.
+         * 
+         * @method unload
+         * @param {String} id
+         */</span>
+        unload: <b>function </b>(id){
+            sm.unload(id);
+        },
+<span class="multiComment">        /**
+         * Plays the sound by ID.
+         * 
+         * @method play
+         * @param {String} id
+         * @param {Object} args:optional
+         */</span>
+        play: <b>function </b>(id, args){
+            sm.play(id, args);
+        },
+<span class="multiComment">        /**
+         * Stops the sound by ID or all sounds.
+         * 
+         * @method stop
+         * @param {String} id:optional
+         */</span>
+        stop: <b>function </b>(id){
+            <b>if </b>(id) {
+                sm.stop(id)
+            }<b>else </b>{
+                sm.stopAll();
+            }
+        },
+<span class="multiComment">        /**
+         * Pauses the sound by ID or all sounds.
+         * 
+         * @method pause
+         * @param {String} id:optional
+         */</span>
+        pause: <b>function </b>(id){
+            <b>if </b>(id) {
+                sm.pause(id)
+            }<b>else </b>{
+                sm.pauseAll();
+            }
+        },
+<span class="multiComment">        /**
+         * Resumes the sound by ID or all sounds.
+         * 
+         * @method resume
+         * @param {String} id:optional
+         */</span>
+        resume: <b>function </b>(id){
+            <b>if </b>(id) {
+                sm.resume(id)
+            }<b>else </b>{
+                sm.resumeAll();
+            }
+        },
+<span class="multiComment">        /**
+         * Toggles Pause/Resume the sound by ID.
+         * 
+         * @method togglePause
+         * @param {String} id
+         */</span>
+        togglePause: <b>function </b>(id){
+            sm.togglePause(id);
+        },
+<span class="multiComment">        /**
+         * Mutes the sound by ID.
+         * 
+         * @method mute
+         * @param {String} id
+         */        </span>
+        mute: <b>function </b>(id){
+            sm.mute(id);
+        },
+<span class="multiComment">        /**
+         * Unmutes the sound by ID.
+         * 
+         * @method unmute
+         * @param {String} id
+         */    </span>
+        unmute: <b>function </b>(id){
+            sm.unmute(id);
+        },
+<span class="multiComment">        /**
+         * Toggles Mute/Unmute the sound by ID.
+         * 
+         * @method toggleMute
+         * @param {String} id
+         */</span>
+        toggleMute: <b>function </b>(id){
+            sm.toggleMute(id);
+        },
+<span class="multiComment">        /**
+         * Sets the stereo pan (left/right bias) of the sound specified by ID. 
+         * Accepted values: -100 to 100 (L/R, 0 = center.) Affects pan property. 
+         * 
+         * @method setPan
+         * @param {String} id
+         * @param {Int} volume
+         */</span>
+        setPan: <b>function </b>(id, volume){
+            sm.setPan(id, volume);
+        },
+<span class="multiComment">        /**
+         * Seeeks to a given position within a sound, specified by miliseconds (1000 msec = 1 second).
+         * Affects position property. 
+         * 
+         * @method setPosition
+         * @param {String} id
+         * @param {Int} msecOffset
+         */</span>
+        setPosition: <b>function </b>(id, msecOffset){
+            sm.setPosition(id, msecOffset);
+        },
+<span class="multiComment">        /**
+         * Sets the volume of the sound specified by ID. 
+         * Accepted values: 0-100. Affects volume property. 
+         * 
+         * @method setVolume
+         * @param {String} id
+         * @param {Int} volume
+         */</span>
+        setVolume: <b>function </b>(id, volume){
+            sm.setVolume(id, volume);
+        },
+<span class="multiComment">        /**
+         * Event have 'error','load','ready','timeout'.
+         * 
+         * @method on
+         * @param {String} e values: load|error|ready|timeout
+         * @param {Function} fn 
+         * @param {Object} scope:optional 
+         */</span>
+        on: <b>function </b>(e, fn, scope){
+            sm['on'+e](fn, scope||<b>this</b>);            
+        }
+    }
+}()    
+    
+})
+
+});
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

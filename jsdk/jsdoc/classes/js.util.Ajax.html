@@ -1,0 +1,91 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.util.Ajax</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-util-ajax.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.util</div>
+<div class="topic" title="js.util.Ajax">
+Class: 
+Ajax</div>
+
+<b>public final static</b> Ajax
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="asyncRequest" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static asyncRequest">+ <b>asyncRequest</b></span></span>(<span title="required"><b>method</b></span>:string, <span title="required"><b>uri</b></span>:string, <i title="optional"><b>callback</b></i>:function, <i title="optional"><b>postData</b></i>:string):object</span>
+<div id="asyncRequest_detail" style="display: none;">
+<pre class="desc">For initiating an asynchronous request via the XHR object.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>method</b></span>  &lt;string&gt; HTTP transaction method</dd><br/>
+<dd><span title="required"><b>uri</b></span>  &lt;string&gt; Fully qualified path of resource</dd><br/>
+<dd><i title="optional"><b>callback</b></i>  &lt;function&gt; User-defined callback function or object</dd><br/>
+<dd><i title="optional"><b>postData</b></i>  &lt;string&gt; POST body</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;object&gt; Returns the connection object</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="initHeader" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static initHeader">+ <b>initHeader</b></span></span>(<span title="required"><b>label</b></span>:string, <span title="required"><b>value</b></span>:string, <i title="optional"><b>isDefault</b></i>:string):void</span>
+<div id="initHeader_detail" style="display: none;">
+<pre class="desc">Method that initializes the custom HTTP headers for the each transaction.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>label</b></span>  &lt;string&gt; The HTTP header label</dd><br/>
+<dd><span title="required"><b>value</b></span>  &lt;string&gt; The HTTP header value</dd><br/>
+<dd><i title="optional"><b>isDefault</b></i>  &lt;string&gt; Determines if the specific header is a default header 
+automatically sent with each transaction.</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="resetDefaultHeaders" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static resetDefaultHeaders">+ <b>resetDefaultHeaders</b></span></span>():void</span>
+<div id="resetDefaultHeaders_detail" style="display: none;">
+<pre class="desc">Resets the default HTTP headers object</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="setDefaultPostHeader" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static setDefaultPostHeader">+ <b>setDefaultPostHeader</b></span></span>(<span title="required"><b>b</b></span>:boolean):void</span>
+<div id="setDefaultPostHeader_detail" style="display: none;">
+<pre class="desc">Member to override the default POST header.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>b</b></span>  &lt;boolean&gt; Set and use default header - true or false .</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setForm" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static setForm">+ <b>setForm</b></span></span>(<span title="required"><b>form</b></span>:string|object, <i title="optional"><b>isUpload</b></i>:boolean, <i title="optional"><b>secureUri</b></i>:boolean):string</span>
+<div id="setForm_detail" style="display: none;">
+<pre class="desc">This method assembles the form label and value pairs and constructs an encoded string.
+asyncRequest() will automatically initialize the transaction with a
+a HTTP header Content-Type of application/x-www-form-urlencoded.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>form</b></span>  &lt;string|object&gt; id or name attribute, or form object.</dd><br/>
+<dd><i title="optional"><b>isUpload</b></i>  &lt;boolean&gt; enable file upload.</dd><br/>
+<dd><i title="optional"><b>secureUri</b></i>  &lt;boolean&gt; enable file upload over SSL in IE only.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;string&gt; string of the HTML form field name and value pairs..</dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

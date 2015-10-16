@@ -1,0 +1,177 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>Number</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div></div>
+<div class="topic" title="Number">
+Native: 
+Number</div>
+
+<b>public final</b> Number
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="isNumber" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isNumber">+ <b>isNumber</b></span></span>(<span title="required"><b>s</b></span>:String|Number):Boolean</span>
+<div id="isNumber_detail" style="display: none;">
+<pre class="desc">Determines whether or not the object is a number.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;String|Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toNumber" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static toNumber">+ <b>toNumber</b></span></span>(<span title="required"><b>s</b></span>:String|Number):Number</span>
+<div id="toNumber_detail" style="display: none;">
+<pre class="desc">Transfer a number. The default number is Zero.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;String|Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toInt" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static toInt">+ <b>toInt</b></span></span>(<span title="required"><b>s</b></span>:String|Number, <i title="optional"><b>mode</b></i>:Int):Int</span>
+<div id="toInt_detail" style="display: none;">
+<pre class="desc">Transfer a integer. The default number is Zero.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;String|Number&gt; </dd><br/>
+<dd><i title="optional"><b>mode</b></i>  &lt;Int&gt; rounding mode: (default)0 is round down; 1 is ceil; 2 is floor</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isFloat" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isFloat">+ <b>isFloat</b></span></span>(<span title="required"><b>s</b></span>:String|Number):Boolean</span>
+<div id="isFloat_detail" style="display: none;">
+<pre class="desc">Determines whether or not the object is a float.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;String|Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isInt" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isInt">+ <b>isInt</b></span></span>(<span title="required"><b>s</b></span>:String|Number):Boolean</span>
+<div id="isInt_detail" style="display: none;">
+<pre class="desc">Determines whether or not the object is a Integer.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;String|Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isNegative" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isNegative">+ <b>isNegative</b></span></span>(<span title="required"><b>s</b></span>:String|Number):Boolean</span>
+<div id="isNegative_detail" style="display: none;">
+<pre class="desc">Determines whether or not the object is a negative number, excludes Zero.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;String|Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isPositive" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isPositive">+ <b>isPositive</b></span></span>(<span title="required"><b>s</b></span>:String|Number):Boolean</span>
+<div id="isPositive_detail" style="display: none;">
+<pre class="desc">Determines whether or not the object is a positive number, excludes Zero.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;String|Number&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="decLength" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final decLength">+ decLength</span></span>():Int</span>
+<div id="decLength_detail" style="display: none;">
+<pre class="desc">Returns the length of decimal bit.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="intLength" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final intLength">+ intLength</span></span>():Int</span>
+<div id="intLength_detail" style="display: none;">
+<pre class="desc">Returns the length of integer bit.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="mul" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final mul">+ mul</span></span>(<span title="required"><b>s</b></span>:Number|String):Number</span>
+<div id="mul_detail" style="display: none;">
+<pre class="desc">Precision multiplication.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;Number|String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when The argument is null or not a number</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="div" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final div">+ div</span></span>(<span title="required"><b>s</b></span>:Number|String):Number</span>
+<div id="div_detail" style="display: none;">
+<pre class="desc">Precision division.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;Number|String&gt; but Zero</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when The argument is zero or not a number</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="add" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final add">+ add</span></span>(<span title="required"><b>s</b></span>:Number|String):Number</span>
+<div id="add_detail" style="display: none;">
+<pre class="desc">Precision addition.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;Number|String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when The argument is not a number</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="sub" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final sub">+ sub</span></span>(<span title="required"><b>s</b></span>:Number|String):Number</span>
+<div id="sub_detail" style="display: none;">
+<pre class="desc">Precision subtraction.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;Number|String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when The argument is not a number</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="calc" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final calc">+ calc</span></span>(<span title="required"><b>s</b></span>:Number|String):Number</span>
+<div id="calc_detail" style="display: none;">
+<pre class="desc">Arithmetic such as '+ - * /'.
+<pre class="source">
+3.1415.calc('*', 1, '/', 1, '+', 0, '-', 0) = 3.1415;
+</pre></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>s</b></span>  &lt;Number|String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when The arguments is null or empty</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="toJSONString" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final toJSONString">+ toJSONString</span></span>():String</span>
+<div id="toJSONString_detail" style="display: none;">
+<pre class="desc">Return a JSON String of the number.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

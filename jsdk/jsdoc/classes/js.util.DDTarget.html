@@ -1,0 +1,63 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.util.DDTarget</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-util-dragdrop.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.util</div>
+<div class="topic" title="js.util.DDTarget">
+Class: 
+DDTarget</div>
+<div><a href="js.util.DragDrop.html">js.util.DragDrop</a></div>
+<div>&nbsp;&nbsp;<img src="../inc/inherit.gif">js.util.DDTarget</div><br/>
+
+<b>public</b> DDTarget <b>extends</b> <a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>
+
+<hr/>
+
+<pre class="desc">
+A DragDrop implementation that does not move, but can be a drop
+target.  You would get the same result by simply omitting implementation
+for the event callbacks, but this way we reduce the processing cost of the
+event listener and the callbacks.</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="DDTarget" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public DDTarget">+ DDTarget</span></span>(<span title="required"><b>id</b></span>:String, <i title="optional"><b>sGroup</b></i>:String, <i title="optional"><b>config</b></i>:object)</span>
+<div id="DDTarget_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; the id of the element that is a drop target</dd><br/>
+<dd><i title="optional"><b>sGroup</b></i>  &lt;String&gt; the group of related DragDrop objects</dd><br/>
+<dd><i title="optional"><b>config</b></i>  &lt;object&gt; an object containing configurable attributes 
+                Valid properties for DDTarget in addition to those in DragDrop: none</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+
+
+
+
+</BODY>
+</HTML>

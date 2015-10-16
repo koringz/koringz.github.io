@@ -1,0 +1,104 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-i18n.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-8-15
+ * 
+ * @requires /core/js-core.js
+ */</span>
+js.lang.System.namespace('js.i18n');
+
+<span class="multiComment">/**
+ * @class js.i18n.Language
+ * @static
+ */</span>
+js.i18n.Language = {
+<span class="multiComment">    /**
+     * @constant {String} CHINESE
+     */</span>
+    CHINESE: 'zh',
+<span class="multiComment">    /**
+     * @constant {String} ENGLISH
+     */</span>
+    ENGLISH: 'en',
+<span class="multiComment">    /**
+     * @constant {String} FRENCH
+     */</span>
+    FRENCH: 'fr',
+<span class="multiComment">    /**
+     * @constant {String} GERMAN
+     */</span>
+    GERMAN: 'de',
+<span class="multiComment">    /**
+     * @constant {String} ITALIAN
+     */</span>
+    ITALIAN: 'it'    
+}
+
+<span class="multiComment">/**
+ * @class js.i18n.Resource
+ * 
+ * @constructor
+ * @param {Object} obj
+ * @param {String} lang:optional
+ */</span>
+js.i18n.Resource = <b>function </b>(obj, lang){
+    <b>this</b>._txt = obj;
+    <b>this</b>._lang = lang||js.core.Env.language;
+}
+js.i18n.Resource.prototype = {
+<span class="multiComment">    /**
+     * Sets the default language.
+     * 
+     * @method setLang
+     * @param {String} lang
+     */</span>
+    setLang:<b>function </b>(lang){
+        <b>this</b>._lang = lang;
+    },
+<span class="multiComment">    /**
+     * Returns the current language.
+     * 
+     * @method getLang
+     * @return {String}
+     */</span>
+    getLang: <b>function </b>(){<b>return</b> <b>this</b>._lang},
+<span class="multiComment">    /**
+     * Returns the value of the key in the language.
+     * 
+     * @method get
+     * @param {String} key
+     * @param {String} lang:optional 
+     * @return {String}
+     */</span>
+    get: <b>function </b>(key, lang){
+        <b>var </b>k = <b>this</b>._txt[key];
+        <b>if </b>(!k) <b>return</b> '';
+        <b>if </b>(js.lang.System.isString(k)) <b>return</b> k;
+        
+        <b>var </b>t = k[lang||<b>this</b>._lang];
+        <b>return</b> t?t:'';
+    }
+}
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

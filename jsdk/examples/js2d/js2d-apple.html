@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * @author fengchun
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Anim Test</title>
+        <script language="JavaScript" type="text/javascript" src="../../source/core/js-core.js"></script>
+        <script language="JavaScript" type="text/javascript" src="../../source/core/js-thread.js"></script>		
+		<script language="JavaScript" type="text/javascript" src="../../source/core/js-mathphys.js"></script>
+		<script language="JavaScript" type="text/javascript" src="../../source/js2d/js-2d-core.js"></script>
+        <script language="JavaScript" type="text/javascript" src="../../source/js2d/js-2d-anim.js"></script>
+        
+        <style>
+            BODY {
+                FONT: 14px arial, helvetica, clean, sans-serif
+            }
+			.container {
+				position:absolute;overflow:hidden;background:#cccccc;
+			}
+            
+        </style>
+        <script>        
+            var Test = function(){
+            	var anim1 = anim2 = null;  
+				
+				return {
+            		main: function(){            			
+						anim1 = new js.anim.Motion({
+            				target:'test1', step:100 ,formula: js.anim.Formulas['bounce_easeout']
+							, points: {
+								from:[0,150]
+								, to:[230,150]
+							}
+            			}, 30);
+						
+						anim2 = new js.anim.Motion({
+            				target:'test2', step:100 ,formula: js.anim.Formulas['bounce_easeout']
+							, points: {
+								from:[720,150]
+								, to:[420,150]
+							}
+            			}, 30);						
+            		},
+            		effect1: function(){
+            			anim1.start();
+            		},
+            		effect2: function(){
+            			anim2.start();
+            		}										
+            	}
+            }();	
+        </script>
+    </head>
+    <body onload ="Test.main();">
+ 	
+        <button onclick='Test.effect1()'>apple effect1</button>
+		<button onclick='Test.effect2()'>apple effect2</button>
+		
+		<div id="test1" class="container" style="left:200px;top:300px;width:180px;height:30px;">
+		With CSS3 implementation
+		</div>
+		<div id="test2" class="container" style="left:200px;top:350px;width:180px;height:30px;">
+		do not feel ashamed?
+		</div>
+
+    </body>
+</html>

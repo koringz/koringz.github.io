@@ -1,0 +1,432 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">util\js-util-validator.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2007-8-30
+ * 
+ * @requires /core/js-core.js
+ */</span>
+
+<span class="multiComment">/**
+ * @class js.util.Validator
+ * @static
+ * @final
+ */</span>
+js.util.Validator = <b>function </b>(){
+    
+    <b>return</b> {
+        REGS: {
+            FULL_NUMBER :  /^\d+$/,
+            ENGLISH : /^[A-Za-z]+$/,
+            ENGLISH_NUMBER: /^[A-Za-z\d]+$/,
+            EMAIL :/^\w+(((-|&)\w*)|(\.\w+))*\@[A-Za-z0-9]+((\-)[A-Za-z0-9]*|(\.)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/,
+            EMAIL_DOMAIN:/^@[A-Za-z0-9]+((\-)[A-Za-z0-9]*|(\.)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/,
+            DATE :/^(\d{1,4})(-|\/)(\d{1,2})(-|\/)(\d{1,2})$/,
+            DATE_TIME :/^(\d{1,4})(-|\/)(\d{1,2})(-|\/)(\d{1,2})\s(\d{1,2}):(\d{1,2}):(\d{1,2})$/,
+            TIME :/^(\d{1,2}):(\d{1,2}):(\d{1,2})$/,
+            HALF_ANGLE: /^[\u0000-\u00FF]+$/,
+            ENTIRE_ANGLE_NOCHINESE: /^[\uFF00-\uFFFF]+$/,
+            ENTIRE_ANGLE : /^[\u0391-\uFFE5]+$/,
+            IP : /^(0|[1-9]\d?|[0-1]\d{2}|2[0-4]\d|25[0-5]).(0|[1-9]\d?|[0-1]\d{2}|2[0-4]\d|25[0-5]).(0|[1-9]\d?|[0-1]\d{2}|2[0-4]\d|25[0-5]).(0|[1-9]\d?|[0-1]\d{2}|2[0-4]\d|25[0-5])$/    
+        },
+<span class="multiComment">        /**
+         * @method isNotEmpty
+         * @param {String} str
+         * @return {Boolean}
+         */</span>
+        isNotEmpty :<b>function </b>(str){
+            <b>if </b>(!str || !str<b> instanceof </b>String) <b>return</b> <b>false</b>;
+            <b>return</b> str.length &gt; 0;
+        },
+<span class="multiComment">        /**
+         * @method isEmpty
+         * @param {String} str
+         * @return {Boolean}
+         */</span>
+        isEmpty : <b>function </b>(str){
+            <b>return</b> !<b>this</b>.isNotEmpty(str);
+        },
+<span class="multiComment">        /**
+         * @method isNull
+         * @param {String} str
+         * @return {Boolean}
+         */</span>
+        isNull: <b>function </b>(str){
+            <b>return</b> js.lang.System.isNull(str) || js.lang.System.isUndefined(str);
+        },
+<span class="multiComment">        /**
+         * @method validateWith
+         * @param {String} str
+         * @param {String} reg
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         */</span>
+        validateWith: <b>function </b>(str, reg, emptyOK){
+            <b>if </b>(<b>this</b>.isNull(str.trim())) <b>return</b> emptyOK?<b>true</b>:<b>false</b>;
+            str = str.trim();                    
+            <b>if </b>(<b>this</b>.isEmpty(str)) <b>return</b> emptyOK?<b>true</b>:<b>false</b>;
+            <b>return</b> (str && (<b>new </b>RegExp (reg)).test(str));
+        },
+<span class="multiComment">        /**
+         * @method isDate
+         * @param {String} str format：'yyyy-mm-dd' or 'yyyy/mm/dd'
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isDate : <b>function </b>(str, emptyOK){
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.DATE, emptyOK);            
+        },
+<span class="multiComment">        /**
+         * @method isDateTime
+         * @param {String} str format：'yyyy-mm-dd hh:mm:ss' or 'yyyy/mm/dd hh:mm:ss'
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isDateTime : <b>function </b>(str, emptyOK){
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.DATE_TIME, emptyOK);            
+        },
+<span class="multiComment">        /**
+         * @method isTime
+         * @param {String} str format：'hh:mm:ss' 
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isTime : <b>function </b>(str, emptyOK){
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.TIME, emptyOK);            
+        },
+<span class="multiComment">        /**
+         * @method isIP
+         * @param {String} str format：'255.255.255.255' 
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isIP: <b>function </b>(str, emptyOK){
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.IP, emptyOK);
+        },
+<span class="multiComment">        /**
+         * @method isEmail
+         * @param {String} str format：'xxx@yyy.zzz' 
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isEmail : <b>function </b>(str, emptyOK){
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.EMAIL, emptyOK);                        
+        },
+<span class="multiComment">        /**
+         * @method isEmailDomain
+         * @param {String} str format：'@yyy.zzz' 
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isEmailDomain : <b>function </b>(str, emptyOK){
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.EMAIL_DOMAIN, emptyOK);    
+        },
+<span class="multiComment">        /**
+         * @method isFullNumber
+         * @param {String} str format：'123456' 
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isFullNumber : <b>function </b>(str, emptyOK) {
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.FULL_NUMBER, emptyOK);                
+        },
+        _isNumber : <b>function </b>(method, str, emptyOK) {
+            <b>if </b>(<b>this</b>.isNull(str.trim())) <b>return</b> emptyOK?<b>true</b>:<b>false</b>;
+            str = str.trim();                    
+            <b>if </b>(<b>this</b>.isEmpty(str)) <b>return</b> emptyOK?<b>true</b>:<b>false</b>;
+            <b>return</b> Number[method](str);                
+        },
+<span class="multiComment">        /**
+         * @method isNumber
+         * @param {String} str format：'-21.33','+6,700.','0.0' 
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isNumber : <b>function </b>(str, emptyOK) {
+            <b>return</b> <b>this</b>._isNumber('isNumber', str, emptyOK);                
+        },
+<span class="multiComment">        /**
+         * @method isFloat
+         * @param {String} str 
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isFloat : <b>function </b>(str, emptyOK) {
+            <b>return</b> <b>this</b>._isNumber('isFloat', str, emptyOK);                
+        },
+<span class="multiComment">        /**
+         * @method isInt
+         * @param {String} str 
+         * @param {Boolean} emptyOK return value when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isInt : <b>function </b>(str, emptyOK) {
+            <b>return</b> <b>this</b>._isNumber('isInt', str, emptyOK);                
+        },
+<span class="multiComment">        /**
+         * @method isNegative
+         * @param {String} str 
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isNegative : <b>function </b>(str, emptyOK) {
+            <b>return</b> <b>this</b>._isNumber('isNegative', str, emptyOK);                
+        },
+<span class="multiComment">        /**
+         * @method isPositive
+         * @param {String} str 
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isPositive : <b>function </b>(str, emptyOK) {
+            <b>return</b> <b>this</b>._isNumber('isPositive', str, emptyOK);                
+        },
+<span class="multiComment">        /**
+         * @method isNumberFormat
+         * @param {String} str
+         * @param {String} format 格式："{整数位长度}.{小数位长度}"。例如：".2","5.3"
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean} 
+         */</span>
+        isNumberFormat: <b>function </b>(str, format, emptyOK){
+            <b>if </b>(<b>this</b>.isNull(str.trim())) <b>return</b> emptyOK?<b>true</b>:<b>false</b>;
+            str = str.trim();                    
+            <b>if </b>(<b>this</b>.isEmpty(str)) <b>return</b> emptyOK?<b>true</b>:<b>false</b>;
+            
+            <b>if </b>(!format || !<b>this</b>.isNumber(str)) <b>return</b> <b>false</b>;
+            <b>var </b>f = format.split('.'), n = Number.toNumber(str), iLength = n.intLength(), dLength = n.decLength();
+            
+<span class="singleComment">            //检查整数位</span>
+            <b>if </b>(iLength &gt;0 && f[0]){
+                <b>if </b>(iLength &gt; parseInt(f[0])) <b>return</b> <b>false</b>;
+            }
+<span class="singleComment">            //检查小数位</span>
+            <b>if </b>(dLength &gt;0 && f[1]){
+                <b>if </b>(dLength &gt; parseInt(f[1])) <b>return</b> <b>false</b>;
+            }
+            <b>return</b> <b>true</b>;
+        },
+<span class="multiComment">        /**
+         * @method isTextLength
+         * @param {String} str
+         * @param {String} format 最小长度,最大长度的闭区间表达式。例如："[2,5]","[0,10]"
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isTextLength:<b>function </b>(str, format, emptyOK){
+            <b>if </b>(<b>this</b>.isNull(str.trim())) <b>return</b> emptyOK?<b>true</b>:<b>false</b>;
+            <b>if </b>(!format || !/^[(\d,\d]$)/.test(format)) <b>return</b> <b>false</b>;
+            
+            <b>var </b>len = str.length, f = format.match(/\d+/g);
+            <b>if </b>(len &lt; f[0]) <b>return</b> <b>false</b>;
+            <b>if </b>(f.length &gt; 1){
+                <b>if </b>(f[1] &lt; f[0]) <b>return</b> <b>false</b>;
+                <b>if </b>(len &gt; f[1]) <b>return</b> <b>false</b>;
+            }
+            <b>return</b> <b>true</b>;
+        },        
+<span class="multiComment">        /**
+         * @method isSBC
+         * @param {String} str  
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isSBC : <b>function </b>(str, emptyOK) {
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.HALF_ANGLE, emptyOK);                
+        },
+<span class="multiComment">        /**
+         * @method isDBC
+         * @param {String} str  
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isDBC : <b>function </b>(str, emptyOK) {
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.ENTIRE_ANGLE, emptyOK);                
+        },
+<span class="multiComment">        /**
+         * @method isDBCWithoutChinese
+         * @param {String} str  
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isDBCWithoutChinese : <b>function </b>(str, emptyOK) {
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.ENTIRE_ANGLE_NOCHINESE, emptyOK);                
+        },
+<span class="multiComment">        /**
+         * @method isEnglish
+         * @param {String} str  
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isEngish : <b>function </b>(str, emptyOK) {
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.ENGLISH, emptyOK);                
+        },
+<span class="multiComment">        /**
+         * @method isEnglishOrNumber
+         * @param {String} str  
+         * @param {Boolean} emptyOK:optional True is return true when str is empty. default is false.
+         * @return {Boolean}
+         */</span>
+        isEngishOrNumber : <b>function </b>(str, emptyOK) {
+            <b>return</b>  <b>this</b>.validateWith(str, <b>this</b>.REGS.ENGLISH_NUMBER, emptyOK);                
+        }
+    }
+}();
+<span class="multiComment">/**
+ * @class js.util.HTMLCheckor
+ * @static
+ * @final
+ */</span>
+js.util.HTMLCheckor = <b>function </b>(){
+    
+<span class="multiComment">    /**
+     * 取得各类HTML标签控件的值。
+     * 1）支持的HTML标签控件:&lt;text&gt;,&lt;hidden&gt;,&lt;radio&gt;,&lt;checkbox&gt;,&lt;select&gt;,&lt;textarea&gt;,&lt;password&gt;,&lt;file&gt;
+     * 2）当type=radio|checkbox，对象必须有name属性
+     * 
+     * param {HTMLElement} oElement  对象
+     * return (String|Array) 如为单选控件，返回String；如为多选控件，返回Array[]；
+     */</span>
+    <b>var </b>_getInputValue = <b>function </b>(oElement){
+        <b>var </b>tagName = oElement.tagName?oElement.tagName.toLowerCase():<b>null</b>; 
+        <b>if </b>(!tagName) <b>return</b> <b>null</b>;
+        
+        <b>var </b>v = '';        
+        <b>switch </b>(tagName){
+            <b>case </b>'input':<b>if </b>(oElement.type=='radio'){
+                    oElement = document.getElementsByName(oElement.name);
+                    <b>for </b>(<b>var </b>i=0;i&lt;oElement.length ;i++){
+                        <b>if </b>(oElement[i].checked) v = oElement[i].value;
+                    }
+                }<b>else </b><b>if </b>(oElement.type=='checkbox'){
+                    oElement = document.getElementsByName(oElement.name);
+                    v = [];
+                    <b>for </b>(<b>var </b>i=0;i&lt;oElement.length ;i++){
+                        <b>if </b>(oElement[i].checked) v[v.length] = oElement[i].value;
+                    }
+                }<b>else </b>{v = oElement.value;};<b>break</b>;
+            <b>case </b>'select':<b>if </b>(oElement.type=='select-one'){
+                    <b>if </b>(oElement.selectedIndex!=-1) v = oElement.options[oElement.selectedIndex].value;
+                }<b>else </b><b>if </b>(oElement.type=='select-multiple'){
+                    v = [];
+                    <b>for </b>(<b>var </b>i=0;i&lt;oElement.length ;i++){
+                        <b>if </b>(oElement[i].selected) v[v.length] = oElement[i].value;
+                    }
+                };<b>break</b>;
+            <b>case </b>'textarea':v = oElement.value;<b>break</b>;
+        }
+        <b>return</b> v;
+    }
+<span class="singleComment">    //校验INPUT</span>
+<span class="singleComment">    //@param {Object|String} ipt</span>
+<span class="singleComment">    //@param {Function} onError</span>
+    <b>var </b>_validateInput = <b>function </b>(ipt, onError){
+        <b>var </b>oInput = js.core.Dom.$(ipt);
+        <b>if </b>(!oInput) <b>return</b> <b>true</b>;
+        
+        <b>var </b>eps = oInput.getAttribute('validate');
+        <b>if </b>(!eps) <b>return</b> <b>true</b>;
+                
+        <b>var </b>value = _getInputValue(oInput);
+        <b>if </b>(!value) <b>return</b> <b>true</b>;
+        
+        <b>var </b>rules = js.lang.System.parseJSON(eps);
+        <b>if </b>(!rules) <b>return</b> <b>true</b>;
+        
+        <b>if </b>(!js.lang.System.isArray(rules)){
+            <b>throw </b><b>new </b>Error('[js.util.HTMLCheckor]The validate rules invalid format.');
+        }
+        
+        <b>return</b> rules.every(<b>function </b>(rule){
+            <b>if </b>(rule && rule.name){
+                <b>var </b>is = <b>true</b>, callback = js.util.Validator[rule.name];
+                <b>if </b>(callback){
+                    <b>try </b>{
+                        is = callback.apply(js.util.Validator, [value].concat(rule.args||[]));
+                    }<b>catch </b>(e){}
+                }
+                <b>if </b>(!is){
+                    <b>try </b>{
+                        <b>if </b>(onError) onError.call(oInput, rule, oldValue);
+                    }<b>catch </b>(e){                        
+                    }<b>finally </b>{
+                        <b>return</b> is;
+                    }                    
+                }
+            }
+        });
+    };
+
+    <b>return</b> {
+<span class="multiComment">        /**
+         * Setup validate rules for one HTML elements
+         * @method setRule
+         * 
+         * @struct js.util.HTMLCheckor$Rules{
+         *         "type":"array"
+         *         ,"items":[{
+         *             "type":"object"
+         *             ,"properties":{
+         *                 "name":{"type":"string"}
+         *                 "args":{"type":"array"}
+         *             }
+         *         }]
+         * }
+         * 
+         * @param {String|HTMLElement} input 控件Id或对象
+         * @param {js.util.HTMLCheckor$Rules} rules 
+         */</span>
+        setRule: <b>function </b>(input, rules){
+            <b>var </b>oInput = js.core.Dom.$(input);
+            <b>if </b>(oInput) oInput.setAttribute('validate',rules);
+        },
+<span class="multiComment">        /**
+         * Check one HTML element
+         * @method checkInput
+         * @param {String|HTMLElement} input
+         * @param {Function} onFailure:optional listening function on checking failure
+         * @return {Boolean} return true if all checkings success
+         * @throws {Error} when the validate rules invalid format
+         */</span>
+        checkInput :<b>function </b>(input, onFailure){
+            <b>return</b> _validateInput(input, onFailure);
+        },
+<span class="multiComment">        /**
+         * Check all HTML elements in a form such types：text,hidden,radio,checkbox,select,textarea,password,file
+         * @method checkForm
+         * @param {String|HTMLElement} form 
+         * @param {Function} onFailure:optional listening function on checking failure
+         * @return {Boolean} return true if all checks success
+         * @throws {Error} when the validate rules invalid format
+         */</span>
+        checkForm : <b>function </b>(form, onFailure){
+            <b>var </b>oForm = js.core.Dom.$(form), els = oForm.elements, rst = <b>true</b>;
+
+            <b>for </b>(<b>var </b>i=0,len=els.length;i&lt;len;i++){
+                <b>if </b>(!<b>this</b>.checkInput(els[i], onFailure)) rst = <b>false</b>;
+            }            
+            <b>return</b> rst;
+        }
+    }
+}();
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

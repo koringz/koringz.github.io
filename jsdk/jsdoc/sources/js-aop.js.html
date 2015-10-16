@@ -1,0 +1,219 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-aop.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.3
+ * @author feng.chun
+ * @date 2012-03-08
+ * 
+ * @version 0.2
+ * @author feng.chun
+ * @date 2010-11-17
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-8-15
+ * 
+ * @requires /core/js-core.js
+ * @requires /core/js-reflect.js
+ */</span>
+js.lang.System.namespace('js.aop');
+
+<span class="multiComment">/**
+ * @struct js.aop.AOP$Callback {
+ *     "type":"object"
+ *     ,"properties":{
+ *         "before":{
+ *             "type":"function"
+ *             ,"description": "fires before the method be invoked"
+ *             ,"required":false
+ *             ,"arguments":{
+ *                 "eType":{"type":"string","required":true}
+ *                 ,"mName":{"type":"string","required":true}
+ *                 ,"mArgs":{"type":"array","required":false}
+ *             }
+ *          }
+ *          ,"after":{
+ *             "type":"function"
+ *             ,"description": "fires after the method be invoked"
+ *             ,"required":false
+ *             ,"arguments":{
+ *                 "eType":{"type":"string","required":true}
+ *                 ,"mName":{"type":"string","required":true}
+ *                 ,"mReturn":{"type":"object","required":false}
+ *             }
+ *          }
+ *          ,"error":{
+ *             "type":"function"
+ *             ,"description": "fires when the method be invoking throws a error"
+ *             ,"required":false
+ *             ,"arguments":{
+ *                 "eType":{"type":"string","required":true}
+ *                 ,"mName":{"type":"string","required":true}
+ *                 ,"mError":{"type":"error","required":false}
+ *             }
+ *          }
+ *      }    
+ * }
+ */</span>
+
+<span class="multiComment">/**
+ * @class js.aop.ClassProxy
+ * @static
+ */</span>
+js.aop.ClassProxy = <b>function </b>(){
+    <b>return</b> {
+<span class="multiComment">        /**
+         * Add advices for the class's method.
+         * 
+         * @method addAdvices
+         * @param {js.reflect.Class|String} clazz a class' name or Class
+         * @param {String} methodName the method name of a class
+         * @param {js.aop.AOP$Callback} callback 
+         * @throws {TypeError} when some arguments invalid or method not exist
+         */</span>
+        addAdvices: <b>function </b>(clazz, methodName, callback){
+            <b>var </b>cla = <b>null</b>;
+            <b>try </b>{
+                cla = clazz<b> instanceof </b>js.reflect.Class?clazz:js.reflect.Class.forName(clazz);
+            }<b>catch </b>(e){
+                <b>throw </b>e;
+            }
+            <b>var </b>klass = cla.getClass()
+            , con = cla.getConstructor()
+            , fn = klass.prototype[methodName];
+            
+            <b>if </b>(!con['_aop']) con['_aop'] = {};
+            <b>var </b>_aop = con['_aop'];
+            <b>if </b>(!_aop[methodName]) _aop[methodName] = fn;
+                        
+            klass.prototype[methodName] = <b>function </b>(){                                
+                <b>return</b> <b>function </b>(){
+                    <b>var </b>args = Array.prototype.slice.call(arguments, 0)
+                    , rst = <b>null</b>, beforeRst = <b>null</b>, afterRst = <b>null</b>, errorRst = <b>null</b>;
+                    <b>if </b>(callback['before']) {
+                        beforeRst = callback['before'].apply(<b>this</b>, ['before', methodName, args]);
+                    }
+                    <b>try </b>{                        
+                        rst = fn.apply(<b>this</b>, beforeRst||arguments);
+                    }<b>catch </b>(e){
+                        <b>if </b>(callback['error']) {
+                            errorRst = callback['error'].apply(<b>this</b>, ['error', methodName, e]);
+                            <b>if </b>(errorRst) <b>throw </b>errorRst;
+                        }
+                    }
+                    <b>if </b>(callback['after']) {
+                        afterRst = callback['after'].apply(<b>this</b>, ['after', methodName, rst]);
+                    }
+                    <b>return</b> afterRst||rst; 
+                }                
+            }();            
+        },
+<span class="multiComment">        /**
+         * Remove all advices on the class's method.
+         * 
+         * @method reset
+         * @param {js.reflect.Class|String} clazz a class' name or Class
+         * @param {String} methodName the method name of a class
+         * @throws {TypeError} when some arguments invalid or method not exist
+         */</span>
+        reset: <b>function </b>(clazz, methodName){
+            <b>var </b>cla = <b>null</b>;
+            <b>try </b>{
+                cla = clazz<b> instanceof </b>js.reflect.Class?clazz:js.reflect.Class.forName(clazz);
+            }<b>catch </b>(e){
+                <b>throw </b>e;
+            }
+            <b>var </b>klass = cla.getClass()
+            , con = cla.getConstructor()
+            ,_aop = con['_aop']
+            ,fn = _aop?_aop[methodName]:<b>null</b>;            
+            <b>if </b>(fn) klass.prototype[methodName] = fn;
+        }
+    }
+}()
+
+<span class="multiComment">/**
+ * @class js.aop.InstanceProxy
+ * @static
+ */</span>
+js.aop.InstanceProxy = <b>function </b>(){
+    <b>return</b> {
+<span class="multiComment">        /**
+         * Add advices for the instance's method.
+         * 
+         * @method addAdvices
+         * @param {Object} obj the instance of a class
+         * @param {String} methodName the method name of a class
+         * @param {js.aop.AOP$Callback} callback 
+         * @throws {TypeError} when some arguments invalid or method not exist
+         */</span>
+        addAdvices: <b>function </b>(obj, methodName, callback){
+            <b>if </b>(!obj || !methodName || !callback) <b>throw </b><b>new </b>TypeError("[js.aop.InstanceProxy#addAdvices]Some arguments invalid.");
+                
+            <b>var </b>fn = obj[methodName];
+            <b>if </b>(<b>typeof </b>fn !='function') <b>throw </b><b>new </b>TypeError('[js.aop.InstanceProxy#addAdvices]The Method&lt;'+methodName+'&gt; not found.');
+            
+<span class="singleComment">            //cache the real method</span>
+            <b>if </b>(!obj.constructor['_aop']) obj.constructor['_aop'] = {};
+            <b>var </b>_aop = obj.constructor['_aop'];
+            <b>if </b>(!_aop[methodName]) _aop[methodName] = fn;            
+            
+            obj[methodName] = <b>function </b>(){
+                <b>var </b>rst = <b>null</b>, beforeRst = <b>null</b>, afterRst = <b>null</b>, errorRst = <b>null</b>;
+                <b>if </b>(callback['before']) {
+                    beforeRst = callback['before'].apply(obj, ['before', methodName, Array.prototype.slice.call(arguments, 0)]);
+                }
+                <b>try </b>{
+                    rst = fn.apply(obj, beforeRst||arguments);
+                }<b>catch </b>(e){
+                    <b>if </b>(callback['error']) {
+                        errorRst = callback['error'].apply(obj, ['error', methodName, e]);
+                        <b>if </b>(errorRst) <b>throw </b>errorRst;
+                    }
+                }
+                <b>if </b>(callback['after']) {
+                    afterRst = callback['after'].apply(obj, ['after', methodName, rst]);
+                }
+                <b>return</b> afterRst||rst; 
+            }
+        },
+<span class="multiComment">        /**
+         * Remove all advices on the instance's method.
+         * 
+         * @method reset
+         * @param {Object} obj the instance of a class
+         * @param {String} methodName the method name of a class
+         * @throws {TypeError} when some arguments invalid or method not exist
+         */</span>
+        reset: <b>function </b>(obj, methodName){
+            <b>if </b>(!obj || !methodName) <b>throw </b><b>new </b>TypeError("[js.aop.InstanceProxy#reset]Some arguments invalid.");
+            <b>var </b>fn = obj[methodName];
+            <b>if </b>(<b>typeof </b>fn !='function') <b>throw </b><b>new </b>TypeError('[js.aop.InstanceProxy#reset]The Method&lt;'+methodName+'&gt; not found.');
+                        
+            <b>var </b>_aop = obj.constructor['_aop'];
+            fn = _aop?_aop[methodName]:<b>null</b>;            
+            <b>if </b>(fn) obj[methodName] = fn;
+        }
+    }
+}();
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

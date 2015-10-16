@@ -1,0 +1,91 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.html5.Worker</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-html5-worker.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.html5</div>
+<div class="topic" title="js.html5.Worker">
+Class: 
+Worker</div>
+
+<b>public</b> Worker
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="Worker" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public Worker">+ Worker</span></span>(<span title="required"><b>target</b></span>:String)</span>
+<div id="Worker_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>target</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;Error&gt; when the browser not support HTML5's Worker</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="onSelf" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static onSelf">+ <b>onSelf</b></span></span>(<span title="required"><b>eName</b></span>:String, <span title="required"><b>fn</b></span>:Function):void</span>
+<div id="onSelf_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>eName</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="closeSelf" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static closeSelf">+ <b>closeSelf</b></span></span>():void</span>
+<div id="closeSelf_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="postSelf" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static postSelf">+ <b>postSelf</b></span></span>(<span title="required"><b>msg</b></span>:String):void</span>
+<div id="postSelf_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>msg</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="start" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public start">+ start</span></span>(<span title="required"><b>msg</b></span>:String):void</span>
+<div id="start_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>msg</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="on" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public on">+ on</span></span>(<span title="required"><b>eName</b></span>:String, <span title="required"><b>fn</b></span>:Function):void</span>
+<div id="on_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>eName</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="stop" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public stop">+ stop</span></span>():void</span>
+<div id="stop_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

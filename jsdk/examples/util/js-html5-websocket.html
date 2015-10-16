@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * @author fengchun
+-->
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Web Storage</title>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/util/js-html5-websocket.js"></script>
+
+<style>
+	BODY {
+		FONT: 14px arial, helvetica, clean, sans-serif;
+		background: white;
+	}
+	
+</style>
+
+<script>
+var $ = js.core.Dom.$;	
+var Test = function(){
+	var skt = null;
+	return {
+		open: function(){			
+			skt = new js.html5.WebSocket();
+			skt.connect();
+			skt.onmessage(function(msg){
+				alert(msg.data)
+			})							
+		},
+		close: function(){			
+			if(skt) skt.close()
+		},
+		send: function(){			
+			if(skt) skt.send($('msg').value)
+		}
+	}
+}();	
+</script>
+</head>
+
+<body onload="">
+<button onclick="Test.open()">open</button>
+<button onclick="Test.close()">close</button>
+<br/>
+<input id="msg">
+<button onclick="Test.send()">send</button>
+
+</body>
+</html>

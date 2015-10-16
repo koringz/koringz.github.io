@@ -1,0 +1,90 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-mathphys-min.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.3
+ * @author feng.chun
+ * @date 2011-01-05
+ * @date 2011-05-25
+ * 
+ * @version 0.2
+ * @author feng.chun
+ * @date 2010-11-15
+ *
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-9-20
+ * 
+ * @requires /core/js-core.js
+ * 
+ * 
+ * @struct js.math.Point {
+ *         "description":"a cartesian coordinate, like: [x, y]"
+ *         ,"type":"array"
+ *         ,"items":[
+ *             {"id":"x","type":"number"}
+ *          {"id":"y","type":"number"}
+ *         ]
+ * }
+ * 
+ * @struct js.math.Polar {
+ *         "description":"a polar coordinate, like: [len, rad]"
+ *         ,"type":"array"
+ *         ,"items":[
+ *             {"id":"length","type":"number"}
+ *          {"id":"radian","type":"number"}
+ *         ]
+ * }
+ * 
+ * @struct js.math.Line {
+ *         "description":"a line from (x1,y1) to (x2,y2), like: [[x1,y1], [x2,y2]]"
+ *         ,"type":"array"
+ *         ,"items":[
+ *             {"id":"p1","type":"js.math.Point"}
+ *          {"id":"p2","type":"js.math.Point"}
+ *         ]
+ * }
+ * 
+ * @struct js.math.Rect {
+ *         "description":"a rectangle, like: {x:111,y:222,w:333,h:444}"
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "x":{"type":"number","required":true}
+ *             ,"y":{"type":"number","required":true}
+ *             ,"w":{"type":"number","required":true}
+ *             ,"h":{"type":"number","required":true}
+ *         }
+ * }
+ * 
+ * @struct js.math.Vector {
+ *         "description":"a vector, like: {vx:111, vy:111}"
+ *         ,"type":"object"
+ *         ,"properties":{
+ *             "vx":{"type":"number","required":true}
+ *             ,"vy":{"type":"number","required":true}
+ *         }
+ * }
+ * 
+ * 
+ */</span>
+js.lang.System.namespace("js.math");js.lang.System.namespace("js.phys");(<b>function </b>(){js.math.MathTool={RADIAN_0:0,RADIAN_1:0.125*Math.PI,RADIAN_2:0.25*Math.PI,RADIAN_3:0.375*Math.PI,RADIAN_4:0.5*Math.PI,RADIAN_5:0.625*Math.PI,RADIAN_6:0.75*Math.PI,RADIAN_7:0.875*Math.PI,RADIAN_8:Math.PI,RADIAN_9:1.125*Math.PI,RADIAN_10:1.25*Math.PI,RADIAN_11:1.375*Math.PI,RADIAN_12:1.5*Math.PI,RADIAN_13:1.625*Math.PI,RADIAN_14:1.75*Math.PI,RADIAN_15:1.875*Math.PI,RADIAN_16:2*Math.PI,equals:<b>function </b>(e,d){<b>return</b> Math.abs(e-d)&lt;0.0001;},calcRadian:<b>function </b>(j,i){<b>if </b>(!i){i=[0,0];}<b>var </b>f=j[0],h=j[1],e=i[0],g=i[1];<b>if </b>(f==0&&h==0&&e==0&&g==0){<b>return</b> 0;}<b>var </b>d=Math.atan2(h-g,f-e);<b>return</b> d&lt;0?<b>this</b>.RADIAN_16+d:d;},radian2Angle:<b>function </b>(d){<b>return</b> d*180/Math.PI;},angle2Radian:<b>function </b>(d){<b>return</b> d*Math.PI/180;},polar2XY:<b>function </b>(e,d){<b>switch </b>(d/Math.PI){<b>case </b>0:<b>return</b>[e,0];<b>case </b>0.5:<b>return</b>[0,e];<b>case </b>1:<b>return</b>[-1*e,0];<b>case </b>1.5:<b>return</b>[0,-1*e];<b>case </b>2:<b>return</b>[e,0];default:<b>return</b>[e*Math.cos(d),e*Math.sin(d)];}},xy2Polar:<b>function </b>(d,e){<b>return</b>[Math.sqrt(Math.pow(d,2)+Math.pow(e,2)),<b>this</b>.calcRadian([d,e])];},rotateAroundOrigin:<b>function </b>(f,e){<b>var </b>d=f[0],h=f[1],g=<b>this</b>.polar2XY(1,e);<b>return</b>[d*g[0]-h*g[1],d*g[1]+h*g[0]];},translateCCS:<b>function </b>(e,d){<b>return</b>[e[0]+d[0],e[1]+d[1]];},getAntiDir:<b>function </b>(d){<b>return</b> d&lt;Math.PI?d+Math.PI:d-Math.PI;}};<b>var </b>b=js.math.MathTool;js.math.Vector2D={equals:<b>function </b>(e,d){<b>return</b> b.equals(e.vx,d.vx)&&b.equals(e.vy,d.vy);},toVector:<b>function </b>(e,d){<b>if </b>(!e){e=[0,0];}<b>return</b>{vx:d[0]-e[0],vy:d[1]-e[1]};},toPoint:<b>function </b>(d){<b>return</b>[d.vx,d.vy];},toString:<b>function </b>(d){<b>return</b>"("+d.vx+","+d.vy+")";},getLength:<b>function </b>(d){<b>if </b>(d.vx==0&&d.vy==0){<b>return</b> 0;}<b>return</b> Math.sqrt(d.vx*d.vx+d.vy*d.vy);},setLength:<b>function </b>(e,d){<b>var </b>f=<b>this</b>.getLength();<b>if </b>(f!=0){<b>this</b>.mul(d/f);}},negate:<b>function </b>(d){<b>return</b> <b>this</b>.mul(d,-1);},add:<b>function </b>(e,d){<b>return</b>{vx:e.vx+d.vx,vy:e.vy+d.vy};},sub:<b>function </b>(e,d){<b>return</b>{vx:e.vx-d.vx,vy:e.vy-d.vy};},mul:<b>function </b>(d,e){<b>return</b>{vx:d.vx*e,vy:d.vy*e};},div:<b>function </b>(d,e){<b>if </b>(e==0){<b>throw </b><b>new </b>TypeError("[js.math.Vector2D#div]The argument&lt;number&gt; is zero.");}<b>return</b>{vx:d.vx/e,vy:d.vy/e};},dot:<b>function </b>(e,d){<b>return</b> e.vx*d.vx+e.vy*d.vy;},cross:<b>function </b>(e,d){<b>return</b> e.vx*d.vy-d.vx*e.vy;},isPerpTo:<b>function </b>(e,d){<b>return</b> <b>this</b>.dot(e,d)==0;},interpolate:<b>function </b>(f,e,g){<b>var </b>d=(1-g)*f.vx+g*e.vx,h=(1-g)*f.vy+g*e.vy;<b>return</b>{vx:d,vy:h};},normalize:<b>function </b>(d){<b>var </b>e=<b>this</b>.getLength(d);<b>return</b> b.equals(e,0)?<b>this</b>.div(d,e):{vx:0,vy:0};},getRadian:<b>function </b>(d){<b>return</b> b.calcRadian([d.vx,d.vy]);},setRadian:<b>function </b>(e,d){<b>var </b>f=<b>this</b>.getLength(e);<b>if </b>(f==0){<b>return</b>;}<b>return</b> b.polar2XY(f,d);},radianBetween:<b>function </b>(f,e){<b>var </b>d=<b>this</b>.getRadian(e)-<b>this</b>.getRadian(f);<b>return</b> d&lt;0?Math.abs(d):d;},project:<b>function </b>(g,e){<b>var </b>f=<b>this</b>.dot(g,e),d=e.vx*e.vx+e.vy*e.vy;<b>return</b>{vx:(f/d)*e.vx,vy:(f/d)*e.vy};},rotate:<b>function </b>(e,d){<b>var </b>f=b.polar2XY(1,d);<b>return</b>{vx:e.vx*f[0]-e.vy*f[1],vy:e.vx*f[1]+e.vy*f[0]};},getNormal:<b>function </b>(d,e){<b>return</b> e?{"vx":d.vy,"vy":-1*d.vx}:{"vx":-1*d.vy,"vy":d.vx};},rebound:<b>function </b>(h,f,d){<b>var </b>e=<b>this</b>.getNormal(f,d);<b>if </b>(<b>this</b>.isPerpTo(h,e)){<b>return</b> <b>null</b>;}<b>var </b>g=<b>this</b>.project(h,e);<b>return</b> <b>this</b>.sub(<b>this</b>.mul(<b>this</b>.add(g,h),2),h);}};<b>var </b>c=js.math.Vector2D;js.math.Geom2D={equalsPoint:<b>function </b>(e,d){<b>return</b> b.equals(e[0],d[0])&&b.equals(e[1],d[1]);},movePoint:<b>function </b>(f,d,e){<b>var </b>g=b.polar2XY(e,d);<b>return</b>[g[0]+f[0],g[1]+f[1]];},getSlope:<b>function </b>(g,f){<b>var </b>e=g[0]-f[0];<b>var </b>d=g[1]-f[1];<b>return</b> e==0?<b>null</b>:d/e;},isCollinear:<b>function </b>(f,e,d){<b>if </b>(<b>this</b>.equalsPoint(f,e)||<b>this</b>.equalsPoint(e,d)||<b>this</b>.equalsPoint(f,d)){<b>return</b> <b>true</b>;}<b>return</b> <b>this</b>.posPointAndLine(d,[f,e])==0;},posPointAndLine:<b>function </b>(e,d){<b>var </b>h=c.toVector(d[0],e),g=c.toVector(d[1],e),f=c.cross(h,g);<b>if </b>(b.equals(0,Math.abs(f))){<b>return</b> 0;}<b>if </b>(f&lt;0){<b>return</b> -1;}<b>if </b>(f&gt;0){<b>return</b> 1;}},roundPoint:<b>function </b>(d){<b>return</b>[d[0].toFixed(4),d[1].toFixed(4)];},_isInPointsBound:<b>function </b>(e,f,d){<b>if </b>(<b>this</b>.equalsPoint(e,f)||<b>this</b>.equalsPoint(e,d)){<b>return</b> <b>true</b>;}e=<b>this</b>.roundPoint(e),f=<b>this</b>.roundPoint(f),d=<b>this</b>.roundPoint(d);<b>return</b> Math.min(f[0],d[0])&lt;=e[0]&&e[0]&lt;=Math.max(f[0],d[0])&&Math.min(f[1],d[1])&lt;=e[1]&&e[1]&lt;=Math.max(f[1],d[1]);},isPointOnSegment:<b>function </b>(e,d){<b>return</b> <b>this</b>.posPointAndLine(e,d)==0&&<b>this</b>._isInPointsBound(e,d[0],d[1]);},posLines:<b>function </b>(e,d){<b>var </b>j=e[0],h=e[1],g=d[0],f=d[1];k1=<b>this</b>.getSlope(j,h),k2=<b>this</b>.getSlope(g,f);<b>if </b>(b.equals(k1,k2)){<b>return</b> <b>this</b>.isCollinear(j,h,g)?1:0;}<b>else </b>{<b>var </b>i=<b>false</b>;<b>if </b>(!k1&&b.equals(k2,0)){<b>return</b> 3;}<b>else </b>{<b>if </b>(!k2&&b.equals(k1,0)){<b>return</b> 3;}<b>else </b>{<b>if </b>(b.equals(k1*k2,-1)){<b>return</b> 3;}}}<b>return</b> 2;}},getVCPOfPointAndLine:<b>function </b>(j,m){<b>var </b>l=m[0],k=m[1],h=k[0]-l[0],g=k[1]-l[1];<b>if </b>(h!=0&&g!=0){<b>var </b>d=Math.pow(h,2),f=Math.pow(g,2),e=(d*j[0]+f*l[0]+h*g*(j[1]-l[1]))/(d+f),i=(g*(e-l[0])+g*l[1])/h;<b>return</b>[e,i];}<b>else </b>{<b>return</b> l;}},getLDOfPointAndLine:<b>function </b>(e,d){<b>var </b>f=<b>this</b>.getVCPOfPointAndLine(e,d);<b>return</b> <b>this</b>.getPointsDistance(f,e);},getCPOfLines:<b>function </b>(s,q){<b>var </b>t=s[0],r=s[1],p=q[0],m=q[1],g=t[0],n=t[1],f=r[0],l=r[1],e=p[0],k=p[1],u=m[0],j=m[1];<b>var </b>i=(l-n)*(u-e)-(j-k)*(f-g);<b>if </b>(b.equals(i,0)){<b>return</b> <b>null</b>;}<b>var </b>h=((f-g)*(u-e)*(k-n)+(l-n)*(u-e)*g-(j-k)*(f-g)*e)/i,o=((l-n)*(j-k)*(e-g)+(f-g)*(j-k)*n-(u-e)*(l-n)*k)/(-i);<b>return</b>[h,o];},getCPOfSegments:<b>function </b>(e,d){<b>var </b>j=e[0],i=e[1],g=d[0],f=d[1],h=<b>this</b>.getCPOfLines([j,i],[g,f]);<b>if </b>(!h){<b>return</b> <b>null</b>;}<b>return</b>(<b>this</b>._isInPointsBound(h,j,i)&&<b>this</b>._isInPointsBound(h,g,f))?h:<b>null</b>;},getCPOfRayAndSegment:<b>function </b>(g,d,e){<b>var </b>f=<b>this</b>.getCPOfLines([g,<b>this</b>.movePoint(g,d,10)],e);<b>if </b>(!f){<b>return</b> <b>null</b>;}<b>return</b> <b>this</b>._isInPointsBound(f,e[0],e[1])?f:<b>null</b>;},getCPOfRayAndLine:<b>function </b>(f,d,e){<b>return</b> <b>this</b>.getCPOfLines([f,<b>this</b>.movePoint(f,d,10)],e);},getPointsDistance:<b>function </b>(e,d){<b>return</b> Math.sqrt(Math.pow(d[0]-e[0],2)+Math.pow(d[1]-e[1],2));},getNearestPoint:<b>function </b>(e,g){<b>var </b>f=-1;<b>if </b>(!g||g.length&lt;=0){<b>return</b> f;}<b>if </b>(g.length==1){<b>return</b> 0;}<b>var </b>h=<b>null</b>;g.forEach(<b>function </b>(k,j){<b>var </b>d=Math.pow(k[0]-e[0],2)+Math.pow(k[1]-e[1],2);<b>if </b>(h==<b>null</b>||d&lt;h){h=d;f=j;}});<b>return</b> f;},getRatioPoint:<b>function </b>(e,d){<b>return</b>[(e[0][0]+d*e[1][0])/(1+d),(e[0][1]+d*e[1][1])/(1+d)];},getMidpoint:<b>function </b>(d){<b>return</b> <b>this</b>.getRatioPoint(d,1);},isPointInTri:<b>function </b>(f,m,l,k){<b>var </b>h=c.toVector(m,l),d=c.toVector(l,k),j=c.toVector(k,m),e=c.cross(h,d),g=c.cross(d,j),i=c.cross(j,h);<b>return</b>(e&gt;0&&g&gt;0&&i&gt;0)||(e&lt;0&&g&lt;0&&i&lt;0);},getTriCGPoint:<b>function </b>(f,e,d){<b>return</b>{x:(f[0]+e[0]+d[0])/3,y:(f[1]+e[1]+d[1])/3};},getTriLength:<b>function </b>(h,g,f){<b>var </b>e=a.getPointsDistance(h,g),d=a.getPointsDistance(g,f),i=a.getPointsDistance(f,h);<b>return</b> e+d+i;},getTriArea:<b>function </b>(i,h,f){<b>var </b>e=a.getPointsDistance(i,h),d=a.getPointsDistance(h,f),j=a.getPointsDistance(f,i),g=(e+d+j)/2;<b>return</b> Math.sqrt(g*(g-e)*(g-d)*(g-j));},isPointInRect:<b>function </b>(f,e){<b>var </b>d=f[0],g=f[1];<b>return</b> d&gt;=e.x&&d&lt;=(e.x+e.w)&&g&gt;=e.y&&g&lt;=(e.y+e.h);},isPointOnRect:<b>function </b>(e,d){<b>return</b>(e[0]==d.x&&(e[1]&gt;=d.y||e[1]&lt;=(d.y+d.h))||e[0]==(d.x+d.w)&&(e[1]&gt;=d.y||e[1]&lt;=(d.y+d.h))||e[1]==d.y&&(e[0]&gt;=d.x||e[0]&lt;=(d.x+d.w))||e[1]==(d.y+d.h)&&(e[0]&gt;=d.x||e[0]&lt;=(d.x+d.w)));},containsRect:<b>function </b>(e,d){<b>return</b>(d.x&gt;=e.x&&d.y&gt;=e.y&&(d.x+d.w)&lt;=(e.x+e.w)&&(d.y+d.h)&lt;=(e.y+e.h));},intersectsRect:<b>function </b>(g,f){<b>var </b>h=Math.max(g.y,f.y),i=Math.min(g.x+g.w,f.x+f.w),d=Math.min(g.y+g.h,f.y+f.h),e=Math.max(g.x,f.x);<b>if </b>(d&gt;h&&i&gt;e){<b>return</b>{x:e,y:h,w:i-e,h:d-h};}<b>else </b>{<b>return</b> <b>null</b>;}},getRectCenter:<b>function </b>(d){<b>return</b>[d.w/2+d.x,d.h/2+d.y];},centerToRect:<b>function </b>(g,f){<b>var </b>e=g["w"],i=g["h"],d=f["w"],h=f["h"];g.x=f.x+(d-e)/2;g.y=f.y+(h-i)/2;},limitInRect:<b>function </b>(e,d){<b>var </b>f=<b>false</b>;<b>if </b>(e.x&lt;d.x){e.x=d.x;f=<b>true</b>;}<b>else </b>{<b>if </b>(e.x&gt;(d.x+d.w-e.w)){e.x=d.x+d.w-e.w;f=<b>true</b>;}}<b>if </b>(e.y&lt;d.y){e.y=d.y;f=<b>true</b>;}<b>else </b>{<b>if </b>(e.y&gt;(d.y+d.h-e.h)){e.y=d.y+d.h-e.h;f=<b>true</b>;}}<b>return</b> f;},getRectBorders:<b>function </b>(e){<b>var </b>d=<b>this</b>.getRectPoints(e);<b>return</b>[[d[0],d[1]],[d[1],d[2]],[d[2],d[3]],[d[3],d[0]]];},a<b>void</b>ToRect:<b>function </b>(t,s,v){<b>var </b>e=a.intersectsRect(t,s);<b>if </b>(e!=<b>null</b>){<b>var </b>j=<b>this</b>.getRectCenter(t),u=<b>this</b>.getRectPoints(s),r=u[0],q=u[1],p=u[2],o=u[3],i=[r[0]-t.w/2,r[1]-t.h/2],h=[q[0]+t.w/2,q[1]-t.h/2],g=[p[0]+t.w/2,p[1]+t.h/2],f=[o[0]-t.w/2,o[1]+t.h/2],d=[[i,h],[h,g],[g,f],[f,i]],m=b.getAntiDir(v);<b>var </b>l=[];d.some(<b>function </b>(w){<b>var </b>x=<b>this</b>.getCPOfRayAndSegment(j,m,w);<b>if </b>(x){l.push(x);}},<b>this</b>);<b>var </b>k=<b>this</b>.getNearestPoint(j,l),n=l[k];<b>return</b>[n[0]-t.w/2,n[1]-t.h/2];}<b>else </b>{<b>return</b> <b>null</b>;}},getRectPoints:<b>function </b>(d){<b>return</b>[[d.x,d.y],[d.x+d.w,d.y],[d.x+d.w,d.y+d.h],[d.x,d.y+d.h]];},posRectAndLine:<b>function </b>(h,f){<b>var </b>g=<b>this</b>.getRectPoints(h),e=<b>this</b>.posPointAndLine(g[0],f),d=<b>this</b>.posPointAndLine(g[1],f),j=<b>this</b>.posPointAndLine(g[2],f),i=<b>this</b>.posPointAndLine(g[3],f);<b>if </b>(e==-1&&d==-1&&j==-1&&i==-1){<b>return</b> -1;}<b>if </b>(e==1&&d==1&&j==1&&i==1){<b>return</b> 1;}<b>return</b> 0;},getRoundLength:<b>function </b>(d){<b>return</b> 2*d*Math.PI;},getRoundArea:<b>function </b>(d){<b>return</b> Math.PI*Math.pow(d,2);},isOnRound:<b>function </b>(i,d,f){<b>var </b>h=Math.pow(f[0]-i[0],2),g=Math.pow(f[1]-i[1],2),e=Math.pow(d,2);<b>return</b> b.equals(h+g-e,0);},getRoundCenter:<b>function </b>(n,l,e){<b>var </b>i=a.getPointsDistance(n,l);<b>if </b>(i&gt;2*e){<b>return</b> <b>null</b>;}<b>var </b>g=a.getMidpoint([n,l]),k=b.calcRadian(n,l),j=Math.sqrt(Math.pow(e,2)-Math.pow(i/2,2)),f=b.polar2XY(j,b.RADIAN_4+k),h=b.polar2XY(j,-1*(b.RADIAN_4+k));<b>return</b>[[g[0]+f[0],g[1]+f[1]],[g[0]+h[0],g[1]+h[1]]];}};<b>var </b>a=js.math.Geom2D;js.phys.Motion2D={mergeVelocity:<b>function </b>(e,d){<b>return</b>(Math.pow(e,2)+Math.pow(d,2))/2;}};js.phys.Formulas={line:<b>function </b>(f,h,d,e){<b>if </b>(!h){<b>throw </b><b>new </b>Error();}<b>var </b>g=b.polar2XY(e,d);<b>return</b>[g[0]*f+h[0],g[1]*f+h[1]];},round:<b>function </b>(m,j,e,l,g){<b>if </b>(!j||!e){<b>throw </b><b>new </b>Error();}<b>if </b>(a.equalsPoint(j,e)){<b>return</b> j;}<b>var </b>d=a.getPointsDistance(j,e),k=l/d,h=k*m+b.calcRadian(j,e),i=g?[Math.sin(h),Math.cos(h)]:[Math.cos(h),Math.sin(h)];<b>return</b>[e[0]+d*i[0],e[1]+d*i[1]];}};}());
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

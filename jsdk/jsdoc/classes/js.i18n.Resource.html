@@ -1,0 +1,77 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.i18n.Resource</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-i18n.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.i18n</div>
+<div class="topic" title="js.i18n.Resource">
+Class: 
+Resource</div>
+
+<b>public</b> Resource
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="Resource" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public Resource">+ Resource</span></span>(<span title="required"><b>obj</b></span>:Object, <i title="optional"><b>lang</b></i>:String)</span>
+<div id="Resource_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>obj</b></span>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>lang</b></i>  &lt;String&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="setLang" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setLang">+ setLang</span></span>(<span title="required"><b>lang</b></span>:String):void</span>
+<div id="setLang_detail" style="display: none;">
+<pre class="desc">Sets the default language.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>lang</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getLang" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getLang">+ getLang</span></span>():String</span>
+<div id="getLang_detail" style="display: none;">
+<pre class="desc">Returns the current language.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="get" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public get">+ get</span></span>(<span title="required"><b>key</b></span>:String, <i title="optional"><b>lang</b></i>:String):String</span>
+<div id="get_detail" style="display: none;">
+<pre class="desc">Returns the value of the key in the language.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>key</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>lang</b></i>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

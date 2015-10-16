@@ -1,0 +1,296 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.d2.View</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-2d-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.d2</div>
+<div class="topic" title="js.d2.View">
+Class: 
+View</div>
+
+<b>public abstract</b> View <b>mix</b> <a href="js.core.EventProvider.html" title="js.core.EventProvider">EventProvider</a>
+
+<hr/>
+
+<pre class="desc">
+Sets the size.</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="View" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public View">+ View</span></span>(<span title="required"><b>config</b></span>:<a href="js.d2.View$Config.html" title="js.d2.View$Config">View$Config</a>)</span>
+<div id="View_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>config</b></span>  &lt;<a href="js.d2.View$Config.html" title="js.d2.View$Config">View$Config</a>&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="_id" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _id">- _id</span></span>: String</span>
+<div id="_id_detail" style="display: none;">
+<pre class="desc">图层ID</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_x" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _x">- _x</span></span>: Int</span>
+<div id="_x_detail" style="display: none;">
+<pre class="desc">图层X坐标（相对画布）</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_y" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _y">- _y</span></span>: Int</span>
+<div id="_y_detail" style="display: none;">
+<pre class="desc">图层Y坐标（相对画布）</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_z" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _z">- _z</span></span>: Int</span>
+<div id="_z_detail" style="display: none;">
+<pre class="desc">图层Z坐标（相对画布）</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_w" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _w">- _w</span></span>: Int</span>
+<div id="_w_detail" style="display: none;">
+<pre class="desc">图层宽度</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_h" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _h">- _h</span></span>: Int</span>
+<div id="_h_detail" style="display: none;">
+<pre class="desc">图层高度</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_isV" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _isV">- _isV</span></span>: Boolean</span>
+<div id="_isV_detail" style="display: none;">
+<pre class="desc">是否可视</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_isD" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _isD">- _isD</span></span>: Boolean</span>
+<div id="_isD_detail" style="display: none;">
+<pre class="desc">isDestoryed</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_isM" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _isM">- _isM</span></span>: Boolean</span>
+<div id="_isM_detail" style="display: none;">
+<pre class="desc">是否可动</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_opacity" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _opacity">- _opacity</span></span>: Number</span>
+<div id="_opacity_detail" style="display: none;">
+<pre class="desc">透明</pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="getId" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getId">+ getId</span></span>():String</span>
+<div id="getId_detail" style="display: none;">
+<pre class="desc">Returns the ID.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getBound" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getBound">+ getBound</span></span>():<a href="js.math.Rect.html" title="js.math.Rect">Rect</a></span>
+<div id="getBound_detail" style="display: none;">
+<pre class="desc">Returns the bound relative to the canvas which this layer be painted on.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getScreenBound" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getScreenBound">+ getScreenBound</span></span>():<a href="js.math.Rect.html" title="js.math.Rect">Rect</a></span>
+<div id="getScreenBound_detail" style="display: none;">
+<pre class="desc">Returns the bound relative to the browser.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getWidth" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getWidth">+ getWidth</span></span>():Number</span>
+<div id="getWidth_detail" style="display: none;">
+<pre class="desc">Returns the width.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getHeight" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getHeight">+ getHeight</span></span>():Number</span>
+<div id="getHeight_detail" style="display: none;">
+<pre class="desc">Returns the height.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getSize" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getSize">+ getSize</span></span>():Array</span>
+<div id="getSize_detail" style="display: none;">
+<pre class="desc">Returns the size.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; [width,height]</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getX" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getX">+ getX</span></span>():Number</span>
+<div id="getX_detail" style="display: none;">
+<pre class="desc">Returns the X coordinate relative to the canvas which this layer be painted on.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getY">+ getY</span></span>():Number</span>
+<div id="getY_detail" style="display: none;">
+<pre class="desc">Returns the Y coordinate relative to the the canvas which this layer be painted on.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getZ" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getZ">+ getZ</span></span>():Int</span>
+<div id="getZ_detail" style="display: none;">
+<pre class="desc">Returns the layer's z-index.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setX" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setX">+ setX</span></span>(<span title="required"><b>x</b></span>:Number):void</span>
+<div id="setX_detail" style="display: none;">
+<pre class="desc">Sets the X coordinate relative to the the canvas which this layer be painted on.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>x</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setY">+ setY</span></span>(<span title="required"><b>y</b></span>:Number):void</span>
+<div id="setY_detail" style="display: none;">
+<pre class="desc">Sets the Y coordinate relative to the the canvas which this layer be painted on.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>y</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setZ" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setZ">+ setZ</span></span>(<span title="required"><b>z</b></span>:Int):void</span>
+<div id="setZ_detail" style="display: none;">
+<pre class="desc">Sets the z-index.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>z</b></span>  &lt;Int&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setXY">+ setXY</span></span>(<span title="required"><b>x</b></span>:Number, <span title="required"><b>y</b></span>:Number):void</span>
+<div id="setXY_detail" style="display: none;">
+<pre class="desc">Sets the X and Y coordinates relative to the the canvas which this layer be painted on.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>x</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>y</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getXY">+ getXY</span></span>():<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getXY_detail" style="display: none;">
+<pre class="desc">Returns the X and Y coordinates relative to the the canvas which this layer be painted on.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isMovable" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isMovable">+ isMovable</span></span>():Boolean</span>
+<div id="isMovable_detail" style="display: none;">
+<pre class="desc">The layer is movable?</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setMovable" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setMovable">+ setMovable</span></span>(<span title="required"><b>m</b></span>:Boolean):void</span>
+<div id="setMovable_detail" style="display: none;">
+<pre class="desc">Sets the layer is movable.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>m</b></span>  &lt;Boolean&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setOpacity" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setOpacity">+ setOpacity</span></span>(<span title="required"><b>opa</b></span>:Number):void</span>
+<div id="setOpacity_detail" style="display: none;">
+<pre class="desc">Sets the Opacity.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>opa</b></span>  &lt;Number&gt; The float is in [0,1].</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getOpacity" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getOpacity">+ getOpacity</span></span>():Number</span>
+<div id="getOpacity_detail" style="display: none;">
+<pre class="desc">Returns the Opacity.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="move" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public move">+ move</span></span>(<span title="required"><b>dx</b></span>:Number, <span title="required"><b>dy</b></span>:Number):void</span>
+<div id="move_detail" style="display: none;">
+<pre class="desc">Move the layer on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>dx</b></span>  &lt;Number&gt; deltaX</dd><br/>
+<dd><span title="required"><b>dy</b></span>  &lt;Number&gt; deltaY</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="isVisible" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isVisible">+ isVisible</span></span>():Boolean</span>
+<div id="isVisible_detail" style="display: none;">
+<pre class="desc">The layer is visible?</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setVisible" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setVisible">+ setVisible</span></span>(<span title="required"><b>v</b></span>:Boolean):void</span>
+<div id="setVisible_detail" style="display: none;">
+<pre class="desc">Sets the layer's visible.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;Boolean&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="isDestoryed" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isDestoryed">+ isDestoryed</span></span>():Boolean</span>
+<div id="isDestoryed_detail" style="display: none;">
+<pre class="desc">The layer is destoryed?</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="destory" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public destory">+ destory</span></span>(<span title="required"><b>canvas</b></span>:<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>):void</span>
+<div id="destory_detail" style="display: none;">
+<pre class="desc">Destory the layer.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>canvas</b></span>  &lt;<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="paint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public abstract paint">+ <i>paint</i></span></span>(<span title="required"><b>canvas</b></span>:<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>):void</span>
+<div id="paint_detail" style="display: none;">
+<pre class="desc">Paint the layer on the canvas.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>canvas</b></span>  &lt;<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Events</td></tr></thead><tr><td>
+<span id="@painting" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="painting">painting</span>
+<div id="@painting_detail" style="display: none;">
+<pre class="desc">{"description":"fires before paint on the canvas" 
+		,"type":"function" 
+		,"scope":{"type":"js.d2.View"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@painted" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="painted">painted</span>
+<div id="@painted_detail" style="display: none;">
+<pre class="desc">{"description":"fires after paint on the canvas" 
+		,"type":"function" 
+		,"scope":{"type":"js.d2.View"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@destorying" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="destorying">destorying</span>
+<div id="@destorying_detail" style="display: none;">
+<pre class="desc">{"description":"fires before destory the layer once" 
+		,"type":"function" 
+		,"scope":{"type":"js.d2.View"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@destoryed" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="destoryed">destoryed</span>
+<div id="@destoryed_detail" style="display: none;">
+<pre class="desc">{"description":"fires after destory the layer once" 
+		,"type":"function" 
+		,"scope":{"type":"js.d2.View"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@moving" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="moving">moving</span>
+<div id="@moving_detail" style="display: none;">
+<pre class="desc">{"description":"fires before move the layer" 
+		,"type":"function" 
+		,"scope":{"type":"js.d2.View"} 
+     ,"arguments":{ 
+         "type":"array" 
+         ,"items":[ 
+             {"type":"js.math.Point", "description":"the old position of the layer"} 
+         ]} }</pre></div>
+</td></tr><tr><td>
+<span id="@moved" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="moved">moved</span>
+<div id="@moved_detail" style="display: none;">
+<pre class="desc">{"description":"fires after move the layer" 
+		,"type":"function" 
+		,"scope":{"type":"js.d2.View"} 
+     ,"arguments":{ 
+         "type":"array" 
+         ,"items":[ 
+             {"type":"js.math.Point", "description":"the old position of the layer"} 
+             ,{"type":"js.math.Point", "description":"the new position of the layer"} 
+         ]} }</pre></div>
+</td></tr></table><br/>
+
+</BODY>
+</HTML>

@@ -1,0 +1,78 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.util.HTMLCheckor</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-util-validator.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.util</div>
+<div class="topic" title="js.util.HTMLCheckor">
+Class: 
+HTMLCheckor</div>
+
+<b>public final static</b> HTMLCheckor
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="setRule" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static setRule">+ <b>setRule</b></span></span>(<span title="required"><b>input</b></span>:String|HTMLElement, <span title="required"><b>rules</b></span>:<a href="js.util.HTMLCheckor$Rules.html" title="js.util.HTMLCheckor$Rules">HTMLCheckor$Rules</a>):void</span>
+<div id="setRule_detail" style="display: none;">
+<pre class="desc">Setup validate rules for one HTML elements</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>input</b></span>  &lt;String|HTMLElement&gt; 控件Id或对象</dd><br/>
+<dd><span title="required"><b>rules</b></span>  &lt;<a href="js.util.HTMLCheckor$Rules.html" title="js.util.HTMLCheckor$Rules">HTMLCheckor$Rules</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="checkInput" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static checkInput">+ <b>checkInput</b></span></span>(<span title="required"><b>input</b></span>:String|HTMLElement, <i title="optional"><b>onFailure</b></i>:Function):Boolean</span>
+<div id="checkInput_detail" style="display: none;">
+<pre class="desc">Check one HTML element</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>input</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><i title="optional"><b>onFailure</b></i>  &lt;Function&gt; listening function on checking failure</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; return true if all checkings success</dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;Error&gt; when the validate rules invalid format</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="checkForm" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static checkForm">+ <b>checkForm</b></span></span>(<span title="required"><b>form</b></span>:String|HTMLElement, <i title="optional"><b>onFailure</b></i>:Function):Boolean</span>
+<div id="checkForm_detail" style="display: none;">
+<pre class="desc">Check all HTML elements in a form such types：text,hidden,radio,checkbox,select,textarea,password,file</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>form</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><i title="optional"><b>onFailure</b></i>  &lt;Function&gt; listening function on checking failure</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; return true if all checks success</dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;Error&gt; when the validate rules invalid format</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

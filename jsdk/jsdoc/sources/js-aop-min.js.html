@@ -1,0 +1,40 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-aop-min.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.3
+ * @author feng.chun
+ * @date 2012-03-08
+ * 
+ * @version 0.2
+ * @author feng.chun
+ * @date 2010-11-17
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-8-15
+ * 
+ * @requires /core/js-core.js
+ * @requires /core/js-reflect.js
+ */</span>
+js.lang.System.namespace("js.aop");js.aop.ClassProxy=<b>function </b>(){<b>return</b>{addAdvices:<b>function </b>(b,i,j){<b>var </b>f=<b>null</b>;<b>try </b>{f=b<b> instanceof </b>js.reflect.Class?b:js.reflect.Class.forName(b);}<b>catch </b>(c){<b>throw </b>c;}<b>var </b>d=f.getClass(),a=f.getConstructor(),g=d.prototype[i];<b>if </b>(!a["_aop"]){a["_aop"]={};}<b>var </b>h=a["_aop"];<b>if </b>(!h[i]){h[i]=g;}d.prototype[i]=<b>function </b>(){<b>return</b> <b>function </b>(){<b>var </b>l=Array.prototype.slice.call(arguments,0),o=<b>null</b>,p=<b>null</b>,k=<b>null</b>,m=<b>null</b>;<b>if </b>(j["before"]){p=j["before"].apply(<b>this</b>,["before",i,l]);}<b>try </b>{o=g.apply(<b>this</b>,p||arguments);}<b>catch </b>(n){<b>if </b>(j["error"]){m=j["error"].apply(<b>this</b>,["error",i,n]);<b>if </b>(m){<b>throw </b>m;}}}<b>if </b>(j["after"]){k=j["after"].apply(<b>this</b>,["after",i,o]);}<b>return</b> k||o;};}();},reset:<b>function </b>(d,c){<b>var </b>i=<b>null</b>;<b>try </b>{i=d<b> instanceof </b>js.reflect.Class?d:js.reflect.Class.forName(d);}<b>catch </b>(h){<b>throw </b>h;}<b>var </b>a=i.getClass(),b=i.getConstructor(),g=b["_aop"],f=g?g[c]:<b>null</b>;<b>if </b>(f){a.prototype[c]=f;}}};}();js.aop.InstanceProxy=<b>function </b>(){<b>return</b>{addAdvices:<b>function </b>(d,a,e){<b>if </b>(!d||!a||!e){<b>throw </b><b>new </b>TypeError("[js.aop.InstanceProxy#addAdvices]Some arguments invalid.");}<b>var </b>b=d[a];<b>if </b>(<b>typeof </b>b!="function"){<b>throw </b><b>new </b>TypeError("[js.aop.InstanceProxy#addAdvices]The Method&lt;"+a+"&gt; not found.");}<b>if </b>(!d.constructor["_aop"]){d.constructor["_aop"]={};}<b>var </b>c=d.constructor["_aop"];<b>if </b>(!c[a]){c[a]=b;}d[a]=<b>function </b>(){<b>var </b>i=<b>null</b>,j=<b>null</b>,f=<b>null</b>,g=<b>null</b>;<b>if </b>(e["before"]){j=e["before"].apply(d,["before",a,Array.prototype.slice.call(arguments,0)]);}<b>try </b>{i=b.apply(d,j||arguments);}<b>catch </b>(h){<b>if </b>(e["error"]){g=e["error"].apply(d,["error",a,h]);<b>if </b>(g){<b>throw </b>g;}}}<b>if </b>(e["after"]){f=e["after"].apply(d,["after",a,i]);}<b>return</b> f||i;};},reset:<b>function </b>(d,a){<b>if </b>(!d||!a){<b>throw </b><b>new </b>TypeError("[js.aop.InstanceProxy#reset]Some arguments invalid.");}<b>var </b>b=d[a];<b>if </b>(<b>typeof </b>b!="function"){<b>throw </b><b>new </b>TypeError("[js.aop.InstanceProxy#reset]The Method&lt;"+a+"&gt; not found.");}<b>var </b>c=d.constructor["_aop"];b=c?c[a]:<b>null</b>;<b>if </b>(b){d[a]=b;}}};}();
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

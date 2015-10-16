@@ -1,0 +1,119 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">util\js-util-logger.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-8-15
+ * 
+ * @requires /core/js-core.js
+ * @requires /library/blackbirdjs-1.0/blackbird.js
+ * @requires /library/blackbirdjs-1.0/blackbird.css
+ */</span>
+
+js.lang.Loader.loadLib(
+{css:'/library/blackbirdjs-1.0/blackbird-min.css'
+,js:'/library/blackbirdjs-1.0/blackbird-min.js'}
+, <b>function </b>(){    
+<span class="multiComment">/**
+ * @class js.util.Logger
+ * @static
+ */</span>
+js.util.Logger = {
+    _isV: <b>false</b>,
+<span class="multiComment">    /**
+     * Hide or show.
+     * @method toggle
+     */</span>
+    toggle:<b>function </b>(){
+        <b>if </b>(<b>this</b>._isV) {
+            <b>this</b>._isV = <b>false</b>;
+        } <b>else </b>{
+            <b>this</b>._isV = <b>true</b>;
+        }
+        log.toggle();
+    },
+<span class="multiComment">    /**
+     * @method hide
+     */</span>
+    hide: <b>function </b>(){
+        <b>if </b>(<b>this</b>._isV) <b>this</b>.toggle();
+        <b>this</b>._isV = <b>false</b>;
+    },
+<span class="multiComment">    /**
+     * @method show
+     */</span>
+    show: <b>function </b>(){
+        <b>if </b>(!<b>this</b>._isV) <b>this</b>.toggle();
+        <b>this</b>._isV = <b>true</b>;
+    },
+<span class="multiComment">    /**
+     * Resize
+     * @method resize
+     */</span>
+    resize:log['resize'],
+<span class="multiComment">    /**
+     * Clear all messages.
+     * @method clear
+     */</span>
+    clear:log['clear'],
+<span class="multiComment">    /**
+     * Move to position.
+     * 
+     * @method move
+     * @param {Int} pos 0|1|2|3: TopLeft|TopRight|BottomLeft|BottomRight
+     */</span>
+    move:log['move'],
+<span class="multiComment">    /**
+     * Print the debug message.
+     * @method debug
+     * @param {String} msg
+     */</span>
+    debug:log['debug'],
+<span class="multiComment">    /**
+     * Print the warn message.
+     * @method warn
+     * @param {String} msg
+     */</span>
+    warn:log['warn'],
+<span class="multiComment">    /**
+     * Print the info message.
+     * @method info
+     * @param {String} msg
+     */</span>
+    info:log['info'],
+<span class="multiComment">    /**
+     * Print the error message.
+     * @method error
+     * @param {String} msg
+     */</span>
+    error:log['error'],    
+<span class="multiComment">    /**
+     * @method profile
+     */</span>
+    profile:log['profile']
+}    
+}
+
+);
+
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

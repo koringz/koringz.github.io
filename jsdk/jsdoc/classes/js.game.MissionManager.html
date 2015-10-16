@@ -1,0 +1,140 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.game.MissionManager</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-game-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.game</div>
+<div class="topic" title="js.game.MissionManager">
+Class: 
+MissionManager</div>
+
+<b>public</b> MissionManager
+
+<hr/>
+
+<pre class="desc">
+Manage all missions.</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="MissionManager" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public MissionManager">+ MissionManager</span></span>()</span>
+<div id="MissionManager_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="loadMissions" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public loadMissions">+ loadMissions</span></span>(<span title="required"><b>ms</b></span>:<a href="js.game.Mission.html" title="js.game.Mission">Mission</a>|<a href="js.game.Mission.html" title="js.game.Mission">Mission</a>[]):void</span>
+<div id="loadMissions_detail" style="display: none;">
+<pre class="desc">Load missions.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>ms</b></span>  &lt;<a href="js.game.Mission.html" title="js.game.Mission">Mission</a>|<a href="js.game.Mission.html" title="js.game.Mission">Mission</a>[]&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="unloadMissions" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public unloadMissions">+ unloadMissions</span></span>():void</span>
+<div id="unloadMissions_detail" style="display: none;">
+<pre class="desc">Unload missions.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="getMission" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getMission">+ getMission</span></span>(<i title="optional"><b>i</b></i>:Int):<a href="js.game.Mission.html" title="js.game.Mission">Mission</a></span>
+<div id="getMission_detail" style="display: none;">
+<pre class="desc">Returns a mission by index.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>i</b></i>  &lt;Int&gt; index</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.game.Mission.html" title="js.game.Mission">Mission</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getNextMission" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getNextMission">+ getNextMission</span></span>():<a href="js.game.Mission.html" title="js.game.Mission">Mission</a></span>
+<div id="getNextMission_detail" style="display: none;">
+<pre class="desc">Returns next mission.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.game.Mission.html" title="js.game.Mission">Mission</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="hasNextMission" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public hasNextMission">+ hasNextMission</span></span>():Boolean</span>
+<div id="hasNextMission_detail" style="display: none;">
+<pre class="desc">Determines whether or not has next mission.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="onMission" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public onMission">+ onMission</span></span>(<span title="required"><b>eName</b></span>:String, <span title="required"><b>fn</b></span>:Function):void</span>
+<div id="onMission_detail" style="display: none;">
+<pre class="desc">Sets the listeners on missions.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>eName</b></span>  &lt;String&gt; the event name</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getMissionIndex" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getMissionIndex">+ getMissionIndex</span></span>():Int</span>
+<div id="getMissionIndex_detail" style="display: none;">
+<pre class="desc">Returns the current mission's index.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="reset" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public reset">+ reset</span></span>():void</span>
+<div id="reset_detail" style="display: none;">
+<pre class="desc">Reset the current mission's index to -1.</pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Events</td></tr></thead><tr><td>
+<span id="@starting" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="starting">starting</span>
+<div id="@starting_detail" style="display: none;">
+<pre class="desc">{"description":"fires before start the mission" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Mission"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@started" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="started">started</span>
+<div id="@started_detail" style="display: none;">
+<pre class="desc">{"description":"fires after start the mission" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Mission"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@running" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="running">running</span>
+<div id="@running_detail" style="display: none;">
+<pre class="desc">{"description":"fires before run every cycle of the mission" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Mission"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@completed" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="completed">completed</span>
+<div id="@completed_detail" style="display: none;">
+<pre class="desc">{"description":"fires after finish the mission" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Mission"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr><tr><td>
+<span id="@failed" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="failed">failed</span>
+<div id="@failed_detail" style="display: none;">
+<pre class="desc">{"description":"fires after failure the mission" 
+		,"type":"function" 
+		,"scope":{"type":"js.game.Mission"} 
+     ,"arguments":{ 
+         "type":"null"} }</pre></div>
+</td></tr></table><br/>
+
+</BODY>
+</HTML>

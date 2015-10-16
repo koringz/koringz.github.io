@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * @author fengchun
+-->
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Thread Simple</title>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-thread.js"></script>
+
+<style>
+	BODY {
+		FONT: 14px arial, helvetica, clean, sans-serif;
+		background: white;
+	}
+	
+</style>
+
+<script>
+var Test = function(){
+	var th = null;	
+	return {
+		main: function(){
+			th = new js.lang.Thread({
+				run: function(){
+					this.innerHTML = new Date().toLocaleString();					
+				}
+			},{interval:1000, scope: js.core.Dom.$('data')});
+		},
+		run: function(){			
+			if(th.isWorking()) {
+				th.stop();
+			}
+			th.start();	
+		},
+		wait: function(n){
+			th.wait(n);
+		}
+	}
+}();	
+</script>
+</head>
+
+<body onload="Test.main();">
+<button onclick="Test.run()">Run</button>
+<button onclick="Test.wait(10000)">Wait 10s</button>
+<div id=data></div>
+</body>
+</html>

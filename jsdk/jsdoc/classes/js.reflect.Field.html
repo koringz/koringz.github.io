@@ -1,0 +1,82 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.reflect.Field</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-reflect.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.reflect</div>
+<div class="topic" title="js.reflect.Field">
+Class: 
+Field</div>
+
+<b>public final</b> Field
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="Field" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final Field">+ Field</span></span>(<span title="required"><b>name</b></span>:String)</span>
+<div id="Field_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>name</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; if the name is empty</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="getName" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final getName">+ getName</span></span>():String</span>
+<div id="getName_detail" style="display: none;">
+<pre class="desc">Returns the name.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="set" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final set">+ set</span></span>(<span title="required"><b>obj</b></span>:Object, <span title="required"><b>value</b></span>:Object):void</span>
+<div id="set_detail" style="display: none;">
+<pre class="desc">Sets the field.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>obj</b></span>  &lt;Object&gt; the instance</dd><br/>
+<dd><span title="required"><b>value</b></span>  &lt;Object&gt; </dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the object is null or the field not be found</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="get" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final get">+ get</span></span>(<span title="required"><b>obj</b></span>:Object):Object</span>
+<div id="get_detail" style="display: none;">
+<pre class="desc">Gets the field.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>obj</b></span>  &lt;Object&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object&gt; value</dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when the object is null or the field not be found</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

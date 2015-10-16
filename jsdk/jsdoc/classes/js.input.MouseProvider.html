@@ -1,0 +1,151 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.input.MouseProvider</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-input.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.input</div>
+<div class="topic" title="js.input.MouseProvider">
+Class: 
+MouseProvider</div>
+
+<b>public</b> MouseProvider
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="onMouseShift" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public onMouseShift">+ onMouseShift</span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>evtName</b></span>:String, <span title="required"><b>fn</b></span>:Function, <i title="optional"><b>args</b></i>:Object, <i title="optional"><b>context</b></i>:Object|Boolean):Boolean</span>
+<div id="onMouseShift_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>evtName</b></span>  &lt;String&gt; over|out|move|...</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>args</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>context</b></i>  &lt;Object|Boolean&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="onMouseTap" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public onMouseTap">+ onMouseTap</span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>evtName</b></span>:String, <span title="required"><b>fn</b></span>:Function, <i title="optional"><b>args</b></i>:Object, <i title="optional"><b>context</b></i>:Object|Boolean, <i title="optional"><b>button</b></i>:Int):Boolean</span>
+<div id="onMouseTap_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>evtName</b></span>  &lt;String&gt; up|down</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>args</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>context</b></i>  &lt;Object|Boolean&gt; </dd><br/>
+<dd><i title="optional"><b>button</b></i>  &lt;Int&gt; 0:left|1:center|2:right. The default value is 0.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="onMouseLeftTap" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public onMouseLeftTap">+ onMouseLeftTap</span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>evtName</b></span>:String, <span title="required"><b>fn</b></span>:Function, <i title="optional"><b>args</b></i>:Object, <i title="optional"><b>context</b></i>:Object|Boolean):Boolean</span>
+<div id="onMouseLeftTap_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>evtName</b></span>  &lt;String&gt; up|down</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>args</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>context</b></i>  &lt;Object|Boolean&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="onMouseCenterTap" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public onMouseCenterTap">+ onMouseCenterTap</span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>evtName</b></span>:String, <span title="required"><b>fn</b></span>:Function, <i title="optional"><b>args</b></i>:Object, <i title="optional"><b>context</b></i>:Object|Boolean):Boolean</span>
+<div id="onMouseCenterTap_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>evtName</b></span>  &lt;String&gt; up|down</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>args</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>context</b></i>  &lt;Object|Boolean&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="onMouseRightTap" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public onMouseRightTap">+ onMouseRightTap</span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>evtName</b></span>:String, <span title="required"><b>fn</b></span>:Function, <i title="optional"><b>args</b></i>:Object, <i title="optional"><b>context</b></i>:Object|Boolean):Boolean</span>
+<div id="onMouseRightTap_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>evtName</b></span>  &lt;String&gt; up|down</dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>args</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>context</b></i>  &lt;Object|Boolean&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="rmMouseTap" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public rmMouseTap">+ rmMouseTap</span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>evtName</b></span>:String, <span title="required"><b>fn</b></span>:Function, <i title="optional"><b>button</b></i>:Int):Boolean</span>
+<div id="rmMouseTap_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>evtName</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>button</b></i>  &lt;Int&gt; 0:left|1:center|2:right. The default value is 0.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="rmMouseLeftTap" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public rmMouseLeftTap">+ rmMouseLeftTap</span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>evtName</b></span>:String, <span title="required"><b>fn</b></span>:Function):Boolean</span>
+<div id="rmMouseLeftTap_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>evtName</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="rmMouseCenterTap" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public rmMouseCenterTap">+ rmMouseCenterTap</span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>evtName</b></span>:String, <span title="required"><b>fn</b></span>:Function):Boolean</span>
+<div id="rmMouseCenterTap_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>evtName</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="rmMouseRightTap" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public rmMouseRightTap">+ rmMouseRightTap</span></span>(<span title="required"><b>el</b></span>:String|HTMLElement, <span title="required"><b>evtName</b></span>:String, <span title="required"><b>fn</b></span>:Function):Boolean</span>
+<div id="rmMouseRightTap_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>evtName</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

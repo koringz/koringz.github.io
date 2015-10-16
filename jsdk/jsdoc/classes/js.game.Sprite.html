@@ -1,0 +1,185 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.game.Sprite</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-game-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.game</div>
+<div class="topic" title="js.game.Sprite">
+Class: 
+Sprite</div>
+<div><a href="js.d2.View.html">js.d2.View</a></div>
+<div>&nbsp;&nbsp;<img src="../inc/inherit.gif">js.game.Sprite</div><br/>
+
+<b>public abstract</b> Sprite <b>extends</b> <a href="js.d2.View.html" title="js.d2.View">View</a>
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="Sprite" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public Sprite">+ Sprite</span></span>(<span title="required"><b>config</b></span>:<a href="js.game.Sprite$Config.html" title="js.game.Sprite$Config">Sprite$Config</a>)</span>
+<div id="Sprite_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>config</b></span>  &lt;<a href="js.game.Sprite$Config.html" title="js.game.Sprite$Config">Sprite$Config</a>&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="_dir" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _dir">- _dir</span></span>: Number</span>
+<div id="_dir_detail" style="display: none;">
+<pre class="desc">方向:弧度计量</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_imageSrc" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _imageSrc">- _imageSrc</span></span>: String</span>
+<div id="_imageSrc_detail" style="display: none;">
+<pre class="desc">精灵帧的图片源URL</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_frameSeqs" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _frameSeqs">- _frameSeqs</span></span>: object&lt;string,js.game.SpriteFrameSeq&gt;</span>
+<div id="_frameSeqs_detail" style="display: none;">
+<pre class="desc">多个精灵帧序列的集合</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_frameKey" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _frameKey">- _frameKey</span></span>: String</span>
+<div id="_frameKey_detail" style="display: none;">
+<pre class="desc">当前帧序列的Key</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_frameIndex" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _frameIndex">- _frameIndex</span></span>: Int</span>
+<div id="_frameIndex_detail" style="display: none;">
+<pre class="desc">当前帧数组的索引指针</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="_aabbs" style="cursor:pointer;" onclick="switchDesc(this);"><span title="private _aabbs">- _aabbs</span></span>: Object&lt;js.game.collision.AABB&gt;</span>
+<div id="_aabbs_detail" style="display: none;">
+<pre class="desc">碰撞用的AABB矩形，其X,Y坐标为相对于精灵帧图砖的坐标</pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="getImageSrc" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getImageSrc">+ getImageSrc</span></span>():String</span>
+<div id="getImageSrc_detail" style="display: none;">
+<pre class="desc">Return the image's url.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="paint" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public paint">+ paint</span></span>(<span title="required"><b>canvas</b></span>:<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>):void</span>
+<div id="paint_detail" style="display: none;">
+<pre class="desc">Paint the sprite on the canvas.
+在画布上绘制精灵</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>canvas</b></span>  &lt;<a href="js.d2.Canvas.html" title="js.d2.Canvas">Canvas</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getFrame" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getFrame">+ getFrame</span></span>(<i title="optional"><b>i</b></i>:Int, <i title="optional"><b>key</b></i>:String):<a href="js.game.SpriteFrame.html" title="js.game.SpriteFrame">SpriteFrame</a></span>
+<div id="getFrame_detail" style="display: none;">
+<pre class="desc">Returns the current frame.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><i title="optional"><b>i</b></i>  &lt;Int&gt; </dd><br/>
+<dd><i title="optional"><b>key</b></i>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.game.SpriteFrame.html" title="js.game.SpriteFrame">SpriteFrame</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setFrameIndex" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setFrameIndex">+ setFrameIndex</span></span>(<span title="required"><b>i</b></span>:Int):void</span>
+<div id="setFrameIndex_detail" style="display: none;">
+<pre class="desc">Sets the current frame queue's index.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>i</b></span>  &lt;Int&gt; default value is zero</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setFrameSeqKey" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setFrameSeqKey">+ setFrameSeqKey</span></span>(<span title="required"><b>key</b></span>:String):void</span>
+<div id="setFrameSeqKey_detail" style="display: none;">
+<pre class="desc">Sets the key of the current frame queue.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>key</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getFrameSeqKey" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getFrameSeqKey">+ getFrameSeqKey</span></span>():String</span>
+<div id="getFrameSeqKey_detail" style="display: none;">
+<pre class="desc">Returns the key of the current frame queue.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="nextFrame" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public nextFrame">+ nextFrame</span></span>():void</span>
+<div id="nextFrame_detail" style="display: none;">
+<pre class="desc">Goto next frame.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="prevFrame" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public prevFrame">+ prevFrame</span></span>():void</span>
+<div id="prevFrame_detail" style="display: none;">
+<pre class="desc">Goto prev frame.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="getFrameSeq" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getFrameSeq">+ getFrameSeq</span></span>(<span title="required"><b>key</b></span>:String):<a href="js.game.SpriteFrameSeq.html" title="js.game.SpriteFrameSeq">SpriteFrameSeq</a></span>
+<div id="getFrameSeq_detail" style="display: none;">
+<pre class="desc">Returns the frame queue data by the key.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>key</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.game.SpriteFrameSeq.html" title="js.game.SpriteFrameSeq">SpriteFrameSeq</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setFrameSeq" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setFrameSeq">+ setFrameSeq</span></span>(<span title="required"><b>key</b></span>:String, <span title="required"><b>data</b></span>:<a href="js.game.SpriteFrameSeq.html" title="js.game.SpriteFrameSeq">SpriteFrameSeq</a>):void</span>
+<div id="setFrameSeq_detail" style="display: none;">
+<pre class="desc">Sets the frame queue data, like: [[offsetX1,offsetY1],...,[offsetXn,offsetYn]].</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>key</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>data</b></span>  &lt;<a href="js.game.SpriteFrameSeq.html" title="js.game.SpriteFrameSeq">SpriteFrameSeq</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getDir" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getDir">+ getDir</span></span>():Number</span>
+<div id="getDir_detail" style="display: none;">
+<pre class="desc">Return the diretory of the sprite.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; 弧度</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="turn" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public turn">+ turn</span></span>(<span title="required"><b>dir</b></span>:Number):void</span>
+<div id="turn_detail" style="display: none;">
+<pre class="desc">Turn the diretory of the sprite.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>dir</b></span>  &lt;Number&gt; 弧度</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="moveWith" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public moveWith">+ moveWith</span></span>(<span title="required"><b>step</b></span>:Number):void</span>
+<div id="moveWith_detail" style="display: none;">
+<pre class="desc">Move the sprite with a step by the diretory.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>step</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setAABB" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setAABB">+ setAABB</span></span>(<span title="required"><b>key</b></span>:String, <span title="required"><b>collisionRect</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):void</span>
+<div id="setAABB_detail" style="display: none;">
+<pre class="desc">Sets a new AABB rectangle.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>key</b></span>  &lt;String&gt; the name of the AABB</dd><br/>
+<dd><span title="required"><b>collisionRect</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; relative to the sprite's frame</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getAABB" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getAABB">+ getAABB</span></span>(<span title="required"><b>key</b></span>:String):<a href="js.game.collision.AABB.html" title="js.game.collision.AABB">AABB</a></span>
+<div id="getAABB_detail" style="display: none;">
+<pre class="desc">Returns a AABB by name</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>key</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.game.collision.AABB.html" title="js.game.collision.AABB">AABB</a>&gt; </dd>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Events</td></tr></thead><tr><td>
+<span id="@turning" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="turning">turning</span>
+<div id="@turning_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@turned" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="turned">turned</span>
+<div id="@turned_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr></table><br/>
+
+</BODY>
+</HTML>

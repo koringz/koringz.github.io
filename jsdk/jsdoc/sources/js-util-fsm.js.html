@@ -1,0 +1,95 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">util\js-util-fsm.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2011-05-09
+ * 
+ * @requires /core/js-core.js
+ */</span>
+
+<span class="multiComment">/**
+ * Event-driven Finite-State Machine
+ * 
+ * @class js.util.FSM 
+ * @constructor
+ * 
+ * @struct js.util.FSM$Transtable {
+ *         "type":"object"
+ *         ,"properties":{
+ *             "?state_name":{
+ *                 "type":"object"
+ *                 ,"properties":{
+ *                     "?event_name":{"type":"function"}
+ *                 }
+ *             }
+ *         } 
+ * }
+ * 
+ * @param {String} initState
+ * @param {js.util.FSM$Transtable} table 
+ */</span>
+js.util.FSM = <b>function </b>(initState, table){
+    <b>this</b>._initState = initState;
+    <b>this</b>._currentState = initState;
+    <b>this</b>._trans_table = table;
+} 
+js.util.FSM.prototype = {
+<span class="multiComment">    /**
+     * Reset the current state to the init state.
+     * @method reset
+     */</span>
+    reset: <b>function </b>(){
+        <b>this</b>._currentState = <b>this</b>._initState;
+    },
+<span class="multiComment">    /**
+     * Returns the current state.
+     * @method getState
+     * @return {String}
+     */</span>
+    getState: <b>function </b>(){
+        <b>return</b> <b>this</b>._currentState;
+    },
+    _errorMsg: <b>function </b>(name, value){
+        <b>return</b> '[js.util.FSM#handle]Not found the '+name+'&lt;'+value+'&gt; when transit.';
+    },
+<span class="multiComment">    /**
+     * Fire when the new event happened. 
+     * 
+     * @method fire
+     * @param {String} event
+     * @param {Object} scope:optional
+     * @throws {Error} not found the state's setting when transit
+     */</span>
+    fire: <b>function </b>(event, scope){
+        <b>var </b>state = <b>this</b>._trans_table[<b>this</b>._currentState];
+        <b>if </b>(!state) <b>throw </b><b>new </b>Error(<b>this</b>._errorMsg('from-state', <b>this</b>._currentState));
+        <b>var </b>fn = state[event];
+        <b>if </b>(!fn) <b>throw </b><b>new </b>Error(<b>this</b>._errorMsg('event', event));
+        <b>var </b>to = fn.call(scope, <b>this</b>._currentState, event);
+        <b>if </b>(!to) <b>throw </b><b>new </b>Error(<b>this</b>._errorMsg('to-state of the event', event));
+        
+        <b>this</b>._currentState = to;    
+    }
+}
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

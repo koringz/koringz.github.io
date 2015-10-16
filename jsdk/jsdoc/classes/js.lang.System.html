@@ -1,0 +1,243 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.lang.System</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.lang</div>
+<div class="topic" title="js.lang.System">
+Class: 
+System</div>
+
+<b>public static</b> System
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="namespace" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static namespace">+ <b>namespace</b></span></span>(<span title="required"><b>pkg</b></span>:String):void</span>
+<div id="namespace_detail" style="display: none;">
+<pre class="desc">Alias as package. Must starts with: "a-z".</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>pkg</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="random" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static random">+ <b>random</b></span></span>(<span title="required"><b>n</b></span>:Number, <span title="required"><b>m</b></span>:Number, <i title="optional"><b>isFloat</b></i>:Boolean):Number</span>
+<div id="random_detail" style="display: none;">
+<pre class="desc">Returns a random number in [n,m).</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>n</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>m</b></span>  &lt;Number&gt; </dd><br/>
+<dd><i title="optional"><b>isFloat</b></i>  &lt;Boolean&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; The default is Integer</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="randomEnum" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static randomEnum">+ <b>randomEnum</b></span></span>(<span title="required"><b>array</b></span>:Array):Object</span>
+<div id="randomEnum_detail" style="display: none;">
+<pre class="desc">Returns a random item in a array.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>array</b></span>  &lt;Array&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="randomBoolean" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static randomBoolean">+ <b>randomBoolean</b></span></span>():Boolean</span>
+<div id="randomBoolean_detail" style="display: none;">
+<pre class="desc">Returns a random True or False.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="randomColor" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static randomColor">+ <b>randomColor</b></span></span>():String</span>
+<div id="randomColor_detail" style="display: none;">
+<pre class="desc">Returns a random color RGB value.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getUUID" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static getUUID">+ <b>getUUID</b></span></span>():String</span>
+<div id="getUUID_detail" style="display: none;">
+<pre class="desc">Returns a new generating UUID.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; uuid</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toJSONString" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static toJSONString">+ <b>toJSONString</b></span></span>(<span title="required"><b>o</b></span>:Object):String</span>
+<div id="toJSONString_detail" style="display: none;">
+<pre class="desc">Encode the JSONObject to a JSON String.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; json</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="parseJSON" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static parseJSON">+ <b>parseJSON</b></span></span>(<span title="required"><b>json</b></span>:String):Object</span>
+<div id="parseJSON_detail" style="display: none;">
+<pre class="desc">Returns a JSON Object</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>json</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="dump" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static dump">+ <b>dump</b></span></span>(<span title="required"><b>o</b></span>:Object, <i title="optional"><b>d</b></i>:int):String</span>
+<div id="dump_detail" style="display: none;">
+<pre class="desc">Returns a simple string representation of the object or array.
+Other types of objects will be returned unprocessed.  Arrays
+are expected to be indexed.  Use object notation for
+associative arrays.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; The object to dump</dd><br/>
+<dd><i title="optional"><b>d</b></i>  &lt;int&gt; How deep to recurse child objects, default 3</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; the dump result</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="extend" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static extend">+ <b>extend</b></span></span>(<span title="required"><b>subc</b></span>:Function, <span title="required"><b>superc</b></span>:Function, <i title="optional"><b>overrides</b></i>:Object):void</span>
+<div id="extend_detail" style="display: none;">
+<pre class="desc">Utility to set up the prototype, constructor and superclass properties to
+support an inheritance strategy that can chain constructors and methods.
+Static members will not be inherited.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>subc</b></span>  &lt;Function&gt; the object to modify</dd><br/>
+<dd><span title="required"><b>superc</b></span>  &lt;Function&gt; the object to inherit</dd><br/>
+<dd><i title="optional"><b>overrides</b></i>  &lt;Object&gt; additional properties/methods to add to the 
+                             subclass prototype.  These will override the 
+                             matching items obtained from the superclass 
+                             if present.</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="augment" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static augment">+ <b>augment</b></span></span>(<span title="required"><b>r</b></span>:Function, <span title="required"><b>s</b></span>:Function, <i title="optional"><b>arguments</b></i>:<a href="String...html" title="String.."></a>):void</span>
+<div id="augment_detail" style="display: none;">
+<pre class="desc">Applies all prototype properties in the supplier to the receiver if the receiver does not have these properties yet.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>r</b></span>  &lt;Function&gt; the object to receive the augmentation</dd><br/>
+<dd><span title="required"><b>s</b></span>  &lt;Function&gt; the object that supplies the properties to augment</dd><br/>
+<dd><i title="optional"><b>arguments</b></i>  &lt;<a href="String...html" title="String.."></a>&gt; zero or more properties methods to 
+       augment the receiver with.  If none specified, everything 
+       in the supplier will be used unless it would 
+       overwrite an existing property in the receiver</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="hasOwnProperty" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static hasOwnProperty">+ <b>hasOwnProperty</b></span></span>(<span title="required"><b>o</b></span>:Object, <span title="required"><b>prop</b></span>:String):Boolean</span>
+<div id="hasOwnProperty_detail" style="display: none;">
+<pre class="desc">Determines whether or not the property was added
+to the object instance.  Returns false if the property is not present
+in the object, or was inherited from the prototype.
+<pre class="source">
+var A = function() {};
+A.prototype.foo = 'foo';
+var a = new A();
+a.foo = 'foo';
+alert(a.hasOwnProperty('foo')); // true
+</pre></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; The object being testing</dd><br/>
+<dd><span title="required"><b>prop</b></span>  &lt;String&gt; the name of the property to test</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; the result</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isArray" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isArray">+ <b>isArray</b></span></span>(<span title="required"><b>o</b></span>:Object):Boolean</span>
+<div id="isArray_detail" style="display: none;">
+<pre class="desc">Determines wheather or not the provided object is an array.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; The object being testing</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; the result</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isBoolean" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isBoolean">+ <b>isBoolean</b></span></span>(<span title="required"><b>o</b></span>:Object):Boolean</span>
+<div id="isBoolean_detail" style="display: none;">
+<pre class="desc">Determines whether or not the provided object is a boolean</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; The object being testing</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; the result</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isFunction" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isFunction">+ <b>isFunction</b></span></span>(<span title="required"><b>o</b></span>:Object):Boolean</span>
+<div id="isFunction_detail" style="display: none;">
+<pre class="desc">Determines whether or not the provided object is a function.
+Note: Internet Explorer thinks certain functions are objects:
+var obj = document.createElement("object");
+js.lang.System.isFunction(obj.getAttribute) // reports false in IE
+var input = document.createElement("input"); // append to body
+js.lang.System.isFunction(input.focus) // reports false in IE
+You will have to implement additional tests if these functions
+matter to you.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; The object being testing</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; the result</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isNull" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isNull">+ <b>isNull</b></span></span>(<span title="required"><b>o</b></span>:Object):Boolean</span>
+<div id="isNull_detail" style="display: none;">
+<pre class="desc">Determines whether or not the provided object is null</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; The object being testing</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; the result</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isNumber" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isNumber">+ <b>isNumber</b></span></span>(<span title="required"><b>o</b></span>:Object):Boolean</span>
+<div id="isNumber_detail" style="display: none;">
+<pre class="desc">Determines whether or not the provided object is a legal number</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; The object being testing</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; the result</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isObject" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isObject">+ <b>isObject</b></span></span>(<span title="required"><b>o</b></span>:Object):Boolean</span>
+<div id="isObject_detail" style="display: none;">
+<pre class="desc">Determines whether or not the provided object is of type object
+or function</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; The object being testing</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; the result</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isString" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isString">+ <b>isString</b></span></span>(<span title="required"><b>o</b></span>:Object):Boolean</span>
+<div id="isString_detail" style="display: none;">
+<pre class="desc">Determines whether or not the provided object is a string</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; The object being testing</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; the result</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isUndefined" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isUndefined">+ <b>isUndefined</b></span></span>(<span title="required"><b>o</b></span>:Object):Boolean</span>
+<div id="isUndefined_detail" style="display: none;">
+<pre class="desc">Determines whether or not the provided object is undefined</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; The object being testing</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; the result</dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isValue" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static isValue">+ <b>isValue</b></span></span>(<span title="required"><b>o</b></span>:Object):Boolean</span>
+<div id="isValue_detail" style="display: none;">
+<pre class="desc">A convenience method for detecting a legitimate non-null value.
+Returns false for null/undefined/NaN, true for other values,
+including 0/false/''</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>o</b></span>  &lt;Object&gt; the item to test</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; true if it is not null/undefined/NaN||false</dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

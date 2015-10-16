@@ -1,0 +1,2621 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-core.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK &lt;a target="_blank" href="http://jsdk2.sourceforge.net/website/index.html"&gt;JSDK&lt;/a&gt;'s full name is JavaScript Development Kit, which is a full OO style JavaScript Framework. 
+ * It has a small core file and many extension libraries, support such features: System, DOM, Event, Reflect, AOP, I18n, Thread, JS2D, JSGF, JSUI and Utils. 
+ * 
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.6.2
+ * @author feng.chun
+ * @date 2012-04-28
+ * @date 2012-05-02
+ * 
+ * @version 0.6.1
+ * @author feng.chun
+ * @date 2012-04-18
+ * 
+ * @version 0.6
+ * @author feng.chun
+ * @date 2011-09-28
+ * @date 2011-10-11
+ * @date 2012-02-27
+ * @date 2012-03-08
+ * @date 2012-04-15
+ *  
+ * @version 0.5
+ * @author feng.chun
+ * @date 2011-09-19
+ * @date 2011-09-26
+ * @date 2011-09-27
+ * 
+ * @version 0.4
+ * @author feng.chun
+ * @date 2011-09-04
+ * 
+ * @version 0.3
+ * @author feng.chun
+ * @date 2011-01-05
+ * @date 2011-03-22
+ * @date 2011-04-26
+ * @date 2011-05-18
+ * 
+ * @version 0.2
+ * @author feng.chun
+ * @date 2010-11-15
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2007-7-20
+ * @date 2010-8-15
+ */</span>
+<span class="multiComment">/*!
+Copyright (c) 2011, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 2.9.0
+yahoo-dom-event.js
+*/</span>
+<b>if </b>(<b>typeof </b>YAHOO=="undefined"||!YAHOO){<b>var </b>YAHOO={};}YAHOO.namespace=<b>function </b>(){<b>var </b>b=arguments,g=<b>null</b>,e,c,f;<b>for </b>(e=0;e&lt;b.length;e=e+1){f=(""+b[e]).split(".");g=YAHOO;<b>for </b>(c=(f[0]=="YAHOO")?1:0;c&lt;f.length;c=c+1){g[f[c]]=g[f[c]]||{};g=g[f[c]];}}<b>return</b> g;};YAHOO.log=<b>function </b>(d,a,c){<b>var </b>b=YAHOO.widget.Logger;<b>if </b>(b&&b.log){<b>return</b> b.log(d,a,c);}<b>else </b>{<b>return</b> <b>false</b>;}};YAHOO.register=<b>function </b>(a,f,e){<b>var </b>k=YAHOO.env.modules,c,j,h,g,d;<b>if </b>(!k[a]){k[a]={versions:[],builds:[]};}c=k[a];j=e.version;h=e.build;g=YAHOO.env.listeners;c.name=a;c.version=j;c.build=h;c.versions.push(j);c.builds.push(h);c.mainClass=f;<b>for </b>(d=0;d&lt;g.length;d=d+1){g[d](c);}<b>if </b>(f){f.VERSION=j;f.BUILD=h;}<b>else </b>{YAHOO.log("mainClass is undefined for module "+a,"warn");}};YAHOO.env=YAHOO.env||{modules:[],listeners:[]};YAHOO.env.getVersion=<b>function </b>(a){<b>return</b> YAHOO.env.modules[a]||<b>null</b>;};YAHOO.env.parseUA=<b>function </b>(d){<b>var </b>e=<b>function </b>(i){<b>var </b>j=0;<b>return</b> parseFloat(i.replace(/\./g,<b>function </b>(){<b>return</b>(j++==1)?"":".";}));},h=navigator,g={ie:0,opera:0,gecko:0,webkit:0,chrome:0,mobile:<b>null</b>,air:0,ipad:0,iphone:0,ipod:0,ios:<b>null</b>,android:0,webos:0,caja:h&&h.cajaVersion,secure:<b>false</b>,os:<b>null</b>},c=d||(navigator&&navigator.userAgent),f=window&&window.location,b=f&&f.href,a;g.secure=b&&(b.toLowerCase().indexOf("https")===0);<b>if </b>(c){<b>if </b>((/windows|win32/i).test(c)){g.os="windows";}<b>else </b>{<b>if </b>((/macintosh/i).test(c)){g.os="macintosh";}<b>else </b>{<b>if </b>((/rhino/i).test(c)){g.os="rhino";}}}<b>if </b>((/KHTML/).test(c)){g.webkit=1;}a=c.match(/AppleWebKit\/([^\s]*)/);<b>if </b>(a&&a[1]){g.webkit=e(a[1]);<b>if </b>(/ Mobile\//.test(c)){g.mobile="Apple";a=c.match(/OS ([^\s]*)/);<b>if </b>(a&&a[1]){a=e(a[1].replace("_","."));}g.ios=a;g.ipad=g.ipod=g.iphone=0;a=c.match(/iPad|iPod|iPhone/);<b>if </b>(a&&a[0]){g[a[0].toLowerCase()]=g.ios;}}<b>else </b>{a=c.match(/NokiaN[^\/]*|Android \d\.\d|webOS\/\d\.\d/);<b>if </b>(a){g.mobile=a[0];}<b>if </b>(/webOS/.test(c)){g.mobile="WebOS";a=c.match(/webOS\/([^\s]*);/);<b>if </b>(a&&a[1]){g.webos=e(a[1]);}}<b>if </b>(/ Android/.test(c)){g.mobile="Android";a=c.match(/Android ([^\s]*);/);<b>if </b>(a&&a[1]){g.android=e(a[1]);}}}a=c.match(/Chrome\/([^\s]*)/);<b>if </b>(a&&a[1]){g.chrome=e(a[1]);}<b>else </b>{a=c.match(/AdobeAIR\/([^\s]*)/);<b>if </b>(a){g.air=a[0];}}}<b>if </b>(!g.webkit){a=c.match(/Opera[\s\/]([^\s]*)/);<b>if </b>(a&&a[1]){g.opera=e(a[1]);a=c.match(/Version\/([^\s]*)/);<b>if </b>(a&&a[1]){g.opera=e(a[1]);}a=c.match(/Opera Mini[^;]*/);<b>if </b>(a){g.mobile=a[0];}}<b>else </b>{a=c.match(/MSIE\s([^;]*)/);<b>if </b>(a&&a[1]){g.ie=e(a[1]);}<b>else </b>{a=c.match(/Gecko\/([^\s]*)/);<b>if </b>(a){g.gecko=1;a=c.match(/rv:([^\s\)]*)/);<b>if </b>(a&&a[1]){g.gecko=e(a[1]);}}}}}}<b>return</b> g;};YAHOO.env.ua=YAHOO.env.parseUA();(<b>function </b>(){YAHOO.namespace("util","widget","example");<b>if </b>("undefined"!==<b>typeof </b>YAHOO_config){<b>var </b>b=YAHOO_config.listener,a=YAHOO.env.listeners,d=<b>true</b>,c;<b>if </b>(b){<b>for </b>(c=0;c&lt;a.length;c++){<b>if </b>(a[c]==b){d=<b>false</b>;<b>break</b>;}}<b>if </b>(d){a.push(b);}}}})();YAHOO.lang=YAHOO.lang||{};(<b>function </b>(){<b>var </b>f=YAHOO.lang,a=Object.prototype,c="[object Array]",h="[object Function]",i="[object Object]",b=[],g={"&":"&amp;","&lt;":"&lt;","&gt;":"&gt;",'"':"&quot;","'":"&#x27;","/":"&#x2F;","`":"&#x60;"},d=["toString","valueOf"],e={isArray:<b>function </b>(j){<b>return</b> a.toString.apply(j)===c;},isBoolean:<b>function </b>(j){<b>return</b> <b>typeof </b>j==="boolean";},isFunction:<b>function </b>(j){<b>return</b>(<b>typeof </b>j==="function")||a.toString.apply(j)===h;},isNull:<b>function </b>(j){<b>return</b> j===<b>null</b>;},isNumber:<b>function </b>(j){<b>return</b> <b>typeof </b>j==="number"&&isFinite(j);},isObject:<b>function </b>(j){<b>return</b>(j&&(<b>typeof </b>j==="object"||f.isFunction(j)))||<b>false</b>;},isString:<b>function </b>(j){<b>return</b> <b>typeof </b>j==="string";},isUndefined:<b>function </b>(j){<b>return</b> <b>typeof </b>j==="undefined";},_IEEnumFix:(YAHOO.env.ua.ie)?<b>function </b>(l,k){<b>var </b>j,n,m;<b>for </b>(j=0;j&lt;d.length;j=j+1){n=d[j];m=k[n];<b>if </b>(f.isFunction(m)&&m!=a[n]){l[n]=m;}}}:<b>function </b>(){},escapeHTML:<b>function </b>(j){<b>return</b> j.replace(/[&&lt;&gt;"'\/`]/g,<b>function </b>(k){<b>return</b> g[k];});},extend:<b>function </b>(m,n,l){<b>if </b>(!n||!m){<b>throw </b><b>new </b>Error("extend failed, please check that "+"all dependencies are included.");}<b>var </b>k=<b>function </b>(){},j;k.prototype=n.prototype;m.prototype=<b>new </b>k();m.prototype.constructor=m;m.superclass=n.prototype;<b>if </b>(n.prototype.constructor==a.constructor){n.prototype.constructor=n;}<b>if </b>(l){<b>for </b>(j<b> in </b>l){<b>if </b>(f.hasOwnProperty(l,j)){m.prototype[j]=l[j];}}f._IEEnumFix(m.prototype,l);}},augmentObject:<b>function </b>(n,m){<b>if </b>(!m||!n){<b>throw </b><b>new </b>Error("Absorb failed, verify dependencies.");}<b>var </b>j=arguments,l,o,k=j[2];<b>if </b>(k&&k!==<b>true</b>){<b>for </b>(l=2;l&lt;j.length;l=l+1){n[j[l]]=m[j[l]];}}<b>else </b>{<b>for </b>(o<b> in </b>m){<b>if </b>(k||!(o<b> in </b>n)){n[o]=m[o];}}f._IEEnumFix(n,m);}<b>return</b> n;},augmentProto:<b>function </b>(m,l){<b>if </b>(!l||!m){<b>throw </b><b>new </b>Error("Augment failed, verify dependencies.");}<b>var </b>j=[m.prototype,l.prototype],k;<b>for </b>(k=2;k&lt;arguments.length;k=k+1){j.push(arguments[k]);}f.augmentObject.apply(<b>this</b>,j);<b>return</b> m;},dump:<b>function </b>(j,p){<b>var </b>l,n,r=[],t="{...}",k="f(){...}",q=", ",m=" =&gt; ";<b>if </b>(!f.isObject(j)){<b>return</b> j+"";}<b>else </b>{<b>if </b>(j<b> instanceof </b>Date||("nodeType"<b> in </b>j&&"tagName"<b> in </b>j)){<b>return</b> j;}<b>else </b>{<b>if </b>(f.isFunction(j)){<b>return</b> k;}}}p=(f.isNumber(p))?p:3;<b>if </b>(f.isArray(j)){r.push("[");<b>for </b>(l=0,n=j.length;l&lt;n;l=l+1){<b>if </b>(f.isObject(j[l])){r.push((p&gt;0)?f.dump(j[l],p-1):t);}<b>else </b>{r.push(j[l]);}r.push(q);}<b>if </b>(r.length&gt;1){r.pop();}r.push("]");}<b>else </b>{r.push("{");<b>for </b>(l<b> in </b>j){<b>if </b>(f.hasOwnProperty(j,l)){r.push(l+m);<b>if </b>(f.isObject(j[l])){r.push((p&gt;0)?f.dump(j[l],p-1):t);}<b>else </b>{r.push(j[l]);}r.push(q);}}<b>if </b>(r.length&gt;1){r.pop();}r.push("}");}<b>return</b> r.join("");},substitute:<b>function </b>(x,y,E,l){<b>var </b>D,C,B,G,t,u,F=[],p,z=x.length,A="dump",r=" ",q="{",m="}",n,w;<b>for </b>(;;){D=x.lastIndexOf(q,z);<b>if </b>(D&lt;0){<b>break</b>;}C=x.indexOf(m,D);<b>if </b>(D+1&gt;C){<b>break</b>;}p=x.substring(D+1,C);G=p;u=<b>null</b>;B=G.indexOf(r);<b>if </b>(B&gt;-1){u=G.substring(B+1);G=G.substring(0,B);}t=y[G];<b>if </b>(E){t=E(G,t,u);}<b>if </b>(f.isObject(t)){<b>if </b>(f.isArray(t)){t=f.dump(t,parseInt(u,10));}<b>else </b>{u=u||"";n=u.indexOf(A);<b>if </b>(n&gt;-1){u=u.substring(4);}w=t.toString();<b>if </b>(w===i||n&gt;-1){t=f.dump(t,parseInt(u,10));}<b>else </b>{t=w;}}}<b>else </b>{<b>if </b>(!f.isString(t)&&!f.isNumber(t)){t="~-"+F.length+"-~";F[F.length]=p;}}x=x.substring(0,D)+t+x.substring(C+1);<b>if </b>(l===<b>false</b>){z=D-1;}}<b>for </b>(D=F.length-1;D&gt;=0;D=D-1){x=x.replace(<b>new </b>RegExp("~-"+D+"-~"),"{"+F[D]+"}","g");}<b>return</b> x;},trim:<b>function </b>(j){<b>try </b>{<b>return</b> j.replace(/^\s+|\s+$/g,"");}<b>catch </b>(k){<b>return</b> j;
+}},merge:<b>function </b>(){<b>var </b>n={},k=arguments,j=k.length,m;<b>for </b>(m=0;m&lt;j;m=m+1){f.augmentObject(n,k[m],<b>true</b>);}<b>return</b> n;},later:<b>function </b>(t,k,u,n,p){t=t||0;k=k||{};<b>var </b>l=u,s=n,q,j;<b>if </b>(f.isString(u)){l=k[u];}<b>if </b>(!l){<b>throw </b><b>new </b>TypeError("method undefined");}<b>if </b>(!f.isUndefined(n)&&!f.isArray(s)){s=[n];}q=<b>function </b>(){l.apply(k,s||b);};j=(p)?setInterval(q,t):setTimeout(q,t);<b>return</b>{interval:p,cancel:<b>function </b>(){<b>if </b>(<b>this</b>.interval){clearInterval(j);}<b>else </b>{clearTimeout(j);}}};},isValue:<b>function </b>(j){<b>return</b>(f.isObject(j)||f.isString(j)||f.isNumber(j)||f.isBoolean(j));}};f.hasOwnProperty=(a.hasOwnProperty)?<b>function </b>(j,k){<b>return</b> j&&j.hasOwnProperty&&j.hasOwnProperty(k);}:<b>function </b>(j,k){<b>return</b> !f.isUndefined(j[k])&&j.constructor.prototype[k]!==j[k];};e.augmentObject(f,e,<b>true</b>);YAHOO.util.Lang=f;f.augment=f.augmentProto;YAHOO.augment=f.augmentProto;YAHOO.extend=f.extend;})();YAHOO.register("yahoo",YAHOO,{version:"2.9.0",build:"2800"});(<b>function </b>(){YAHOO.env._id_counter=YAHOO.env._id_counter||0;<b>var </b>e=YAHOO.util,k=YAHOO.lang,L=YAHOO.env.ua,a=YAHOO.lang.trim,B={},F={},m=/^t(?:able|d|h)$/i,w=/color$/i,j=window.document,v=j.documentElement,C="ownerDocument",M="defaultView",U="documentElement",S="compatMode",z="offsetLeft",o="offsetTop",T="offsetParent",x="parentNode",K="nodeType",c="tagName",n="scrollLeft",H="scrollTop",p="getBoundingClientRect",V="getComputedStyle",y="currentStyle",l="CSS1Compat",A="BackCompat",E="class",f="className",i="",b=" ",R="(?:^|\\s)",J="(?= |$)",t="g",O="position",D="fixed",u="relative",I="left",N="top",Q="medium",P="borderLeftWidth",q="borderTopWidth",d=L.opera,h=L.webkit,g=L.gecko,s=L.ie;e.Dom={CUSTOM_ATTRIBUTES:(!v.hasAttribute)?{"for":"htmlFor","class":f}:{"htmlFor":"for","className":E},DOT_ATTRIBUTES:{checked:<b>true</b>},get:<b>function </b>(aa){<b>var </b>ac,X,ab,Z,W,G,Y=<b>null</b>;<b>if </b>(aa){<b>if </b>(<b>typeof </b>aa=="string"||<b>typeof </b>aa=="number"){ac=aa+"";aa=j.getElementById(aa);G=(aa)?aa.attributes:<b>null</b>;<b>if </b>(aa&&G&&G.id&&G.id.value===ac){<b>return</b> aa;}<b>else </b>{<b>if </b>(aa&&j.all){aa=<b>null</b>;X=j.all[ac];<b>if </b>(X&&X.length){<b>for </b>(Z=0,W=X.length;Z&lt;W;++Z){<b>if </b>(X[Z].id===ac){<b>return</b> X[Z];}}}}}}<b>else </b>{<b>if </b>(e.Element&&aa<b> instanceof </b>e.Element){aa=aa.get("element");}<b>else </b>{<b>if </b>(!aa.nodeType&&"length"<b> in </b>aa){ab=[];<b>for </b>(Z=0,W=aa.length;Z&lt;W;++Z){ab[ab.length]=e.Dom.get(aa[Z]);}aa=ab;}}}Y=aa;}<b>return</b> Y;},getComputedStyle:<b>function </b>(G,W){<b>if </b>(window[V]){<b>return</b> G[C][M][V](G,<b>null</b>)[W];}<b>else </b>{<b>if </b>(G[y]){<b>return</b> e.Dom.IE_ComputedStyle.get(G,W);}}},getStyle:<b>function </b>(G,W){<b>return</b> e.Dom.batch(G,e.Dom._getStyle,W);},_getStyle:<b>function </b>(){<b>if </b>(window[V]){<b>return</b> <b>function </b>(G,Y){Y=(Y==="float")?Y="cssFloat":e.Dom._toCamel(Y);<b>var </b>X=G.style[Y],W;<b>if </b>(!X){W=G[C][M][V](G,<b>null</b>);<b>if </b>(W){X=W[Y];}}<b>return</b> X;};}<b>else </b>{<b>if </b>(v[y]){<b>return</b> <b>function </b>(G,Y){<b>var </b>X;<b>switch </b>(Y){case"opacity":X=100;<b>try </b>{X=G.filters["DXImageTransform.Microsoft.Alpha"].opacity;}<b>catch </b>(Z){<b>try </b>{X=G.filters("alpha").opacity;}<b>catch </b>(W){}}<b>return</b> X/100;case"float":Y="styleFloat";default:Y=e.Dom._toCamel(Y);X=G[y]?G[y][Y]:<b>null</b>;<b>return</b>(G.style[Y]||X);}};}}}(),setStyle:<b>function </b>(G,W,X){e.Dom.batch(G,e.Dom._setStyle,{prop:W,val:X});},_setStyle:<b>function </b>(){<b>if </b>(!window.getComputedStyle&&j.documentElement.currentStyle){<b>return</b> <b>function </b>(W,G){<b>var </b>X=e.Dom._toCamel(G.prop),Y=G.val;<b>if </b>(W){<b>switch </b>(X){case"opacity":<b>if </b>(Y===""||Y===<b>null</b>||Y===1){W.style.removeAttribute("filter");}<b>else </b>{<b>if </b>(k.isString(W.style.filter)){W.style.filter="alpha(opacity="+Y*100+")";<b>if </b>(!W[y]||!W[y].hasLayout){W.style.zoom=1;}}}<b>break</b>;case"float":X="styleFloat";default:W.style[X]=Y;}}<b>else </b>{}};}<b>else </b>{<b>return</b> <b>function </b>(W,G){<b>var </b>X=e.Dom._toCamel(G.prop),Y=G.val;<b>if </b>(W){<b>if </b>(X=="float"){X="cssFloat";}W.style[X]=Y;}<b>else </b>{}};}}(),getXY:<b>function </b>(G){<b>return</b> e.Dom.batch(G,e.Dom._getXY);},_canPosition:<b>function </b>(G){<b>return</b>(e.Dom._getStyle(G,"display")!=="none"&&e.Dom._inDoc(G));},_getXY:<b>function </b>(W){<b>var </b>X,G,Z,ab,Y,aa,ac=Math.round,ad=<b>false</b>;<b>if </b>(e.Dom._canPosition(W)){Z=W[p]();ab=W[C];X=e.Dom.getDocumentScrollLeft(ab);G=e.Dom.getDocumentScrollTop(ab);ad=[Z[I],Z[N]];<b>if </b>(Y||aa){ad[0]-=aa;ad[1]-=Y;}<b>if </b>((G||X)){ad[0]+=X;ad[1]+=G;}ad[0]=ac(ad[0]);ad[1]=ac(ad[1]);}<b>else </b>{}<b>return</b> ad;},getX:<b>function </b>(G){<b>var </b>W=<b>function </b>(X){<b>return</b> e.Dom.getXY(X)[0];};<b>return</b> e.Dom.batch(G,W,e.Dom,<b>true</b>);},getY:<b>function </b>(G){<b>var </b>W=<b>function </b>(X){<b>return</b> e.Dom.getXY(X)[1];};<b>return</b> e.Dom.batch(G,W,e.Dom,<b>true</b>);},setXY:<b>function </b>(G,X,W){e.Dom.batch(G,e.Dom._setXY,{pos:X,noRetry:W});},_setXY:<b>function </b>(G,Z){<b>var </b>aa=e.Dom._getStyle(G,O),Y=e.Dom.setStyle,ad=Z.pos,W=Z.noRetry,ab=[parseInt(e.Dom.getComputedStyle(G,I),10),parseInt(e.Dom.getComputedStyle(G,N),10)],ac,X;ac=e.Dom._getXY(G);<b>if </b>(!ad||ac===<b>false</b>){<b>return</b> <b>false</b>;}<b>if </b>(aa=="static"){aa=u;Y(G,O,aa);}<b>if </b>(isNaN(ab[0])){ab[0]=(aa==u)?0:G[z];}<b>if </b>(isNaN(ab[1])){ab[1]=(aa==u)?0:G[o];}<b>if </b>(ad[0]!==<b>null</b>){Y(G,I,ad[0]-ac[0]+ab[0]+"px");}<b>if </b>(ad[1]!==<b>null</b>){Y(G,N,ad[1]-ac[1]+ab[1]+"px");}<b>if </b>(!W){X=e.Dom._getXY(G);<b>if </b>((ad[0]!==<b>null</b>&&X[0]!=ad[0])||(ad[1]!==<b>null</b>&&X[1]!=ad[1])){e.Dom._setXY(G,{pos:ad,noRetry:<b>true</b>});}}},setX:<b>function </b>(W,G){e.Dom.setXY(W,[G,<b>null</b>]);},setY:<b>function </b>(G,W){e.Dom.setXY(G,[<b>null</b>,W]);},getRegion:<b>function </b>(G){<b>var </b>W=<b>function </b>(X){<b>var </b>Y=<b>false</b>;<b>if </b>(e.Dom._canPosition(X)){Y=e.Region.getRegion(X);}<b>else </b>{}<b>return</b> Y;};<b>return</b> e.Dom.batch(G,W,e.Dom,<b>true</b>);},getClientWidth:<b>function </b>(){<b>return</b> e.Dom.getViewportWidth();},getClientHeight:<b>function </b>(){<b>return</b> e.Dom.getViewportHeight();},getElementsByClassName:<b>function </b>(ab,af,ac,ae,X,ad){af=af||"*";ac=(ac)?e.Dom.get(ac):<b>null</b>||j;<b>if </b>(!ac){<b>return</b>[];}<b>var </b>W=[],G=ac.getElementsByTagName(af),Z=e.Dom.hasClass;<b>for </b>(<b>var </b>Y=0,aa=G.length;Y&lt;aa;++Y){<b>if </b>(Z(G[Y],ab)){W[W.length]=G[Y];}}<b>if </b>(ae){e.Dom.batch(W,ae,X,ad);}<b>return</b> W;},hasClass:<b>function </b>(W,G){<b>return</b> e.Dom.batch(W,e.Dom._hasClass,G);},_hasClass:<b>function </b>(X,W){<b>var </b>G=<b>false</b>,Y;<b>if </b>(X&&W){Y=e.Dom._getAttribute(X,f)||i;<b>if </b>(Y){Y=Y.replace(/\s+/g,b);}<b>if </b>(W.exec){G=W.test(Y);}<b>else </b>{G=W&&(b+Y+b).indexOf(b+W+b)&gt;-1;}}<b>else </b>{}<b>return</b> G;},addClass:<b>function </b>(W,G){<b>return</b> e.Dom.batch(W,e.Dom._addClass,G);},_addClass:<b>function </b>(X,W){<b>var </b>G=<b>false</b>,Y;<b>if </b>(X&&W){Y=e.Dom._getAttribute(X,f)||i;<b>if </b>(!e.Dom._hasClass(X,W)){e.Dom.setAttribute(X,f,a(Y+b+W));G=<b>true</b>;}}<b>else </b>{}<b>return</b> G;},removeClass:<b>function </b>(W,G){<b>return</b> e.Dom.batch(W,e.Dom._removeClass,G);},_removeClass:<b>function </b>(Y,X){<b>var </b>W=<b>false</b>,aa,Z,G;<b>if </b>(Y&&X){aa=e.Dom._getAttribute(Y,f)||i;e.Dom.setAttribute(Y,f,aa.replace(e.Dom._getClassRegex(X),i));Z=e.Dom._getAttribute(Y,f);<b>if </b>(aa!==Z){e.Dom.setAttribute(Y,f,a(Z));W=<b>true</b>;<b>if </b>(e.Dom._getAttribute(Y,f)===""){G=(Y.hasAttribute&&Y.hasAttribute(E))?E:f;Y.removeAttribute(G);}}}<b>else </b>{}<b>return</b> W;},replaceClass:<b>function </b>(X,W,G){<b>return</b> e.Dom.batch(X,e.Dom._replaceClass,{from:W,to:G});},_replaceClass:<b>function </b>(Y,X){<b>var </b>W,ab,aa,G=<b>false</b>,Z;<b>if </b>(Y&&X){ab=X.from;aa=X.to;<b>if </b>(!aa){G=<b>false</b>;}<b>else </b>{<b>if </b>(!ab){G=e.Dom._addClass(Y,X.to);}<b>else </b>{<b>if </b>(ab!==aa){Z=e.Dom._getAttribute(Y,f)||i;W=(b+Z.replace(e.Dom._getClassRegex(ab),b+aa).replace(/\s+/g,b)).split(e.Dom._getClassRegex(aa));W.splice(1,0,b+aa);e.Dom.setAttribute(Y,f,a(W.join(i)));G=<b>true</b>;}}}}<b>else </b>{}<b>return</b> G;},generateId:<b>function </b>(G,X){X=X||"yui-gen";<b>var </b>W=<b>function </b>(Y){<b>if </b>(Y&&Y.id){<b>return</b> Y.id;}<b>var </b>Z=X+YAHOO.env._id_counter++;
+<b>if </b>(Y){<b>if </b>(Y[C]&&Y[C].getElementById(Z)){<b>return</b> e.Dom.generateId(Y,Z+X);}Y.id=Z;}<b>return</b> Z;};<b>return</b> e.Dom.batch(G,W,e.Dom,<b>true</b>)||W.apply(e.Dom,arguments);},isAncestor:<b>function </b>(W,X){W=e.Dom.get(W);X=e.Dom.get(X);<b>var </b>G=<b>false</b>;<b>if </b>((W&&X)&&(W[K]&&X[K])){<b>if </b>(W.contains&&W!==X){G=W.contains(X);}<b>else </b>{<b>if </b>(W.compareDocumentPosition){G=!!(W.compareDocumentPosition(X)&16);}}}<b>else </b>{}<b>return</b> G;},inDocument:<b>function </b>(G,W){<b>return</b> e.Dom._inDoc(e.Dom.get(G),W);},_inDoc:<b>function </b>(W,X){<b>var </b>G=<b>false</b>;<b>if </b>(W&&W[c]){X=X||W[C];G=e.Dom.isAncestor(X[U],W);}<b>else </b>{}<b>return</b> G;},getElementsBy:<b>function </b>(W,af,ab,ad,X,ac,ae){af=af||"*";ab=(ab)?e.Dom.get(ab):<b>null</b>||j;<b>var </b>aa=(ae)?<b>null</b>:[],G;<b>if </b>(ab){G=ab.getElementsByTagName(af);<b>for </b>(<b>var </b>Y=0,Z=G.length;Y&lt;Z;++Y){<b>if </b>(W(G[Y])){<b>if </b>(ae){aa=G[Y];<b>break</b>;}<b>else </b>{aa[aa.length]=G[Y];}}}<b>if </b>(ad){e.Dom.batch(aa,ad,X,ac);}}<b>return</b> aa;},getElementBy:<b>function </b>(X,G,W){<b>return</b> e.Dom.getElementsBy(X,G,W,<b>null</b>,<b>null</b>,<b>null</b>,<b>true</b>);},batch:<b>function </b>(X,ab,aa,Z){<b>var </b>Y=[],W=(Z)?aa:<b>null</b>;X=(X&&(X[c]||X.item))?X:e.Dom.get(X);<b>if </b>(X&&ab){<b>if </b>(X[c]||X.length===undefined){<b>return</b> ab.call(W,X,aa);}<b>for </b>(<b>var </b>G=0;G&lt;X.length;++G){Y[Y.length]=ab.call(W||X[G],X[G],aa);}}<b>else </b>{<b>return</b> <b>false</b>;}<b>return</b> Y;},getDocumentHeight:<b>function </b>(){<b>var </b>W=(j[S]!=l||h)?j.body.scrollHeight:v.scrollHeight,G=Math.max(W,e.Dom.getViewportHeight());<b>return</b> G;},getDocumentWidth:<b>function </b>(){<b>var </b>W=(j[S]!=l||h)?j.body.scrollWidth:v.scrollWidth,G=Math.max(W,e.Dom.getViewportWidth());<b>return</b> G;},getViewportHeight:<b>function </b>(){<b>var </b>G=self.innerHeight,W=j[S];<b>if </b>((W||s)&&!d){G=(W==l)?v.clientHeight:j.body.clientHeight;}<b>return</b> G;},getViewportWidth:<b>function </b>(){<b>var </b>G=self.innerWidth,W=j[S];<b>if </b>(W||s){G=(W==l)?v.clientWidth:j.body.clientWidth;}<b>return</b> G;},getAncestorBy:<b>function </b>(G,W){<b>while </b>((G=G[x])){<b>if </b>(e.Dom._testElement(G,W)){<b>return</b> G;}}<b>return</b> <b>null</b>;},getAncestorByClassName:<b>function </b>(W,G){W=e.Dom.get(W);<b>if </b>(!W){<b>return</b> <b>null</b>;}<b>var </b>X=<b>function </b>(Y){<b>return</b> e.Dom.hasClass(Y,G);};<b>return</b> e.Dom.getAncestorBy(W,X);},getAncestorByTagName:<b>function </b>(W,G){W=e.Dom.get(W);<b>if </b>(!W){<b>return</b> <b>null</b>;}<b>var </b>X=<b>function </b>(Y){<b>return</b> Y[c]&&Y[c].toUpperCase()==G.toUpperCase();};<b>return</b> e.Dom.getAncestorBy(W,X);},getPreviousSiblingBy:<b>function </b>(G,W){<b>while </b>(G){G=G.previousSibling;<b>if </b>(e.Dom._testElement(G,W)){<b>return</b> G;}}<b>return</b> <b>null</b>;},getPreviousSibling:<b>function </b>(G){G=e.Dom.get(G);<b>if </b>(!G){<b>return</b> <b>null</b>;}<b>return</b> e.Dom.getPreviousSiblingBy(G);},getNextSiblingBy:<b>function </b>(G,W){<b>while </b>(G){G=G.nextSibling;<b>if </b>(e.Dom._testElement(G,W)){<b>return</b> G;}}<b>return</b> <b>null</b>;},getNextSibling:<b>function </b>(G){G=e.Dom.get(G);<b>if </b>(!G){<b>return</b> <b>null</b>;}<b>return</b> e.Dom.getNextSiblingBy(G);},getFirstChildBy:<b>function </b>(G,X){<b>var </b>W=(e.Dom._testElement(G.firstChild,X))?G.firstChild:<b>null</b>;<b>return</b> W||e.Dom.getNextSiblingBy(G.firstChild,X);},getFirstChild:<b>function </b>(G,W){G=e.Dom.get(G);<b>if </b>(!G){<b>return</b> <b>null</b>;}<b>return</b> e.Dom.getFirstChildBy(G);},getLastChildBy:<b>function </b>(G,X){<b>if </b>(!G){<b>return</b> <b>null</b>;}<b>var </b>W=(e.Dom._testElement(G.lastChild,X))?G.lastChild:<b>null</b>;<b>return</b> W||e.Dom.getPreviousSiblingBy(G.lastChild,X);},getLastChild:<b>function </b>(G){G=e.Dom.get(G);<b>return</b> e.Dom.getLastChildBy(G);},getChildrenBy:<b>function </b>(W,Y){<b>var </b>X=e.Dom.getFirstChildBy(W,Y),G=X?[X]:[];e.Dom.getNextSiblingBy(X,<b>function </b>(Z){<b>if </b>(!Y||Y(Z)){G[G.length]=Z;}<b>return</b> <b>false</b>;});<b>return</b> G;},getChildren:<b>function </b>(G){G=e.Dom.get(G);<b>if </b>(!G){}<b>return</b> e.Dom.getChildrenBy(G);},getDocumentScrollLeft:<b>function </b>(G){G=G||j;<b>return</b> Math.max(G[U].scrollLeft,G.body.scrollLeft);},getDocumentScrollTop:<b>function </b>(G){G=G||j;<b>return</b> Math.max(G[U].scrollTop,G.body.scrollTop);},insertBefore:<b>function </b>(W,G){W=e.Dom.get(W);G=e.Dom.get(G);<b>if </b>(!W||!G||!G[x]){<b>return</b> <b>null</b>;}<b>return</b> G[x].insertBefore(W,G);},insertAfter:<b>function </b>(W,G){W=e.Dom.get(W);G=e.Dom.get(G);<b>if </b>(!W||!G||!G[x]){<b>return</b> <b>null</b>;}<b>if </b>(G.nextSibling){<b>return</b> G[x].insertBefore(W,G.nextSibling);}<b>else </b>{<b>return</b> G[x].appendChild(W);}},getClientRegion:<b>function </b>(){<b>var </b>X=e.Dom.getDocumentScrollTop(),W=e.Dom.getDocumentScrollLeft(),Y=e.Dom.getViewportWidth()+W,G=e.Dom.getViewportHeight()+X;<b>return</b> <b>new </b>e.Region(X,Y,G,W);},setAttribute:<b>function </b>(W,G,X){e.Dom.batch(W,e.Dom._setAttribute,{attr:G,val:X});},_setAttribute:<b>function </b>(X,W){<b>var </b>G=e.Dom._toCamel(W.attr),Y=W.val;<b>if </b>(X&&X.setAttribute){<b>if </b>(e.Dom.DOT_ATTRIBUTES[G]&&X.tagName&&X.tagName!="BUTTON"){X[G]=Y;}<b>else </b>{G=e.Dom.CUSTOM_ATTRIBUTES[G]||G;X.setAttribute(G,Y);}}<b>else </b>{}},getAttribute:<b>function </b>(W,G){<b>return</b> e.Dom.batch(W,e.Dom._getAttribute,G);},_getAttribute:<b>function </b>(W,G){<b>var </b>X;G=e.Dom.CUSTOM_ATTRIBUTES[G]||G;<b>if </b>(e.Dom.DOT_ATTRIBUTES[G]){X=W[G];}<b>else </b>{<b>if </b>(W&&"getAttribute"<b> in </b>W){<b>if </b>(/^(?:href|src)$/.test(G)){X=W.getAttribute(G,2);}<b>else </b>{X=W.getAttribute(G);}}<b>else </b>{}}<b>return</b> X;},_toCamel:<b>function </b>(W){<b>var </b>X=B;function G(Y,Z){<b>return</b> Z.toUpperCase();}<b>return</b> X[W]||(X[W]=W.indexOf("-")===-1?W:W.replace(/-([a-z])/gi,G));},_getClassRegex:<b>function </b>(W){<b>var </b>G;<b>if </b>(W!==undefined){<b>if </b>(W.exec){G=W;}<b>else </b>{G=F[W];<b>if </b>(!G){W=W.replace(e.Dom._patterns.CLASS_RE_TOKENS,"\\$1");W=W.replace(/\s+/g,b);G=F[W]=<b>new </b>RegExp(R+W+J,t);}}}<b>return</b> G;},_patterns:{ROOT_TAG:/^body|html$/i,CLASS_RE_TOKENS:/([\.\(\)\^\$\*\+\?\|\[\]\{\}\\])/g},_testElement:<b>function </b>(G,W){<b>return</b> G&&G[K]==1&&(!W||W(G));},_calcBorders:<b>function </b>(X,Y){<b>var </b>W=parseInt(e.Dom[V](X,q),10)||0,G=parseInt(e.Dom[V](X,P),10)||0;<b>if </b>(g){<b>if </b>(m.test(X[c])){W=0;G=0;}}Y[0]+=G;Y[1]+=W;<b>return</b> Y;}};<b>var </b>r=e.Dom[V];<b>if </b>(L.opera){e.Dom[V]=<b>function </b>(W,G){<b>var </b>X=r(W,G);<b>if </b>(w.test(G)){X=e.Dom.Color.toRGB(X);}<b>return</b> X;};}<b>if </b>(L.webkit){e.Dom[V]=<b>function </b>(W,G){<b>var </b>X=r(W,G);<b>if </b>(X==="rgba(0, 0, 0, 0)"){X="transparent";}<b>return</b> X;};}<b>if </b>(L.ie&&L.ie&gt;=8){e.Dom.DOT_ATTRIBUTES.type=<b>true</b>;}})();YAHOO.util.Region=<b>function </b>(d,e,a,c){<b>this</b>.top=d;<b>this</b>.y=d;<b>this</b>[1]=d;<b>this</b>.right=e;<b>this</b>.bottom=a;<b>this</b>.left=c;<b>this</b>.x=c;<b>this</b>[0]=c;<b>this</b>.width=<b>this</b>.right-<b>this</b>.left;<b>this</b>.height=<b>this</b>.bottom-<b>this</b>.top;};YAHOO.util.Region.prototype.contains=<b>function </b>(a){<b>return</b>(a.left&gt;=<b>this</b>.left&&a.right&lt;=<b>this</b>.right&&a.top&gt;=<b>this</b>.top&&a.bottom&lt;=<b>this</b>.bottom);};YAHOO.util.Region.prototype.getArea=<b>function </b>(){<b>return</b>((<b>this</b>.bottom-<b>this</b>.top)*(<b>this</b>.right-<b>this</b>.left));};YAHOO.util.Region.prototype.intersect=<b>function </b>(f){<b>var </b>d=Math.max(<b>this</b>.top,f.top),e=Math.min(<b>this</b>.right,f.right),a=Math.min(<b>this</b>.bottom,f.bottom),c=Math.max(<b>this</b>.left,f.left);
+<b>if </b>(a&gt;=d&&e&gt;=c){<b>return</b> <b>new </b>YAHOO.util.Region(d,e,a,c);}<b>else </b>{<b>return</b> <b>null</b>;}};YAHOO.util.Region.prototype.union=<b>function </b>(f){<b>var </b>d=Math.min(<b>this</b>.top,f.top),e=Math.max(<b>this</b>.right,f.right),a=Math.max(<b>this</b>.bottom,f.bottom),c=Math.min(<b>this</b>.left,f.left);<b>return</b> <b>new </b>YAHOO.util.Region(d,e,a,c);};YAHOO.util.Region.prototype.toString=<b>function </b>(){<b>return</b>("Region {"+"top: "+<b>this</b>.top+", right: "+<b>this</b>.right+", bottom: "+<b>this</b>.bottom+", left: "+<b>this</b>.left+", height: "+<b>this</b>.height+", width: "+<b>this</b>.width+"}");};YAHOO.util.Region.getRegion=<b>function </b>(e){<b>var </b>g=YAHOO.util.Dom.getXY(e),d=g[1],f=g[0]+e.offsetWidth,a=g[1]+e.offsetHeight,c=g[0];<b>return</b> <b>new </b>YAHOO.util.Region(d,f,a,c);};YAHOO.util.Point=<b>function </b>(a,b){<b>if </b>(YAHOO.lang.isArray(a)){b=a[1];a=a[0];}YAHOO.util.Point.superclass.constructor.call(<b>this</b>,b,a,b,a);};YAHOO.extend(YAHOO.util.Point,YAHOO.util.Region);(<b>function </b>(){<b>var </b>b=YAHOO.util,a="clientTop",f="clientLeft",j="parentNode",k="right",w="hasLayout",i="px",u="opacity",l="auto",d="borderLeftWidth",g="borderTopWidth",p="borderRightWidth",v="borderBottomWidth",s="visible",q="transparent",n="height",e="width",h="style",t="currentStyle",r=/^width|height$/,o=/^(\d[.\d]*)+(em|ex|px|gd|rem|vw|vh|vm|ch|mm|cm|in|pt|pc|deg|rad|ms|s|hz|khz|%){1}?/i,m={get:<b>function </b>(x,z){<b>var </b>y="",A=x[t][z];<b>if </b>(z===u){y=b.Dom.getStyle(x,u);}<b>else </b>{<b>if </b>(!A||(A.indexOf&&A.indexOf(i)&gt;-1)){y=A;}<b>else </b>{<b>if </b>(b.Dom.IE_COMPUTED[z]){y=b.Dom.IE_COMPUTED[z](x,z);}<b>else </b>{<b>if </b>(o.test(A)){y=b.Dom.IE.ComputedStyle.getPixel(x,z);}<b>else </b>{y=A;}}}}<b>return</b> y;},getOffset:<b>function </b>(z,E){<b>var </b>B=z[t][E],x=E.charAt(0).toUpperCase()+E.substr(1),C="offset"+x,y="pixel"+x,A="",D;<b>if </b>(B==l){D=z[C];<b>if </b>(D===undefined){A=0;}A=D;<b>if </b>(r.test(E)){z[h][E]=D;<b>if </b>(z[C]&gt;D){A=D-(z[C]-D);}z[h][E]=l;}}<b>else </b>{<b>if </b>(!z[h][y]&&!z[h][E]){z[h][E]=B;}A=z[h][y];}<b>return</b> A+i;},getBorderWidth:<b>function </b>(x,z){<b>var </b>y=<b>null</b>;<b>if </b>(!x[t][w]){x[h].zoom=1;}<b>switch </b>(z){<b>case </b>g:y=x[a];<b>break</b>;<b>case </b>v:y=x.offsetHeight-x.clientHeight-x[a];<b>break</b>;<b>case </b>d:y=x[f];<b>break</b>;<b>case </b>p:y=x.offsetWidth-x.clientWidth-x[f];<b>break</b>;}<b>return</b> y+i;},getPixel:<b>function </b>(y,x){<b>var </b>A=<b>null</b>,B=y[t][k],z=y[t][x];y[h][k]=z;A=y[h].pixelRight;y[h][k]=B;<b>return</b> A+i;},getMargin:<b>function </b>(y,x){<b>var </b>z;<b>if </b>(y[t][x]==l){z=0+i;}<b>else </b>{z=b.Dom.IE.ComputedStyle.getPixel(y,x);}<b>return</b> z;},getVisibility:<b>function </b>(y,x){<b>var </b>z;<b>while </b>((z=y[t])&&z[x]=="inherit"){y=y[j];}<b>return</b>(z)?z[x]:s;},getColor:<b>function </b>(y,x){<b>return</b> b.Dom.Color.toRGB(y[t][x])||q;},getBorderColor:<b>function </b>(y,x){<b>var </b>z=y[t],A=z[x]||z.color;<b>return</b> b.Dom.Color.toRGB(b.Dom.Color.toHex(A));}},c={};c.top=c.right=c.bottom=c.left=c[e]=c[n]=m.getOffset;c.color=m.getColor;c[g]=c[p]=c[v]=c[d]=m.getBorderWidth;c.marginTop=c.marginRight=c.marginBottom=c.marginLeft=m.getMargin;c.visibility=m.getVisibility;c.borderColor=c.borderTopColor=c.borderRightColor=c.borderBottomColor=c.borderLeftColor=m.getBorderColor;b.Dom.IE_COMPUTED=c;b.Dom.IE_ComputedStyle=m;})();(<b>function </b>(){<b>var </b>c="toString",a=parseInt,b=RegExp,d=YAHOO.util;d.Dom.Color={KEYWORDS:{black:"000",silver:"c0c0c0",gray:"808080",white:"fff",maroon:"800000",red:"f00",purple:"800080",fuchsia:"f0f",green:"008000",lime:"0f0",olive:"808000",yellow:"ff0",navy:"000080",blue:"00f",teal:"008080",aqua:"0ff"},re_RGB:/^rgb\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\)$/i,re_hex:/^#?([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i,re_hex3:/([0-9A-F])/gi,toRGB:<b>function </b>(e){<b>if </b>(!d.Dom.Color.re_RGB.test(e)){e=d.Dom.Color.toHex(e);}<b>if </b>(d.Dom.Color.re_hex.exec(e)){e="rgb("+[a(b.$1,16),a(b.$2,16),a(b.$3,16)].join(", ")+")";}<b>return</b> e;},toHex:<b>function </b>(f){f=d.Dom.Color.KEYWORDS[f]||f;<b>if </b>(d.Dom.Color.re_RGB.exec(f)){f=[Number(b.$1).toString(16),Number(b.$2).toString(16),Number(b.$3).toString(16)];<b>for </b>(<b>var </b>e=0;e&lt;f.length;e++){<b>if </b>(f[e].length&lt;2){f[e]="0"+f[e];}}f=f.join("");}<b>if </b>(f.length&lt;6){f=f.replace(d.Dom.Color.re_hex3,"$1$1");}<b>if </b>(f!=="transparent"&&f.indexOf("#")&lt;0){f="#"+f;}<b>return</b> f.toUpperCase();}};}());YAHOO.register("dom",YAHOO.util.Dom,{version:"2.9.0",build:"2800"});YAHOO.util.CustomEvent=<b>function </b>(d,c,b,a,e){<b>this</b>.type=d;<b>this</b>.scope=c||window;<b>this</b>.silent=b;<b>this</b>.fireOnce=e;<b>this</b>.fired=<b>false</b>;<b>this</b>.firedWith=<b>null</b>;<b>this</b>.signature=a||YAHOO.util.CustomEvent.LIST;<b>this</b>.subscribers=[];<b>if </b>(!<b>this</b>.silent){}<b>var </b>f="_YUICEOnSubscribe";<b>if </b>(d!==f){<b>this</b>.subscribeEvent=<b>new </b>YAHOO.util.CustomEvent(f,<b>this</b>,<b>true</b>);}<b>this</b>.lastError=<b>null</b>;};YAHOO.util.CustomEvent.LIST=0;YAHOO.util.CustomEvent.FLAT=1;YAHOO.util.CustomEvent.prototype={subscribe:<b>function </b>(b,c,d){<b>if </b>(!b){<b>throw </b><b>new </b>Error("Invalid callback for subscriber to '"+<b>this</b>.type+"'");}<b>if </b>(<b>this</b>.subscribeEvent){<b>this</b>.subscribeEvent.fire(b,c,d);}<b>var </b>a=<b>new </b>YAHOO.util.Subscriber(b,c,d);<b>if </b>(<b>this</b>.fireOnce&&<b>this</b>.fired){<b>this</b>.notify(a,<b>this</b>.firedWith);}<b>else </b>{<b>this</b>.subscribers.push(a);}},unsubscribe:<b>function </b>(d,f){<b>if </b>(!d){<b>return</b> <b>this</b>.unsubscribeAll();}<b>var </b>e=<b>false</b>;<b>for </b>(<b>var </b>b=0,a=<b>this</b>.subscribers.length;b&lt;a;++b){<b>var </b>c=<b>this</b>.subscribers[b];<b>if </b>(c&&c.contains(d,f)){<b>this</b>._delete(b);e=<b>true</b>;}}<b>return</b> e;},fire:<b>function </b>(){<b>this</b>.lastError=<b>null</b>;<b>var </b>h=[],a=<b>this</b>.subscribers.length;<b>var </b>d=[].slice.call(arguments,0),c=<b>true</b>,f,b=<b>false</b>;<b>if </b>(<b>this</b>.fireOnce){<b>if </b>(<b>this</b>.fired){<b>return</b> <b>true</b>;}<b>else </b>{<b>this</b>.firedWith=d;}}<b>this</b>.fired=<b>true</b>;<b>if </b>(!a&&<b>this</b>.silent){<b>return</b> <b>true</b>;}<b>if </b>(!<b>this</b>.silent){}<b>var </b>e=<b>this</b>.subscribers.slice();<b>for </b>(f=0;f&lt;a;++f){<b>var </b>g=e[f];<b>if </b>(!g||!g.fn){b=<b>true</b>;}<b>else </b>{c=<b>this</b>.notify(g,d);<b>if </b>(<b>false</b>===c){<b>if </b>(!<b>this</b>.silent){}<b>break</b>;}}}<b>return</b>(c!==<b>false</b>);},notify:<b>function </b>(g,c){<b>var </b>b,i=<b>null</b>,f=g.getScope(<b>this</b>.scope),a=YAHOO.util.Event.throwErrors;<b>if </b>(!<b>this</b>.silent){}<b>if </b>(<b>this</b>.signature==YAHOO.util.CustomEvent.FLAT){<b>if </b>(c.length&gt;0){i=c[0];}<b>try </b>{b=g.fn.call(f,i,g.obj);}<b>catch </b>(h){<b>this</b>.lastError=h;<b>if </b>(a){<b>throw </b>h;}}}<b>else </b>{<b>try </b>{b=g.fn.call(f,<b>this</b>.type,c,g.obj);}<b>catch </b>(d){<b>this</b>.lastError=d;<b>if </b>(a){<b>throw </b>d;}}}<b>return</b> b;},unsubscribeAll:<b>function </b>(){<b>var </b>a=<b>this</b>.subscribers.length,b;<b>for </b>(b=a-1;b&gt;-1;b--){<b>this</b>._delete(b);}<b>this</b>.subscribers=[];<b>return</b> a;},_delete:<b>function </b>(a){<b>var </b>b=<b>this</b>.subscribers[a];<b>if </b>(b){<b>delete </b>b.fn;<b>delete </b>b.obj;}<b>this</b>.subscribers.splice(a,1);},toString:<b>function </b>(){<b>return</b>"CustomEvent: "+"'"+<b>this</b>.type+"', "+"context: "+<b>this</b>.scope;}};YAHOO.util.Subscriber=<b>function </b>(a,b,c){<b>this</b>.fn=a;<b>this</b>.obj=YAHOO.lang.isUndefined(b)?<b>null</b>:b;<b>this</b>.overrideContext=c;};YAHOO.util.Subscriber.prototype.getScope=<b>function </b>(a){<b>if </b>(<b>this</b>.overrideContext){<b>if </b>(<b>this</b>.overrideContext===<b>true</b>){<b>return</b> <b>this</b>.obj;}<b>else </b>{<b>return</b> <b>this</b>.overrideContext;}}<b>return</b> a;};YAHOO.util.Subscriber.prototype.contains=<b>function </b>(a,b){<b>if </b>(b){<b>return</b>(<b>this</b>.fn==a&&<b>this</b>.obj==b);}<b>else </b>{<b>return</b>(<b>this</b>.fn==a);}};YAHOO.util.Subscriber.prototype.toString=<b>function </b>(){<b>return</b>"Subscriber { obj: "+<b>this</b>.obj+", overrideContext: "+(<b>this</b>.overrideContext||"no")+" }";};<b>if </b>(!YAHOO.util.Event){YAHOO.util.Event=<b>function </b>(){<b>var </b>g=<b>false</b>,h=[],j=[],a=0,e=[],b=0,c={63232:38,63233:40,63234:37,63235:39,63276:33,63277:34,25:9},d=YAHOO.env.ua.ie,f="focusin",i="focusout";<b>return</b>{POLL_RETRYS:500,POLL_INTERVAL:40,EL:0,TYPE:1,FN:2,WFN:3,UNLOAD_OBJ:3,ADJ_SCOPE:4,OBJ:5,OVERRIDE:6,CAPTURE:7,lastError:<b>null</b>,isSafari:YAHOO.env.ua.webkit,webkit:YAHOO.env.ua.webkit,isIE:d,_interval:<b>null</b>,_dri:<b>null</b>,_specialTypes:{focusin:(d?"focusin":"focus"),focusout:(d?"focusout":"blur")},DOMReady:<b>false</b>,throwErrors:<b>false</b>,startInterval:<b>function </b>(){<b>if </b>(!<b>this</b>._interval){<b>this</b>._interval=YAHOO.lang.later(<b>this</b>.POLL_INTERVAL,<b>this</b>,<b>this</b>._tryPreloadAttach,<b>null</b>,<b>true</b>);}},onAvailable:<b>function </b>(q,m,o,p,n){<b>var </b>k=(YAHOO.lang.isString(q))?[q]:q;<b>for </b>(<b>var </b>l=0;l&lt;k.length;l=l+1){e.push({id:k[l],fn:m,obj:o,overrideContext:p,checkReady:n});}a=<b>this</b>.POLL_RETRYS;<b>this</b>.startInterval();},onContentReady:<b>function </b>(n,k,l,m){<b>this</b>.onAvailable(n,k,l,m,<b>true</b>);},onDOMReady:<b>function </b>(){<b>this</b>.DOMReadyEvent.subscribe.apply(<b>this</b>.DOMReadyEvent,arguments);},_addListener:<b>function </b>(m,k,v,p,t,y){<b>if </b>(!v||!v.call){<b>return</b> <b>false</b>;}<b>if </b>(<b>this</b>._isValidCollection(m)){<b>var </b>w=<b>true</b>;<b>for </b>(<b>var </b>q=0,s=m.length;q&lt;s;++q){w=<b>this</b>.on(m[q],k,v,p,t)&&w;}<b>return</b> w;}<b>else </b>{<b>if </b>(YAHOO.lang.isString(m)){<b>var </b>o=<b>this</b>.getEl(m);<b>if </b>(o){m=o;}<b>else </b>{<b>this</b>.onAvailable(m,<b>function </b>(){YAHOO.util.Event._addListener(m,k,v,p,t,y);});<b>return</b> <b>true</b>;}}}<b>if </b>(!m){<b>return</b> <b>false</b>;}<b>if </b>("unload"==k&&p!==<b>this</b>){j[j.length]=[m,k,v,p,t];<b>return</b> <b>true</b>;}<b>var </b>l=m;<b>if </b>(t){<b>if </b>(t===<b>true</b>){l=p;}<b>else </b>{l=t;}}<b>var </b>n=<b>function </b>(z){<b>return</b> v.call(l,YAHOO.util.Event.getEvent(z,m),p);};<b>var </b>x=[m,k,v,n,l,p,t,y];<b>var </b>r=h.length;h[r]=x;<b>try </b>{<b>this</b>._simpleAdd(m,k,n,y);}<b>catch </b>(u){<b>this</b>.lastError=u;<b>this</b>.removeListener(m,k,v);<b>return</b> <b>false</b>;}<b>return</b> <b>true</b>;},_getType:<b>function </b>(k){<b>return</b> <b>this</b>._specialTypes[k]||k;},addListener:<b>function </b>(m,p,l,n,o){<b>var </b>k=((p==f||p==i)&&!YAHOO.env.ua.ie)?<b>true</b>:<b>false</b>;<b>return</b> <b>this</b>._addListener(m,<b>this</b>._getType(p),l,n,o,k);},addFocusListener:<b>function </b>(l,k,m,n){<b>return</b> <b>this</b>.on(l,f,k,m,n);},removeFocusListener:<b>function </b>(l,k){<b>return</b> <b>this</b>.removeListener(l,f,k);},addBlurListener:<b>function </b>(l,k,m,n){<b>return</b> <b>this</b>.on(l,i,k,m,n);},removeBlurListener:<b>function </b>(l,k){<b>return</b> <b>this</b>.removeListener(l,i,k);},removeListener:<b>function </b>(l,k,r){<b>var </b>m,p,u;k=<b>this</b>._getType(k);<b>if </b>(<b>typeof </b>l=="string"){l=<b>this</b>.getEl(l);}<b>else </b>{<b>if </b>(<b>this</b>._isValidCollection(l)){<b>var </b>s=<b>true</b>;<b>for </b>(m=l.length-1;m&gt;-1;m--){s=(<b>this</b>.removeListener(l[m],k,r)&&s);}<b>return</b> s;}}<b>if </b>(!r||!r.call){<b>return</b> <b>this</b>.purgeElement(l,<b>false</b>,k);}<b>if </b>("unload"==k){<b>for </b>(m=j.length-1;m&gt;-1;m--){u=j[m];<b>if </b>(u&&u[0]==l&&u[1]==k&&u[2]==r){j.splice(m,1);<b>return</b> <b>true</b>;}}<b>return</b> <b>false</b>;}<b>var </b>n=<b>null</b>;<b>var </b>o=arguments[3];<b>if </b>("undefined"===<b>typeof </b>o){o=<b>this</b>._getCacheIndex(h,l,k,r);}<b>if </b>(o&gt;=0){n=h[o];}<b>if </b>(!l||!n){<b>return</b> <b>false</b>;}<b>var </b>t=n[<b>this</b>.CAPTURE]===<b>true</b>?<b>true</b>:<b>false</b>;<b>try </b>{<b>this</b>._simpleRemove(l,k,n[<b>this</b>.WFN],t);}<b>catch </b>(q){<b>this</b>.lastError=q;<b>return</b> <b>false</b>;}<b>delete </b>h[o][<b>this</b>.WFN];<b>delete </b>h[o][<b>this</b>.FN];h.splice(o,1);<b>return</b> <b>true</b>;},getTarget:<b>function </b>(m,l){<b>var </b>k=m.target||m.srcElement;<b>return</b> <b>this</b>.resolveTextNode(k);},resolveTextNode:<b>function </b>(l){<b>try </b>{<b>if </b>(l&&3==l.nodeType){<b>return</b> l.parentNode;}}<b>catch </b>(k){<b>return</b> <b>null</b>;}<b>return</b> l;},getPageX:<b>function </b>(l){<b>var </b>k=l.pageX;<b>if </b>(!k&&0!==k){k=l.clientX||0;<b>if </b>(<b>this</b>.isIE){k+=<b>this</b>._getScrollLeft();}}<b>return</b> k;},getPageY:<b>function </b>(k){<b>var </b>l=k.pageY;<b>if </b>(!l&&0!==l){l=k.clientY||0;<b>if </b>(<b>this</b>.isIE){l+=<b>this</b>._getScrollTop();}}<b>return</b> l;},getXY:<b>function </b>(k){<b>return</b>[<b>this</b>.getPageX(k),<b>this</b>.getPageY(k)];},getRelatedTarget:<b>function </b>(l){<b>var </b>k=l.relatedTarget;
+<b>if </b>(!k){<b>if </b>(l.type=="mouseout"){k=l.toElement;}<b>else </b>{<b>if </b>(l.type=="mouseover"){k=l.fromElement;}}}<b>return</b> <b>this</b>.resolveTextNode(k);},getTime:<b>function </b>(m){<b>if </b>(!m.time){<b>var </b>l=<b>new </b>Date().getTime();<b>try </b>{m.time=l;}<b>catch </b>(k){<b>this</b>.lastError=k;<b>return</b> l;}}<b>return</b> m.time;},stopEvent:<b>function </b>(k){<b>this</b>.stopPropagation(k);<b>this</b>.preventDefault(k);},stopPropagation:<b>function </b>(k){<b>if </b>(k.stopPropagation){k.stopPropagation();}<b>else </b>{k.cancelBubble=<b>true</b>;}},preventDefault:<b>function </b>(k){<b>if </b>(k.preventDefault){k.preventDefault();}<b>else </b>{k.<b>return</b>Value=<b>false</b>;}},getEvent:<b>function </b>(m,k){<b>var </b>l=m||window.event;<b>if </b>(!l){<b>var </b>n=<b>this</b>.getEvent.caller;<b>while </b>(n){l=n.arguments[0];<b>if </b>(l&&Event==l.constructor){<b>break</b>;}n=n.caller;}}<b>return</b> l;},getCharCode:<b>function </b>(l){<b>var </b>k=l.keyCode||l.charCode||0;<b>if </b>(YAHOO.env.ua.webkit&&(k<b> in </b>c)){k=c[k];}<b>return</b> k;},_getCacheIndex:<b>function </b>(n,q,r,p){<b>for </b>(<b>var </b>o=0,m=n.length;o&lt;m;o=o+1){<b>var </b>k=n[o];<b>if </b>(k&&k[<b>this</b>.FN]==p&&k[<b>this</b>.EL]==q&&k[<b>this</b>.TYPE]==r){<b>return</b> o;}}<b>return</b> -1;},generateId:<b>function </b>(k){<b>var </b>l=k.id;<b>if </b>(!l){l="yuievtautoid-"+b;++b;k.id=l;}<b>return</b> l;},_isValidCollection:<b>function </b>(l){<b>try </b>{<b>return</b>(l&&<b>typeof </b>l!=="string"&&l.length&&!l.tagName&&!l.alert&&<b>typeof </b>l[0]!=="undefined");}<b>catch </b>(k){<b>return</b> <b>false</b>;}},elCache:{},getEl:<b>function </b>(k){<b>return</b>(<b>typeof </b>k==="string")?document.getElementById(k):k;},clearCache:<b>function </b>(){},DOMReadyEvent:<b>new </b>YAHOO.util.CustomEvent("DOMReady",YAHOO,0,0,1),_load:<b>function </b>(l){<b>if </b>(!g){g=<b>true</b>;<b>var </b>k=YAHOO.util.Event;k._ready();k._tryPreloadAttach();}},_ready:<b>function </b>(l){<b>var </b>k=YAHOO.util.Event;<b>if </b>(!k.DOMReady){k.DOMReady=<b>true</b>;k.DOMReadyEvent.fire();k._simpleRemove(document,"DOMContentLoaded",k._ready);}},_tryPreloadAttach:<b>function </b>(){<b>if </b>(e.length===0){a=0;<b>if </b>(<b>this</b>._interval){<b>this</b>._interval.cancel();<b>this</b>._interval=<b>null</b>;}<b>return</b>;}<b>if </b>(<b>this</b>.locked){<b>return</b>;}<b>if </b>(<b>this</b>.isIE){<b>if </b>(!<b>this</b>.DOMReady){<b>this</b>.startInterval();<b>return</b>;}}<b>this</b>.locked=<b>true</b>;<b>var </b>q=!g;<b>if </b>(!q){q=(a&gt;0&&e.length&gt;0);}<b>var </b>p=[];<b>var </b>r=<b>function </b>(t,u){<b>var </b>s=t;<b>if </b>(u.overrideContext){<b>if </b>(u.overrideContext===<b>true</b>){s=u.obj;}<b>else </b>{s=u.overrideContext;}}u.fn.call(s,u.obj);};<b>var </b>l,k,o,n,m=[];<b>for </b>(l=0,k=e.length;l&lt;k;l=l+1){o=e[l];<b>if </b>(o){n=<b>this</b>.getEl(o.id);<b>if </b>(n){<b>if </b>(o.checkReady){<b>if </b>(g||n.nextSibling||!q){m.push(o);e[l]=<b>null</b>;}}<b>else </b>{r(n,o);e[l]=<b>null</b>;}}<b>else </b>{p.push(o);}}}<b>for </b>(l=0,k=m.length;l&lt;k;l=l+1){o=m[l];r(<b>this</b>.getEl(o.id),o);}a--;<b>if </b>(q){<b>for </b>(l=e.length-1;l&gt;-1;l--){o=e[l];<b>if </b>(!o||!o.id){e.splice(l,1);}}<b>this</b>.startInterval();}<b>else </b>{<b>if </b>(<b>this</b>._interval){<b>this</b>._interval.cancel();<b>this</b>._interval=<b>null</b>;}}<b>this</b>.locked=<b>false</b>;},purgeElement:<b>function </b>(p,q,s){<b>var </b>n=(YAHOO.lang.isString(p))?<b>this</b>.getEl(p):p;<b>var </b>r=<b>this</b>.getListeners(n,s),o,k;<b>if </b>(r){<b>for </b>(o=r.length-1;o&gt;-1;o--){<b>var </b>m=r[o];<b>this</b>.removeListener(n,m.type,m.fn);}}<b>if </b>(q&&n&&n.childNodes){<b>for </b>(o=0,k=n.childNodes.length;o&lt;k;++o){<b>this</b>.purgeElement(n.childNodes[o],q,s);}}},getListeners:<b>function </b>(n,k){<b>var </b>q=[],m;<b>if </b>(!k){m=[h,j];}<b>else </b>{<b>if </b>(k==="unload"){m=[j];}<b>else </b>{k=<b>this</b>._getType(k);m=[h];}}<b>var </b>s=(YAHOO.lang.isString(n))?<b>this</b>.getEl(n):n;<b>for </b>(<b>var </b>p=0;p&lt;m.length;p=p+1){<b>var </b>u=m[p];<b>if </b>(u){<b>for </b>(<b>var </b>r=0,t=u.length;r&lt;t;++r){<b>var </b>o=u[r];<b>if </b>(o&&o[<b>this</b>.EL]===s&&(!k||k===o[<b>this</b>.TYPE])){q.push({type:o[<b>this</b>.TYPE],fn:o[<b>this</b>.FN],obj:o[<b>this</b>.OBJ],adjust:o[<b>this</b>.OVERRIDE],scope:o[<b>this</b>.ADJ_SCOPE],index:r});}}}}<b>return</b>(q.length)?q:<b>null</b>;},_unload:<b>function </b>(s){<b>var </b>m=YAHOO.util.Event,p,o,n,r,q,t=j.slice(),k;<b>for </b>(p=0,r=j.length;p&lt;r;++p){n=t[p];<b>if </b>(n){<b>try </b>{k=window;<b>if </b>(n[m.ADJ_SCOPE]){<b>if </b>(n[m.ADJ_SCOPE]===<b>true</b>){k=n[m.UNLOAD_OBJ];}<b>else </b>{k=n[m.ADJ_SCOPE];}}n[m.FN].call(k,m.getEvent(s,n[m.EL]),n[m.UNLOAD_OBJ]);}<b>catch </b>(w){}t[p]=<b>null</b>;}}n=<b>null</b>;k=<b>null</b>;j=<b>null</b>;<b>if </b>(h){<b>for </b>(o=h.length-1;o&gt;-1;o--){n=h[o];<b>if </b>(n){<b>try </b>{m.removeListener(n[m.EL],n[m.TYPE],n[m.FN],o);}<b>catch </b>(v){}}}n=<b>null</b>;}<b>try </b>{m._simpleRemove(window,"unload",m._unload);m._simpleRemove(window,"load",m._load);}<b>catch </b>(u){}},_getScrollLeft:<b>function </b>(){<b>return</b> <b>this</b>._getScroll()[1];},_getScrollTop:<b>function </b>(){<b>return</b> <b>this</b>._getScroll()[0];},_getScroll:<b>function </b>(){<b>var </b>k=document.documentElement,l=document.body;<b>if </b>(k&&(k.scrollTop||k.scrollLeft)){<b>return</b>[k.scrollTop,k.scrollLeft];}<b>else </b>{<b>if </b>(l){<b>return</b>[l.scrollTop,l.scrollLeft];}<b>else </b>{<b>return</b>[0,0];}}},regCE:<b>function </b>(){},_simpleAdd:<b>function </b>(){<b>if </b>(window.addEventListener){<b>return</b> <b>function </b>(m,n,l,k){m.addEventListener(n,l,(k));};}<b>else </b>{<b>if </b>(window.attachEvent){<b>return</b> <b>function </b>(m,n,l,k){m.attachEvent("on"+n,l);};}<b>else </b>{<b>return</b> <b>function </b>(){};}}}(),_simpleRemove:<b>function </b>(){<b>if </b>(window.removeEventListener){<b>return</b> <b>function </b>(m,n,l,k){m.removeEventListener(n,l,(k));};}<b>else </b>{<b>if </b>(window.detachEvent){<b>return</b> <b>function </b>(l,m,k){l.detachEvent("on"+m,k);};}<b>else </b>{<b>return</b> <b>function </b>(){};}}}()};}();(<b>function </b>(){<b>var </b>a=YAHOO.util.Event;a.on=a.addListener;a.onFocus=a.addFocusListener;a.onBlur=a.addBlurListener;
+<span class="multiComment">/*! DOMReady: based on work by: Dean Edwards/John Resig/Matthias Miller/Diego Perini */</span>
+<b>if </b>(a.isIE){<b>if </b>(self!==self.top){document.onreadystatechange=<b>function </b>(){<b>if </b>(document.readyState=="complete"){document.onreadystatechange=<b>null</b>;a._ready();}};}<b>else </b>{YAHOO.util.Event.onDOMReady(YAHOO.util.Event._tryPreloadAttach,YAHOO.util.Event,<b>true</b>);<b>var </b>b=document.createElement("p");a._dri=setInterval(<b>function </b>(){<b>try </b>{b.doScroll("left");clearInterval(a._dri);a._dri=<b>null</b>;a._ready();b=<b>null</b>;}<b>catch </b>(c){}},a.POLL_INTERVAL);}}<b>else </b>{<b>if </b>(a.webkit&&a.webkit&lt;525){a._dri=setInterval(<b>function </b>(){<b>var </b>c=document.readyState;<b>if </b>("loaded"==c||"complete"==c){clearInterval(a._dri);a._dri=<b>null</b>;a._ready();}},a.POLL_INTERVAL);}<b>else </b>{a._simpleAdd(document,"DOMContentLoaded",a._ready);}}a._simpleAdd(window,"load",a._load);a._simpleAdd(window,"unload",a._unload);a._tryPreloadAttach();})();}YAHOO.util.EventProvider=<b>function </b>(){};YAHOO.util.EventProvider.prototype={__yui_events:<b>null</b>,__yui_subscribers:<b>null</b>,subscribe:<b>function </b>(a,c,f,e){<b>this</b>.__yui_events=<b>this</b>.__yui_events||{};<b>var </b>d=<b>this</b>.__yui_events[a];<b>if </b>(d){d.subscribe(c,f,e);}<b>else </b>{<b>this</b>.__yui_subscribers=<b>this</b>.__yui_subscribers||{};<b>var </b>b=<b>this</b>.__yui_subscribers;<b>if </b>(!b[a]){b[a]=[];}b[a].push({fn:c,obj:f,overrideContext:e});}},unsubscribe:<b>function </b>(c,e,g){<b>this</b>.__yui_events=<b>this</b>.__yui_events||{};<b>var </b>a=<b>this</b>.__yui_events;<b>if </b>(c){<b>var </b>f=a[c];<b>if </b>(f){<b>return</b> f.unsubscribe(e,g);}}<b>else </b>{<b>var </b>b=<b>true</b>;<b>for </b>(<b>var </b>d<b> in </b>a){<b>if </b>(YAHOO.lang.hasOwnProperty(a,d)){b=b&&a[d].unsubscribe(e,g);
+}}<b>return</b> b;}<b>return</b> <b>false</b>;},unsubscribeAll:<b>function </b>(a){<b>return</b> <b>this</b>.unsubscribe(a);},createEvent:<b>function </b>(b,g){<b>this</b>.__yui_events=<b>this</b>.__yui_events||{};<b>var </b>e=g||{},d=<b>this</b>.__yui_events,f;<b>if </b>(d[b]){}<b>else </b>{f=<b>new </b>YAHOO.util.CustomEvent(b,e.scope||<b>this</b>,e.silent,YAHOO.util.CustomEvent.LIST,e.fireOnce);d[b]=f;<b>if </b>(e.onSubscribeCallback){f.subscribeEvent.subscribe(e.onSubscribeCallback);}<b>this</b>.__yui_subscribers=<b>this</b>.__yui_subscribers||{};<b>var </b>a=<b>this</b>.__yui_subscribers[b];<b>if </b>(a){<b>for </b>(<b>var </b>c=0;c&lt;a.length;++c){f.subscribe(a[c].fn,a[c].obj,a[c].overrideContext);}}}<b>return</b> d[b];},fireEvent:<b>function </b>(b){<b>this</b>.__yui_events=<b>this</b>.__yui_events||{};<b>var </b>d=<b>this</b>.__yui_events[b];<b>if </b>(!d){<b>return</b> <b>null</b>;}<b>var </b>a=[];<b>for </b>(<b>var </b>c=1;c&lt;arguments.length;++c){a.push(arguments[c]);}<b>return</b> d.fire.apply(d,a);},hasEvent:<b>function </b>(a){<b>if </b>(<b>this</b>.__yui_events){<b>if </b>(<b>this</b>.__yui_events[a]){<b>return</b> <b>true</b>;}}<b>return</b> <b>false</b>;}};(<b>function </b>(){<b>var </b>a=YAHOO.util.Event,c=YAHOO.lang;YAHOO.util.KeyListener=<b>function </b>(d,i,e,f){<b>if </b>(!d){}<b>else </b>{<b>if </b>(!i){}<b>else </b>{<b>if </b>(!e){}}}<b>if </b>(!f){f=YAHOO.util.KeyListener.KEYDOWN;}<b>var </b>g=<b>new </b>YAHOO.util.CustomEvent("keyPressed");<b>this</b>.enabledEvent=<b>new </b>YAHOO.util.CustomEvent("enabled");<b>this</b>.disabledEvent=<b>new </b>YAHOO.util.CustomEvent("disabled");<b>if </b>(c.isString(d)){d=document.getElementById(d);}<b>if </b>(c.isFunction(e)){g.subscribe(e);}<b>else </b>{g.subscribe(e.fn,e.scope,e.correctScope);}function h(o,n){<b>if </b>(!i.shift){i.shift=<b>false</b>;}<b>if </b>(!i.alt){i.alt=<b>false</b>;}<b>if </b>(!i.ctrl){i.ctrl=<b>false</b>;}<b>if </b>(o.shiftKey==i.shift&&o.altKey==i.alt&&o.ctrlKey==i.ctrl){<b>var </b>j,m=i.keys,l;<b>if </b>(YAHOO.lang.isArray(m)){<b>for </b>(<b>var </b>k=0;k&lt;m.length;k++){j=m[k];l=a.getCharCode(o);<b>if </b>(j==l){g.fire(l,o);<b>break</b>;}}}<b>else </b>{l=a.getCharCode(o);<b>if </b>(m==l){g.fire(l,o);}}}}<b>this</b>.enable=<b>function </b>(){<b>if </b>(!<b>this</b>.enabled){a.on(d,f,h);<b>this</b>.enabledEvent.fire(i);}<b>this</b>.enabled=<b>true</b>;};<b>this</b>.disable=<b>function </b>(){<b>if </b>(<b>this</b>.enabled){a.removeListener(d,f,h);<b>this</b>.disabledEvent.fire(i);}<b>this</b>.enabled=<b>false</b>;};<b>this</b>.toString=<b>function </b>(){<b>return</b>"KeyListener ["+i.keys+"] "+d.tagName+(d.id?"["+d.id+"]":"");};};<b>var </b>b=YAHOO.util.KeyListener;b.KEYDOWN="keydown";b.KEYUP="keyup";b.KEY={ALT:18,BACK_SPACE:8,CAPS_LOCK:20,CONTROL:17,DELETE:46,DOWN:40,END:35,ENTER:13,ESCAPE:27,HOME:36,LEFT:37,META:224,NUM_LOCK:144,PAGE_DOWN:34,PAGE_UP:33,PAUSE:19,PRINTSCREEN:44,RIGHT:39,SCROLL_LOCK:145,SHIFT:16,SPACE:32,TAB:9,UP:38};})();YAHOO.register("event",YAHOO.util.Event,{version:"2.9.0",build:"2800"});YAHOO.register("yahoo-dom-event", YAHOO, {version: "2.9.0", build: "2800"});
+
+
+<b>var </b>js = YAHOO;
+js.core = {};
+
+<span class="multiComment">/**
+ * @class js.core.Version
+ * @final
+ * @static
+ */</span>
+js.core.Version = {
+<span class="multiComment">    /**
+     * @constant {Int} major
+     */</span>
+    major: 0,
+<span class="multiComment">    /**
+     * @constant {Int} minor
+     */</span>
+    minor: 6,
+<span class="multiComment">    /**
+     * @constant {Int} update
+     */</span>
+    update: 2,
+<span class="multiComment">    /**
+     * @constant {String} stage AL|BT|RC|GA
+     */</span>
+    stage: 'RC',
+<span class="multiComment">    /**
+     * @constant {Int} night
+     */</span>
+    night : 20120502,
+<span class="multiComment">    /**
+     * @constant {String} mainVersion
+     */</span>
+    mainVersion : <b>this</b>.major + '.' + <b>this</b>.minor + '.' + <b>this</b>.update, 
+<span class="multiComment">    /**
+     * @constant {String} fullVersion
+     */</span>
+    fullVersion: <b>this</b>.mainVersion + '-' + <b>this</b>.stage + '-' + <b>this</b>.night    
+};
+
+<span class="multiComment">/**
+ * @class js.lang.System
+ * @static
+ */</span>
+js.lang.System = js.lang;
+
+<span class="multiComment">/**
+ * Alias as package. Must starts with: "a-z".
+ * 
+ * @method namespace
+ * @param {String} pkg
+ */</span>
+js.lang.System.namespace = <b>function </b>(pkg) {
+    <b>var </b>p = pkg.split('.'), len = p.length;
+    <b>if </b>(len &lt; 1) <b>return</b>;
+    
+    <b>var </b>p0 = p[0];
+    <b>if </b>(<b>typeof </b>window[p0]=="undefined") window[p0] = {};
+    <b>var </b>b = window[p0];
+    <b>for </b>(<b>var </b>i=1; i&lt;len; i++) {
+        <b>var </b>pi = p[i]; <b>if </b>(!pi) <b>break</b>;                 
+        b[pi] = b[pi]||{};
+        b = b[pi];
+    }
+    <b>return</b> b;
+};
+
+<span class="multiComment">/**
+ * Returns a random number in [n,m).
+ * 
+ * @method random
+ * @param {Number} n
+ * @param {Number} m
+ * @param {Boolean} isFloat:optional
+ * @return {Number} The default is Integer
+ */</span>
+js.lang.System.random = <b>function </b>(n, m, isFloat){
+        <b>var </b>x = Math.random()*(m-n)+n;
+        <b>return</b> isFloat?x:Math.floor(x);
+};
+<span class="multiComment">/**
+ * Returns a random item in a array.
+ * 
+ * @method randomEnum
+ * @param {Array} array
+ * @return {Object}
+ */</span>
+js.lang.System.randomEnum = <b>function </b>(array){
+    <b>if </b>(!array || array.length&lt;=0) <b>return</b> <b>null</b>;
+    <b>if </b>(array.length &lt; 2) <b>return</b> array[0];
+    
+    <b>return</b> array[<b>this</b>.random(0, array.length)];
+};
+<span class="multiComment">/**
+ * Returns a random True or False.
+ * 
+ * @method randomBoolean
+ * @return {Boolean}
+ */</span>
+js.lang.System.randomBoolean = <b>function </b>(){
+    <b>return</b> <b>this</b>.randomEnum([<b>true</b>, <b>false</b>]);
+};
+<span class="multiComment">/**
+ * Returns a random color RGB value.
+ * 
+ * @method randomColor
+ * @return {String}
+ */</span>
+js.lang.System.randomColor = <b>function </b>(){
+    <b>var </b>a = '0123456789abcdef'.split('');
+    <b>var </b>c = [];
+    <b>for </b>( <b>var </b>i=0; i &lt; 6; ++i ) {
+        c.push(<b>this</b>.randomEnum(a));
+    }    
+    <b>return</b> '#'+c.join('');
+};
+
+<span class="multiComment">/**
+ * Returns a new generating UUID.
+ * 
+ * @method getUUID
+ * @return {String} uuid
+ */</span>
+js.lang.System.getUUID = <b>function </b>(){
+    <b>var </b>t = <b>new </b>Date().getTime();
+    <b>return</b> t+''+Math.floor(Math.random()*t);
+};
+
+<span class="multiComment">/**
+ * Encode the JSONObject to a JSON String.
+ * 
+ * @method toJSONString
+ * @param {Object} o
+ * @return {String} json
+ */</span>
+js.lang.System.toJSONString = <b>function </b>(o){
+    <b>if </b>(<b>typeof </b>o == "undefined" || o === <b>null</b>){
+        <b>return</b> "<b>null</b>";
+    }<b>else </b><b>if </b>(o.toJSONString){
+        <b>return</b> o.toJSONString();
+    }<b>else </b><b>if </b>(<b>typeof </b>o == "boolean"){
+        <b>return</b> String(o);
+    }<b>else </b>{
+        <b>var </b>a = ["{"], b, i, v;
+        <b>for </b>(i<b> in </b>o) {
+            <b>if </b>(!({}.hasOwnProperty ? <b>true</b> : <b>false</b>) || o.hasOwnProperty(i)) {
+                v = o[i];
+                <b>switch </b>(<b>typeof </b>v) {
+                <b>case </b>"undefined":
+                <b>case </b>"function":
+                <b>case </b>"unknown":
+                    <b>break</b>;
+                default:
+                    <b>if </b>(b){
+                        a.push(',');
+                    }
+                    a.push(<b>this</b>.encode(i), ":",
+                            v === <b>null</b> ? "<b>null</b>" : <b>this</b>.encode(v));
+                    b = <b>true</b>;
+                }
+            }
+        }
+        a.push("}");
+        <b>return</b> a.join("");
+    }
+}
+
+<span class="multiComment">/**
+ * Returns a JSON Object
+ * 
+ * @method parseJSON
+ * @param {String} json
+ * @return {Object}
+ */</span>
+js.lang.System.parseJSON = <b>function </b>(json){
+    <b>return</b> eval("(" + json + ')');
+}
+
+<span class="multiComment">/**
+ * Returns a simple string representation of the object or array.
+ * Other types of objects will be returned unprocessed.  Arrays
+ * are expected to be indexed.  Use object notation for
+ * associative arrays.
+ * @method dump
+ * @param {Object} o The object to dump
+ * @param {int} d:optional How deep to recurse child objects, default 3
+ * @return {String} the dump result
+ */</span>
+<span class="multiComment">/**
+ * Utility to set up the prototype, constructor and superclass properties to
+ * support an inheritance strategy that can chain constructors and methods.
+ * Static members will not be inherited.
+ *
+ * @method extend
+ * @param {Function} subc   the object to modify
+ * @param {Function} superc the object to inherit
+ * @param {Object} overrides:optional  additional properties/methods to add to the
+ *                              subclass prototype.  These will override the
+ *                              matching items obtained from the superclass 
+ *                              if present.
+ */</span>
+<span class="multiComment">/**
+ * Applies all prototype properties in the supplier to the receiver if the receiver does not have these properties yet.
+ * @method augment
+ * @param {Function} r  the object to receive the augmentation
+ * @param {Function} s  the object that supplies the properties to augment
+ * @param {String..} arguments:optional zero or more properties methods to 
+ *        augment the receiver with.  If none specified, everything
+ *        in the supplier will be used unless it would
+ *        overwrite an existing property in the receiver
+ */</span>
+<span class="multiComment">/**
+ * Determines whether or not the property was added
+ * to the object instance.  Returns false if the property is not present
+ * in the object, or was inherited from the prototype.
+ * &lt;code&gt;
+ * var A = function() {};
+ * A.prototype.foo = 'foo';
+ * var a = new A();
+ * a.foo = 'foo';
+ * alert(a.hasOwnProperty('foo')); // true
+ * &lt;/code&gt;
+ * @method hasOwnProperty
+ * @param {Object} o The object being testing
+ * @param {String} prop the name of the property to test
+ * @return {Boolean} the result
+ */</span>
+<span class="multiComment">/**
+ * Determines wheather or not the provided object is an array.
+ * @method isArray
+ * @param {Object} o The object being testing
+ * @return {Boolean} the result
+ */</span>
+<span class="multiComment">/**
+ * Determines whether or not the provided object is a boolean
+ * @method isBoolean
+ * @param {Object} o The object being testing
+ * @return {Boolean} the result
+ */</span>
+<span class="multiComment">/**
+ * Determines whether or not the provided object is a function.
+ * Note: Internet Explorer thinks certain functions are objects:
+ *
+ * var obj = document.createElement("object");
+ * js.lang.System.isFunction(obj.getAttribute) // reports false in IE
+ *
+ * var input = document.createElement("input"); // append to body
+ * js.lang.System.isFunction(input.focus) // reports false in IE
+ *
+ * You will have to implement additional tests if these functions
+ * matter to you.
+ *
+ * @method isFunction
+ * @param {Object} o The object being testing
+ * @return {Boolean} the result
+ */</span>
+<span class="multiComment">/**
+ * Determines whether or not the provided object is null
+ * @method isNull
+ * @param {Object} o The object being testing
+ * @return {Boolean} the result
+ */</span>
+<span class="multiComment">/**
+ * Determines whether or not the provided object is a legal number
+ * @method isNumber
+ * @param {Object} o The object being testing
+ * @return {Boolean} the result
+ */</span>
+<span class="multiComment">/**
+ * Determines whether or not the provided object is of type object
+ * or function
+ * @method isObject
+ * @param {Object} o The object being testing
+ * @return {Boolean} the result
+ */ </span>
+<span class="multiComment">/**
+ * Determines whether or not the provided object is a string
+ * @method isString
+ * @param {Object} o The object being testing
+ * @return {Boolean} the result
+ */</span>
+<span class="multiComment">/**
+ * Determines whether or not the provided object is undefined
+ * @method isUndefined
+ * @param {Object} o The object being testing
+ * @return {Boolean} the result
+ */</span>
+<span class="multiComment">/**
+ * A convenience method for detecting a legitimate non-null value.
+ * Returns false for null/undefined/NaN, true for other values, 
+ * including 0/false/''
+ * @method isValue
+ * @param {Object} o  the item to test
+ * @return {Boolean} true if it is not null/undefined/NaN || false
+ */</span>
+
+<span class="multiComment">/**
+ * @class js.core.Env
+ * @static
+ */</span>
+js.core.Env = js.env.ua;
+
+<b>if </b>(js.core.Env.ie==6){//bugfix: IE6 background image cache bug
+    document.execCommand('BackgroundImageCache', <b>false</b>, <b>true</b>);
+}
+
+<span class="multiComment">/**
+ * The operating system. Currently only detecting windows or macintosh 
+ * @field {String} os
+ */</span>
+<span class="multiComment">/**
+ * The mobile property will be set to a string containing any relevant user agent information when a modern mobile browser is detected. Currently limited to Safari on the iPhone/iPod Touch, Nokia N-series devices with the WebKit-based browser, and Opera Mini. 
+ * @field {String} mobile
+ */</span>
+<span class="multiComment">/**
+ * Detects Googles Android OS version 
+ * @field {float} android 
+ */</span>
+<span class="multiComment">/**
+ * General truthy check for iPad, iPhone or iPod 
+ * @field {float} ios  
+ */</span>
+<span class="multiComment">/**
+ * Detects Apple iPad's OS version 
+ * @field {float} ipad   
+ */</span>
+<span class="multiComment">/**
+ * Detects Apple iPhone's OS version 
+ * @field {float} iphone    
+ */</span>
+<span class="multiComment">/**
+ * Detects Apples iPod's OS version  
+ * @field {float} ipod     
+ */</span>
+<span class="multiComment">/**
+ * Set to true if the page appears to be in SSL 
+ * @field {Boolean} secure
+ */</span>
+
+<span class="multiComment">/**
+ * Internet Explorer version number or 0.  Example: 6
+ * @field {float} ie
+ */</span>
+<span class="multiComment">/**
+ * Opera version number or 0.  Example: 9.2
+ * @field {float} opera
+ */</span>
+<span class="multiComment">/**
+ * Gecko engine revision number.  Will evaluate to 1 if Gecko 
+ * is detected but the revision could not be found. Other browsers
+ * will be 0.  Example: 1.8
+ * &lt;pre&gt;
+ * Firefox 1.0.0.4: 1.7.8   &lt;-- Reports 1.7
+ * Firefox 1.5.0.9: 1.8.0.9 &lt;-- Reports 1.8
+ * Firefox 2.0.0.3: 1.8.1.3 &lt;-- Reports 1.8
+ * Firefox 3 alpha: 1.9a4   &lt;-- Reports 1.9
+ * &lt;/pre&gt;
+ * @field {float} gecko
+ */</span>
+<span class="multiComment">/**
+ * AppleWebKit version.  KHTML browsers that are not WebKit browsers 
+ * will evaluate to 1, other browsers 0.  Example: 418.9.1
+ * &lt;pre&gt;
+ * Safari 1.3.2 (312.6): 312.8.1 &lt;-- Reports 312.8 -- currently the 
+ *                                   latest available for Mac OSX 10.3.
+ * Safari 2.0.2:         416     &lt;-- hasOwnProperty introduced
+ * Safari 2.0.4:         418     &lt;-- preventDefault fixed
+ * Safari 2.0.4 (419.3): 418.9.1 &lt;-- One version of Safari may run
+ *                                   different versions of webkit
+ * Safari 2.0.4 (419.3): 419     &lt;-- Tiger installations that have been
+ *                                   updated, but not updated
+ *                                   to the latest patch.
+ * Webkit 212 nightly:   522+    &lt;-- Safari 3.0 precursor (with native SVG
+ *                                   and many major issues fixed).  
+ * 3.x yahoo.com, flickr:422     &lt;-- Safari 3.x hacks the user agent
+ *                                   string when hitting yahoo.com and 
+ *                                   flickr.com.
+ * Safari 3.0.4 (523.12):523.12  &lt;-- First Tiger release - automatic update
+ *                                   from 2.x via the 10.4.11 OS patch
+ * Webkit nightly 1/2008:525+    &lt;-- Supports DOMContentLoaded event.
+ *                                   yahoo.com user agent hack removed.
+ * &lt;/pre&gt;
+ * http://developer.apple.com/internet/safari/uamatrix.html
+ * @field {float} webkit
+ */</span>
+
+<span class="multiComment">/**
+ * Chrome version number
+ * @field {Float} chrome
+ */</span>
+<span class="multiComment">/**
+ * The current browser's name
+ * @field {String} browserName
+ */</span>
+<span class="multiComment">/**
+ * The current browser's version
+ * @field {String} browserVersion
+ */</span>
+<span class="multiComment">/**
+ * LowerCase.
+ * The format is: &lt;language code&gt;-&lt;country code&gt;
+ * @field {String} locale 
+ */</span>
+<span class="multiComment">/**
+ * LowerCase.
+ * Language codes are defined by ISO 639, an international standard that assigns two- and three-letter codes to most languages of the world.
+ * @field {String} language
+ */</span>
+<span class="multiComment">/**
+ * LowerCase.
+ * Country codes are defined by ISO 3166, another international standard. It defines two- and three-letter abbreviations for each country or major region in the world. 
+ * @field {String} country
+ */</span>
+(<b>function </b>(){
+    <b>var </b>numberify = <b>function </b>(s) {
+        <b>var </b>c = 0;
+        <b>return</b> parseFloat(s.replace(/\./g, <b>function </b>() {
+            <b>return</b> (c++ == 1) ? '' : '.';
+        }));
+    }
+    js.core.Env.chrome = 0;
+    <b>var </b>m = navigator.userAgent.match(/Chrome\/([^\s]*)/);
+    <b>if </b>(m && m[1]) {
+        js.core.Env.chrome = numberify(m[1]); // Chrome
+        js.core.Env.webkit = 0; //Reset to 0
+    }
+
+    <b>if </b>(js.core.Env.gecko &gt; 0){
+        js.core.Env.browserName = 'Firefox';
+        js.core.Env.browserVersion = js.core.Env.gecko;
+    }<b>else </b><b>if </b>(js.core.Env.webkit &gt; 0){
+        js.core.Env.browserName = 'Safari';
+        js.core.Env.browserVersion = js.core.Env.gecko;
+    }<b>else </b><b>if </b>(js.core.Env.ie &gt; 0){
+        js.core.Env.browserName = 'Internet Explorer';
+        js.core.Env.browserVersion = js.core.Env.ie;
+    }<b>else </b><b>if </b>(js.core.Env.opera &gt; 0){
+        js.core.Env.browserName = 'Opera';
+        js.core.Env.browserVersion = js.core.Env.opera;
+    }<b>else </b><b>if </b>(js.core.Env.chrome &gt; 0){
+        js.core.Env.browserName = 'Chrome';
+        js.core.Env.browserVersion = js.core.Env.chrome;
+    }
+    
+    <b>var </b>locale = (navigator.language || navigator.browserLanguage).toLowerCase();
+    <b>if </b>(locale && locale.indexOf('-')&gt;0) {
+        <b>var </b>_localeArr = locale.split('-');
+        js.core.Env.language = _localeArr[0];
+        js.core.Env.country  = _localeArr[1];
+        js.core.Env.locale = locale;
+    }    
+})();
+
+
+<span class="multiComment">/**
+ * @class js.core.Dom
+ * @static
+ */</span>
+js.core.Dom = js.util.Dom;
+
+<span class="multiComment">/**
+ * Returns an HTMLElement reference.
+ * @method $
+ * @param {String | HTMLElement |Array} el Accepts a string to use as an ID for getting a DOM reference, an actual DOM reference, or an Array of IDs and/or HTMLElements.
+ * @return {HTMLElement | Array} A DOM reference to an HTML element or an array of HTMLElements.
+ */</span>
+js.core.Dom.$ = <b>function </b>(el){
+    <b>return</b> js.core.Dom.get(el);
+}
+<span class="multiComment">/**
+ * Better performance than "innerHTML".
+ * 
+ * @method replaceHtml
+ * @param {String|HTMLElement} el
+ * @param {String} html
+ * @return {HTMLElement}
+ */</span>
+js.core.Dom.replaceHtml = <b>function </b>(el, html) {   
+    <b>var </b>oldEl = <b>typeof </b>el === "string" ? document.getElementById(el) : el;   
+    <b>if </b>(js.core.Env.ie &gt; 0){// Pure innerHTML is slightly faster<b> in </b>IE 
+        oldEl.innerHTML = html;  
+        <b>return</b> oldEl;
+    }<b>else </b>{
+        <b>if </b>(oldEl.parentNode){
+            <b>var </b>newEl = oldEl.cloneNode(<b>false</b>);   
+            newEl.innerHTML = html;   
+            oldEl.parentNode.replaceChild(newEl, oldEl);   
+            <b>return</b> newEl;            
+        }<b>else </b>{
+            oldEl.innerHTML = html;   
+            <b>return</b> oldEl;
+        }        
+    }      
+}
+
+,
+<span class="multiComment">/**
+ * @method setCursorStyle
+ * @param {String|HTMLElement} el
+ * @param {String} style 
+ */</span>
+js.core.Dom.setCursorStyle = <b>function </b>(el, style){
+    <b>if </b>(!style) {
+        style = 'default';
+    } <b>else </b><b>if </b>(style.endsWith('.cur') || style.endsWith('.ani') || style.endsWith('.gif') || style.endsWith('.png')) {
+        style = 'url("'+style+'"),auto';
+    }
+    <b>this</b>.updateEl(el, <b>null</b>, {cursor: style});
+}
+
+<span class="multiComment">/**
+ * Returns the height of the window.
+ * 
+ * @method getDocumentHeight
+ * @param {HTMLElement} win:optional the window object
+ * @return {Int} The height of the actual document (which includes the body and its margin).
+ */</span>
+js.core.Dom.getDocumentHeight = <b>function </b>(win) {
+    <b>var </b>doc = win?win['document']:document 
+    , scrollHeight = (doc['compatMode'] != 'CSS1Compat' || js.core.Env.webkit) ? doc.body.scrollHeight : doc['documentElement'].scrollHeight
+    , h = Math.max(scrollHeight, js.core.Dom.getViewportHeight(win));
+    <b>return</b> h;
+}
+
+        
+<span class="multiComment">/**
+ * Returns the width of the window.
+ * 
+ * @method getDocumentWidth
+ * @param {HTMLElement} win:optional the window object
+ * @return {Int} The width of the actual document (which includes the body and its margin).
+ */</span>
+js.core.Dom.getDocumentWidth = <b>function </b>(win) {
+    <b>var </b>doc = win?win['document']:document
+    , scrollWidth = (doc['compatMode'] != 'CSS1Compat' || js.core.Env.webkit) ? doc.body.scrollWidth : doc['documentElement'].scrollWidth
+    , w = Math.max(scrollWidth, js.core.Dom.getViewportWidth(win));
+    <b>return</b> w;
+}
+
+<span class="multiComment">/**
+ * Returns the current view height of the window.
+ * 
+ * @method getViewportHeight
+ * @param {HTMLElement} win:optional the window object
+ * @return {Int} The height of the viewable area of the page (excludes scrollbars).
+ */</span>
+js.core.Dom.getViewportHeight = <b>function </b>(win) {
+    <b>var </b>doc = win?win['document']:document
+    , height = win?win.innerHeight:self.innerHeight // Safari, Opera
+    , mode = doc['compatMode'];
+
+    <b>if </b>( (mode || js.core.Env.ie) && !js.core.Env.opera ) { // IE, Gecko
+        height = (mode == 'CSS1Compat') ?
+                doc['documentElement'].clientHeight : // Standards
+                doc.body.clientHeight; // Quirks
+    }
+
+    <b>return</b> height;
+}
+        
+<span class="multiComment">/**
+ * Returns the current view width of the window.
+ * 
+ * @method getViewportWidth
+ * @param {HTMLElement} win:optional the window object
+ * @return {Int} The width of the viewable area of the page (excludes scrollbars).
+ */</span>
+js.core.Dom.getViewportWidth = <b>function </b>(win) {
+    <b>var </b>doc = win?win['document']:document
+    , width = win?win.innerWidth:self.innerWidth // Safari
+    , mode = doc['compatMode'];
+    
+    <b>if </b>(mode || js.core.Env.ie) { // IE, Gecko, Opera
+        width = (mode == 'CSS1Compat') ?
+                doc['documentElement'].clientWidth : // Standards
+                doc.body.clientWidth; // Quirks
+    }
+    <b>return</b> width;
+}
+
+js.core.Dom.DOT_ATTRIBUTES = {
+    className: <b>true</b>,
+    name:      <b>true</b>,
+    disabled:  <b>true</b>,
+    checked:   <b>true</b>,
+    value:     <b>true</b>,
+    action:    <b>true</b>,
+    method:    <b>true</b>
+};
+
+<span class="multiComment">/**
+ * Set the elements 's attribute. 
+ * 
+ * @method setAttribute
+ * @param {String|Array&lt;HTMLElement&gt;} el the elements
+ * @param {String} attr the attribute name
+ * @param {String} val the attribute value
+ */                </span>
+js.core.Dom.setAttribute = <b>function </b>(el, attr, val) {
+    <b>if </b>(js.lang.System.isUndefined(val)) <b>return</b>;
+    
+    <b>if </b>(attr == 'checked') {
+        attr = js.core.Env.ie?'defaultChecked':'checked';                
+    }<b>else </b><b>if </b>(attr == 'cssName'){
+        attr = js.core.Env.ie?'className':'class';
+    }<b>else </b><b>if </b>(attr == 'cssText'){
+        <b>if </b>(js.core.Env.ie) {
+            js.core.Dom.setStyle(el,'cssText', val);
+            <b>return</b>;
+        }<b>else </b>{
+            attr = 'style';
+        }
+    }
+    
+    js.core.Dom.batch(el, <b>function </b>(el, args) {
+        <b>var </b>attr = js.core.Dom._toCamel(args.attr),
+            val = args.val;
+
+        <b>if </b>(el && el.setAttribute) {
+            <b>if </b>(js.core.Dom.DOT_ATTRIBUTES[attr]) {
+                el[attr] = val;
+            } <b>else </b>{
+                attr = js.core.Dom.CUSTOM_ATTRIBUTES[attr] || attr;
+                el.setAttribute(attr, val);
+            }
+        } 
+    }, { attr: attr, val: val });
+},
+
+<span class="multiComment">/**
+ * Set many attributes of the element.
+ * 
+ * @method setAttributes
+ * @param {String|Array&lt;HTMLElement&gt;} el the elements
+ * @param {Object} attrs
+ */</span>
+js.core.Dom.setAttributes = <b>function </b>(el, attrs){
+    <b>if </b>(attrs) { 
+        <b>for </b>(<b>var </b>k<b> in </b>attrs) {
+            js.core.Dom.setAttribute(el, k, attrs[k]);                
+        }         
+    }    
+}
+
+<span class="multiComment">/**
+ * Set the elements 's style.
+ * 
+ * @method setStyle
+ * @param {String|Array&lt;HTMLElement&gt;} el the elements
+ * @param {String} k the style's key
+ * @param {String|Number} val the style's value
+ */</span>
+js.core.Dom.setStyle = <b>function </b>(el, k, val) {
+    <b>var </b>SYS = js.lang.System;
+    <b>if </b>(SYS.isUndefined(val)) <b>return</b>;
+    
+    <b>if </b>(k=='x' || k=='left'){
+        k = 'left';
+        <b>if </b>(SYS.isNumber(val)) val+= 'px';
+    }<b>else </b><b>if </b>(k=='y' || k=='top'){
+        k = 'top';
+        <b>if </b>(SYS.isNumber(val)) val+= 'px';
+    }<b>else </b><b>if </b>(k=='width' || k=='height' || k=='marginLeft' || k=='marginTop' || k=='lineHeight'){
+        <b>if </b>(SYS.isNumber(val)) val+= 'px';
+    }<b>else </b><b>if </b>(k=='opacity'){
+        <b>if </b>(js.core.Env.ie&gt;0){
+            k = 'filter';
+            val = 'alpha(opacity:' + val * 100 + ')';
+        }                
+    }<b>else </b><b>if </b>(k=='visible'){
+        k = 'visibility';
+        val = val?'visible':'hidden';
+    }<b>else </b><b>if </b>(k=='z'){
+        k = 'zIndex';
+    }    
+    
+    <b>this</b>.batch(el, <b>this</b>._setStyle, { prop: k, val: val });
+}
+<span class="multiComment">/**
+ * Normalizes currentStyle and ComputedStyle.
+ * @method getStyle
+ * @param {String | HTMLElement |Array} el Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements.
+ * @param {String} property The style property whose value is returned.
+ * @return {String | Array} The current value of the style property for the element(s).
+ */</span>
+js.core.Dom.getStyle = <b>function </b>(el, property) {
+    <b>if </b>(property=='x'){
+        property = 'left';
+    }<b>else </b><b>if </b>(property=='y'){
+        property = 'top';            
+    }<b>else </b><b>if </b>(property=='visible'){
+        property = 'visibility';
+    }<b>else </b><b>if </b>(property=='z'){
+        property = 'zIndex';
+    }    
+    
+    <b>return</b> <b>this</b>.batch(el, <b>this</b>._getStyle, property);
+}
+<span class="multiComment">/**
+ * Set many styles of the element.
+ * 
+ * @method setStyles
+ * @param {String|Array&lt;HTMLElement&gt;} el the elements 
+ * @param {Object} styles
+ */</span>
+js.core.Dom.setStyles = <b>function </b>(el, styles){
+    <b>if </b>(styles) { 
+        <b>for </b>(<b>var </b>k<b> in </b>styles) {
+            js.core.Dom.setStyle(el, k, styles[k]);      
+        } 
+    } 
+}
+<span class="multiComment">/**
+ * Update the element's attributs, styles and innerHTML.
+ * 
+ * @method updateEl
+ * @param {String|HTMLElement} el
+ * @param {Object} attrs:optional
+ * @param {Object} styles:optional
+ * @param {String} html:optional
+ * @return {HTMLElement} 
+ * @throws {TypeError} when the element not exist
+ */</span>
+js.core.Dom.updateEl = <b>function </b>(el, attrs, styles, html){
+    <b>var </b>ele = <b>this</b>.$(el);
+    <b>if </b>(!ele) <b>throw </b><b>new </b>TypeError("[js.core.Dom#updateEl]The element not exist.");
+    
+    <b>this</b>.setAttributes(ele, attrs);
+    <b>this</b>.setStyles(ele, styles);
+    <b>if </b>(html) <b>this</b>.replaceHtml(ele, html);
+    <b>return</b> ele;
+}
+<span class="multiComment">/**
+ * Creates a new element by attributs, styles and innerHTML.
+ * 
+ * @method createEl
+ * @param {String} tag the created element's tag name
+ * @param {Object} attrs:optional
+ * @param {Object} styles:optional
+ * @param {String} html:optional
+ * @return {HTMLElement} 
+ * @throws {TypeError} when The tag is empty
+ */</span>
+js.core.Dom.createEl = <b>function </b>(tag, attrs, styles, html){
+    <b>if </b>(!tag) <b>throw </b><b>new </b>TypeError("[js.core.Dom#createEl]The tag is empty.");
+    
+    <b>var </b>el = <b>null</b>;
+    <b>if </b>(tag == 'input' && js.core.Env.ie){//fix ie bug: input's name and value
+        el = document.createElement('&lt;INPUT name="'+attrs['name']+'" value="'+attrs['value']+'"/&gt;');
+    }<b>else </b>{
+        el = document.createElement(tag);
+        <b>if </b>(attrs && attrs['name']) el.name = attrs['name'];
+    }
+    
+    <b>this</b>.updateEl(el, attrs, styles, html);   
+    <b>return</b> el;
+}
+
+<span class="multiComment">/**
+ * Adds a class name to a given element or collection of elements. 
+ * @method addClass
+ * @param {String|HTMLElement|Array} el The element or collection to add the class to 
+ * @param {String} className the class name to add to the class attribute 
+ * @return {Boolean|Array} A pass/fail boolean or array of booleans 
+ */</span>
+<span class="multiComment">/**
+ * Removes a class name from a given element or collection of elements.
+ * @method removeClass         
+ * @param {String | HTMLElement | Array} el The element or collection to remove the class from
+ * @param {String} className the class name to remove from the class attribute
+ * @return {Boolean | Array} A pass/fail boolean or array of booleans
+ */</span>
+<span class="multiComment">/**
+ * Replace a class with another class for a given element or collection of elements.
+ * If no oldClassName is present, the newClassName is simply added.
+ * @method replaceClass  
+ * @param {String | HTMLElement | Array} el The element or collection to remove the class from
+ * @param {String} oldClassName the class name to be replaced
+ * @param {String} newClassName the class name that will be replacing the old class name
+ * @return {Boolean | Array} A pass/fail boolean or array of booleans
+ */</span>
+<span class="multiComment">/**
+ * Determines whether an HTMLElement has the given className.
+ * @method hasClass
+ * @param {String | HTMLElement | Array} el The element or collection to test
+ * @param {String} className the class name to search for
+ * @return {Boolean | Array} A boolean value or array of boolean values
+ */</span>
+<span class="multiComment">/**
+ * Provides a normalized attribute interface. 
+ * @method getAttribute
+ * @param {String | HTMLElement} el The target element for the attribute.
+ * @param {String} attr The attribute to get.
+ * @return {String} The current value of the attribute. 
+ */</span>
+<span class="multiComment">/**
+ * Returns an array of HTMLElement childNodes. 
+ * @method getChildren
+ * @param {String | HTMLElement} node The HTMLElement or an ID to use as the starting point 
+ * @return {Array} A static array of HTMLElements
+ */</span>
+<span class="multiComment">/**
+ * Returns an array of HTMLElement childNodes that pass the test method. 
+ * @method getChildrenBy
+ * @param {HTMLElement} node The HTMLElement to start from
+ * @param {Function} method A boolean function used to test children that receives the node being tested as its only argument
+ * @return {Array} A static array of HTMLElements
+ */</span>
+<span class="multiComment">/**
+ * Returns the left scroll value of the document 
+ * @method getDocumentScrollLeft
+ * @param {HTMLElement} document:optional The document to get the scroll value of
+ * @return {Int}  The amount that the document is scrolled to the left
+ */</span>
+<span class="multiComment">/**
+ * Returns the top scroll value of the document 
+ * @method getDocumentScrollTop
+ * @param {HTMLElement} document:optional The document to get the scroll value of
+ * @return {Int}  The amount that the document is scrolled to the top
+ */</span>
+<span class="multiComment">/**
+ * Returns the first HTMLElement that passes the test applied by the supplied boolean method.
+ * @method getElementBy
+ * @param {Function} method - A boolean method for testing elements which receives the element as its only argument.
+ * @param {String} tag:optional The tag name of the elements being collected
+ * @param {String | HTMLElement} root:optional The HTMLElement or an ID to use as the starting point 
+ * @return {HTMLElement}
+ */</span>
+<span class="multiComment">/**
+ * Returns an array of HTMLElements that pass the test applied by supplied boolean method.
+ * For optimized performance, include a tag and/or root node when possible.
+ * Note: This method operates against a live collection, so modifying the 
+ * collection in the callback (removing/appending nodes, etc.) will have
+ * side effects.  Instead you should iterate the returned nodes array,
+ * as you would with the native "getElementsByTagName" method. 
+ * @method getElementsBy
+ * @param {Function} method - A boolean method for testing elements which receives the element as its only argument.
+ * @param {String} tag:optional The tag name of the elements being collected
+ * @param {String | HTMLElement} root:optional The HTMLElement or an ID to use as the starting point 
+ * @param {Function} apply:optional A function to apply to each element when found 
+ * @param {Object} o:optional An optional arg that is passed to the supplied method
+ * @param {Boolean} overrides:optional Whether or not to override the scope of "method" with "o"
+ * @return {Array} Array of HTMLElements
+ */</span>
+<span class="multiComment">/**
+ * Returns an array of HTMLElements with the given class.
+ * For optimized performance, include a tag and/or root node when possible.
+ * Note: This method operates against a live collection, so modifying the 
+ * collection in the callback (removing/appending nodes, etc.) will have
+ * side effects.  Instead you should iterate the returned nodes array,
+ * as you would with the native "getElementsByTagName" method. 
+ * @method getElementsByClassName
+ * @param {String} className The class name to match against
+ * @param {String} tag:optional The tag name of the elements being collected
+ * @param {String | HTMLElement} root:optional The HTMLElement or an ID to use as the starting point. This element is not included in the className scan.
+ * @param {Function} apply:optional A function to apply to each element when found 
+ * @param {Object} o:optional An optional arg that is passed to the supplied method
+ * @param {Boolean} overrides:optional Whether or not to override the scope of "method" with "o"
+ * @return {Array} An array of elements that have the given class name
+ */</span>
+<span class="multiComment">/**
+ * Gets the current position of an element based on page coordinates. 
+ * Element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).
+ * @method getXY
+ * @param {String | HTMLElement | Array} el Accepts a string to use as an ID, an actual DOM
+ * reference, or an Array of IDs and/or HTMLElements
+ * @return {Array} The XY position of the element(s)
+ */</span>
+<span class="multiComment">/**
+ * Gets the current X position of an element based on page coordinates.  The element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).
+ * @method getX
+ * @param {String | HTMLElement | Array} el Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements
+ * @return {Number | Array} The X position of the element(s)
+ */</span>
+<span class="multiComment">/**
+ * Gets the current Y position of an element based on page coordinates.  Element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).
+ * @method getY
+ * @param {String | HTMLElement | Array} el Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements
+ * @return {Number | Array} The Y position of the element(s)
+ */</span>
+<span class="multiComment">/**
+ * Set the position of an html element in page coordinates, regardless of how the element is positioned.
+ * The element(s) must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).
+ * @method setXY
+ * @param {String | HTMLElement | Array} el Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements
+ * @param {Array} pos Contains X & Y values for new position (coordinates are page-based)
+ * @param {Boolean} noRetry By default we try and set the position a second time if the first fails
+ */</span>
+<span class="multiComment">/**
+ * Set the X position of an html element in page coordinates, regardless of how the element is positioned.
+ * The element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).
+ * @method setX
+ * @param {String | HTMLElement | Array} el Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements.
+ * @param {Int} x The value to use as the X coordinate for the element(s).
+ */</span>
+<span class="multiComment">/**
+ * Set the Y position of an html element in page coordinates, regardless of how the element is positioned.
+ * The element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).
+ * @method setY
+ * @param {String | HTMLElement | Array} el Accepts a string to use as an ID, an actual DOM reference, or an Array of IDs and/or HTMLElements.
+ * @param {Int} x To use as the Y coordinate for the element(s).
+ */</span>
+<span class="multiComment">/**
+ * Determines whether an HTMLElement is present in the current document.
+ * @method inDocument         
+ * @param {String | HTMLElement} el The element to search for
+ * @param {Object} doc:optional An optional document to search, defaults to element's owner document 
+ * @return {Boolean} Whether or not the element is present in the current document
+ */</span>
+<span class="multiComment">/**
+ * Inserts the new node as the next sibling of the reference node 
+ * @method insertAfter
+ * @param {String | HTMLElement} newNode The node to be inserted
+ * @param {String | HTMLElement} referenceNode The node to insert the new node after 
+ * @return {HTMLElement} The node that was inserted (or null if insert fails) 
+ */</span>
+<span class="multiComment">/**
+ * Inserts the new node as the previous sibling of the reference node 
+ * @method insertBefore
+ * @param {String | HTMLElement} newNode The node to be inserted
+ * @param {String | HTMLElement} referenceNode The node to insert the new node before 
+ * @return {HTMLElement} The node that was inserted (or null if insert fails) 
+ */</span>
+<span class="multiComment">/**
+ * Determines whether an HTMLElement is an ancestor of another HTML element in the DOM hierarchy.
+ * @method isAncestor
+ * @param {String | HTMLElement} haystack The possible ancestor
+ * @param {String | HTMLElement} needle The possible descendent
+ * @return {Boolean} Whether or not the haystack is an ancestor of needle
+ */</span>
+
+
+
+<span class="multiComment">/**********************************************
+ * The Native Object Extension
+ * 
+ * Note:
+ * 1: Don't expand "Object"
+ * 
+ * 2: Traversal a Array using "for in...", should write like this:
+ *         for (k in arr){    
+ *             if (arr.hasOwnProperty(k)) {...}
+ *         }
+ *    Or use the "forEach" function.
+ *  
+ *********************************************/</span>
+
+<span class="multiComment">/**
+ * @native String 
+ */</span>
+<b>var </b>__WHITESPACE = ' \n\r\t\f\x0b\xa0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000';
+<span class="multiComment">/**
+ * Trim the String's left and right empty chars.
+ * 
+ * @method trim
+ * @see http://blog.stevenlevithan.com/archives/faster-trim-javascript
+ * @return {String}
+ */</span>
+String.prototype.trim = String.prototype.trim || <b>function </b>() {        
+    <b>var </b>str = <b>this</b>.trimLeft();
+    str = <b>this</b>.trimRight();
+    <b>return</b> __WHITESPACE.indexOf(str.charAt(0)) === -1 ? str : '';
+}
+<span class="multiComment">/**
+ * Trim the String's left empty chars.
+ * 
+ * @method trimLeft
+ * @return {String}
+ */</span>
+String.prototype.trimLeft = <b>function </b>() {        
+    <b>var </b>str = <b>this</b>;
+    <b>for </b>(<b>var </b>i = 0,len = str.length; i &lt; len; i++) {
+      <b>if </b>(__WHITESPACE.indexOf(str.charAt(i)) === -1) {
+        str = str.substring(i);
+        <b>break</b>;
+      }
+    }
+    <b>return</b> str;
+}
+<span class="multiComment">/**
+ * Trim the String's right empty chars.
+ * 
+ * @method trimRight
+ * @return {String}
+ */</span>
+String.prototype.trimRight = <b>function </b>() {        
+    <b>var </b>str = <b>this</b>;
+    <b>for </b>(i = str.length - 1; i &gt;= 0; i--) {
+      <b>if </b>(__WHITESPACE.indexOf(str.charAt(i)) === -1) {
+        str = str.substring(0, i + 1);
+        <b>break</b>;
+      }
+    }
+    <b>return</b> str;
+}
+<span class="multiComment">/**
+ * Returns the text between start word and end word.
+ * 
+ * @method between
+ * @param {String} startWord:optional
+ * @param {String} endWord:optional
+ * @return {String}
+ */    </span>
+String.prototype.between = <b>function </b>(startWord, endWord) {        
+    <b>var </b>pos1 = 0, pos2 = <b>this</b>.length;
+    
+    <b>if </b>(startWord){
+        <b>var </b>p1 = <b>this</b>.indexOf(startWord);
+        <b>if </b>(p1 &gt;= 0) {            
+            pos1 = p1 + startWord.length;
+        }
+    }
+    
+    <b>if </b>(endWord){
+        <b>var </b>p2 = <b>this</b>.indexOf(endWord);
+        <b>if </b>(p2 &gt;= 0) {            
+            pos2 = p2;
+        }
+    }
+    
+    <b>return</b> <b>this</b>.substring(pos1,pos2);
+}    
+<span class="multiComment">/**
+ * Ends with the string.
+ * 
+ * @method endsWith
+ * @param {String} str
+ * @return {Boolean}
+ */</span>
+String.prototype.endsWith = <b>function </b>(str){    
+    <b>if </b>(<b>this</b>.length==0 || !str || <b>typeof </b>str !='string') <b>return</b> <b>false</b>;
+    <b>if </b>(str.length &gt; <b>this</b>.length) <b>return</b> <b>false</b>;
+    
+      <b>return</b> (<b>this</b>.substring(<b>this</b>.length-str.length)==str)?<b>true</b>:<b>false</b>;
+}
+<span class="multiComment">/**
+ * Starts with the string.
+ * 
+ * @method startsWith
+ * @param {String} str
+ * @return {Boolean}
+ */</span>
+String.prototype.startsWith = <b>function </b>(str){    
+    <b>if </b>(<b>this</b>.length==0 || !str || <b>typeof </b>str !='string') <b>return</b> <b>false</b>;
+    <b>if </b>(str.length &gt; <b>this</b>.length) <b>return</b> <b>false</b>;
+    
+      <b>return</b> <b>this</b>.substr(0,str.length)==str?<b>true</b>:<b>false</b>;  
+}
+<span class="multiComment">/**
+ * Returns the byte length in UTF-8 encoding. If the byteSize is null then the default byteSize is 3. 
+ * 
+ * UTF-8  
+ * The 8-bit encoding of Unicode. It is a variable-width encoding. 
+ * One Unicode character can be 1 byte, 2 bytes, 3 bytes, or 4 bytes in UTF-8 encoding. 
+ * Characters from the European scripts are represented in either 1 or 2 bytes. 
+ * Characters from most Asian scripts are represented in 3 bytes. 
+ * Supplementary characters are represented in 4 bytes.
+ * 
+ * @method byteLength
+ * @param {Int} byteSize:optional
+ * @return {Int}
+ */</span>
+String.prototype.byteLength = <b>function </b>(byteSize){
+    <b>if </b>(<b>this</b>.length==0) <b>return</b> 0; 
+    <b>if </b>(!byteSize || byteSize&lt;=0 || byteSize&gt;4) byteSize = 3;
+    <b>return</b> <b>this</b>.replace(/[^\x00-\xff]/g, ''+Math.pow(10,byteSize-1)).length;
+};
+<span class="multiComment">/**
+ * Transfer the string to a number. The default number is Zero when failed. 
+ * 
+ * @method toNumber
+ * @param {Number} defaultNum:optional
+ * @return {Number}
+ */</span>
+String.prototype.toNumber = <b>function </b>(defaultNum){    
+    <b>return</b> isNaN(<b>this</b>)?(defaultNum?Number(defaultNum):0):Number(<b>this</b>);
+};
+
+<span class="multiComment">/**
+ * Returns a json string.
+ * 
+ * @method toJSONString
+ * @return {String}
+ */</span>
+String.prototype.toJSONString = <b>function </b>(){
+    <b>var </b>s = <b>this</b>;    
+    <b>if </b>(/["\\\x00-\x1f]/.test(s)) {
+        <b>return</b> '"' + s.replace(/([\x00-\x1f\\"])/g, <b>function </b>(a, b) {
+            <b>var </b>c = {
+                "\b": '\\b',
+                "\t": '\\t',
+                "\n": '\\n',
+                "\f": '\\f',
+                "\r": '\\r',
+                '"' : '\\"',
+                "\\": '\\\\'
+            }[b];
+            <b>if </b>(c){
+                <b>return</b> c;
+            }
+            c = b.charCodeAt();
+            <b>return</b> "\\u00" +
+                Math.floor(c / 16).toString(16) +
+                (c % 16).toString(16);
+        }) + '"';
+    }
+    <b>return</b> '"' + s + '"';
+}
+
+<span class="multiComment">/**
+ * @native Array 
+ */</span>
+<span class="multiComment">/**
+ * Returns the index of a item in the array by asc order. 
+ * 
+ * @method indexOf
+ * @param {Object} elt
+ * @param {Function} fn:optional The compare function
+ * @param {Object} thisp:optional The function's this
+ * @param {Int} from:optional The default is Zero
+ * @return {Int} returns -1 when not found
+ */</span>
+Array.prototype.indexOf = <b>function </b>(elt, fn, <b>this</b>p, from) {   
+    <b>var </b>len = <b>this</b>.length &gt;&gt;&gt; 0, <b>this</b>P = <b>this</b>p||<b>this</b>, fun = (fn && <b>typeof </b>fn == "function")?fn:<b>null</b>;   
+  
+    from = isNaN(from)? 0:Math.round(from); 
+    <b>if </b>(from &lt; 0) {
+        from += len;
+    }<b>else </b><b>if </b>(from &gt; len){
+        from = len;
+    }   
+  
+    <b>for </b>(; from &lt; len; from++){
+        <b>if </b>(fun){
+            <b>if </b>(fun.call(<b>this</b>P, elt, <b>this</b>[from], <b>this</b>, from)) <b>return</b> from;
+        }<b>else </b>{
+            <b>if </b>(<b>this</b>[from] === elt) <b>return</b> from;
+        }
+    }   
+    <b>return</b> -1;     
+};  
+<span class="multiComment">/**
+ * Returns the index of a item in the array by desc order. 
+ * 
+ * @method lastIndexOf
+ * @param {Object} elt
+ * @param {Function} fn:optional The equals function
+ * @param {Object} thisp:optional The function's this
+ * @param {Int} from:optional The default is length-1
+ * @return {Int} returns -1 when not found
+ */</span>
+Array.prototype.lastIndexOf = <b>function </b>(elt, fn, <b>this</b>p, from){
+    <b>var </b>len = <b>this</b>.length, <b>this</b>P = <b>this</b>p||<b>this</b>, fun = (fn && <b>typeof </b>fn == "function")?fn:<b>null</b>;
+
+    from = isNaN(from)? len-1:Math.round(from);
+    <b>if </b>(from &lt; 0) {
+        from = Math.abs(from);
+    }<b>else </b><b>if </b>(from &gt; len){
+        from = len;
+    }
+    
+    <b>for </b>(; from &gt; -1; from--){
+          <b>if </b>(fun){
+            <b>if </b>(fun.call(<b>this</b>P, elt, <b>this</b>[from], <b>this</b>, from)) <b>return</b> from;
+        }<b>else </b>{
+            <b>if </b>(<b>this</b>[from] === elt) <b>return</b> from;
+        }
+    }
+    <b>return</b> -1;
+};
+<span class="multiComment">/**
+ * Execute the callback function for every item.
+ * 
+ * @method forEach
+ * @param {Function} fn
+ * @param {Object}   thisp:optional the function's this
+ * @throws {TypeError} The argument&lt;fn&gt; is not function
+ */</span>
+Array.prototype.forEach = <b>function </b>(fn, <b>this</b>p){
+    <b>var </b>len = <b>this</b>.length &gt;&gt;&gt; 0, <b>this</b>P = <b>this</b>p||<b>this</b>;
+    <b>if </b>(<b>typeof </b>fn != "function")
+        <b>throw </b><b>new </b>TypeError('[Array#forEach]The argument&lt;fn&gt; is not function.');
+
+    <b>for </b>(<b>var </b>i = 0; i &lt; len; i++){
+        fn.call(<b>this</b>P, <b>this</b>[i], i, <b>this</b>);
+    }    
+};
+<span class="multiComment">/**
+ * Returns a JSONObject of all items for callback.
+ * 
+ * @method toMap
+ * @param {Function} fn returns a array like [key,value]
+ * @param {Object} thisp:optional the function's this
+ * @return {Object}
+ * @throws {TypeError} The argument&lt;fn&gt; is not function
+ */</span>
+Array.prototype.toMap = <b>function </b>(fn, <b>this</b>p){
+    <b>var </b>len = <b>this</b>.length &gt;&gt;&gt; 0, <b>this</b>P = <b>this</b>p||<b>this</b>;
+    <b>if </b>(<b>typeof </b>fn != "function")
+      <b>throw </b><b>new </b>TypeError('[Array#toMap]The argument&lt;fn&gt; is not function.');
+
+    <b>var </b>res = {};
+    <b>for </b>(<b>var </b>i = 0; i &lt; len; i++){
+        <b>var </b>rst = fn.call(<b>this</b>P, <b>this</b>[i], i, <b>this</b>);
+          <b>if </b>(rst && rst.length&gt;1) res[rst[0]] = rst[1];
+    }
+
+    <b>return</b> res;
+};
+
+<span class="multiComment">/**
+ * If all items passed the function's test, then return true.
+ * 
+ * @method every
+ * @param {Function} fn
+ * @param {Object} thisp:optional the function's this
+ * @return {Boolean}
+ * @throws {TypeError} The argument&lt;fn&gt; is not function
+ */</span>
+Array.prototype.every = <b>function </b>(fn, <b>this</b>p){   
+    <b>var </b>len = <b>this</b>.length &gt;&gt;&gt; 0, <b>this</b>P = <b>this</b>p||<b>this</b>;   
+    <b>if </b>(<b>typeof </b>fn != "function")   
+      <b>throw </b><b>new </b>TypeError('[Array#every]The argument&lt;fn&gt; is not function.');   
+  
+    <b>for </b>(<b>var </b>i = 0; i &lt; len; i++) {   
+      <b>if </b>(!fn.call(<b>this</b>P, <b>this</b>[i], i, <b>this</b>))   
+        <b>return</b> <b>false</b>;   
+    }        
+  
+    <b>return</b> <b>true</b>;   
+};   
+
+<span class="multiComment">/**
+ * If one item passed the function's test, then return true.
+ * 
+ * @method some
+ * @param {Function} fn
+ * @param {Object} thisp:optional the function's this
+ * @return {Boolean}
+ * @throws {TypeError} The argument&lt;fn&gt; is not function
+ */</span>
+Array.prototype.some = <b>function </b>(fn, <b>this</b>p){
+    <b>var </b>len = <b>this</b>.length &gt;&gt;&gt; 0, <b>this</b>P = <b>this</b>p||<b>this</b>;
+    <b>if </b>(<b>typeof </b>fn != "function")
+      <b>throw </b><b>new </b>TypeError('[Array#some]The argument&lt;fn&gt; is not function.');
+
+    <b>for </b>(<b>var </b>i = 0; i &lt; len; i++){
+      <b>if </b>(fn.call(<b>this</b>P, <b>this</b>[i], i, <b>this</b>))
+        <b>return</b> <b>true</b>;
+    }   
+
+    <b>return</b> <b>false</b>;
+};
+
+<span class="multiComment">/**
+ * Filter all items to a new Array by the function's test.
+ * 
+ * @method filter
+ * @param {Function} fn
+ * @param {Object} thisp:optional the function's this
+ * @return {Array}
+ * @throws {TypeError} The argument&lt;fn&gt; is not function
+ */</span>
+Array.prototype.filter = <b>function </b>(fn, <b>this</b>p){   
+    <b>var </b>len = <b>this</b>.length &gt;&gt;&gt; 0, <b>this</b>P = <b>this</b>p||<b>this</b>;   
+    <b>if </b>(<b>typeof </b>fn != "function")   
+      <b>throw </b><b>new </b>TypeError('[Array#filter]The argument&lt;fn&gt; is not function.');   
+  
+    <b>var </b>res = [];  
+    <b>for </b>(<b>var </b>i = 0; i &lt; len; i++){   
+      <b>var </b>val = <b>this</b>[i];   
+      <b>if </b>(fn.call(<b>this</b>P, val, i, <b>this</b>)) res.push(val);  
+    }       
+  
+    <b>return</b> res;   
+};   
+<span class="multiComment">/**
+ * Clear all items to empty.
+ * 
+ * @method clear
+ */</span>
+Array.prototype.clear = <b>function </b>() {   
+    <b>this</b>.length = 0;
+}
+<span class="multiComment">/**
+ * Clone to a new Array.
+ * 
+ * @method clone
+ * @return {Array}
+ */  </span>
+Array.prototype.clone = <b>function </b>() {   
+    <b>return</b> <b>this</b>.slice(0);;   
+}
+<span class="multiComment">/**
+ * Determines whether or not the item be contains in the array.
+ * 
+ * @method contains
+ * @param {Object} item
+ * @param {Function} fn:optional the compare function
+ * @param {Object} thisp:optional the function's this
+ * @param {Int} from:optional the from index
+ * @return {Boolean}
+ */</span>
+Array.prototype.contains = <b>function </b>(item, fn, <b>this</b>p, from) {  
+    <b>return</b> <b>this</b>.indexOf(item, fn, <b>this</b>p, from)==-1?<b>false</b>:<b>true</b>;
+}
+<span class="multiComment">/**
+ * Insert some items after the position.
+ * 
+ * @method splice
+ * @param {Object} index
+ * @param {Object...} item
+ */</span>
+Array.prototype.insertAt = <b>function </b>(index, item){
+    <b>this</b>.splice(index,0,item);
+}
+<span class="multiComment">/**
+ * If contains the item in the array, then removes it.
+ * 
+ * @method remove
+ * @param {Object} item
+ * @param {Function} fn:optional the compare function
+ * @param {Object} thisp:optional the function's this
+ * @param {Int} from:optional the from index
+ * @return {Boolean}
+ */</span>
+Array.prototype.remove = <b>function </b>(item, fn, <b>this</b>p, from) {
+    <b>var </b>index = <b>this</b>.indexOf(item, fn, <b>this</b>p, from);
+    <b>if </b>(index &gt;= 0) {
+        <b>this</b>.splice(index, 1);
+        <b>return</b> <b>true</b>;
+    }
+    <b>return</b> <b>false</b>;
+}
+<span class="multiComment">/**
+ * Removes one item on the index position.
+ * 
+ * @method removeAt
+ * @param {Int} index
+ * @return {Boolean}
+ */</span>
+Array.prototype.removeAt = <b>function </b>(index) {   
+    <b>if </b>(index &gt;= 0 && index &lt; <b>this</b>.length) {
+        <b>this</b>.splice(index, 1);
+        <b>return</b> <b>true</b>;
+    }
+    <b>return</b> <b>false</b>;
+} 
+<span class="multiComment">/**
+ * Returns a new version of the array, without any null/undefined values.
+ * 
+ * @method compact
+ * @return {Array}
+ */</span>
+Array.prototype.compact = <b>function </b>() {   
+    <b>return</b> <b>this</b>.filter(<b>function </b>(v){
+        <b>return</b> !(v==<b>null</b> || <b>typeof </b>v=="undefined"); 
+    });   
+}     
+<span class="multiComment">/**
+ * Returns a new array without repeat items.
+ * 
+ * @method uniq
+ * @param {Function} fn:optional the equals function
+ * @param {Object} thisp:optional the function's this
+ * @return {Array}
+ */</span>
+Array.prototype.uniq = <b>function </b>(fn, <b>this</b>p) {   
+    <b>if </b>(<b>this</b>.length &lt; 2) <b>return</b> <b>this</b>.clone();
+    
+    <b>var </b>temp = <b>this</b>.clone(), <b>this</b>p = <b>this</b>p||<b>this</b>;   
+    <b>for </b>(<b>var </b>i=0;i &lt; temp.length;i++){   
+        <b>for </b>(<b>var </b>j=i+1;j &lt; temp.length;){   
+            <b>if </b>(fn && fn.call(<b>this</b>p, temp[i], temp[j], <b>this</b>)){
+                temp.splice(j,1);
+            }<b>else </b><b>if </b>(temp[i] === temp[j]) {
+                temp.splice(j,1);
+            } <b>else </b>{j++;} 
+        }   
+    }   
+    <b>return</b> temp;
+}
+
+<span class="multiComment">/**
+ * Returns a JSON String of the array.
+ * 
+ * @method toJSONString
+ * @return {String}
+ */</span>
+Array.prototype.toJSONString = <b>function </b>(){
+    <b>var </b>a = ["["], b, i, l = <b>this</b>.length, v;
+        <b>for </b>(i = 0; i &lt; l; i++) {
+            v = <b>this</b>[i];
+            <b>switch </b>(<b>typeof </b>v) {
+                <b>case </b>"undefined":
+                <b>case </b>"function":
+                <b>case </b>"unknown":
+                    <b>break</b>;
+                default:
+                    <b>if </b>(b) a.push(',');
+                    a.push(v === <b>null</b> ? "<b>null</b>" : js.lang.System.toJSONString(v));
+                    b = <b>true</b>;
+            }
+        }
+    a.push("]");
+    <b>return</b> a.join("");
+}
+
+<span class="multiComment">/**
+ * @native Number  
+ */</span>
+<span class="multiComment">/**
+ * Determines whether or not the object is a number. 
+ * 
+ * @static
+ * @method isNumber
+ * @param {String|Number} s
+ * @return {Boolean}
+ */</span>
+Number.isNumber = <b>function </b>(s){
+    <b>if </b>(s==<b>null</b> || <b>typeof </b>s == 'undefined') <b>return</b> <b>false</b>;
+    <b>if </b>(<b>typeof </b>s == 'number'){
+        <b>return</b> <b>true</b>;
+    }<b>else </b><b>if </b>(<b>typeof </b>s == 'string'){
+        <b>var </b>n = s.replace(/,/g, '');
+        <b>return</b> (!n || isNaN(n))?<b>false</b>:<b>true</b>;
+    }
+    <b>return</b> <b>false</b>;
+}
+
+<span class="multiComment">/**
+ * Transfer a number. The default number is Zero.
+ * 
+ * @static
+ * @method toNumber
+ * @param {String|Number} s
+ * @return {Number} 
+ */</span>
+Number.toNumber = <b>function </b>(s){
+    <b>if </b>(!Number.isNumber(s)) <b>return</b> 0;
+    <b>if </b>(<b>typeof </b>s == 'string') {
+        <b>var </b>f = parseFloat(s.replace(/,/g, ''));
+        <b>return</b> isNaN(f)?0:f;
+    }<b>else </b>{
+        <b>return</b> Number(s);
+    }        
+}
+
+<span class="multiComment">/**
+ * Transfer a integer. The default number is Zero.
+ *
+ * @static
+ * @method toInt
+ * @param {String|Number} s
+ * @param {Int} mode:optional rounding mode: (default)0 is round down; 1 is ceil; 2 is floor
+ * @return {Int}
+ */</span>
+Number.toInt = <b>function </b>(s, mode){
+    <b>if </b>(<b>this</b>.isInt(s)) <b>return</b> s;
+    <b>if </b>(!mode) mode = 0;
+    
+    <b>switch </b>(mode){
+        <b>case </b>0: <b>return</b> Math.round(Number.toNumber(s));<b>break</b>;
+        <b>case </b>1: <b>return</b> Math.ceil(Number.toNumber(s));<b>break</b>;
+        <b>case </b>2: <b>return</b> Math.floor(Number.toNumber(s));<b>break</b>;
+    }         
+}
+
+<span class="multiComment">/**
+ * Determines whether or not the object is a float.
+ * 
+ * @static
+ * @method isFloat
+ * @param {String|Number} s
+ * @return {Boolean}
+ */</span>
+Number.isFloat = <b>function </b>(s){
+    <b>if </b>(!Number.isNumber(s)) <b>return</b> <b>false</b>;
+    <b>var </b>n = Number.toNumber(s).toString();        
+    <b>return</b> n.indexOf('.') &gt;= 0;
+}
+<span class="multiComment">/**
+ * Determines whether or not the object is a Integer.
+ * 
+ * @static
+ * @method isInt
+ * @param {String|Number} s
+ * @return {Boolean}
+ */</span>
+Number.isInt = <b>function </b>(){
+    <b>if </b>(!Number.isNumber(s)) <b>return</b> <b>false</b>;
+    <b>var </b>n = Number.toNumber(s).toString();        
+    <b>return</b> n.indexOf('.') &lt; 0;
+}
+
+<span class="multiComment">/**
+ * Determines whether or not the object is a negative number, excludes Zero.
+ * 
+ * @static
+ * @method isNegative
+ * @param {String|Number} s
+ * @return {Boolean}
+ */</span>
+Number.isNegative = <b>function </b>(s){
+    <b>if </b>(!<b>this</b>.isNumber(s)) <b>return</b> <b>false</b>;
+    <b>var </b>n = Number.toNumber(s);
+    <b>return</b> n!==0 && Math.abs(n)!=n;
+},
+<span class="multiComment">/**
+ * Determines whether or not the object is a positive number, excludes Zero.
+ * 
+ * @static
+ * @method isPositive
+ * @param {String|Number} s
+ * @return {Boolean}
+ */</span>
+Number.isPositive = <b>function </b>(s){
+    <b>if </b>(!<b>this</b>.isNumber(s)) <b>return</b> <b>false</b>;
+    <b>var </b>n = Number.toNumber(s);
+    <b>return</b> n!==0 && Math.abs(n)==n;
+}
+
+<span class="multiComment">/**
+ * Returns the length of decimal bit.
+ * 
+ * @method decLength
+ * @return {Int}
+ */</span>
+Number.prototype.decLength = <b>function </b>(){
+    <b>var </b>s = Math.abs(<b>this</b>).toString();    
+    <b>var </b>p = s.indexOf('.');
+    
+    <b>return</b> (p&lt;0||p&gt;s.length-1)?0:s.length-p-1;
+}
+<span class="multiComment">/**
+ * Returns the length of integer bit.
+ * 
+ * @method intLength
+ * @return {Int}
+ */</span>
+Number.prototype.intLength = <b>function </b>(){
+    <b>var </b>s = Math.abs(<b>this</b>).toString();        
+    <b>var </b>p = s.indexOf('.');
+    
+    <b>return</b> p&lt;0?s.length:p;
+}
+<span class="multiComment">/**
+ * Precision multiplication.
+ * 
+ * @method mul
+ * @param {Number|String} s 
+ * @return {Number} 
+ * @throws {TypeError} when The argument is null or not a number
+ */</span>
+Number.prototype.mul = <b>function </b>(s){
+    <b>if </b>(s==<b>null</b> || isNaN(s)) {
+        <b>throw </b><b>new </b>TypeError('[Number#mul]The argument is <b>null</b> or not a number.');
+    }
+    <b>var </b>n = (<b>typeof </b>s == 'string')?s.toNumber():s;
+    
+    <b>if </b>(n==0) <b>return</b> 0;
+    <b>if </b>(n==1) <b>return</b> Number(<b>this</b>);
+    
+    <b>if </b>(<b>this</b>.isInt() && n.isInt()) {
+        <b>return</b> Number(<b>this</b>*n);
+    }
+    
+    <b>var </b>n1=Number(<b>this</b>.toString().replace('.','')), n2=Number(n.toString().replace('.',''));
+    <b>return</b> n1*n2/Math.pow(10,<b>this</b>.decLength()+n.decLength());        
+}
+<span class="multiComment">/**
+ * Precision division.
+ * 
+ * @method div
+ * @param {Number|String} s but Zero
+ * @return {Number} 
+ * @throws {TypeError} when The argument is zero or not a number
+ */</span>
+Number.prototype.div = <b>function </b>(s){
+    <b>if </b>(s==<b>null</b> || s==0 || isNaN(s)) {
+        <b>throw </b><b>new </b>TypeError('[Number#div]The argument is zero or not a number.');
+    }
+    
+    <b>if </b>(<b>this</b>==0) <b>return</b> 0;
+    <b>var </b>n = (<b>typeof </b>s == 'string')?s.toNumber():s;
+    
+    <b>var </b>n1 = Number(<b>this</b>.toString().replace('.','')), n2 = Number(n.toString().replace('.',''));    
+    <b>return</b> Math.pow(10,n.decLength()-<b>this</b>.decLength()).mul(n1/n2);        
+},    
+<span class="multiComment">/**
+ * Precision addition.
+ * 
+ * @method add
+ * @param {Number|String} s 
+ * @return {Number}
+ * @throws {TypeError} when The argument is not a number
+ */</span>
+Number.prototype.add = <b>function </b>(s){
+    <b>if </b>(s==<b>null</b> || isNaN(s)) {
+        <b>throw </b><b>new </b>TypeError('[Number#add]The argument is not a number.');
+    }
+    
+    <b>var </b>n = (<b>typeof </b>s == 'string')?s.toNumber():s;
+    
+    <b>if </b>(n==0) <b>return</b> Number(<b>this</b>);
+    <b>if </b>(<b>this</b>.isInt() && n.isInt()) {
+        <b>return</b> Number(<b>this</b>+n);
+    }
+    
+    <b>var </b>m = Math.pow(10,Math.max(<b>this</b>.decLength(),n.decLength()));    
+    <b>var </b>n1=<b>this</b>.mul(m), n2=n.mul(m);        
+    
+    <b>return</b> (n1+n2)/m;
+}
+<span class="multiComment">/**
+ * Precision subtraction.
+ * 
+ * @method sub
+ * @param {Number|String} s 
+ * @return {Number} 
+ * @throws {TypeError} when The argument is not a number
+ */</span>
+Number.prototype.sub = <b>function </b>(s){
+    <b>if </b>(s==<b>null</b> || isNaN(s)) {
+        <b>throw </b><b>new </b>TypeError('[Number#sub]The argument is not a number.');
+    }
+    
+    <b>var </b>n = (<b>typeof </b>s == 'string')?s.toNumber():s;
+    <b>if </b>(n==0) <b>return</b> Number(<b>this</b>);
+    <b>if </b>(<b>this</b>.isInt() && n.isInt()) {
+        <b>return</b> Number(<b>this</b>-n);
+    }
+    
+    <b>var </b>m = Math.pow(10,Math.max(<b>this</b>.decLength(),n.decLength()));
+    <b>var </b>n1=<b>this</b>.mul(m), n2=n.mul(m);        
+    
+    <b>return</b> (n1-n2)/m;
+}
+<span class="multiComment">/**
+ * Arithmetic such as '+ - * /'.
+ * &lt;code&gt;
+ * 3.1415.calc('*', 1, '/', 1, '+', 0, '-', 0) = 3.1415;
+ * &lt;/code&gt;
+ * 
+ * @method calc
+ * @param {Number|String} s
+ * @return {Number} 
+ * @throws {TypeError} when The arguments is null or empty
+ */</span>
+Number.prototype.calc = <b>function </b>(){
+    <b>if </b>(arguments==<b>null</b> || arguments.length&lt;=0) <b>throw </b><b>new </b>TypeError('[Number#calc]The arguments is <b>null</b> or empty.');
+    
+    <b>var </b>n = Number(<b>this</b>);
+    <b>for </b>(<b>var </b>i = 0, len = arguments.length; i &lt; len; i+=2){
+        <b>if </b>(i+1==len) <b>break</b>;
+        
+        <b>var </b>s = arguments[i+1];
+        <b>if </b>(s != <b>null</b> && !isNaN(s)) {
+            <b>switch </b>(arguments[i]) {
+                <b>case </b>'+':
+                    n = n.add(s);
+                    <b>break</b>;
+                <b>case </b>'-':
+                    n = n.sub(s);
+                    <b>break</b>;
+                <b>case </b>'*':
+                    n = n.mul(s);
+                    <b>break</b>;
+                <b>case </b>'/':
+                    n = n.div(s);
+                    <b>break</b>;
+            }
+        }
+    }
+    
+    <b>return</b> n;
+}
+<span class="multiComment">/**
+ * Return a JSON String of the number.
+ * 
+ * @method toJSONString
+ * @return {String}
+ */</span>
+Number.prototype.toJSONString = <b>function </b>(){
+    <b>return</b> isFinite(<b>this</b>) ? String(<b>this</b>) : "<b>null</b>";
+}
+
+<span class="multiComment">/**
+ * @native Date 
+ */</span>
+<span class="multiComment">/**
+ * Determines whether or not a year is leap year.
+ * 
+ * @static
+ * @method isLeapYear
+ * @param {Int} year
+ * @return {Boolean}
+ */</span>
+Date.isLeapYear = <b>function </b>(year){<b>return</b> (((year%4===0)&&(year%100!==0))||(year%400===0));};
+<span class="multiComment">/**
+ * Returns the max day number in the month and the year.
+ * 
+ * @static
+ * @method getDaysInMonth
+ * @param {Int} year
+ * @param {Int} month 0~11
+ * @return {Int}
+ */</span>
+Date.getDaysInMonth = <b>function </b>(year, month){
+    <b>return</b> <b>new </b>Date(year, month + 1, 0).getDate();
+}
+<span class="multiComment">/**
+ * Parse a String to a Date.
+ * 
+ * @static
+ * @method parseDate
+ * @param {String} sDate
+ * @return {Date}
+ * @throws {TypeError} when Arguments is null or bad-format
+ */</span>
+Date.parseDate = <b>function </b>(sDate){
+    <b>if </b>(!js.lang.System.isString(sDate)) <b>throw </b><b>new </b>TypeError("[Date#parseDate]Arguments is <b>null</b> or bad-format.");
+    
+    <b>if </b>(/\s*(\d{1,4})(-|\/)(\d{1,2})(-|\/)(\d{1,2})/.test(sDate)){//start with yyyy-mm-dd or yyyy/mm/dd
+        <b>var </b>m = sDate.match(/\d+/g);
+        <b>if </b>(m){
+            <b>if </b>(m.length&gt;1) m[1] = parseInt(m[1])-1; 
+            <b>return</b> eval('<b>new </b>Date('+m.join(',')+')');
+        }
+    } <b>else </b>{
+        <b>var </b>ms = Date.parse(sDate);
+        <b>if </b>(ms) {
+            <b>var </b>d1970 = <b>new </b>Date(1970, 1, 1, 0, 0, 0, 000);
+            d1970.setTime(ms);
+            <b>return</b> d1970;
+        }
+    }
+    <b>throw </b><b>new </b>Error();            
+}
+
+<span class="multiComment">/**
+ * Determines whether or not a day equals this day.
+ * 
+ * @method equals
+ * @param {Date} date
+ * @param {String} type:optional values: "y"|"m"|"d"|"ymd"|"t"; the default value is "t"
+ * @return {Boolean} 
+ * @throws {TypeError} when Arguments is not date
+ */</span>
+Date.prototype.equals = <b>function </b>(date,type){<b>return</b> <b>this</b>.compare(date,type)==0;};
+<span class="multiComment">/**
+ * Add one day or month or year to this date.
+ * 
+ * @method add
+ * @param {Int} n
+ * @param {String} type values:"y"|"m"|"w"|"d"|"h"|"mi"|"s"|"ms"; the default value is "d"
+ * @throws {TypeError} when The argument&lt;n&gt; is not integer
+ */</span>
+Date.prototype.add = <b>function </b>(n, type){
+    <b>if </b>(n.isFloat()) <b>throw </b><b>new </b>TypeError('[Date#add]The argument&lt;n&gt; is not integer.');
+    
+    <b>switch </b>(type) {
+        <b>case </b>'y':
+            <b>this</b>.add(n*12, 'm');<b>break</b>;
+        <b>case </b>'m':
+            <b>var </b>d = <b>this</b>.getDate();
+            <b>this</b>.setDate(1);
+            <b>this</b>.setMonth(<b>this</b>.getMonth()+n);
+            <b>this</b>.setDate(Math.min(d, Date.getDaysInMonth(<b>this</b>.getFullYear(),<b>this</b>.getMonth())));
+            <b>break</b>;
+        <b>case </b>'d':
+            <b>this</b>.add(n*86400000, 'ms');<b>break</b>;
+        <b>case </b>'h':
+            <b>this</b>.add(n*3600000, 'ms');<b>break</b>;    
+        <b>case </b>'mi':
+            <b>this</b>.add(n*60000, 'ms');<b>break</b>;    
+        <b>case </b>'s':
+            <b>this</b>.add(n*1000, 'ms');<b>break</b>;    
+        <b>case </b>'ms':
+            <b>this</b>.setMilliseconds(<b>this</b>.getMilliseconds()+n);<b>break</b>;    
+        <b>case </b>'w':
+            <b>this</b>.add(n*604800000, 'ms');<b>break</b>;
+        default:
+            <b>this</b>.add(n,'d');
+    }
+};
+
+(<b>function </b>(){
+<b>var </b>_compare = <b>function </b>(a,b){<b>return</b> (a&gt;b)?1:(a&lt;b?-1:0)};
+<b>var </b>_compareYear = <b>function </b>(a,b){<b>return</b> _compare(a.getFullYear(), b.getFullYear())};
+<b>var </b>_compareMonth = <b>function </b>(a,b){<b>return</b> _compare(a.getMonth(), b.getMonth())};
+<b>var </b>_compareDate = <b>function </b>(a,b){<b>return</b> _compare(a.getDate(), b.getDate())};
+<span class="multiComment">/**
+ * Compare this date with a date.
+ * 
+ * @method compare
+ * @param {Date} date
+ * @param {String} type:optional values: "y"|"m"|"d"|"ymd"|"t"; the default value is "t"
+ * @return {Number} values: -1 is before the date; 0 is equals the date; 1 is after the date
+ * @throws {TypeError} when The argument&lt;date&gt; is not date
+ */    </span>
+Date.prototype.compare = <b>function </b>(date, type){
+    <b>if </b>(!date || !(date<b> instanceof </b>Date)) <b>throw </b><b>new </b>TypeError('[Date#compare]The argument&lt;date&gt; is not date.');
+    
+    <b>switch </b>(type) {
+        <b>case </b>'y':
+            <b>return</b> _compareYear(<b>this</b>,date);
+        <b>case </b>'m':
+            <b>return</b> _compareMonth(<b>this</b>,date);
+        <b>case </b>'d':
+            <b>return</b> _compareDate(<b>this</b>,date);
+        <b>case </b>'ymd':
+            <b>var </b>i = _compareYear(<b>this</b>,date);
+            <b>if </b>(i!=0) <b>return</b> i;
+            i = _compareMonth(<b>this</b>,date);
+            <b>if </b>(i!=0) <b>return</b> i;
+            i = _compareDate(<b>this</b>,date);
+            <b>return</b> i;
+        default:
+            <b>return</b> _compare(<b>this</b>.getTime(), date.getTime());
+    }        
+}    
+    
+<b>var </b>_format = <b>function </b>(i){
+    <b>var </b>str = i.toString();
+    <b>return</b> (str.length &lt; 2) ? '0' + str : str;
+}
+<b>var </b>_ymdString = <b>function </b>(date, split){
+    <b>return</b> date.getFullYear() + split + _format(date.getMonth() + 1) + split + _format(date.getDate());
+}
+<b>var </b>_hmsString = <b>function </b>(date, split){
+    <b>return</b> _format(date.getHours()) + split + _format(date.getMinutes()) + split + _format(date.getSeconds());
+}  
+
+<span class="multiComment">/** 
+ * Format the date to a String.
+ * 
+ * @method format
+ * @param {String|Function} a String values: "hh:mm:ss"|"yyyy-MM-dd"|"yyyy-MM-dd hh:mm:ss"|"yyyy/MM/dd"|"yyyy/MM/dd hh:mm:ss"; or a function with arguments this date
+ * @param {Object} thisP:optional the callback function's "this"
+ * @return {String} 
+ */    </span>
+Date.prototype.format = <b>function </b>(arg, <b>this</b>P){
+    <b>if </b>(!arg || js.lang.System.isString(arg)){
+        <b>switch </b>(arg){
+            <b>case </b>'hh:mm:ss': <b>return</b> _hmsString(<b>this</b>, ':');
+            <b>case </b>'yyyy-MM-dd': <b>return</b> _ymdString(<b>this</b>, '-');
+            <b>case </b>'yyyy-MM-dd hh:mm:ss': <b>return</b> _ymdString(<b>this</b>, '-')+' '+_hmsString(<b>this</b>, ':');
+            <b>case </b>'yyyy/MM/dd': <b>return</b> _ymdString(<b>this</b>, '/');
+            <b>case </b>'yyyy/MM/dd hh:mm:ss': <b>return</b> _ymdString(<b>this</b>, '/')+' '+_hmsString(<b>this</b>, ':');
+            default: <b>return</b> _ymdString(<b>this</b>, '-');
+        }
+    }<b>else </b><b>if </b>(js.lang.System.isFunction(arg)){
+        <b>try </b>{
+            <b>return</b> arg.apply(<b>this</b>P, [<b>this</b>]);
+        }<b>catch </b>(e){<b>return</b> <b>this</b>.toLocaleString();}
+    }<b>else </b>{
+        <b>return</b> <b>this</b>.toLocaleString();
+    }    
+}
+
+<span class="multiComment">/** 
+ * Format this date to a JSON String.
+ * 
+ * @method toJSONString
+ * @return {String} 
+ */</span>
+Date.prototype.toJSONString = <b>function </b>() {
+  <b>return</b> '"' + _ymdString(<b>this</b>, '-') + "T" + _hmsString(<b>this</b>, ':') + '"';
+}
+})();
+
+(<b>function </b>(){
+<span class="multiComment">/**
+ * Returns the root dir of the JSDK source. 
+ * The script search the dir by URL if not be setup manually.
+ */</span>
+<b>var </b>_root = <b>function </b>(){
+    <b>var </b>scripts = document.getElementsByTagName('script');
+    <b>if </b>(!scripts) <b>return</b> '';
+    <b>for </b>(<b>var </b>i=0,len=scripts.length;i&lt;len;i++){
+        <b>var </b>src = scripts[i].src;        
+        <b>if </b>(src.indexOf('/core/js-core') &gt; 0){
+            <b>return</b> src.substring(0,src.indexOf('/core/js-core'));
+        }
+    }
+    <b>return</b> '';    
+}()
+
+<span class="multiComment">/**
+ * @class js.lang.Loader
+ * @static
+ */</span>
+js.lang.Loader = <b>function </b>(){
+    <b>var </b>L = js.lang.System, $ = js.core.Dom.$, head = document.head||document.getElementsByTagName('head')[0];
+    
+    <b>var </b>_loadImage = <b>function </b>(len, index, url, onload, onerror, loadContext, errorContext){
+        <b>var </b>imgObj = <b>new </b>Image();
+        <b>if </b>(L.isFunction(onload)) imgObj.onload = <b>function </b>(){
+            onload.call(loadContext||imgObj, imgObj, len, index);
+        }
+        <b>if </b>(L.isFunction(onerror)) imgObj.onerror = <b>function </b>(){
+            onerror.call(errorContext||imgObj, imgObj, len, index);
+        }
+        imgObj.src = url;
+    }        
+    
+    <b>return</b> {
+<span class="multiComment">        /**
+         * @field {String} SOURCE_ROOT_DIR
+         */</span>
+        SOURCE_ROOT_DIR: _root,
+<span class="multiComment">        /**
+         * Load many images from URL.
+         * 
+         * @struct js.lang.Callback {
+         *      "description": "a common json callback object"
+         *      ,"type":"object"
+         *      ,"properties":{
+         *           "fn":{"type":"string","required":true}
+         *           ,"scope":{"type":"object","required":false}
+         *           ,"args":{"type":"array","required":false}
+         *      }
+         * }
+         * 
+         * @method loadImage
+         * @param {String|Array} url the images's url
+         * @param {js.lang.Callback} loadHandler:optional 
+         * @param {js.lang.Callback} errorHandler:optional 
+         */</span>
+        loadImage: <b>function </b>(url, loadHandler, errorHandler){
+            <b>var </b>onload = loadHandler?loadHandler['fn']:<b>null</b>, loadContext = loadHandler?loadHandler['scope']:<b>null</b>
+            , onerror = errorHandler?errorHandler['fn']:<b>null</b>, errorContext = errorHandler?errorHandler['scope']:<b>null</b>;
+            
+            <b>var </b>urls = (L.isArray(url))?url:[url];
+            <b>for </b>(<b>var </b>i = 0, len = urls.length; i &lt; len; i++){
+                _loadImage(len, i, urls[i], onload, onerror, loadContext, errorContext);
+            }
+        },
+        _reloadHandle: <b>function </b>(head, child, reload){
+            <b>if </b>(child) {
+                <b>if </b>(reload) {
+                    head.removeChild(child);
+                    <b>return</b> <b>false</b>;
+                }<b>else </b>{
+                    <b>return</b> <b>true</b>;
+                }                
+            }
+            <b>return</b> <b>false</b>; 
+        },
+        _setupOnload: <b>function </b>(obj, fn, scope){
+            <b>if </b>(!fn) <b>return</b>; 
+            
+            <b>var </b>loadFn = <b>function </b>() {
+                fn.call(scope||window, obj);
+            }, errorFn = <b>function </b>(){
+                <b>throw </b><b>new </b>Error();
+            }
+            obj.onerror = errorFn;
+            
+            obj.onload = loadFn;
+            obj.onreadystatechange = <b>function </b>() {//compatible fix
+                <b>if </b>(<b>this</b>.readyState === 'loaded' || <b>this</b>.readyState === 'complete') {
+                    loadFn();
+                }
+            };                  
+        },
+<span class="multiComment">        /**
+         * Load css from URL.
+         * 
+         * @struct js.lang.Loader$cssConfig {
+         *      "description": "a css file's config"
+         *      ,"type":"object"
+         *      ,"properties":{
+         *           "src":{"type":"string","required":true}
+         *           ,"id":{"type":"string","required":false}
+         *           ,"reload":{"type":"boolean","required":false}
+         *      }
+         * }
+         * @method loadCss
+         * @param {js.lang.Loader$cssConfig} cssConfig 
+         * @return {Boolean}
+         */        </span>
+        loadCss: <b>function </b>(cssConfig){
+            <b>var </b>cssObj = $(cssConfig['id']);
+            <b>if </b>(<b>this</b>._reloadHandle(head, cssObj, cssConfig['reload'])) <b>return</b> <b>true</b>;
+            
+            <b>try </b>{
+                cssObj = document.createElement('link');
+                cssObj.href = cssConfig['src'];
+                cssObj.rel = 'stylesheet';
+                cssObj.type = 'text/css';
+                cssObj.id = cssConfig['id'];                
+                head.appendChild(cssObj);                
+            }<b>catch </b>(e){
+                <b>return</b> <b>false</b>;
+            }
+            <b>return</b> <b>true</b>;
+        },
+<span class="multiComment">        /**
+         * Load js from URL.
+         * 
+         * @struct js.lang.Loader$jsConfig {
+         *      "description": "a js file's config"
+         *      ,"type":"object"
+         *      ,"properties":{
+         *           "src":{"type":"string","required":true}
+         *           ,"id":{"type":"string","required":false}
+         *           ,"reload":{"type":"boolean","required":false}
+         *           ,"charset":{"type":"string","required":false}
+         *           ,"defer":{"type":"boolean","required":false}
+         *           ,"onloaded":{"type":"function","required":false}
+         *           ,"scope":{"type":"object","required":false}
+         *      }
+         * }
+         * @method loadJs
+         * @param {js.lang.Loader$jsConfig} jsConfig 
+         * @return {Boolean}
+         */</span>
+        loadJs: <b>function </b>(jsConfig){
+            <b>var </b>jsObj = $(jsConfig['id']);
+<span class="singleComment">            //if(this._reloadHandle(head, jsObj, jsConfig['reload'])) return true;</span>
+            
+            <b>try </b>{
+                jsObj = document.createElement('script');
+                jsObj.setAttribute('id', jsConfig['id']);
+                jsObj.setAttribute('charset', jsConfig['charset']||'utf-8');
+                <b>if </b>(jsConfig['defer']) jsObj.setAttribute('defer', jsConfig['defer']);
+                jsObj.type = 'text/javascript';
+                jsObj.src = jsConfig['src'];
+                
+                <b>this</b>._setupOnload(jsObj, jsConfig['onloaded'], jsConfig['scope']);
+                head.appendChild(jsObj);
+            }<b>catch </b>(e){
+                <b>return</b> <b>false</b>;
+            }
+            <b>return</b> <b>true</b>;            
+        },
+        _loadLib: <b>function </b>(a, fn){
+            <b>if </b>(a.endsWith('js')) {
+                <b>return</b> <b>this</b>.loadJs({'src':<b>this</b>.SOURCE_ROOT_DIR+a,'onloaded':fn})
+            }<b>else </b>{
+                <b>return</b> <b>this</b>.loadCss({'src':<b>this</b>.SOURCE_ROOT_DIR+a})
+            }
+        },
+        _loadLibs: <b>function </b>(list, fn){
+            <b>if </b>(js.lang.System.isArray(list)){
+                <b>return</b> list.every(<b>function </b>(a, i, arr){
+                    <b>if </b>(i==arr.length-1){
+                        <b>return</b> <b>this</b>._loadLib(a, fn);
+                    }<b>else </b>{
+                        <b>return</b> <b>this</b>._loadLib(a);
+                    }                    
+                }, <b>this</b>);                
+            }<b>else </b>{
+                <b>return</b> <b>this</b>._loadLib(list, fn);
+            }
+        },
+<span class="multiComment">        /**
+         * Load js or css from URL.
+         * 
+         * @struct js.lang.Loader$resList {
+         *      "description": "a css or js files list"
+         *      ,"type":"object"
+         *      ,"properties":{
+         *           "css":{"type":"array","required":false}
+         *           ,"js":{"type":"array","required":false}
+         *      }
+         * }
+         * 
+         * @method loadLib
+         * @param {js.lang.Loader$resList} resList 
+         * @param {Function} fnLoad
+         * @throws {Error} when loading failure
+         */</span>
+        loadLib: <b>function </b>(resList, fnLoad){
+            <b>var </b>cssList = resList['css'], jsList = resList['js'];            
+            <b>if </b>(cssList) <b>this</b>._loadLibs(cssList);
+            <b>if </b>(jsList) <b>this</b>._loadLibs(jsList, fnLoad);
+        }        
+    }
+}();    
+})()
+
+js.core.Event = js.util.Event;
+js.core.CustomEvent = js.util.CustomEvent;
+js.core.EventProvider = js.util.EventProvider;
+<span class="multiComment">/**
+ * EventProvider is designed to be used with js.lang.System.augment to wrap 
+ * CustomEvents in an interface that allows events to be subscribed to 
+ * and fired by name.  This makes it possible for implementing code to
+ * subscribe to an event that either has not been created yet, or will
+ * not be created at all.
+ *
+ * @class js.core.EventProvider
+ */</span>
+<span class="multiComment">/**
+ * Subscribe to a CustomEvent by event type
+ *
+ * @method subscribe
+ * @param {String}   p_type  the type, or name of the event
+ * @param {Function} p_fn    the function to exectute when the event fires
+ * @param {Object}   p_obj:optional   An object to be passed along when the event 
+ *                              fires
+ * @param {boolean}  overrideContext:optional If true, the obj passed in becomes the 
+ *                              execution scope of the listener
+ */</span>
+<span class="multiComment">/**
+ * Unsubscribes one or more listeners the from the specified event
+ * @method unsubscribe
+ * @param  {String} p_type  The type, or name of the event.  If the type
+ *                          is not specified, it will attempt to remove
+ *                          the listener from all hosted events.
+ * @param  {Function} p_fn:optional The subscribed function to unsubscribe, if not
+ *                          supplied, all subscribers will be removed.
+ * @param  {Object}  p_obj:optional The custom object passed to subscribe.  This is
+ *                        optional, but if supplied will be used to
+ *                        disambiguate multiple listeners that are the same
+ *                        (e.g., you subscribe many object using a function
+ *                        that lives on the prototype)
+ * @return {Boolean} true if the subscriber was found and detached.
+ */</span>
+<span class="multiComment">/**
+ * Removes all listeners from the specified event.  If the event type
+ * is not specified, all listeners from all hosted custom events will
+ * be removed.
+ * @method unsubscribeAll
+ * @param {string} p_type:optional  The type, or name of the event
+ */</span>
+<span class="multiComment">/**
+ * Creates a new custom event of the specified type.  If a custom event
+ * by that name already exists, it will not be re-created.  In either
+ * case the custom event is returned. 
+ *
+ * @method createEvent
+ *
+ * @param  {string} p_type the type, or name of the event
+ * @param  {object} p_config:optional config params.  Valid properties are:
+ *
+ *  &lt;ul&gt;
+ *    &lt;li&gt;
+ *      scope: defines the default execution scope.  If not defined
+ *      the default scope will be this instance.
+ *    &lt;/li&gt;
+ *    &lt;li&gt;
+ *      silent: if true, the custom event will not generate log messages.
+ *      This is false by default.
+ *    &lt;/li&gt;
+ *    &lt;li&gt;
+ *      fireOnce: if true, the custom event will only notify subscribers
+ *      once regardless of the number of times the event is fired.  In
+ *      addition, new subscribers will be executed immediately if the
+ *      event has already fired.
+ *      This is false by default.
+ *    &lt;/li&gt;
+ *    &lt;li&gt;
+ *      onSubscribeCallback: specifies a callback to execute when the
+ *      event has a new subscriber.  This will fire immediately for
+ *      each queued subscriber if any exist prior to the creation of
+ *      the event.
+ *    &lt;/li&gt;
+ *  &lt;/ul&gt;
+ *
+ *  @return {js.core.CustomEvent} the custom event
+ */</span>
+<span class="multiComment">/**
+ * Fire a custom event by name.  The callback functions will be executed
+ * from the scope specified when the event was created, and with the 
+ * following parameters:
+ *   &lt;ul&gt;
+ *   &lt;li&gt;The first argument fire() was executed with&lt;/li&gt;
+ *   &lt;li&gt;The custom object (if any) that was passed into the subscribe() 
+ *       method&lt;/li&gt;
+ *   &lt;/ul&gt;
+ * @method fireEvent
+ * @param {String} p_type the type, or name of the event
+ * @param {Object..} arguments an arbitrary set of parameters to pass to 
+ *                            the handler.
+ * @return {Boolean} the return value from CustomEvent.fire
+ */</span>
+<span class="multiComment">/**
+ * Returns true if the custom event of the provided type has been created
+ * with createEvent.
+ * @method hasEvent
+ * @param {String} type name of the event
+ */</span>
+
+<span class="multiComment">/**
+ * The CustomEvent class lets you define events for your application
+ * that can be subscribed to by one or more independent component.
+ *
+ * @class js.core.CustomEvent
+ * @constructor
+ * @param {String}  type The type of event, which is passed to the callback
+ *                  when the event fires
+ * @param {Object}  context The context the event will fire from.  "this" will
+ *                  refer to this object in the callback.  Default value: 
+ *                  the window object.  The listener can override this.
+ * @param {boolean} silent pass true to prevent the event from writing to
+ *                  the debugsystem
+ * @param {int}     signature the signature that the custom event subscriber
+ *                  will receive. js.core.CustomEvent.LIST or 
+ *                  js.core.CustomEvent.FLAT.  The default is
+ *                  js.core.CustomEvent.LIST.
+ * @param {boolean} fireOnce  If configured to fire once, the custom event 
+ * will only notify subscribers a single time regardless of how many times 
+ * the event is fired.  In addition, new subscribers will be notified 
+ * immediately if the event has already been fired.
+ */</span>
+<span class="multiComment">/**
+ * The type of event, returned to subscribers when the event fires
+ * @field {string} type
+ */</span>
+<span class="multiComment">/**
+ * The context the event will fire from by default. Defaults to the window obj.
+ * @field {object} scope
+ */</span>
+<span class="multiComment">/**
+ * By default all custom events are logged in the debug build. Set silent to true 
+ * to disable debug output for this event.
+ * @field {boolean} silent
+ */</span>
+<span class="multiComment">/**
+ * If configured to fire once, the custom event will only notify subscribers
+ * a single time regardless of how many times the event is fired.  In addition,
+ * new subscribers will be notified immediately if the event has already been
+ * fired.
+ * @field {boolean} fireOnce
+ */</span>
+<span class="multiComment">/**
+ * Indicates whether or not this event has ever been fired.
+ * @field {boolean} fired
+ */</span>
+<span class="multiComment">/**
+ * Custom events support two styles of arguments provided to the event
+ * subscribers.  
+ * &lt;ul&gt;
+ * &lt;li&gt;js.core.CustomEvent.LIST: 
+ *   &lt;ul&gt;
+ *   &lt;li&gt;param1: event name&lt;/li&gt;
+ *   &lt;li&gt;param2: array of arguments sent to fire&lt;/li&gt;
+ *   &lt;li&gt;param3: &lt;optional&gt; a custom object supplied by the subscriber&lt;/li&gt;
+ *   &lt;/ul&gt;
+ * &lt;/li&gt;
+ * &lt;li&gt;js.core.CustomEvent.FLAT
+ *   &lt;ul&gt;
+ *   &lt;li&gt;param1: the first argument passed to fire.  If you need to
+ *           pass multiple parameters, use and array or object literal&lt;/li&gt;
+ *   &lt;li&gt;param2: &lt;optional&gt; a custom object supplied by the subscriber&lt;/li&gt;
+ *   &lt;/ul&gt;
+ * &lt;/li&gt;
+ * &lt;/ul&gt;
+ * @field {int} signature
+ */</span>
+<span class="multiComment">/**
+ * In order to make it possible to execute the rest of the subscriber
+ * stack when one thows an exception, the subscribers exceptions are
+ * caught.  The most recent exception is stored in this property
+ * @field {Error} lastError
+ */</span>
+<span class="multiComment">/**
+ * Subscriber listener sigature constant.  The LIST type returns three
+ * parameters: the event type, the array of args passed to fire, and
+ * the optional custom object
+ * @constant {int} LIST
+ */</span>
+<span class="multiComment">/**
+ * Subscriber listener sigature constant.  The FLAT type returns two
+ * parameters: the first argument passed to fire and the optional 
+ * custom object
+ * @constant {int} FLAT
+ */</span>
+<span class="multiComment">/**
+ * Subscribes the caller to this event
+ * @method subscribe
+ * @param {Function} fn        The function to execute
+ * @param {Object}   obj       An object to be passed along when the event fires.
+ * @param {boolean|Object} overrideContext:optional If true, the obj passed in becomes the execution 
+ * context of the listener. If an object, that object becomes the execution context.
+ */</span>
+<span class="multiComment">/**
+ * Unsubscribes subscribers.
+ * @method unsubscribe
+ * @param {Function} fn  The subscribed function to remove, if not supplied
+ *                       all will be removed
+ * @param {Object}   obj:optional  The custom object passed to subscribe.  This is
+ *                        optional, but if supplied will be used to
+ *                        disambiguate multiple listeners that are the same
+ *                        (e.g., you subscribe many object using a function
+ *                        that lives on the prototype)
+ * @return {boolean} True if the subscriber was found and detached.
+ */</span>
+<span class="multiComment">/**
+ * Notifies the subscribers.  The callback functions will be executed
+ * from the context specified when the event was created, and with the 
+ * following parameters:
+ *   &lt;ul&gt;
+ *   &lt;li&gt;The type of event&lt;/li&gt;
+ *   &lt;li&gt;All of the arguments fire() was executed with as an array&lt;/li&gt;
+ *   &lt;li&gt;The custom object (if any) that was passed into the subscribe() 
+ *       method&lt;/li&gt;
+ *   &lt;/ul&gt;
+ * @method fire 
+ * @param {Object..} arguments:optional an arbitrary set of parameters to pass to 
+ *                            the handler.
+ * @return {boolean} if one of the subscribers returned false, true otherwise
+ */</span>
+<span class="multiComment">/**
+ * Removes all listeners
+ * @method unsubscribeAll
+ * @return {int} The number of listeners unsubscribed
+ */</span>
+<span class="multiComment">/**
+ * @method toString
+ * @return {String}
+ */</span>
+
+<span class="multiComment">/**
+ * The event utility provides functions to add and remove event listeners,
+ * event cleansing.  It also tries to automatically remove listeners it
+ * registers during the unload event.
+ *
+ * @class js.core.Event
+ * @static
+ */</span>
+<span class="multiComment">/**
+ * addListener/removeListener can throw errors in unexpected scenarios.
+ * These errors are suppressed, the method returns false, and this property is set.
+ * @field {Error} lastError
+ */</span>
+<span class="multiComment">/**
+ * True when the document is initially usable.
+ * @field {boolean} DOMReady
+ */</span>
+<span class="multiComment">/**
+ * Errors thrown by subscribers of custom events are caught
+ * and the error message is written to the debug console.  If
+ * this property is set to true, it will also re-throw the
+ * error. The default is false.
+ * @field {boolean} throwErrors
+ */</span>
+<span class="multiComment">/**
+ * Executes the supplied callback when the item with the supplied
+ * id is found.  This is meant to be used to execute behavior as
+ * soon as possible as the page loads.  If you use this after the
+ * initial page load it will poll for a fixed time for the element.
+ * The number of times it will poll and the frequency are
+ * configurable.  By default it will poll for 10 seconds.
+ *
+ * &lt;p&gt;The callback is executed with a single parameter:
+ * the custom object parameter, if provided.&lt;/p&gt;
+ *
+ * @method onAvailable
+ *
+ * @param {string|string[]}   id the id of the element, or an array of ids to look for.
+ * @param {function} fn what to execute when the element is found.
+ * @param {object}   obj:optional an optional object to be passed back as a parameter to fn.
+ * @param {boolean|object}  overrideContext:optional If set to true, fn will execute
+ *                   in the context of obj, if set to an object it
+ *                   will execute in the context of that object
+ * @param {boolean} checkContent:optional check child node readiness (onContentReady)
+ */</span>
+<span class="multiComment">/**
+ * Works the same way as onAvailable, but additionally checks the
+ * state of sibling elements to determine if the content of the
+ * available element is safe to modify.
+ *
+ * &lt;p&gt;The callback is executed with a single parameter:
+ * the custom object parameter, if provided.&lt;/p&gt;
+ *
+ * @method onContentReady
+ *
+ * @param {string}   id the id of the element to look for.
+ * @param {function} fn what to execute when the element is ready.
+ * @param {object}   obj:optional an optional object to be passed back as
+ *                   a parameter to fn.
+ * @param {boolean|object}  overrideContext:optional If set to true, fn will execute
+ *                   in the context of obj.  If an object, fn will
+ *                   exectute in the context of that object
+ */</span>
+<span class="multiComment">/**
+ * Executes the supplied callback when the DOM is first usable.  This
+ * will execute immediately if called after the DOMReady event has
+ * fired.   @todo the DOMContentReady event does not fire when the
+ * script is dynamically injected into the page.  This means the
+ * DOMReady custom event will never fire in FireFox or Opera when the
+ * library is injected.  It _will_ fire in Safari, and the IE 
+ * implementation would allow for us to fire it if the defered script
+ * is not available.  We want this to behave the same in all browsers.
+ * Is there a way to identify when the script has been injected 
+ * instead of included inline?  Is there a way to know whether the 
+ * window onload event has fired without having had a listener attached 
+ * to it when it did so?
+ *
+ * &lt;p&gt;The callback is a CustomEvent, so the signature is:&lt;/p&gt;
+ * &lt;p&gt;type &lt;string&gt;, args &lt;array&gt;, customobject &lt;object&gt;&lt;/p&gt;
+ * &lt;p&gt;For DOMReady events, there are no fire argments, so the
+ * signature is:&lt;/p&gt;
+ * &lt;p&gt;"DOMReady", [], obj&lt;/p&gt;
+ *
+ * @method onDOMReady
+ *
+ * @param {function} fn what to execute when the element is found.
+ * @param {object}   obj:optional an optional object to be passed back as
+ *                   a parameter to fn.
+ * @param {boolean|object}  overrideContext:optional If set to true, fn will execute
+ *                   in the context of obj, if set to an object it
+ *                   will execute in the context of that object
+ */</span>
+<span class="multiComment">/**
+ * Appends an event handler
+ *
+ * @method addListener
+ *
+ * @param {String|HTMLElement|Array&lt;HTMLElement&gt;} el An id, an element 
+ *  reference, or a collection of ids and/or elements to assign the 
+ *  listener to.
+ * @param {String}   sType     The type of event to append
+ * @param {Function} fn        The method the event invokes
+ * @param {Object}   obj:optional    An arbitrary object that will be 
+ *                             passed as a parameter to the handler
+ * @param {Boolean|object}  overrideContext:optional  If true, the obj passed in becomes
+ *                             the execution context of the listener. If an
+ *                             object, this object becomes the execution
+ *                             context.
+ * @return {Boolean} True if the action was successful or defered,
+ *                        false if one or more of the elements 
+ *                        could not have the listener attached,
+ *                        or if the operation throws an exception.
+ */</span>
+<span class="multiComment">/**
+ * an alias for addListener 
+ * @method on
+ */</span>
+<span class="multiComment">/**
+ * Returns the charcode for an event
+ * @method getCharCode
+ * @param {Event} ev the dom event
+ * @return {int} the event's charCode
+ */</span>
+<span class="multiComment">/**
+ * Returns all listeners attached to the given element via addListener.
+ * Optionally, you can specify a specific type of event to return.
+ * @method getListeners
+ * @param {HTMLElement|string} el the element or element id to inspect 
+ * @param {string} sType:optional type of listener to return. If
+ * left out, all listeners will be returned
+ * @return {Object} Contains the following fields:
+ * &nbsp;&nbsp;type:   (string)   the type of event
+ * &nbsp;&nbsp;fn:     (function) the callback supplied to addListener
+ * &nbsp;&nbsp;obj:    (object)   the custom object supplied to addListener
+ * &nbsp;&nbsp;adjust: (boolean|object)  whether or not to adjust the default context
+ * &nbsp;&nbsp;scope: (boolean)  the derived context based on the adjust parameter
+ * &nbsp;&nbsp;index:  (int)      its position in the Event util listener cache
+ */  </span>
+<span class="multiComment">/**
+ * Returns the event's pageX
+ * @method getPageX
+ * @param {Event} ev the dom event
+ * @return {int} the event's pageX
+ */</span>
+<span class="multiComment">/**
+ * Returns the event's pageY
+ * @method getPageY
+ * @param {Event} ev the dom event
+ * @return {int} the event's pageY
+ */</span>
+<span class="multiComment">/**
+ * Returns the pageX and pageY properties as an indexed array.
+ * @method getXY
+ * @param {Event} ev the dom event
+ * @return {Array} the pageX and pageY properties of the event
+ */</span>
+<span class="multiComment">/**
+ * Returns the event's related target 
+ * @method getRelatedTarget
+ * @param {Event} ev the dom event
+ * @return {HTMLElement} the event's relatedTarget
+ */</span>
+<span class="multiComment">/**
+ * Returns the event's target element.  Safari sometimes provides
+ * a text node, and this is automatically resolved to the text
+ * node's parent so that it behaves like other browsers.
+ * @method getTarget
+ * @param {Event} ev the event
+ * @return {HTMLElement} the event's target
+ */</span>
+<span class="multiComment">/**
+ * Returns the time of the event.  If the time is not included, the
+ * event is modified using the current time.
+ * @method getTime
+ * @param {Event} ev the dom event
+ * @return {Date} the time of the event
+ */</span>
+<span class="multiComment">/**
+ * Prevents the default behavior of the event
+ * @method preventDefault
+ * @param {Event} ev the dom event
+ */</span>
+<span class="multiComment">/**
+ * Removes all listeners attached to the given element via addListener.
+ * Optionally, the node's children can also be purged.
+ * Optionally, you can specify a specific type of event to remove.
+ * @method purgeElement
+ * @param {HTMLElement} el the element to purge
+ * @param {boolean} recurse:optional recursively purge this element's children
+ * as well.  Use with caution.
+ * @param {string} sType:optional type of listener to purge. If
+ * left out, all listeners will be removed
+ */</span>
+<span class="multiComment">/**
+ * Removes an event listener
+ *
+ * @method removeListener
+ *
+ * @param {String|HTMLElement|Array|HTMLElement[]} el An id, an element 
+ *  reference, or a collection of ids and/or elements to remove
+ *  the listener from.
+ * @param {String} sType the type of event to remove.
+ * @param {Function} fn:optional the method the event invokes.  If fn is
+ *  undefined, then all event handlers for the type of event are 
+ *  removed.
+ * @return {boolean} true if the unbind was successful, false 
+ *  otherwise.
+ */</span>
+<span class="multiComment">/**
+ * Convenience method for stopPropagation + preventDefault
+ * @method stopEvent
+ * @param {Event} ev the dom event 
+ */</span>
+<span class="multiComment">/**
+ * Stops event propagation
+ * @method stopPropagation
+ * @param {Event} ev the dom event
+ */</span>
+
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

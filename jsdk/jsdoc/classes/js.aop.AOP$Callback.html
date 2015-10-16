@@ -1,0 +1,81 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.aop.AOP$Callback</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-aop.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.aop</div>
+<div class="topic" title="js.aop.AOP$Callback">
+Struct: 
+AOP$Callback</div>
+
+<b>public static</b> AOP$Callback
+
+<hr/>
+
+<pre class="desc">
+<pre class="source">{"type":"object" 
+    ,"properties":{ 
+        "before":{ 
+            "type":"function" 
+            ,"description": "fires before the method be invoked" 
+            ,"required":false 
+            ,"arguments":{ 
+                "eType":{"type":"string","required":true} 
+                ,"mName":{"type":"string","required":true} 
+                ,"mArgs":{"type":"array","required":false}} } 
+         ,"after":{ 
+            "type":"function" 
+            ,"description": "fires after the method be invoked" 
+            ,"required":false 
+            ,"arguments":{ 
+                "eType":{"type":"string","required":true} 
+                ,"mName":{"type":"string","required":true} 
+                ,"mReturn":{"type":"object","required":false} 
+            } 
+         } 
+         ,"error":{ 
+            "type":"function" 
+            ,"description": "fires when the method be invoking throws a error" 
+            ,"required":false 
+            ,"arguments":{ 
+                "eType":{"type":"string","required":true} 
+                ,"mName":{"type":"string","required":true} 
+                ,"mError":{"type":"error","required":false} 
+            } 
+         } 
+     } 
+}
+</pre></pre>
+<hr/><br/>
+
+
+
+
+
+
+
+
+
+</BODY>
+</HTML>

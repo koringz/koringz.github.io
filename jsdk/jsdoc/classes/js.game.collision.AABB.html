@@ -1,0 +1,118 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.game.collision.AABB</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-game-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.game.collision</div>
+<div class="topic" title="js.game.collision.AABB">
+Class: 
+AABB</div>
+
+<b>public</b> AABB
+
+<hr/>
+
+<pre class="desc">
+AABB is Axis-Aligned Bounding Box, used by collision detection.</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="AABB" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public AABB">+ AABB</span></span>(<span title="required"><b>sprite</b></span>:<a href="js.game.Sprite.html" title="js.game.Sprite">Sprite</a>, <span title="required"><b>collisionRect</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>)</span>
+<div id="AABB_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>sprite</b></span>  &lt;<a href="js.game.Sprite.html" title="js.game.Sprite">Sprite</a>&gt; </dd><br/>
+<dd><span title="required"><b>collisionRect</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="getBoundingBox" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getBoundingBox">+ getBoundingBox</span></span>():<a href="js.math.Rect.html" title="js.math.Rect">Rect</a></span>
+<div id="getBoundingBox_detail" style="display: none;">
+<pre class="desc">Returns the bounding box rectangle of the sprite.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isDestoryed" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isDestoryed">+ isDestoryed</span></span>():boolean</span>
+<div id="isDestoryed_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="collidesWith" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public collidesWith">+ collidesWith</span></span>(<span title="required"><b>aabb</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>|<a href="js.game.collision.AABB.html" title="js.game.collision.AABB">AABB</a>):Boolean</span>
+<div id="collidesWith_detail" style="display: none;">
+<pre class="desc">Collision detection with an AABB or a Rect.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>aabb</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>|<a href="js.game.collision.AABB.html" title="js.game.collision.AABB">AABB</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="collidesWithTiles" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public collidesWithTiles">+ collidesWithTiles</span></span>(<span title="required"><b>tiledLayer</b></span>:<a href="js.game.TiledLayer.html" title="js.game.TiledLayer">TiledLayer</a>, <span title="required"><b>blockCells</b></span>:Array):Boolean</span>
+<div id="collidesWithTiles_detail" style="display: none;">
+<pre class="desc">Collision detection with a tiled layer.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>tiledLayer</b></span>  &lt;<a href="js.game.TiledLayer.html" title="js.game.TiledLayer">TiledLayer</a>&gt; </dd><br/>
+<dd><span title="required"><b>blockCells</b></span>  &lt;Array&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="avoidTo" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public avoidTo">+ avoidTo</span></span>(<span title="required"><b>aabb</b></span>:<a href="js.game.collision.AABB.html" title="js.game.collision.AABB">AABB</a>):Boolean</span>
+<div id="avoidTo_detail" style="display: none;">
+<pre class="desc">Avoid to an AABB.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>aabb</b></span>  &lt;<a href="js.game.collision.AABB.html" title="js.game.collision.AABB">AABB</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="avoidToTiles" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public avoidToTiles">+ avoidToTiles</span></span>(<span title="required"><b>tiledLayer</b></span>:<a href="js.game.TiledLayer.html" title="js.game.TiledLayer">TiledLayer</a>, <span title="required"><b>blockCells</b></span>:Array):Boolean</span>
+<div id="avoidToTiles_detail" style="display: none;">
+<pre class="desc">Avoid to a tiled layer.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>tiledLayer</b></span>  &lt;<a href="js.game.TiledLayer.html" title="js.game.TiledLayer">TiledLayer</a>&gt; </dd><br/>
+<dd><span title="required"><b>blockCells</b></span>  &lt;Array&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="limitIn" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public limitIn">+ limitIn</span></span>(<span title="required"><b>rect</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>):Boolean</span>
+<div id="limitIn_detail" style="display: none;">
+<pre class="desc">Movement be limited in a rectangle.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isInBox" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public isInBox">+ isInBox</span></span>(<span title="required"><b>rect</b></span>:<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>|<a href="js.game.collision.AABB.html" title="js.game.collision.AABB">AABB</a>):Boolean</span>
+<div id="isInBox_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>rect</b></span>  &lt;<a href="js.math.Rect.html" title="js.math.Rect">Rect</a>|<a href="js.game.collision.AABB.html" title="js.game.collision.AABB">AABB</a>&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

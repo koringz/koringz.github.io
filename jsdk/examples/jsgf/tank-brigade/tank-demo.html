@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * @author fengchun
+-->
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Tank Demo</title>
+
+<style>
+	BODY {
+		FONT: 16px arial, helvetica, clean, sans-serif
+	}	
+	A:link {color: yellow; text-decoration: underline;} 
+	A:visited {color: yellow; text-decoration: underline;} 
+	A:active {color: yellow; text-decoration: underline;} 
+	A:hover {color: yellow; text-decoration: underline;} 
+	li { 
+		line-height: 28px;
+	}
+</style>
+<script language="JavaScript" type="text/javascript" src="../../../source/core/js-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../../source/core/js-thread.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../../source/core/js-input.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../../source/core/js-i18n.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../../source/core/js-media.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../../source/core/js-mathphys.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../../source/js2d/js-2d-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../../source/js2d/js-2d-anim.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../../source/jsgf/js-game-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="tank-demo.js"></script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29719982-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body onload = "TankDemo.init();">
+<div id="setting" style="position:absolute;left:150px;top:5px;width:300px;">
+<input id="fps_limit" type="checkbox" checked></input>MaxFPS = <input id="fps_max" type="text" value=30 size=5></input>
+</div>
+	
+<div id="readme" style="position:absolute;left:150px;top:50px;width:600px;display:;background:black;">
+
+<div style="color:#cccccc;">
+<input id="v1" name="lang" type="radio" value="en" onclick="TankDemo.changeLang();this.blur();"/>English
+<input id="v0" name="lang" type="radio" value="zh" onclick="TankDemo.changeLang();this.blur();"/>中文
+</div>
+
+<div id="read_en" style="display:none;color:white;">
+<ul>
+<li>
+This is a Game Demo in <a href="http://jsdk2.sourceforge.net/website/index.html">JSDK</a>. It's written with JavaScript, based on JS2D & JSGF(all in JSDK, support for HTML4). 
+</li>
+<li>
+When you open the page locally, may not be able to hear sound in the game. Please visit the Flash <a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html">Site</a>
+and add the folder of the page as trust.
+</li>
+<li>
+If you have any suggestions or find any bugs, please <a href="mailto:f15_nsm@hotmail.com?subject=JSDK Problem Report">send email</a> to me or report on my <a href="http://blog.sina.com.cn/haidao415">blog</a>.	
+</li>
+<li>
+JSDK is available under the LGPLv3 license. <br/>
+Below is a list of third party codes and resources using by JSDK:
+<ul style="COLOR:yellow;list-style-type:lower-alpha;">
+<li>YUI is under the BSD license.</li>
+<li>All resources of examples are from the web, only for learning.<br/>
+Like "spritelib", is free resource, undering the GPL license. </li>
+</ul>	
+</li>
+</ul>
+
+<div style="text-align: right">
+	<button onclick='TankDemo.agree();'>i agree</button>
+</div>
+</div>
+
+<div id="read_zh" style="display:none;color:white;">
+<ul>
+<li>
+这是<a href="http://jsdk2.sourceforge.net/website/index.html">JSDK</a>中附带的一款游戏DEMO。
+使用JavaScript编写, 基于JS2D和JSGF(都属于JSDK，支持HTML4)。
+</li>
+<li>
+当你在本地打开此页面时, 可能无法听到游戏中的声音。请访问Flash<a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html">站点</a>
+, 添加此页面所在的文件夹为信任目录.
+</li>
+<li>
+如果您有任何的建议或发现任何BUG，请<a href="mailto:f15_nsm@hotmail.com?subject=JSDK Problem Report">发邮件</a>或者反馈至我的<a href="http://blog.sina.com.cn/haidao415">blog</a>。	
+</li>
+<li>
+JSDK声明在LGPLv3协议保护下。<br/>
+以下是包含在JSDK中的第三方代码或资源的版权协议声明：
+<ul style="COLOR:yellow;list-style-type:lower-alpha;">
+<li>YUI类库受BSD协议保护。</li>
+<li>所有示例的资源都来自于网络，仅供学习。<br/>
+如spritelib图像库，是免费的，受GPL协议保护。</li>
+</ul>	
+</li>
+</ul>
+
+<div style="text-align: right">
+	<button onclick='TankDemo.agree();'>我同意</button>
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

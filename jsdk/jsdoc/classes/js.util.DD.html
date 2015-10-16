@@ -1,0 +1,105 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.util.DD</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-util-dragdrop.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.util</div>
+<div class="topic" title="js.util.DD">
+Class: 
+DD</div>
+<div><a href="js.util.DragDrop.html">js.util.DragDrop</a></div>
+<div>&nbsp;&nbsp;<img src="../inc/inherit.gif">js.util.DD</div><br/>
+
+<b>public</b> DD <b>extends</b> <a href="js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a>
+
+<hr/>
+
+<pre class="desc">
+A DragDrop implementation where the linked element follows the
+mouse cursor during a drag.</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="DD" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public DD">+ DD</span></span>(<span title="required"><b>id</b></span>:String, <i title="optional"><b>sGroup</b></i>:String, <i title="optional"><b>config</b></i>:object)</span>
+<div id="DD_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; the id of the linked element</dd><br/>
+<dd><i title="optional"><b>sGroup</b></i>  &lt;String&gt; the group of related DragDrop items</dd><br/>
+<dd><i title="optional"><b>config</b></i>  &lt;object&gt; an object containing configurable attributes 
+               Valid properties for DD: scroll</dd><br/>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="scroll" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public scroll">+ scroll</span></span>: boolean</span>
+<div id="scroll_detail" style="display: none;">
+<pre class="desc">When set to true, the utility automatically tries to scroll the browser
+window when a drag and drop element is dragged near the viewport boundary.
+Defaults to true.</pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="autoOffset" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public autoOffset">+ autoOffset</span></span>(<span title="required"><b>iPageX</b></span>:int, <span title="required"><b>iPageY</b></span>:int):void</span>
+<div id="autoOffset_detail" style="display: none;">
+<pre class="desc">Sets the pointer offset to the distance between the linked element's top
+left corner and the location the element was clicked</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>iPageX</b></span>  &lt;int&gt; the X coordinate of the click</dd><br/>
+<dd><span title="required"><b>iPageY</b></span>  &lt;int&gt; the Y coordinate of the click</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setDelta" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setDelta">+ setDelta</span></span>(<span title="required"><b>iDeltaX</b></span>:int, <span title="required"><b>iDeltaY</b></span>:int):void</span>
+<div id="setDelta_detail" style="display: none;">
+<pre class="desc">Sets the pointer offset.  You can call this directly to force the
+offset to be in a particular location (e.g., pass in 0,0 to set it
+to the center of the object, as done in YAHOO.widget.Slider)</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>iDeltaX</b></span>  &lt;int&gt; the distance from the left</dd><br/>
+<dd><span title="required"><b>iDeltaY</b></span>  &lt;int&gt; the distance from the top</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setDragElPos" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setDragElPos">+ setDragElPos</span></span>(<span title="required"><b>iPageX</b></span>:int, <span title="required"><b>iPageY</b></span>:int):void</span>
+<div id="setDragElPos_detail" style="display: none;">
+<pre class="desc">Sets the drag element to the location of the mousedown or click event,
+maintaining the cursor location relative to the location on the element
+that was clicked.  Override this if you want to place the element in a
+location other than where the cursor is.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>iPageX</b></span>  &lt;int&gt; the X coordinate of the mousedown or drag event</dd><br/>
+<dd><span title="required"><b>iPageY</b></span>  &lt;int&gt; the Y coordinate of the mousedown or drag event</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="alignElWithMouse" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public alignElWithMouse">+ alignElWithMouse</span></span>(<span title="required"><b>el</b></span>:HTMLElement, <span title="required"><b>iPageX</b></span>:int, <span title="required"><b>iPageY</b></span>:int):void</span>
+<div id="alignElWithMouse_detail" style="display: none;">
+<pre class="desc">Sets the element to the location of the mousedown or click event,
+maintaining the cursor location relative to the location on the element
+that was clicked.  Override this if you want to place the element in a
+location other than where the cursor is.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>el</b></span>  &lt;HTMLElement&gt; the element to move</dd><br/>
+<dd><span title="required"><b>iPageX</b></span>  &lt;int&gt; the X coordinate of the mousedown or drag event</dd><br/>
+<dd><span title="required"><b>iPageY</b></span>  &lt;int&gt; the Y coordinate of the mousedown or drag event</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

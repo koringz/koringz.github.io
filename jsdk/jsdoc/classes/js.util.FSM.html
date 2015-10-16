@@ -1,0 +1,75 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.util.FSM</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-util-fsm.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.util</div>
+<div class="topic" title="js.util.FSM">
+Class: 
+FSM</div>
+
+<b>public</b> FSM
+
+<hr/>
+
+<pre class="desc">
+Event-driven Finite-State Machine</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="FSM" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public FSM">+ FSM</span></span>(<span title="required"><b>initState</b></span>:String, <span title="required"><b>table</b></span>:<a href="js.util.FSM$Transtable.html" title="js.util.FSM$Transtable">FSM$Transtable</a>)</span>
+<div id="FSM_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>initState</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>table</b></span>  &lt;<a href="js.util.FSM$Transtable.html" title="js.util.FSM$Transtable">FSM$Transtable</a>&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="reset" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public reset">+ reset</span></span>():void</span>
+<div id="reset_detail" style="display: none;">
+<pre class="desc">Reset the current state to the init state.</pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="getState" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getState">+ getState</span></span>():String</span>
+<div id="getState_detail" style="display: none;">
+<pre class="desc">Returns the current state.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="fire" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public fire">+ fire</span></span>(<span title="required"><b>event</b></span>:String, <i title="optional"><b>scope</b></i>:Object):void</span>
+<div id="fire_detail" style="display: none;">
+<pre class="desc">Fire when the new event happened.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>event</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>scope</b></i>  &lt;Object&gt; </dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;Error&gt; not found the state's setting when transit</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

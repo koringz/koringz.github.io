@@ -1,0 +1,31 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">core\js-i18n-min.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2010-8-15
+ * 
+ * @requires /core/js-core.js
+ */</span>
+js.lang.System.namespace("js.i18n");js.i18n.Language={CHINESE:"zh",ENGLISH:"en",FRENCH:"fr",GERMAN:"de",ITALIAN:"it"};js.i18n.Resource=<b>function </b>(a,b){<b>this</b>._txt=a;<b>this</b>._lang=b||js.core.Env.language;};js.i18n.Resource.prototype={setLang:<b>function </b>(a){<b>this</b>._lang=a;},getLang:<b>function </b>(){<b>return</b> <b>this</b>._lang;},get:<b>function </b>(c,d){<b>var </b>a=<b>this</b>._txt[c];<b>if </b>(!a){<b>return</b>"";}<b>if </b>(js.lang.System.isString(a)){<b>return</b> a;}<b>var </b>b=a[d||<b>this</b>._lang];<b>return</b> b?b:"";}};
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

@@ -1,0 +1,390 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.anim.Formulas</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-2d-anim.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.anim</div>
+<div class="topic" title="js.anim.Formulas">
+Class: 
+Formulas</div>
+
+<b>public</b> Formulas
+
+<hr/>
+
+<pre class="desc">
+Math formulas.</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="linear" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public linear">+ linear</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="linear_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="quad_easein" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public quad_easein">+ quad_easein</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="quad_easein_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="quad_easeout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public quad_easeout">+ quad_easeout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="quad_easeout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="quad_easeinout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public quad_easeinout">+ quad_easeinout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="quad_easeinout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="cubic_easein" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public cubic_easein">+ cubic_easein</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="cubic_easein_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="cubic_easeout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public cubic_easeout">+ cubic_easeout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="cubic_easeout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="cubic_easeinout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public cubic_easeinout">+ cubic_easeinout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="cubic_easeinout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="quart_easein" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public quart_easein">+ quart_easein</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="quart_easein_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="quart_easeout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public quart_easeout">+ quart_easeout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="quart_easeout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="quart_easeinout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public quart_easeinout">+ quart_easeinout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="quart_easeinout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="quint_easein" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public quint_easein">+ quint_easein</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="quint_easein_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="quint_easeout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public quint_easeout">+ quint_easeout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="quint_easeout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="quint_easeinout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public quint_easeinout">+ quint_easeinout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="quint_easeinout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="sine_easein" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public sine_easein">+ sine_easein</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="sine_easein_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="sine_easeout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public sine_easeout">+ sine_easeout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="sine_easeout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="sine_easeinout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public sine_easeinout">+ sine_easeinout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="sine_easeinout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="expo_easein" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public expo_easein">+ expo_easein</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="expo_easein_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="expo_easeout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public expo_easeout">+ expo_easeout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="expo_easeout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="expo_easeinout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public expo_easeinout">+ expo_easeinout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="expo_easeinout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="circ_easein" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public circ_easein">+ circ_easein</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="circ_easein_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="circ_easeout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public circ_easeout">+ circ_easeout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="circ_easeout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="circ_easeinout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public circ_easeinout">+ circ_easeinout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="circ_easeinout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="elastic_easein" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public elastic_easein">+ elastic_easein</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="elastic_easein_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="elastic_easeout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public elastic_easeout">+ elastic_easeout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="elastic_easeout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="elastic_easeinout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public elastic_easeinout">+ elastic_easeinout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="elastic_easeinout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="back_easein" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public back_easein">+ back_easein</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="back_easein_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="back_easeout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public back_easeout">+ back_easeout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="back_easeout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="back_easeinout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public back_easeinout">+ back_easeinout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="back_easeinout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="bounce_easein" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public bounce_easein">+ bounce_easein</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="bounce_easein_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="bounce_easeout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public bounce_easeout">+ bounce_easeout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="bounce_easeout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="bounce_easeinout" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public bounce_easeinout">+ bounce_easeinout</span></span>(<span title="required"><b>t</b></span>:Int, <span title="required"><b>b</b></span>:Number, <span title="required"><b>c</b></span>:Number, <span title="required"><b>d</b></span>:Number):Number</span>
+<div id="bounce_easeinout_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>t</b></span>  &lt;Int&gt; times</dd><br/>
+<dd><span title="required"><b>b</b></span>  &lt;Number&gt; begin</dd><br/>
+<dd><span title="required"><b>c</b></span>  &lt;Number&gt; increment</dd><br/>
+<dd><span title="required"><b>d</b></span>  &lt;Number&gt; step</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

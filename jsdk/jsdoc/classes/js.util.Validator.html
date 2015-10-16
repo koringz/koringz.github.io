@@ -1,0 +1,254 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.util.Validator</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-util-validator.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.util</div>
+<div class="topic" title="js.util.Validator">
+Class: 
+Validator</div>
+
+<b>public final static</b> Validator
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="isNotEmpty" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isNotEmpty">+ <b>isNotEmpty</b></span></span>(<span title="required"><b>str</b></span>:String):Boolean</span>
+<div id="isNotEmpty_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isEmpty" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isEmpty">+ <b>isEmpty</b></span></span>(<span title="required"><b>str</b></span>:String):Boolean</span>
+<div id="isEmpty_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isNull" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isNull">+ <b>isNull</b></span></span>(<span title="required"><b>str</b></span>:String):Boolean</span>
+<div id="isNull_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="validateWith" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static validateWith">+ <b>validateWith</b></span></span>(<span title="required"><b>str</b></span>:String, <span title="required"><b>reg</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):void</span>
+<div id="validateWith_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>reg</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="isDate" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isDate">+ <b>isDate</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isDate_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; format：'yyyy-mm-dd' or 'yyyy/mm/dd'</dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isDateTime" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isDateTime">+ <b>isDateTime</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isDateTime_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; format：'yyyy-mm-dd hh:mm:ss' or 'yyyy/mm/dd hh:mm:ss'</dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isTime" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isTime">+ <b>isTime</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isTime_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; format：'hh:mm:ss'</dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isIP" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isIP">+ <b>isIP</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isIP_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; format：'255.255.255.255'</dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isEmail" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isEmail">+ <b>isEmail</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isEmail_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; format：'xxx@yyy.zzz'</dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isEmailDomain" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isEmailDomain">+ <b>isEmailDomain</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isEmailDomain_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; format：'@yyy.zzz'</dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isFullNumber" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isFullNumber">+ <b>isFullNumber</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isFullNumber_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; format：'123456'</dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isNumber" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isNumber">+ <b>isNumber</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isNumber_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; format：'-21.33','+6,700.','0.0'</dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isFloat" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isFloat">+ <b>isFloat</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isFloat_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isInt" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isInt">+ <b>isInt</b></span></span>(<span title="required"><b>str</b></span>:String, <span title="required"><b>emptyOK</b></span>:Boolean):Boolean</span>
+<div id="isInt_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>emptyOK</b></span>  &lt;Boolean&gt; return value when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isNegative" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isNegative">+ <b>isNegative</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isNegative_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isPositive" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isPositive">+ <b>isPositive</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isPositive_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isNumberFormat" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isNumberFormat">+ <b>isNumberFormat</b></span></span>(<span title="required"><b>str</b></span>:String, <span title="required"><b>format</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isNumberFormat_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>format</b></span>  &lt;String&gt; 格式："{整数位长度}.{小数位长度}"。例如：".2","5.3"</dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isTextLength" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isTextLength">+ <b>isTextLength</b></span></span>(<span title="required"><b>str</b></span>:String, <span title="required"><b>format</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isTextLength_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>format</b></span>  &lt;String&gt; 最小长度,最大长度的闭区间表达式。例如："[2,5]","[0,10]"</dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isSBC" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isSBC">+ <b>isSBC</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isSBC_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isDBC" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isDBC">+ <b>isDBC</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isDBC_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isDBCWithoutChinese" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isDBCWithoutChinese">+ <b>isDBCWithoutChinese</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isDBCWithoutChinese_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isEnglish" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isEnglish">+ <b>isEnglish</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isEnglish_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="isEnglishOrNumber" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isEnglishOrNumber">+ <b>isEnglishOrNumber</b></span></span>(<span title="required"><b>str</b></span>:String, <i title="optional"><b>emptyOK</b></i>:Boolean):Boolean</span>
+<div id="isEnglishOrNumber_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>str</b></span>  &lt;String&gt; </dd><br/>
+<dd><i title="optional"><b>emptyOK</b></i>  &lt;Boolean&gt; True is return true when str is empty. default is false.</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

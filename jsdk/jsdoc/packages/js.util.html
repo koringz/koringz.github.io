@@ -1,0 +1,77 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.util</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div class="topic" title="js.util">
+Package: js.util</div>
+
+<table>
+<thead><tr><td colspan="2">Classes Summary</td></tr></thead>
+<tr><td width="20%"><a href="../classes/js.util.Ajax.html" title="js.util.Ajax">Ajax</a></td>
+<td></td></tr>
+<tr><td width="20%"><a href="../classes/js.util.Cookie.html" title="js.util.Cookie">Cookie</a></td>
+<td></td></tr>
+<tr><td width="20%"><a href="../classes/js.util.DragDrop.html" title="js.util.DragDrop">DragDrop</a></td>
+<td>Defines the interface and base operation of items that that can be
+dragged or can be drop targets.  It was designed to be extended, overriding
+the event handlers for startDrag, onDrag, onDragOver, onDragOut.
+This class should not be instantiated until the onload event to ensure that
+the associated elements are available.
+The following would define a DragDrop obj that would interact with any
+other DragDrop obj in the "group1" group:
+<pre>
+ dd = new js.util.DragDrop("div1", "group1");
+</pre>
+Since none of the event handlers have been implemented, nothing would
+actually happen if you were to run the code above.  Normally you would
+override this class or one of the default implementations, but you can
+also override the methods you want on an instance of the class...
+<pre>
+ dd.onDragDrop = function(e, id) {
+ &nbsp;&nbsp;alert("dd was dropped on " + id);
+ }
+</pre></td></tr>
+<tr><td width="20%"><a href="../classes/js.util.DD.html" title="js.util.DD">DD</a></td>
+<td>A DragDrop implementation where the linked element follows the
+mouse cursor during a drag.</td></tr>
+<tr><td width="20%"><a href="../classes/js.util.DDProxy.html" title="js.util.DDProxy">DDProxy</a></td>
+<td>A DragDrop implementation that inserts an empty, bordered div into
+the document that follows the cursor during drag operations.  At the time of
+the click, the frame div is resized to the dimensions of the linked html
+element, and moved to the exact location of the linked element.
+References to the "frame" element refer to the single proxy element that
+was created to be dragged in place of all DDProxy elements on the
+page.</td></tr>
+<tr><td width="20%"><a href="../classes/js.util.DDTarget.html" title="js.util.DDTarget">DDTarget</a></td>
+<td>A DragDrop implementation that does not move, but can be a drop
+target.  You would get the same result by simply omitting implementation
+for the event callbacks, but this way we reduce the processing cost of the
+event listener and the callbacks.</td></tr>
+<tr><td width="20%"><a href="../classes/js.util.DragDropMgr.html" title="js.util.DragDropMgr">DragDropMgr</a></td>
+<td>DragDropMgr is a singleton that tracks the element interaction for
+all DragDrop items in the window.  Generally, you will not call
+this class directly, but it does have helper methods that could
+be useful in your DragDrop implementations.</td></tr>
+<tr><td width="20%"><a href="../classes/js.util.FSM.html" title="js.util.FSM">FSM</a></td>
+<td>Event-driven Finite-State Machine</td></tr>
+<tr><td width="20%"><a href="../classes/js.util.Logger.html" title="js.util.Logger">Logger</a></td>
+<td></td></tr>
+<tr><td width="20%"><a href="../classes/js.util.Validator.html" title="js.util.Validator">Validator</a></td>
+<td></td></tr>
+<tr><td width="20%"><a href="../classes/js.util.HTMLCheckor.html" title="js.util.HTMLCheckor">HTMLCheckor</a></td>
+<td></td></tr>
+
+</table>
+<br/>
+
+</BODY>
+</HTML>

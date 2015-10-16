@@ -1,0 +1,362 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.ui.Widget</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-ui-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.ui</div>
+<div class="topic" title="js.ui.Widget">
+Class: 
+Widget</div>
+
+<b>public abstract</b> Widget <b>mix</b> <a href="js.core.EventProvider.html" title="js.core.EventProvider">EventProvider</a>|<a href="js.input.KeyBufferProvider.html" title="js.input.KeyBufferProvider">KeyBufferProvider</a>
+
+<hr/>
+
+<pre class="desc">
+The base class of all widgets.</pre>
+<hr/><br/>
+
+<table><thead><tr><td>Constructor</td></tr></thead><tr><td>
+<span class="member"><span id="Widget" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public Widget">+ Widget</span></span>(<span title="required"><b>config</b></span>:<a href="js.ui.Widget$Config.html" title="js.ui.Widget$Config">Widget$Config</a>)</span>
+<div id="Widget_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>config</b></span>  &lt;<a href="js.ui.Widget$Config.html" title="js.ui.Widget$Config">Widget$Config</a>&gt; </dd><br/>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Fields</td></tr></thead><tr><td>
+<span class="member"><span id="DOM_ATTRIBUTES" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public DOM_ATTRIBUTES">+ DOM_ATTRIBUTES</span></span>: Object</span>
+<div id="DOM_ATTRIBUTES_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="STYLE_ATTRIBUTES" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public STYLE_ATTRIBUTES">+ STYLE_ATTRIBUTES</span></span>: Object</span>
+<div id="STYLE_ATTRIBUTES_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="render" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public abstract render">+ <i>render</i></span></span>():void</span>
+<div id="render_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="load" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public abstract load">+ <i>load</i></span></span>(<span title="required"><b>url</b></span>:String):void</span>
+<div id="load_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>url</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="set" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public set">+ set</span></span>(<span title="required"><b>k</b></span>:String, <span title="required"><b>v</b></span>:Object):void</span>
+<div id="set_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>v</b></span>  &lt;Object&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="get" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public get">+ get</span></span>(<span title="required"><b>k</b></span>:String):Object</span>
+<div id="get_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>k</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Object&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getId" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getId">+ getId</span></span>():String</span>
+<div id="getId_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getWidgetClass" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getWidgetClass">+ getWidgetClass</span></span>():String</span>
+<div id="getWidgetClass_detail" style="display: none;">
+<pre class="desc">Returns the widget class name.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="attachEvent" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public attachEvent">+ attachEvent</span></span>(<span title="required"><b>eventName</b></span>:String, <span title="required"><b>fn</b></span>:Function, <i title="optional"><b>agrs</b></i>:Object, <i title="optional"><b>context</b></i>:Object):void</span>
+<div id="attachEvent_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>eventName</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>agrs</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>context</b></i>  &lt;Object&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="detachEvent" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public detachEvent">+ detachEvent</span></span>(<span title="required"><b>eventName</b></span>:String, <span title="required"><b>fn</b></span>:Function, <i title="optional"><b>agrs</b></i>:Object, <i title="optional"><b>context</b></i>:Object):void</span>
+<div id="detachEvent_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>eventName</b></span>  &lt;String&gt; </dd><br/>
+<dd><span title="required"><b>fn</b></span>  &lt;Function&gt; </dd><br/>
+<dd><i title="optional"><b>agrs</b></i>  &lt;Object&gt; </dd><br/>
+<dd><i title="optional"><b>context</b></i>  &lt;Object&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="destory" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public destory">+ destory</span></span>():void</span>
+<div id="destory_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="getEl" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getEl">+ getEl</span></span>():HTMLElement</span>
+<div id="getEl_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getParentEl" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getParentEl">+ getParentEl</span></span>():HTMLElement</span>
+<div id="getParentEl_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;HTMLElement&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getSize" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getSize">+ getSize</span></span>():Array</span>
+<div id="getSize_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setSize" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setSize">+ setSize</span></span>(<span title="required"><b>width</b></span>:Number, <span title="required"><b>height</b></span>:Number):void</span>
+<div id="setSize_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>width</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>height</b></span>  &lt;Number&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="show" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public show">+ show</span></span>():void</span>
+<div id="show_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="hide" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public hide">+ hide</span></span>():void</span>
+<div id="hide_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="enable" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public enable">+ enable</span></span>():void</span>
+<div id="enable_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="disable" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public disable">+ disable</span></span>():void</span>
+<div id="disable_detail" style="display: none;">
+<pre class="desc"></pre>
+</div></td></tr><tr><td>
+<span class="member"><span id="setXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setXY">+ setXY</span></span>(<span title="required"><b>x</b></span>:Number, <span title="required"><b>y</b></span>:Number, <i title="optional"><b>isSilent</b></i>:Boolean):void</span>
+<div id="setXY_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>x</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>y</b></span>  &lt;Number&gt; </dd><br/>
+<dd><i title="optional"><b>isSilent</b></i>  &lt;Boolean&gt; not fires events</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setX" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setX">+ setX</span></span>(<span title="required"><b>x</b></span>:Number, <i title="optional"><b>isSilent</b></i>:Boolean):void</span>
+<div id="setX_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>x</b></span>  &lt;Number&gt; </dd><br/>
+<dd><i title="optional"><b>isSilent</b></i>  &lt;Boolean&gt; not fires events</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setY">+ setY</span></span>(<span title="required"><b>y</b></span>:Number, <i title="optional"><b>isSilent</b></i>:Boolean):void</span>
+<div id="setY_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>y</b></span>  &lt;Number&gt; </dd><br/>
+<dd><i title="optional"><b>isSilent</b></i>  &lt;Boolean&gt; not fires events</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getXY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getXY">+ getXY</span></span>():<a href="js.math.Point.html" title="js.math.Point">Point</a></span>
+<div id="getXY_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getX" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getX">+ getX</span></span>():Number</span>
+<div id="getX_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getY" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getY">+ getY</span></span>():Number</span>
+<div id="getY_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getSize" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getSize">+ getSize</span></span>():Array</span>
+<div id="getSize_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Array&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="setSize" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setSize">+ setSize</span></span>(<span title="required"><b>w</b></span>:Number, <span title="required"><b>h</b></span>:Number, <i title="optional"><b>isSilent</b></i>:Boolean):void</span>
+<div id="setSize_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>w</b></span>  &lt;Number&gt; </dd><br/>
+<dd><span title="required"><b>h</b></span>  &lt;Number&gt; </dd><br/>
+<dd><i title="optional"><b>isSilent</b></i>  &lt;Boolean&gt; not fires events</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setWidth" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setWidth">+ setWidth</span></span>(<span title="required"><b>w</b></span>:Number, <i title="optional"><b>isSilent</b></i>:Boolean):void</span>
+<div id="setWidth_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>w</b></span>  &lt;Number&gt; </dd><br/>
+<dd><i title="optional"><b>isSilent</b></i>  &lt;Boolean&gt; not fires events</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setHeight" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setHeight">+ setHeight</span></span>(<span title="required"><b>h</b></span>:Number, <i title="optional"><b>isSilent</b></i>:Boolean):void</span>
+<div id="setHeight_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>h</b></span>  &lt;Number&gt; </dd><br/>
+<dd><i title="optional"><b>isSilent</b></i>  &lt;Boolean&gt; not fires events</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="alignTo" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public alignTo">+ alignTo</span></span>(<span title="required"><b>destEl</b></span>:String|HTMLElement, <span title="required"><b>pos</b></span>:String, <i title="optional"><b>offsets</b></i>:<a href="js.math.Point.html" title="js.math.Point">Point</a>):void</span>
+<div id="alignTo_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>destEl</b></span>  &lt;String|HTMLElement&gt; </dd><br/>
+<dd><span title="required"><b>pos</b></span>  &lt;String&gt; values: lt|ct|rt|lc|cc|rc|lb|cb|rb</dd><br/>
+<dd><i title="optional"><b>offsets</b></i>  &lt;<a href="js.math.Point.html" title="js.math.Point">Point</a>&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="setValue" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public setValue">+ setValue</span></span>(<span title="required"><b>v</b></span>:String):void</span>
+<div id="setValue_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>v</b></span>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getValue" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getValue">+ getValue</span></span>():String</span>
+<div id="getValue_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="addSameChildWidget" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public addSameChildWidget">+ addSameChildWidget</span></span>(<span title="required"><b>wgts</b></span>:<a href="js.ui.Widget.html" title="js.ui.Widget">Widget</a>|<a href="js.ui.Widget.html" title="js.ui.Widget">Widget</a>[], <i title="optional"><b>widgetClass</b></i>:String):void</span>
+<div id="addSameChildWidget_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>wgts</b></span>  &lt;<a href="js.ui.Widget.html" title="js.ui.Widget">Widget</a>|<a href="js.ui.Widget.html" title="js.ui.Widget">Widget</a>[]&gt; </dd><br/>
+<dd><i title="optional"><b>widgetClass</b></i>  &lt;String&gt; </dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="getChildWidget" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public getChildWidget">+ getChildWidget</span></span>(<span title="required"><b>id</b></span>:String):<a href="js.ui.Widget.html" title="js.ui.Widget">Widget</a>|Object&lt;String,js.ui.Widget&gt;</span>
+<div id="getChildWidget_detail" style="display: none;">
+<pre class="desc"></pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>id</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;<a href="js.ui.Widget.html" title="js.ui.Widget">Widget</a>|Object&lt;String,js.ui.Widget&gt;&gt; </dd>
+</div></td></tr></table><br/>
+
+<table><thead><tr><td>Events</td></tr></thead><tr><td>
+<span id="@destorying" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="destorying">destorying</span>
+<div id="@destorying_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@destoryed" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="destoryed">destoryed</span>
+<div id="@destoryed_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@rendering" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="rendering">rendering</span>
+<div id="@rendering_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@rendered" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="rendered">rendered</span>
+<div id="@rendered_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@loading" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="loading">loading</span>
+<div id="@loading_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@loaded" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="loaded">loaded</span>
+<div id="@loaded_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@showing" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="showing">showing</span>
+<div id="@showing_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@showed" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="showed">showed</span>
+<div id="@showed_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@hiding" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="hiding">hiding</span>
+<div id="@hiding_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@hided" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="hided">hided</span>
+<div id="@hided_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@enabling" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="enabling">enabling</span>
+<div id="@enabling_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@enabled" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="enabled">enabled</span>
+<div id="@enabled_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@disabling" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="disabling">disabling</span>
+<div id="@disabling_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@disabled" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="disabled">disabled</span>
+<div id="@disabled_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@xMoving" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="xMoving">xMoving</span>
+<div id="@xMoving_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@xMoved" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="xMoved">xMoved</span>
+<div id="@xMoved_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@yMoving" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="yMoving">yMoving</span>
+<div id="@yMoving_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@yMoved" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="yMoved">yMoved</span>
+<div id="@yMoved_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@wResizing" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="wResizing">wResizing</span>
+<div id="@wResizing_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@wResized" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="wResized">wResized</span>
+<div id="@wResized_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@hResizing" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="hResizing">hResizing</span>
+<div id="@hResizing_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@hResized" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="hResized">hResized</span>
+<div id="@hResized_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@reconfiging" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="reconfiging">reconfiging</span>
+<div id="@reconfiging_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr><tr><td>
+<span id="@reconfiged" class="member" style="cursor:pointer;" onclick="switchDesc(this);" title="reconfiged">reconfiged</span>
+<div id="@reconfiged_detail" style="display: none;">
+<pre class="desc"></pre></div>
+</td></tr></table><br/>
+
+</BODY>
+</HTML>

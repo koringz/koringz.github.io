@@ -1,0 +1,81 @@
+<!--  -->
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+</HEAD>
+
+<BODY style="margin:5px;">
+<div style="float:right;">
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+<div style="margin-left:5px;">util\js-util-cookie.js</div>
+<pre class="source">
+<span class="multiComment">/*!
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * 
+ * @version 0.1
+ * @author feng.chun
+ * @date 2007-8-30
+ * 
+ * @requires /core/js-core.js
+ */</span>
+
+<span class="multiComment">/**
+ * @class js.util.Cookie
+ * @static
+ * @final
+ */</span>
+js.util.Cookie = <b>function </b>(){
+    <b>return</b> {        
+<span class="multiComment">        /**
+         * Write to cookie.
+         * 
+         * @method write
+         * @param {String} key
+         * @param {String|Number} value
+         * @param {Date} expires:optional
+         * @param {String} path:optional
+         */</span>
+        write: <b>function </b>(key, value, expires, path){
+            <b>if </b>(!key) <b>return</b>;
+            <b>var </b>p =  path? path : '/' ; 
+            <b>var </b>exp = expires?expires.toGMTString():'Wed, 15 Apr 2099 00:00:00 GMT';
+            document.cookie = js.util.Cookie.NAME_SPACE + key + '=' + escape(''+value) + '; path=' +p+ '; expires=' + exp;
+        },
+<span class="multiComment">        /**
+         * Read the value of the key.
+         * 
+         * @method read
+         * @param {String} key
+         * @return {String}
+         */</span>
+        read: <b>function </b>(key){
+            <b>var </b>reg = <b>new </b>RegExp("(^| )" + js.util.Cookie.NAME_SPACE + key+"=([^;]*)(;|$)","gi");
+             <b>var </b>data = reg.exec(document.cookie);
+            <b>return</b> data?unescape(data[2]):<b>null</b>;
+        },
+<span class="multiComment">        /**
+         * Clear the value of the key.
+         * 
+         * @method clear
+         * @param {String} key
+         */</span>
+        clear: <b>function </b>(key){
+            <b>this</b>.write(key, '');
+        }
+    }
+}();
+<span class="multiComment">/**
+ * @field {String} NAME_SPACE
+ * @static
+ */</span>
+js.util.Cookie.NAME_SPACE = 'JSDK_';
+
+</pre>
+<hr/>
+</BODY>
+</HTML>

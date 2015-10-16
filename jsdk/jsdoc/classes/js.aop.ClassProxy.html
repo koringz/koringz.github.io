@@ -1,0 +1,68 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>js.aop.ClassProxy</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-aop.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div>js.aop</div>
+<div class="topic" title="js.aop.ClassProxy">
+Class: 
+ClassProxy</div>
+
+<b>public static</b> ClassProxy
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="addAdvices" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static addAdvices">+ <b>addAdvices</b></span></span>(<span title="required"><b>clazz</b></span>:<a href="js.reflect.Class.html" title="js.reflect.Class">Class</a>|String, <span title="required"><b>methodName</b></span>:String, <span title="required"><b>callback</b></span>:<a href="js.aop.AOP$Callback.html" title="js.aop.AOP$Callback">AOP$Callback</a>):void</span>
+<div id="addAdvices_detail" style="display: none;">
+<pre class="desc">Add advices for the class's method.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>clazz</b></span>  &lt;<a href="js.reflect.Class.html" title="js.reflect.Class">Class</a>|String&gt; a class' name or Class</dd><br/>
+<dd><span title="required"><b>methodName</b></span>  &lt;String&gt; the method name of a class</dd><br/>
+<dd><span title="required"><b>callback</b></span>  &lt;<a href="js.aop.AOP$Callback.html" title="js.aop.AOP$Callback">AOP$Callback</a>&gt; </dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when some arguments invalid or method not exist</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="reset" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public static reset">+ <b>reset</b></span></span>(<span title="required"><b>clazz</b></span>:<a href="js.reflect.Class.html" title="js.reflect.Class">Class</a>|String, <span title="required"><b>methodName</b></span>:String):void</span>
+<div id="reset_detail" style="display: none;">
+<pre class="desc">Remove all advices on the class's method.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>clazz</b></span>  &lt;<a href="js.reflect.Class.html" title="js.reflect.Class">Class</a>|String&gt; a class' name or Class</dd><br/>
+<dd><span title="required"><b>methodName</b></span>  &lt;String&gt; the method name of a class</dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when some arguments invalid or method not exist</dd><br/>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

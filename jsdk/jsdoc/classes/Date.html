@@ -1,0 +1,122 @@
+<!-- Generated on 2012-05-02 13:42:06 by Jsdocx 1.1.0_20120110 -->
+<HTML>
+<HEAD>
+<TITLE>Date</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../inc/stylesheet.css">
+<script type="text/javascript">
+function switchDesc(obj){
+	var divObj = document.getElementById(obj.id + '_detail');
+	if(!divObj) return;
+	
+	if(divObj.style.display == 'none') {
+		document.getElementById(obj.id + '_detail').style.display = '';		
+	}else{
+		document.getElementById(obj.id + '_detail').style.display = 'none';	
+	}	
+}
+</script>
+</HEAD>
+
+<BODY>
+<div style="float:right;">
+<span class="button" onclick="location.href='../sources/js-core.js.html';">Source</span>
+<span class="button" onclick="if(window.history.length > 1) window.history.go(-1);">Back</span>
+</div>
+
+<div></div>
+<div class="topic" title="Date">
+Native: 
+Date</div>
+
+<b>public final</b> Date
+
+<hr/>
+
+<pre class="desc">
+</pre>
+<hr/><br/>
+
+
+
+
+
+<table><thead><tr><td>Methods</td></tr></thead><tr><td>
+<span class="member"><span id="isLeapYear" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static isLeapYear">+ <b>isLeapYear</b></span></span>(<span title="required"><b>year</b></span>:Int):Boolean</span>
+<div id="isLeapYear_detail" style="display: none;">
+<pre class="desc">Determines whether or not a year is leap year.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>year</b></span>  &lt;Int&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="getDaysInMonth" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static getDaysInMonth">+ <b>getDaysInMonth</b></span></span>(<span title="required"><b>year</b></span>:Int, <span title="required"><b>month</b></span>:Int):Int</span>
+<div id="getDaysInMonth_detail" style="display: none;">
+<pre class="desc">Returns the max day number in the month and the year.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>year</b></span>  &lt;Int&gt; </dd><br/>
+<dd><span title="required"><b>month</b></span>  &lt;Int&gt; 0~11</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Int&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="parseDate" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final static parseDate">+ <b>parseDate</b></span></span>(<span title="required"><b>sDate</b></span>:String):Date</span>
+<div id="parseDate_detail" style="display: none;">
+<pre class="desc">Parse a String to a Date.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>sDate</b></span>  &lt;String&gt; </dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Date&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when Arguments is null or bad-format</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="equals" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final equals">+ equals</span></span>(<span title="required"><b>date</b></span>:Date, <i title="optional"><b>type</b></i>:String):Boolean</span>
+<div id="equals_detail" style="display: none;">
+<pre class="desc">Determines whether or not a day equals this day.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>date</b></span>  &lt;Date&gt; </dd><br/>
+<dd><i title="optional"><b>type</b></i>  &lt;String&gt; values: "y"|"m"|"d"|"ymd"|"t"; the default value is "t"</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Boolean&gt; </dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when Arguments is not date</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="add" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final add">+ add</span></span>(<span title="required"><b>n</b></span>:Int, <span title="required"><b>type</b></span>:String):void</span>
+<div id="add_detail" style="display: none;">
+<pre class="desc">Add one day or month or year to this date.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>n</b></span>  &lt;Int&gt; </dd><br/>
+<dd><span title="required"><b>type</b></span>  &lt;String&gt; values:"y"|"m"|"w"|"d"|"h"|"mi"|"s"|"ms"; the default value is "d"</dd><br/>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when The argument<n> is not integer</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="compare" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final compare">+ compare</span></span>(<span title="required"><b>date</b></span>:Date, <i title="optional"><b>type</b></i>:String):Number</span>
+<div id="compare_detail" style="display: none;">
+<pre class="desc">Compare this date with a date.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>date</b></span>  &lt;Date&gt; </dd><br/>
+<dd><i title="optional"><b>type</b></i>  &lt;String&gt; values: "y"|"m"|"d"|"ymd"|"t"; the default value is "t"</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;Number&gt; values: -1 is before the date; 0 is equals the date; 1 is after the date</dd>
+<pre class="desc"><b>Throws</b></pre>
+<dd> &lt;TypeError&gt; when The argument<date> is not date</dd><br/>
+</div></td></tr><tr><td>
+<span class="member"><span id="format" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final format">+ format</span></span>(<span title="required"><b>a</b></span>:String|Function, <i title="optional"><b>thisP</b></i>:Object):String</span>
+<div id="format_detail" style="display: none;">
+<pre class="desc">Format the date to a String.</pre>
+<pre class="desc"><b>Parameters</b></pre>
+<dd><span title="required"><b>a</b></span>  &lt;String|Function&gt; String values: "hh:mm:ss"|"yyyy-MM-dd"|"yyyy-MM-dd hh:mm:ss"|"yyyy/MM/dd"|"yyyy/MM/dd hh:mm:ss"; or a function with arguments this date</dd><br/>
+<dd><i title="optional"><b>thisP</b></i>  &lt;Object&gt; the callback function's "this"</dd><br/>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr><tr><td>
+<span class="member"><span id="toJSONString" style="cursor:pointer;" onclick="switchDesc(this);"><span title="public final toJSONString">+ toJSONString</span></span>():String</span>
+<div id="toJSONString_detail" style="display: none;">
+<pre class="desc">Format this date to a JSON String.</pre>
+<pre class="desc"><b>Return</b></pre>
+<dd>&lt;String&gt; </dd>
+</div></td></tr></table><br/>
+
+
+
+</BODY>
+</HTML>

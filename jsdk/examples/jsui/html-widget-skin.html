@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ * @project JSDK JavaScript Development Kit
+ * @copyright Copyright(c) 2004-2012, Dragonfly.org. All rights reserved.
+ * @license LGPLv3
+ * @author fengchun
+-->
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>HTML Widget Test</title>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/core/js-input.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/jsui/js-ui-core.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../source/jsui/js-ui-html.js"></script>
+
+<style>
+	BODY {
+		FONT: 14px arial, helvetica, clean, sans-serif;
+	}
+	
+	button.imagebutton{
+	   background-image:url(clock.gif);
+	   background-repeat:no-repeat;
+	   height:64px;	
+	   width:130px;
+	   text-indent: 64px;	   
+	}
+	
+	button.skin1,button.skin2,button.skin3,button.skin4
+	,input.skin1,input.skin2,input.skin3,input.skin4
+	,select.skin1,select.skin2,select.skin3,select.skin4
+	,textarea.skin1,textarea.skin2,textarea.skin3,textarea.skin4{
+		color:#333;
+	 	font: bold 84% 'trebuchet ms',helvetica,sans-serif;
+		border:1px solid;
+	 	border-color: #999 #666 #666 #999;
+	}
+	
+	button.skin1, input.skin1, select.skin1, textarea.skin1{
+		background-color:#fed;
+	}
+	
+	button.skin2, input.skin2, select.skin2, textarea.skin2{
+		background-color:#fcc;
+	}
+	
+	button.skin3, input.skin3, select.skin3, textarea.skin3{
+		background-color:#cec;
+	}
+	
+	button.skin4, input.skin4, select.skin4, textarea.skin4{
+		background-color:#ccf;
+	}
+
+	
+</style>
+
+<script>
+var Test = function(){
+	return {
+		skinMode1: function(skinType){
+			var wgt = new js.ui.HTMLButton({
+				id:'button1'
+			});
+			wgt.set('cssName', skinType);
+			wgt.render();
+			
+			wgt = new js.ui.HTMLButton({
+				id:'button2'
+			});
+			wgt.set('cssName', skinType+" imagebutton");
+			wgt.render();
+						
+			wgt = new js.ui.HTMLTextbox({
+				id:'text1'
+			});
+			wgt.set('cssName', skinType);
+			wgt.render();
+			
+			wgt = new js.ui.HTMLPassword({
+				id:'password1'
+			});
+			wgt.set('cssName', skinType);
+			wgt.render();
+			
+			wgt = new js.ui.HTMLFile({
+				id:'file1'
+			});
+			wgt.set('cssName', skinType);
+			wgt.render();
+			
+			wgt = new js.ui.HTMLRadio({
+				id:'radio1'
+			});
+			wgt.set('cssName', skinType);
+			wgt.render();
+			
+			wgt = new js.ui.HTMLCheckbox({
+				id:'checkbox1'
+			});
+			wgt.set('cssName', skinType);
+			wgt.render();
+			
+			wgt = new js.ui.HTMLSelect({
+				id:'select1'
+			});
+			wgt.set('cssName', skinType);
+			wgt.render();
+			
+			wgt = new js.ui.HTMLTextarea({
+				id:'textarea1'
+			});
+			wgt.set('cssName', skinType);
+			wgt.render();
+		},
+		skinMode2: function(skinType){
+			js.core.Dom.setAttribute(
+				['button1','button2','radio1','checkbox1','select1','text1','password1','file1','textarea1']
+				, 'cssName', skinType);
+			js.core.Dom.addClass('button2','imagebutton');
+		}		
+	}
+}();	
+</script>
+</head>
+
+<body>
+换肤模式一：<br/>	
+<button onclick='Test.skinMode1("skin1")' class="skin1">skin1</button>
+<button onclick='Test.skinMode1("skin2")' class="skin2">skin2</button>
+<button onclick='Test.skinMode1("skin3")' class="skin3">skin3</button>
+<button onclick='Test.skinMode1("skin4")' class="skin4">skin4</button>
+<br/><br/>
+换肤模式二：<br/>	
+<button onclick='Test.skinMode2("skin1")' class="skin1">skin1</button>
+<button onclick='Test.skinMode2("skin2")' class="skin2">skin2</button>
+<button onclick='Test.skinMode2("skin3")' class="skin3">skin3</button>
+<button onclick='Test.skinMode2("skin4")' class="skin4">skin4</button>
+<br/><br/>
+<button id="button1">button1</button>
+<button id="button2">button2</button>
+
+<input type="radio" id="radio1" value="a" />
+<input type="checkbox" id="checkbox1" value="a" />
+<select id="select1">
+	<option>1</option>
+	<option>2</option>
+</select>
+<br/>
+<input type="text" id="text1" value="text1" />
+<input type="password" id="password1" value="password1" />
+<input type="file" id="file1" value="" />
+<br/>
+<textarea id="textarea1">textarea1</textarea>
+
+</body>
+</html>
