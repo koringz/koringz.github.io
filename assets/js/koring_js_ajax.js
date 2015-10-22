@@ -97,7 +97,7 @@ var koringz = {
 										// ** 注 ** 此处需要进行一个改进 数组 对象 字符串的判断
 									}
 									document.querySelector('#myPlaces').onclick = function(){
-										myContent.innerHTML = '<iframe src=' + val[k].iframe_url + ' width=100%' + 'height=100%' + '></iframe>';
+										myContent.innerHTML = '<iframe src=' + val[k].iframe_url + ' width=100%' + ' height=100%' + '></iframe>';
 									}
 								}
 							}catch(e){
