@@ -1,5 +1,5 @@
 /*
-* Auther: koringz(www.seewi.com.cn)
+* Auther: koringz(https://koringz.github.io/)
 * -----
 * Date: 2015/9/30
 * ----------------
@@ -47,7 +47,7 @@ body {
 }
 /*
 *
-* Auther: koringz(www.seewi.com.cn);
+* Auther: koringz(https://koringz.github.io/);
 * -----
 * Date: 2015/9/30;
 * ----------------
@@ -71,6 +71,9 @@ body {
 
 .head >h1:hover {
 	font-size: 1.8rem;
+}
+
+.head >h1 >a{
 	color: #f2f2f2;
 }
 
@@ -141,6 +144,9 @@ body {
 	text-align: center;
 	color: #eee;
 	font-size: 16px;
+}
+.head>.menu>.menu-bar>.box-bar>.box-grid>a>span{
+	display: block;
 }
 
 .head >.menu >.menu-bar >.box-bar:hover >.box-grid:hover >a:hover {
@@ -213,7 +219,7 @@ body {
 
 /*
 *
-* Auther: koringz(www.seewi.com.cn);
+* Auther: koringz(https://koringz.github.io/);
 * -----
 * Date: 2015/9/30;
 * ----------------
@@ -234,24 +240,24 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
-.cc01 {
-	color: #8e3757;
+.cc01  {
+	color: #8d8e91;
 }
 
 .cc02 {
-	color: #563475;
-}
+	color: #737c0e;
+} 
 
 .cc03 {
 	color: #0bcc86;
 }
 
-.cc04 {
-	color: #737c0e;
+.cc04{
+	color: #563475;
 }
 
-.cc05 {
-	color: #8d8e91;
+.cc05{
+	color: #8e3757;
 }
 
 .cc06 {
