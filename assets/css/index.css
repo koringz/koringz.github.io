@@ -216,7 +216,11 @@ body {
 	max-height: 50px;
 	line-height: 50px;
 }
-
+iframe{
+	height:50px;
+	width:100px;
+	border:none
+}
 /*
 *
 * Auther: koringz(https://koringz.github.io/);
