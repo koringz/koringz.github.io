@@ -1,8 +1,8 @@
 [
-{shift:'\u2192',map:'\u6211\u7684\u90ae\u7bb1\u5730\u5740',word_links:'Email',url:"#"},
-{shift:'\u2192',map:'\u6211\u7684\u535a\u5ba2\u4e3b\u9875',word_links:'Blog',url:"http://www.cnblogs.com/hao5599/"},
-{shift:'\u2192',map:'\u6211\u7684\u5f00\u6e90\u0063\u0073\u0073\u0020\u6846\u67b6',word_links:'Koringz.css',url:"#"},
-{shift:'\u2192',map:'\u4f60\u53ef\u4ee5\u8bbf\u95ee\u0063\u006f\u0064\u0065\u8d44\u6e90',word_links:'Codepen',url:"http://codepen.io/koringz/"},
-{shift:'\u2192',map:'\u4f60\u53ef\u4ee5\u8bbf\u95ee\u0067\u0069\u0074\u8d44\u6e90',word_links:'Github',url:"https://github.com/koringz"},
+{shift:'\u2192',map:'\u6211\u7684\u90ae\u7bb1\u5730\u5740',word_links:'Email',url:"#",title:'ok234@foxmail.com'},
+{shift:'\u2192',map:'\u6211\u7684\u535a\u5ba2\u4e3b\u9875',word_links:'Blog',url:"http://www.cnblogs.com/hao5599/",title:'Blog'},
+{shift:'\u2192',map:'\u6211\u7684\u5f00\u6e90\u0063\u0073\u0073\u0020\u6846\u67b6',word_links:'Koringz.css',url:"#",title:'koringz.css'},
+{shift:'\u2192',map:'\u4f60\u53ef\u4ee5\u8bbf\u95ee\u0063\u006f\u0064\u0065\u8d44\u6e90',word_links:'Codepen',url:"http://codepen.io/koringz/",title:'Codepen'},
+{shift:'\u2192',map:'\u4f60\u53ef\u4ee5\u8bbf\u95ee\u0067\u0069\u0074\u8d44\u6e90',word_links:'Github',url:"https://github.com/koringz",title:'Github'},
 {iframe_url:"test.html"},
 ]

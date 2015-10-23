@@ -20,8 +20,8 @@ var koringz = {
 	asyc_xhr_request:function (url,d){ 
 	// d表示外部传入的一个dom元素 
 	// url表示一个json地址
-		var create_xhr_object, default_num, _defaul_object, _str_object, str, c;
-		default_num = 0
+		var create_xhr_object,default_num = 0, default_num, _defaul_object, _str_object, str, c;
+		
 		c={
 			lik:url,
 			tid:default_num,
@@ -95,9 +95,6 @@ var koringz = {
 									}else if(typeof val[p].shift == 'string'){ //如果数组的这个对象是一个字符串就输出到html
 										dom.innerHTML += get_string;
 										// ** 注 ** 此处需要进行一个改进 数组 对象 字符串的判断
-									}
-									document.querySelector('#myPlaces').onclick = function(){
-										myContent.innerHTML = '<iframe src=' + val[k].iframe_url + ' width=100%' + ' height=100%' + '></iframe>';
 									}
 								}
 							}catch(e){
