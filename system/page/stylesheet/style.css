@@ -1,0 +1,123 @@
+/*
+* @author koringz
+* @data 2015-11-05
+* @data 2015-11-05
+* @version 0.5.0
+*/
+html,
+body{
+	height: 100%;
+	font-family:'微软雅黑',Verdana,Arial,Helvetica,sans-serif
+}
+
+
+/* 显示页面块级元素的区域 */
+.container{
+	height: 100% ;
+	width: 100% ;
+	background-color: #1FA67A
+}
+/* 这是一个主页的小碎片 */
+.platform{
+	height: 100%;
+	/*width: 100%;
+	font-size: 100%;*/
+	box-shadow:1px 0px 12px #fff,0px 1px 12px #fff,-1px 0px 12px #fff,0px -1px 12px #fff;
+}
+.content{
+	margin:0 auto;
+	text-align: center;
+}
+.index{
+	padding:10em 0 0;
+}
+.login{
+	position: absolute;
+	bottom: 0;
+	height: 15em;
+	min-height: 15em;
+	width: 72%;
+	right:14%;
+}
+.form{
+	width: 20em;
+	float: right;
+	text-align: right;
+}
+.form >label{
+	display: inline-block;
+	padding: .5em 0;
+	width: 100%;
+}
+.form >input{
+	width: 15em;
+	height: 3em;
+	margin-top: .3em;
+	outline: none;
+	border: none;
+	text-align: left;
+	text-indent: 20px;
+	box-shadow: 2px 1px 8px #999;
+}
+.form >a{
+	display: block;
+	height: 2em;
+	line-height: 2em;
+}
+
+
+
+
+
+
+/* public css styles*/
+
+.h1{font-size: 36px;line-height: 48px}
+.h2{font-size: 36px;line-height: 48px}
+.h3{font-size: 44px;line-height: 48px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+*
+*
+*/
