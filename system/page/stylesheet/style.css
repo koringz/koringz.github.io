@@ -13,7 +13,7 @@ body{
 /* 显示页面块级元素的区域 */
 .container{
 	height: 100% ;
-	min-height: 540px;
+	min-height: 480px;
 	width: 100% ;
 	min-width: 280px;
 	background-color: #1FA67A
