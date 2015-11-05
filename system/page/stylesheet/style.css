@@ -9,15 +9,13 @@ body{
 	height: 100%;
 	font-family:'微软雅黑',Verdana,Arial,Helvetica,sans-serif
 }
-a{
-
-}
 
 /* 显示页面块级元素的区域 */
 .container{
 	height: 100% ;
 	min-height: 540px;
 	width: 100% ;
+	min-width: 280px;
 	background-color: #1FA67A
 }
 /* 这是一个主页的小碎片 */
@@ -37,12 +35,13 @@ a{
 	padding:5em 0;
 }
 .login{
-	/*position: absolute;*/
+	position: relative;
 	bottom: 0;
 	height: 25em;
 	min-height: 30em;
 	width: 72%;
 	right:14%;
+	left: 14%;
 }
 .form{
 	width: 20em;
@@ -94,16 +93,13 @@ a{
 
 /* mobile viewport css style */
 
-@media screen (min-height: 540px) {
+@media screen (min-height: 540px) and (min-width: 380px){
 	.container{
 		height: 540px;
+		width: 380px
 	}
 }
-@media screen (min-height: 540px) {
-	.platform{
-		height: 540px;
-	}
-}
+
 
 
 
