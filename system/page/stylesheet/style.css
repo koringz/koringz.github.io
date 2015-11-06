@@ -98,7 +98,7 @@ body{
 	display: inline-block;
 	width: 100%;
 	line-height: 2em;
-	margin-top:2em; 
+	margin-top:1em; 
 	background-color: #fff;
 }
 .menu-p >a{
@@ -109,9 +109,9 @@ body{
 /*中间区域内容部分*/
 .user-form{
 	position: relative;
-	margin-top: 2em;
-	width: 80%;
-	right: 10%;
+	margin-top: 1em;
+	width: 90%;
+	right: 5%;
 	float: right;
 	text-align: right;
 	background-color: #fff;
@@ -124,7 +124,7 @@ body{
 }
 .user-form >label >span.table-title-name{/* 如果宽度改变，就需要设置字体的大小*/
 	display: inline-block;
-	width: 36%;
+	width: 30%;
 	line-height: 2em;
 	text-align: right;
 	font-size: 1em;
@@ -154,7 +154,7 @@ body{
 	display: block;
 	float: right;
 	margin-right: 2%;
-	width: 6%;
+	width: 5%;
 	height: 2em;
 	line-height: 2em;
 	text-align: left;
@@ -168,6 +168,12 @@ body{
 	.user-form >label >span.version-name{
 		font-size: 1em;
 		margin-right: 1.5%;
+	}
+}
+@media screen and (max-width: 320px){
+	.user-form >label >span.version-name{
+		font-size: 1em;
+		margin-right: 1%;
 	}
 }
 /*@media screen (min-width: 720px) and (max-width: 1200px){
@@ -194,18 +200,28 @@ body{
 	}
 }*/
 .user-form >label >span.table-notes{
+	font-size: .9em; /**/
 	display: inline-block;
-	width: 22%;
-	height: 2em;
+	width: 32%;
+	height: 2.2em; /**/
 	line-height: 1.2em;
 	text-align: left;
 	float: right;
-	font-size: .9em; 
 	color: #888;
 	overflow: hidden;
 }
+@media screen and (max-width: 640px){
+	.user-form >label >span.table-notes{
+		font-size: .8em;/**/
+	}
+}
+@media screen and (max-width: 320px){
+	.user-form >label >span.table-notes{
+		font-size: .7em;/**/
+	}
+}
 .user-form >label >input[type="text"]{
-	width: 40%;
+	width: 36%;
 	line-height: 2em;
 	text-indent: .5em;
 	/*border: none;*/
@@ -219,20 +235,22 @@ body{
 	background-color: #FFE599
 }
 .user-form >label >input.product-name{
-	width: 33%
+	width: 30%
 }
 .user-form >p{
-	padding:1em 30% 1em;
+	padding:1em 34% 1em;
 	text-align: right
 }
 .user-form >p >span{
-	
+
 }
 /* up-regist */
 .audit{
+	display: block;
 	position: fixed;
 	width: 80%
 }
+
 
 
 
