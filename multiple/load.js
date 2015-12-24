@@ -17,10 +17,6 @@ if(!window.indexedDB)
 if(window.Worker){
 	var mWorker = new Worker("worker.js");
 
-	mWorker.onmessage = function(e){ //这是接收到的数据 e
-		result.textContent = e.data;
-	}
-
 	txt1.onchange = function(){ 
 		mWorker.postMessage([txt1.value,txt2.value]) // e = [txt1.value,txt2.value]
 		console.log("message post to work")
@@ -31,7 +27,9 @@ if(window.Worker){
 		console.log("message post to work")
 	}
 	
-
+	mWorker.onmessage = function(e){ //这是接收到的数据 e
+		result.textContent = e.data;
+	}
 }
 
 // onmessage表示接收线程worker脚本返回的消息，消息的参数在onmessage方法里面。
