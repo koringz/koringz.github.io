@@ -6,9 +6,9 @@
 *
 */
 
-onmessage =function(e){ //接收postmessage传过来的参数进行一次回调处理
-	var workerResult =  "result  : " + (e.data[0]*e.data[1])
-	postMessage(workerResult);
+onmessage = function(e){ //e接收postmessage传的参数
+	var s = (e.data[2]*e.data[1]);
+	var workerResult =  "result  : " + s;
+	postMessage(workerResult); //worker.onmessage进行回调workerResult参数
 }
-
 

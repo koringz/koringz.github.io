@@ -9,7 +9,11 @@
 var txt1 = document.querySelector("#txt1")
 var txt2 = document.querySelector("#txt2")
 var result = document.querySelector("#result")
-
+window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+if(!window.indexedDB)
+{
+    console.log("你的浏览器不支持IndexedDB");
+}
 if(window.Worker){
 	var mWorker = new Worker("worker.js");
 
@@ -30,10 +34,10 @@ if(window.Worker){
 
 }
 
-//onmessage表示接收线程worker脚本返回的消息，消息的参数在onmessage方法里面。相当于ajax成功接收后台传回来的数据
-//postMessage表示向worker脚本内方法扔参数进行传参
-// *注意Worker的首字母大写的
-// *注意Worker的脚本的目录为HTML页面访问到的目录
+// onmessage表示接收线程worker脚本返回的消息，消息的参数在onmessage方法里面。
+// postMessage表示向worker脚本onmessage方法扔参数进行传参
+// *注Worker的首字母大写的
+// *注Worker的脚本的目录为HTML页面能够访问到的目录
 
 
 
