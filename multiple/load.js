@@ -17,7 +17,7 @@ if(!window.indexedDB)
 }
 
 if(window.Worker){
-	var _this = new Worker("../../js/build/scroll_ten1.js");
+	var _this = new Worker("worker.js");
 
 
 	txt1.onchange = function(){ 
