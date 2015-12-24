@@ -1,7 +1,7 @@
 /* koringz.github.io
 *
 * $author koringz
-* $data 2015-12-24
+* $date 2015-12-24
 * $version 0.1
 *
 */
