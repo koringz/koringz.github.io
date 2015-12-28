@@ -1,6 +1,7 @@
-var start_event, arr_class, init, Prev, Next, input_left, input_right, Container, Content, Grid, Next_grid, Img, style_img, i, j, default_img_width, all_img_length, current_img_length, half, Timer, current_scroll_Width, scroll_Width, speed;
+var start_event, arr_class, init, Prev, Next, input_left, input_right, Container, Content, Grid, Next_grid, Img, style_img, i, j, default_img_width, all_img_length, current_img_length, half, Timer, current_scroll_Width, scroll_Width, speed, objTime;
 Content = getElementNode('.content');
 Grid = getElementNode('#grid');
+Grid.innerHTML += Grid.innerHTML;
 Next_grid = getElementNode('.next_grid');
 Img = Grid.getElementsByTagName('a');
 input_left = getElementNode('.Left');
@@ -10,17 +11,24 @@ all_img_length = Img.length;
 current_img_length = 0;
 half = all_img_length / 2;
 Timer = null;
-Grid.innerHTML += Grid.innerHTML;
+objTime = {};
 
 function auto() {
-	scroll_right()
+	input_right.onclick()
 };
+Content.onmouseover = function() {
+	clearInterval(Timer)
+};
+Content.onmouseout = function() {
+	Timer = setInterval(auto, 3000)
+};
+Timer = setInterval(auto, 3000);
 
-function scroll(grid, finally_distance) {
-	if (Timer !== null && Timer !== undefined) {
-		clearInterval(Timer)
+function scroll(grid, finally_distance, objectTime) {
+	if (objectTime.Timer !== null && objectTime.Timer !== undefined) {
+		clearInterval(objectTime.Timer)
 	}
-	Timer = setInterval(function() {
+	objectTime.Timer = setInterval(function() {
 		var moving = grid.offsetLeft;
 		scroll_Width = parseInt(moving);
 		speed = (finally_distance - scroll_Width) / 6;
@@ -29,15 +37,15 @@ function scroll(grid, finally_distance) {
 			var v = scroll_Width + speed;
 			grid.style.left = scroll_Width + speed + 'px'
 		} else {
-			clearInterval(Timer);
-			Timer = null
+			clearInterval(objectTime.Timer);
+			objectTime.Timer = null
 		}
 	}, 38)
 };
 
 function ready() {
 	current_scroll_Width = -default_img_width * current_img_length;
-	scroll(Grid, current_scroll_Width)
+	scroll(Grid, current_scroll_Width, objTime)
 };
 
 function scroll_left() {
@@ -59,5 +67,9 @@ function scroll_right() {
 	}
 	ready()
 };
-addLister(input_left, "click", scroll_left);
- addLister(input_right, "click", scroll_right);
+input_left.onclick = function() {
+	scroll_left()
+}
+input_right.onclick = function() {
+	scroll_right()
+}

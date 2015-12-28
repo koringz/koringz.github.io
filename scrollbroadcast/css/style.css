@@ -9,6 +9,10 @@
 * $data 2015-12-25
 * $version 0.2
 *
+* $author koringz
+* $data 2015-12-28
+* $version 0.3
+*
 */
 body {
   margin: 0;
@@ -34,9 +38,10 @@ body {
   height: 300px;
   line-height: 300px;
   overflow: hidden;
+  z-index: 100;
 }
 .container .content .grid {
-
+  z-index: 98;
   /*background-color: #881114;*/
 }
 .container .content .next_grid {
@@ -53,7 +58,7 @@ body {
   vertical-align: middle;
 }
 .container .content a img{
-	margin-top: 10px;
+  margin-top: 10px;
 }
 .container .content a span {
   display: none;
@@ -68,8 +73,8 @@ body {
   border-style: solid;
 }
 /*button*/
-.container a.Left,
-.container a.Right {
+.container span.Left,
+.container span.Right {
   display: block;
   position: absolute;
   top: 50%;
@@ -86,6 +91,7 @@ body {
   cursor: pointer;
   font-size: 28px;
   color: #BBB;
+  z-index: 99;
   outline: none;
   -moz-user-select:none;
   -webkit-user-select:none;
@@ -95,12 +101,12 @@ body {
 }
 .container .Left {
   left: 50%;
-  margin-left: -350px;
+  margin-left: -300px;
   box-shadow: -1px 0px 10px #2F4E4D
 }
 .container .Right {
   right: 50%;
-  margin-right: -350px;
+  margin-right: -300px;
   box-shadow: 1px 0px 10px #2F4E4D
 }
 /*网格的div的宽带要大于包含网格的div宽带*/
