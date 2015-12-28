@@ -28,10 +28,6 @@ half = all_img_length / 2; // 一半的图片数目
 Timer = null;
 Grid.innerHTML += Grid.innerHTML;
 
-function auto() {
-	scroll_right()
-};
-
 function scroll(grid, finally_distance) { // 200w
 	if (Timer !== null && Timer !== undefined) {
 		clearInterval(Timer)
@@ -86,24 +82,5 @@ function scroll_right() {
 	ready()
 };
 
-
-!function() {
-	function el(element) {
-		if (!element) {
-			element = document
-		}
-		return element;
-	}
-
-	function addLister(domnode, eventType, handler) {
-		if (el().all) {
-			domnode.attachEvent("on" + eventType, handler)
-		} else {
-			domnode.addEventListener(eventType, handler, false)
-		}
-	}
-
-	addLister(input_left, "click", scroll_left)
-	addLister(input_right, "click", scroll_right)
-
-}();
+addLister(input_left, "click", scroll_left)
+addLister(input_right, "click", scroll_right)
