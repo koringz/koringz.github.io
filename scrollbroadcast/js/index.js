@@ -27,10 +27,7 @@ current_img_length = 0; // 当前图片数目
 half = all_img_length / 2; // 一半的图片数目
 Timer = null;
 Grid.innerHTML += Grid.innerHTML;
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 function auto() {
 	scroll_right()
 };
