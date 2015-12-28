@@ -8,6 +8,10 @@
  * $data 2015-12-25
  * $version 0.2
  *
+ * $author koringz
+ * $data 2015-12-28
+ * $version 0.3
+ *
  */
 var start_event, arr_class, init, Prev, Next, input_left, input_right, Container, Content, Grid, Next_grid, Img, style_img, i, j, default_img_width, all_img_length, current_img_length, half, Timer, current_scroll_Width, scroll_Width, speed;
 
@@ -23,6 +27,10 @@ current_img_length = 0; // 当前图片数目
 half = all_img_length / 2; // 一半的图片数目
 Timer = null;
 Grid.innerHTML += Grid.innerHTML;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 function auto() {
 	scroll_right()
 };
