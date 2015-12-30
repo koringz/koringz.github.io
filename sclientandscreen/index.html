@@ -38,8 +38,8 @@
           var txt1 = getElementNode("#txt1");
           var txt2 = getElementNode("#txt2");
           var rect = getElementNode("#rect");
-       
-          addLister(box,'mousemove',function(){Box(event,txt1,txt2,rect)})
+           var e = e ?event : window.event;
+          addLister(box,'mousemove',function(e){Box(e,txt1,txt2,rect)})
         </script>
     
     
