@@ -48,7 +48,7 @@
 		<aside class="main-sidebar">
 	        <div class="slimScrollDiv">
 	        	<div class="sidebar" id="scrollspy">
-	        	<ul class="nav sidebar-menu">
+	        	<ul class="nav sidebar-menu" >
 	        		<li class="header">导航</li>
 	        		<li class=""><a href="#gaishu"><i></i> 概述</a></li>
 					<li class="active"><a href="#shiyong"><i></i> 使用下载</a></li>
@@ -78,12 +78,17 @@
 					<li><a href="#gexingloading"><i></i> 个性loading</a></li>
        	</ul>
 	   </div>
-	        <div class="slimScrollBar">
-	        </div>
-	        <div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+	</div>
         </aside>
         <script type="text/javascript">
         $('.main-sidebar').find('i').addClass('fa fa-circle-o');
+
+        $(".sidebar-menu").slimscroll({
+			width:'auto',
+			height: $(window).height(),
+			size:'3px',
+			distance: '0px',
+		});
         </script>
 
         <div class="content-wrapper">
@@ -97,30 +102,30 @@
         	<div class="content body">
         		<section id="gaishu">
 	        			<h2 class="page-header"><a href="#gaishu">概述</a></h2>
-	        			<p class="lead"></p><div>AUI目前只做针对apicloud的css，帮助开发者快速完成app布局，采用响应式布局兼容不同尺寸的手机端。完整版体积在30k左右，压缩之后20k左右，用最少的代码完成app的布局，同时方便用户自定义和扩展。将解压后的文件保存到apicloud的css目录下。aui所有的样式均有aui-前缀。在布局app样式时，为了确保绘制和缩放的效果需要在&lt;head&gt;标签中添加 viewport 元数据标签</div><div></div><div>&lt;meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/&gt;</div><div>同时添加format-detection</div><div></div><div>&lt;meta name="format-detection" content="telephone=no,email=no,date=no,address=no"&gt;</div><div>加载上aui.css样式表，享受编程之美。</div><div>&lt;link rel="stylesheet" type="text/css" href="../css/aui.css" /&gt;</div><div><br></div><div>注意，在win窗口中如果没有特别的处理，建议使用aui-win.css或aui-win.min.css</div><p></p>
+	        			<p class="lead"></p><div>KUI目前只做针移动端的css，帮助开发者快速完成手机端的app布局，采用响应式布局兼容不同尺寸的手机端。完整版体积在30k左右，压缩之后20k左右，用最少的代码完成手机端的app布局，同时方便用户自定义和扩展。将解压后的文件保存到kpi的css目录下。kui所有的样式均有kui-前缀。在布局app样式时，为了确保绘制和缩放的效果需要在&lt;head&gt;标签中添加 viewport 元数据标签</div><div></div><div>&lt;meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/&gt;</div><div>同时添加format-detection</div><div></div><div>&lt;meta name="format-detection" content="telephone=no,email=no,date=no,address=no"&gt;</div><div>加载上kui.css样式表，享受编程之美。</div><div>&lt;link rel="stylesheet" type="text/css" href="../css/kui.css" /&gt;</div><div><br></div><div>注意，在win窗口中如果没有特别的处理，建议使用kui-win.css或kui-win.min.css</div><p></p>
 	        			<div class="row">
 	        					        										</div>
 	        		</section><section id="shiyong">
 	        			<h2 class="page-header"><a href="#shiyong">使用下载</a></h2>
-	        			<p class="lead"></p><p>AUI使用方式就是加载一个css样式表的过程。</p><p>在压缩包里面会有5个文件，分别对应如下</p><p>aui.css &nbsp;—— 完整版</p><p>aui.min.css —— 完整版压缩</p><p>aui-win.css —— 适用于win窗口的样式（包含了头部、底部、tab菜单、按钮效果）</p><p>aui-win.min.css —— win样式压缩</p><p>aui_iconfont.ttf —— 字体图标文件。</p><p>文件在使用时保存至APICloud项目的css文件夹内。</p><p><br></p><p><strong>QQ交流群：344869952</strong></p><p><br></p><p><a href="http://www.auicss.com/download/aui.zip" class="btn btn-info btn-lg">下载</a>&nbsp;<a href="http://community.apicloud.com/bbs/forum.php?mod=viewthread&tid=13800" target="_blank" class="btn btn-warning btn-lg">讨论</a></p><p></p>
+	        			<p class="lead"></p><p>KUI使用方式就是加载一个css样式表的过程。</p><p>在压缩包里面会有5个文件，分别对应如下</p><p>kui.css &nbsp;—— 完整版</p><p>kui.min.css —— 完整版压缩</p><p>kui-win.css —— 适用于win窗口的样式（包含了头部、底部、tab菜单、按钮效果）</p><p>kui-win.min.css —— win样式压缩</p><p>kui_iconfont.ttf —— 字体图标文件。</p><p>文件在使用时保存至kpi项目的css文件夹内。</p><p><br></p><p><strong>QQ交流群：260713986</strong></p><p><br></p><p><a href="http://www.auicss.com/download/aui.zip" class="btn btn-info btn-lg">下载</a>&nbsp;<a href="http://community.apicloud.com/bbs/forum.php?mod=viewthread&tid=13800" target="_blank" class="btn btn-warning btn-lg">讨论</a></p><p></p>
 	        			<div class="row">
 	        					        										</div>
 	        		</section><section id="bujurongqi">
 	        			<h2 class="page-header"><a href="#bujurongqi">布局容器</a></h2>
-	        			<p class="lead"></p><p>AUI的布局容器有两种.aui－content、.aui-card和.aui-content-padded；用户可以根据实际情况来定义。.aui-content-padded为增加了10px的内边距。</p><p>.aui-card为圆角卡片式容器。</p><p></p>
+	        			<p class="lead"></p><p>KUI的布局容器有两种.kui－content、.kui-card和.kui-content-padded；用户可以根据实际情况来定义。.kui-content-padded为增加了10px的内边距。</p><p>.kui-card为圆角卡片式容器。</p><p></p>
 	        			<div class="row">
 	        				<div class="col-md-6">
 	        					<div class="box box-solid">
 									<div class="box-body" style="position: relative;">
 										<span class="eg">代码片段</span>
-										<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 420px;"><div id="content-3" style="overflow: hidden; width: auto; height: 420px;"><pre><code class="HTML hljs r"><pre>&lt;div class=<span class="hljs-string">"aui-content"</span>&gt;<span class="hljs-keyword">...</span>&lt;/div&gt;</pre>
-<pre>&lt;div class=<span class="hljs-string">"aui-content-padded"</span>&gt;<span class="hljs-keyword">...</span>&lt;/div&gt;</pre>
-<pre>&lt;div class=<span class="hljs-string">"aui-card"</span>&gt;<span class="hljs-keyword">...</span>&lt;/div&gt;</pre>
-<pre><code class="HTML">&lt;div class=<span class="hljs-string">"aui-content"</span>&gt;
+										<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 420px;"><div id="content-3" style="overflow: hidden; width: auto; height: 420px;"><pre><code class="HTML hljs r"><pre>&lt;div class=<span class="hljs-string">"kui-content"</span>&gt;<span class="hljs-keyword">...</span>&lt;/div&gt;</pre>
+<pre>&lt;div class=<span class="hljs-string">"kui-content-padded"</span>&gt;<span class="hljs-keyword">...</span>&lt;/div&gt;</pre>
+<pre>&lt;div class=<span class="hljs-string">"kui-card"</span>&gt;<span class="hljs-keyword">...</span>&lt;/div&gt;</pre>
+<pre><code class="HTML">&lt;div class=<span class="hljs-string">"kui-content"</span>&gt;
 
-&lt;ul class=<span class="hljs-string">"aui-list-view"</span>&gt;
+&lt;ul class=<span class="hljs-string">"kui-list-view"</span>&gt;
 
-&lt;li class=<span class="hljs-string">"aui-list-view-cell"</span>&gt;&lt;/li&gt;
+&lt;li class=<span class="hljs-string">"kui-list-view-cell"</span>&gt;&lt;/li&gt;
 
 &lt;/ul&gt;
 
@@ -142,14 +147,14 @@
 									<div class="box-body" style="position: relative;">
 										<span class="eg">效果演示</span>
 										<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 420px;"><div id="code-3" style="overflow: hidden; width: auto; height: 420px; background: rgb(244, 244, 244);"><div class="aui-content"><ul class="aui-list-view">
-            <li class="aui-list-view-cell" data-win="list_arrow">aui-content
+            <li class="aui-list-view-cell" data-win="list_arrow">kui-content
             </li>
         </ul></div><div class="aui-content-padded"><ul class="aui-list-view">
             <li class="aui-list-view-cell" data-win="list_arrow">
-                aui-content-padded</li>
+                kui-content-padded</li>
         </ul></div><div class="aui-card"><ul class="aui-list-view">
             <li class="aui-list-view-cell" data-win="list_arrow">
-                aui-card
+                kui-card
             </li>
         </ul></div></div><div class="slimScrollBar" style="width: 5px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 0px; height: 420px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 0px; background: rgb(51, 51, 51);"></div></div>
 									</div>
@@ -2587,13 +2592,5 @@ html { background: #f7f9f8;}
 	 
 	
     <script src="./js/public/bootstrap/bootstrap.min.js"></script>
-    <script src="./js/public/highlight.pack.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('pre code').each(function(i, block) {
-			hljs.highlightBlock(block);
-		});
-	});
-	</script>
 </body>
 </html>
