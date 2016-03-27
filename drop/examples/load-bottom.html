@@ -23,6 +23,7 @@
             <a class="item opacity" href="#1"><img src="wood.jpg" alt=""><h3>我在测试下拉刷新的demo</h3><span class="date">20160327</span></a>
             <a class="item opacity" href="#1"><img src="wood.jpg" alt=""><h3>我在测试下拉刷新的demo</h3><span class="date">20160327</span></a>
             <a class="item opacity" href="#1"><img src="wood.jpg" alt=""><h3>我在测试下拉刷新的demo</h3><span class="date">20160327</span></a>
+            <a class="item opacity" href="#1"><img src="wood.jpg" alt=""><h3>我在测试下拉刷新的demo</h3><span class="date">20160327</span></a>
         </div>
     </div>
 <!-- jQuery1.7以上 或者 Zepto 二选一，不要同时都引用 -->
@@ -42,10 +43,17 @@ $(function(){
     // dropload
     $('.content').dropload({
         scrollArea : window,
+        domDown : {
+            domClass   : 'dropload-down',
+            domRefresh : '<div class="dropload-refresh">↑上拉加载更多-自定义内容</div>',
+            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中-自定义内容...</div>',
+            domNoData  : '<div class="dropload-noData">暂无数据-自定义内容</div>'
+        },
         loadDownFn : function(me){
             $.ajax({
                 type: 'GET',
                 url: 'more.json',
+                timeout:3000,
                 dataType: 'json',
                 success: function(data){
                     var result = '';
@@ -74,10 +82,15 @@ $(function(){
                         me.resetload();
                     },1000);
                 },
+                complete:function (XMLHttpRequest,status) {
+                    if (status === 'timeout') {
+                        console.log("timeout!")
+                    };
+                },
                 error: function(xhr, type){
                     console.log('Ajax error!');
                     // 即使加载出错，也得重置
-                    me.resetload();
+                    // me.resetload();
                 }
             });
         }
