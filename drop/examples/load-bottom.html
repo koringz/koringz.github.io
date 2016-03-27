@@ -32,7 +32,7 @@
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript">
     var H = $(window).height() - 88;
-    $(".lists").css({'height':H});
+    $(".content").css({'height':H});
 </script>
 <script src="../dist/dropload.min.js"></script>
 <script>
@@ -44,7 +44,7 @@ $(function(){
 
     // dropload
     $('.content').dropload({
-        scrollArea : $(".lists"),
+        scrollArea : $(".content"),
         loadDownFn : function(me){
             $.ajax({
                 type: 'GET',
