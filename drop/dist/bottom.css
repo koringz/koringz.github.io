@@ -65,6 +65,9 @@
         line-height: 20px;
         color: #999;
     }
+    .lists{
+        overflow-y: scroll;
+    }
     .opacity{
         -webkit-animation: opacity 0.3s linear;
         animation: opacity 0.3s linear;
