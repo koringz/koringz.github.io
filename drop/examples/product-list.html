@@ -141,7 +141,7 @@ $(function(){
                     },1000);
                 },
                 error: function(xhr, type){
-                    alert('Ajax error! 向shang拉');
+                    console.log('Ajax error! 向shang拉');
                     // 即使加载出错，也得重置
                     dropload.resetload();
                 }
@@ -169,7 +169,7 @@ $(function(){
                     },1000);
                 },
                 error: function(xhr, type){
-                    alert('Ajax error! 向下拉');
+                    console.log('Ajax error! 向下拉');
                     // 即使加载出错，也得重置
                     dropload.resetload();
                 }
