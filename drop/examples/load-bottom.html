@@ -14,7 +14,7 @@
 <div class="header">
     <h1>就当我是新闻页吧</h1>
 </div>
-<div style="position:relative;margin-top:44px;">
+<div style="position:relative;">
     <div class="content">
         <div class="lists">
             <a class="item opacity" href="#1"><img src="wood.jpg" alt=""><h3>我在测试下拉刷新的demo</h3><span class="date">20160327</span></a>
@@ -46,7 +46,7 @@ $(function(){
 
     // dropload
     $('.content').dropload({
-        scrollArea : $(".lists"),
+        scrollArea : window,
         loadDownFn : function(me){
             $.ajax({
                 type: 'GET',
