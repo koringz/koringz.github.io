@@ -49,7 +49,7 @@
 			this.get(elem,options);
 			if (cout == 1) {
 				elem.innerHTML += elem.innerHTML;
-				elem.style.width = (this.half.offsetWidth)*4 + 'px';
+				elem.style.width = (this.default_img_width)*this.all_img_number*2 + 'px';
 			}
 			if (current_img_number > 0) {
 				current_img_number -= 1;
@@ -67,7 +67,7 @@
 			this.get(elem,options);
 			if (cout == 1) {
 				elem.innerHTML += elem.innerHTML;
-				elem.style.width = (this.half.offsetWidth)*4 + 'px';
+				elem.style.width = (this.default_img_width)*this.all_img_number*2 + 'px';
 			}
 			if (current_img_number < this.all_img_number - 1) {
 				current_img_number += 1;
@@ -112,16 +112,6 @@
 	w.k = koringsition;
 
 })(window)
-
-
-
-
-
-
-
-
-
-
 
 
 
