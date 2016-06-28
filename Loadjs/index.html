@@ -1,0 +1,254 @@
+<!doctype html>
+<head>
+  <title>Loading</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Loading</title>
+  <style>
+    .control_load{
+      position: absolute;
+      height: 50%;
+      width: 50%;
+    }
+    #loading {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 999;
+      /*background: rgba(0, 0, 0,.2);*/
+    }
+    .loading-mask {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      background-color: rgba(0, 0, 0,.2);
+    }
+    .loading-txt {
+      position: absolute;
+      left: 0;
+      top: 40%;
+      right: 0;
+      z-index: 3;
+      margin: auto;
+      width: 120px;
+      padding-top: 90px;
+      height: 30px;
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      background: rgba(0,0,0,.6);
+    }
+    .loading-inner {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      right: 0;
+      margin: 30px 0 0 -5px;
+      width: 120px;
+      height: 120px;
+      z-index: 9;
+    }
+    .loading-inner > div:nth-child(1) {
+      top: 20px;
+      left: 0;
+      -webkit-animation: loading-inner 1.2s 0.12s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.12s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(2) {
+      top: 13.63636px;
+      left: 13.63636px;
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      -webkit-animation: loading-inner 1.2s 0.24s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.24s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(3) {
+      top: 0;
+      left: 20px;
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      -webkit-animation: loading-inner 1.2s 0.36s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.36s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(4) {
+      top: -13.63636px;
+      left: 13.63636px;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      -webkit-animation: loading-inner 1.2s 0.48s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.48s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(5) {
+      top: -20px;
+      left: 0;
+      -webkit-animation: loading-inner 1.2s 0.6s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.6s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(6) {
+      top: -13.63636px;
+      left: -13.63636px;
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      -webkit-animation: loading-inner 1.2s 0.72s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.72s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(7) {
+      top: 0;
+      left: -20px;
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      -webkit-animation: loading-inner 1.2s 0.84s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.84s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(8) {
+      top: 13.63636px;
+      left: -13.63636px;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      -webkit-animation: loading-inner 1.2s 0.96s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.96s infinite ease-in-out;
+    }
+    .loading-inner > div {
+      background-color: #fff;
+      width: 4px;
+      height: 35px;
+      border-radius: 2px;
+      margin: 2px;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      position: absolute;
+      width: 5px;
+      height: 15px;
+    }
+    @-webkit-keyframes loading-inner {
+      50% {
+        opacity: 0.3; }
+
+      100% {
+        opacity: 1; } }
+
+    @keyframes loading-inner {
+      50% {
+        opacity: 0.3; }
+
+      100% {
+        opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<main>
+  <h1 id="h1" style="position: absolute; top: 80px; left: 0;right:0; text-align:center;font-size:24px;line-height:38px;z-index: 99999; color: #555;background-color:rgba(233,2,2,.1)">点击弹出加载框</h1>
+
+<div class="control_load">
+  <div id="loading" class="loading" style="display: none">
+    <div class="loading-mask"></div>
+    <div class="loading-inner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="loading-txt">努力加载中...</div>
+  </div>
+</div>
+</main>
+<script>
+(function (win,doc) {
+    var request_handle = function (parame) {
+        var ret_res_handle = function () {
+          var para = parame;
+
+          var EVENTS = {touchstart:'touchstart',click:'onClick'};
+          var ACCESS_EVENT = [];
+
+          if(para.Events){
+            if(para.Events in EVENTS){
+                ACCESS_EVENT.push(para.Events);
+            }
+          }
+          console.log(ACCESS_EVENT[0]);
+          doc.querySelector('#h1').addEventListener(ACCESS_EVENT[0],function(e){
+            showLoading(parame,ACCESS_EVENT);
+          });
+        };
+        return ret_res_handle();
+    };
+    
+    function showLoading(para,ACCESS_EVENT) {
+        var txt = para.Txt;
+        var stop_default_handle = (function(){
+          loading.addEventListener(ACCESS_EVENT[0],function(e){
+            e.preventDefault();
+          });
+        }());
+
+        add_style(para);
+        add_txt(txt);
+    };
+
+    var add_style= function (para) {
+        var loading = doc.querySelector('#loading');
+        var loadingTxt = doc.querySelector('.loading-txt');
+        loading.style.display             = para.bk;
+        loadingTxt.style.backgroundColor  = para.bg._child;
+
+        if (para) {
+          if ('string' == typeof para.ele) {
+            if (doc.querySelector(para.ele)) {
+              var loading_parent = doc.querySelector(para.ele);
+              var loadingMask = doc.querySelector('.loading-mask');
+              loading_parent.style.height           = para.H;
+              loading_parent.style.width            = para.W;
+              loadingMask.style.backgroundColor      = para.bg._parent;
+            }
+          }
+          else {
+            alert('ERROR CAPTURE ELEMENTS');
+          }
+        };
+    };
+
+    var add_txt = function  (txt) {
+        txt!==undefined && (doc.querySelector('.loading-txt').textContent = txt)
+    };
+
+    win.Load = request_handle;
+})(window,document)
+
+  Load({
+    H:'70%', /* 改变高度即可改变加载loading的垂直位置*/
+    W:'70%', /*改变宽度即可改变当前加载的水平位置*/
+    ele:'.control_load', /*控制整个loading的容器*/
+    Events:'click', /*触发事件*/
+    Txt:'努力加载中...', /*加载的文字内容*/
+    bk:'block', /*显示*/
+    bg:{_parent:'rgba(232,12,222,.3)',_child:"rgba(132,3,12,1)"}/*遮罩层背景*/
+  })
+  
+</script>
+</body>
