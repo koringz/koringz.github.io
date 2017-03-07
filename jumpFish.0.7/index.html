@@ -1,0 +1,38 @@
+<!doctype html>
+<head>
+  <title>Loading</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="弹出框-jump-jump-fish">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body>
+  <main>
+    <h1 id="h1" style="">点击弹出加载框</h1>
+  </main>
+</body>
+<script type="text/javascript" src="./js/jumpFish.min.js"></script>
+<script>
+
+jumpFish.request_handle({
+    parentElement:'.loading', /* 必填 */
+    eventElement:'#h1',       /* 必填 */
+    textNode:'.loading-txt',  /* 必填 */
+    events:'click',           /* 不是必填 */
+    text:'稍等,马上就好',     /* 不是必填 */
+    timeout: 8000,            /* 不是必填 */
+    block:"block"             /* 不是必填 */
+},function (ret) {
+      var doc = document;
+      var str = "<div class='loading' style='display: none;'><div class='loading-inner'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div><div class='parent-txt'><div class='loading-txt'>稍等,马上就好</div></div><div class='loading-mask'></div></div>";
+        
+        var create_div = doc.createElement("div");
+        create_div.setAttribute("class","control_load");
+        doc.querySelector('main').appendChild(create_div);
+        doc.querySelector('main .control_load').innerHTML = str;
+});
+
+</script>

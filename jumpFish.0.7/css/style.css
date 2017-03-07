@@ -1,0 +1,148 @@
+  body{
+    margin: 0;
+    padding: 0;
+  }
+  #h1{
+    position: absolute; top: 80px; left: 0;right:0; text-align:center;font-size:24px;line-height:38px;z-index: 99999; color: #555;background-color:rgba(233,2,2,.1)
+  }
+  .control_load{
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+    #loading {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 999;
+      /*background: rgba(0, 0, 0,.2);*/
+    }
+    .loading-mask {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      background-color: rgba(0, 0, 0,.2);
+    }
+    .loading-txt {
+      position: absolute;
+      left: 0;
+      top: 40%;
+      right: 0;
+      z-index: 3;
+      margin: auto;
+      width: 120px;
+      padding-top: 90px;
+      height: 30px;
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      background: rgba(0,0,0,.6);
+    }
+    .loading-inner {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      right: 0;
+      margin: 30px 0 0 -5px;
+      width: 120px;
+      height: 120px;
+      z-index: 9;
+    }
+    .loading-inner > div:nth-child(1) {
+      top: 20px;
+      left: 0;
+      -webkit-animation: loading-inner 1.2s 0.12s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.12s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(2) {
+      top: 13.63636px;
+      left: 13.63636px;
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      -webkit-animation: loading-inner 1.2s 0.24s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.24s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(3) {
+      top: 0;
+      left: 20px;
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      -webkit-animation: loading-inner 1.2s 0.36s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.36s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(4) {
+      top: -13.63636px;
+      left: 13.63636px;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      -webkit-animation: loading-inner 1.2s 0.48s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.48s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(5) {
+      top: -20px;
+      left: 0;
+      -webkit-animation: loading-inner 1.2s 0.6s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.6s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(6) {
+      top: -13.63636px;
+      left: -13.63636px;
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      -webkit-animation: loading-inner 1.2s 0.72s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.72s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(7) {
+      top: 0;
+      left: -20px;
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      -webkit-animation: loading-inner 1.2s 0.84s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.84s infinite ease-in-out;
+    }
+    .loading-inner > div:nth-child(8) {
+      top: 13.63636px;
+      left: -13.63636px;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      -webkit-animation: loading-inner 1.2s 0.96s infinite ease-in-out;
+      animation: loading-inner 1.2s 0.96s infinite ease-in-out;
+    }
+    .loading-inner > div {
+      background-color: #fff;
+      width: 4px;
+      height: 35px;
+      border-radius: 2px;
+      margin: 2px;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      position: absolute;
+      width: 5px;
+      height: 15px;
+    }
+    @-webkit-keyframes loading-inner {
+      50% {
+        opacity: 0.3; }
+
+      100% {
+        opacity: 1; } }
+
+    @keyframes loading-inner {
+      50% {
+        opacity: 0.3; }
+
+      100% {
+        opacity: 1; }
+    }
