@@ -1,0 +1,79 @@
+<html>  
+<head>  
+    <meta charset='utf-8'>
+    <title>测试算法</title>
+    <style>
+    body{
+        margin: 0;
+        padding: 0;
+    }
+    div.main{
+        padding: 16px;
+    }
+    div.top{
+        color: slategrey;
+        margin: -16px;
+        padding: 32px;
+        background-color:  #060606;
+        vertical-align: middle;
+    }
+    div#fontAlgo{
+        margin: auto;
+        padding: 10px;
+        height: 130px;
+        width: 300px;
+        background-color: cadetblue;
+        cursor: pointer;
+        border-radius: 10px;
+        color: #eee;
+        text-align: center;
+    }
+    .enter-box{
+        position: relative;
+        display: inline-block;
+        padding: 10px 8px;
+        background-color: white;
+        vertical-align: middle;
+    }
+    #ipt{
+        width: 300px;
+        line-height: 30px;
+        border: none;
+        outline: none;
+        font: 16px Microsoft YaHei, Arial, Helvetica;
+    }
+    </style>
+</head>  
+<body>
+<div class=" main">
+<!--  -->
+    <div class="top">
+        <div class="enter-box">
+            <input type='text' value='' placeholder="请输入你想对她说的那句话...." id="ipt">
+        </div>
+        <p color='#ccc'>输入之后点这里或回车键(Enter)</p>
+        
+        <div id="fontAlgo"></div>
+    </div>
+<!--  -->
+ <script src="./test_repeat.js"></script>
+ <script> 
+
+
+    // this is the default call enter value.
+    var userContent = dom('#ipt').value,
+        node = dom('#fontAlgo');
+
+    node.innerText = outputVlue(userContent);
+
+
+
+    // when the input changes call the method.
+    dom('#ipt').onchange = function  () {
+        node.innerText = outputVlue((this.value));
+    }
+
+
+</script>
+</body>
+</html>
