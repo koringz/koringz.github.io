@@ -2,32 +2,43 @@ body{font-size:100%;letter-spacing:.08rem;background-color:#10131A}
 .main{top:0;left:0;right:0;bottom:0;overflow:hidden;z-index:1001}
 .head{height:150px;max-height:150px;z-index:999}
 .container{margin:-150px auto 0;height:100%;max-height:100%!important;z-index:99}
-.head>h1{margin:100px 0 0 25px;padding-bottom:10px;width:150px;font-size:1.75rem;z-index:999}
-.head>h1:hover{font-size:1.8rem}
-.head>h1>a{color:#f2f2f2}
-.head>.menu{margin:98px 0 0;width:100px}
-.head>.menu>.menu-bar{position:relative}
-.head>.menu>.menu-bar>.box-bar{position:relative;display:inline-block;width:90%;color:#eee;height:250px;z-index:999}
-.head>.menu>.menu-bar>.box-bar>.box-grid{position:relative;display:inline-block;margin-left:-1px;width:100%;height:42px;line-height:42px;border:1px solid #969696;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;text-align:center;font-size:14px;overflow:hidden;cursor:pointer;z-index:9}
-.head>.menu>.menu-bar>.box-bar:hover>.box-grid:hover{background-color:#fff;border-color:#6f6f6f;color:#222;-webkit-transition:all .2s ease;-moz-transition:all .2s ease;transition:all .2s ease;background:-webkit-linear-gradient(to bottom,rgba(255,255,255,.9) 0,rgba(255,255,255,.9) 25%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.9) 75%,rgba(255,255,255,1) 100%);background:-moz-linear-gradient(to bottom,rgba(255,255,255,.9) 0,rgba(255,255,255,.9) 25%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.9) 75%,rgba(255,255,255,1) 100%);background:linear-gradient(to bottom,rgba(255,255,255,.9) 0,rgba(255,255,255,.9) 25%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.9) 75%,rgba(255,255,255,1) 100%);overflow:visible}
-.head>.menu>.menu-bar>.box-bar>.box-grid>a{position:relative;display:inline-block;float:right;width:88px;height:41px;line-height:41px;border-left:1px #9bbd9d solid;border-right:1px #9bbd9d solid;border-bottom:1px #9bbd9d solid;-webkit-border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;border-radius:5px;white-space:nowrap;text-align:center;color:#eee;font-size:16px}
-.head>.menu>.menu-bar>.box-bar>.box-grid>a>span{display: block}
-.head>.menu>.menu-bar>.box-bar:hover>.box-grid:hover>a:hover{background-color:#f2f2f2;color:#222;-webkit-transition:all .2s ease;-moz-transition:all .2s ease;-ms-transition:all .2s ease;transition:all .2s ease}
-.head>.menu>.menu-bar:hover>.box-bar:hover>a{box-shadow:1px 0 0 rgba(255,255,255,.3),0 1px 0 rgba(255,255,255,.3),-1px 0 1px rgba(255,255,255,.3),0 -1px 1px rgba(255,255,255,.5)}
+.head h1{margin:100px 0 0 25px;padding-bottom:10px;width:150px;font-size:1.75rem;z-index:999}
+.head h1:hover{font-size:1.8rem}
+.head h1 a{color:#f2f2f2}
+.head .menu{margin:98px 0 0;width:100px}
+.menu-bar{position:relative}
+.menu-bar .box-bar{position:relative;display:inline-block;width:90%;color:#eee;height:250px;z-index:999}
+.menu-bar .box-bar .box-grid{position:relative;display:inline-block;margin-left:-1px;width:100%;height:42px;line-height:42px;border:1px solid #969696;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;text-align:center;font-size:14px;overflow:hidden;cursor:pointer;z-index:9}
+.menu-bar .box-bar:hover .box-grid:hover{background-color:#fff;border-color:#6f6f6f;color:#222;-webkit-transition:all .2s ease;-moz-transition:all .2s ease;transition:all .2s ease;background:-webkit-linear-gradient(to bottom,rgba(255,255,255,.9) 0,rgba(255,255,255,.9) 25%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.9) 75%,rgba(255,255,255,1) 100%);background:-moz-linear-gradient(to bottom,rgba(255,255,255,.9) 0,rgba(255,255,255,.9) 25%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.9) 75%,rgba(255,255,255,1) 100%);background:linear-gradient(to bottom,rgba(255,255,255,.9) 0,rgba(255,255,255,.9) 25%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.9) 75%,rgba(255,255,255,1) 100%);overflow:visible}
+.menu-bar .box-bar .box-grid a{position:relative;display:inline-block;float:right;width:88px;height:41px;line-height:41px;border-left:1px #9bbd9d solid;border-right:1px #9bbd9d solid;border-bottom:1px #9bbd9d solid;-webkit-border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;border-radius:5px;white-space:nowrap;text-align:center;color:#eee;font-size:16px}
+.menu-bar .box-bar .box-grid a span{display: block}
+.menu-bar .box-bar:hover .box-grid:hover a:hover{background-color:#f2f2f2;color:#222;-webkit-transition:all .2s ease;-moz-transition:all .2s ease;-ms-transition:all .2s ease;transition:all .2s ease}
+.menu-bar:hover .box-bar:hover a{box-shadow:1px 0 0 rgba(255,255,255,.3),0 1px 0 rgba(255,255,255,.3),-1px 0 1px rgba(255,255,255,.3),0 -1px 1px rgba(255,255,255,.5)}
 
-.container>div.content{margin:250px 0 20px 20%;height:auto;width:60%;min-width:60%}
-.container>div.content>p{color:#766454;font-size:1.25rem;line-height:2rem}
-.container>div.content>p>span{color:#373636}
-.container>div.content>p>a:hover{text-transform:lowercase}
-.container>div.foot{bottom:0;width:100%;color:#eee}
-.container>div.foot>.link{position:relative;width:100%}
-.container>div.foot>.link>p{width:100%;height:50px;max-height:50px;line-height:50px}
-.container,.head{width:66%;min-width:480px}
+.container div.content{margin:250px 0 20px 20%;height:auto;width:60%;min-width:60%}
+.container div.content p{color:#766454;font-size:1.25rem;line-height:2rem}
+.container div.content p span{color:#373636}
+.container div.content p a:hover{text-transform:lowercase}
+.container div.foot{bottom:0;width:100%;color:#eee}
+.container div.foot .link{position:relative;width:100%}
+.container div.foot .link p{width:100%;height:50px;max-height:50px;line-height:50px}
+.container,.head{width:66%;min-width: 320px;}
 iframe{height:50px;width:100px;border:none}
-.head>div.menu>p.menu-bar>span.box-bar>span,.head>div.menu>p.menu-bar>span.box-bar>span>a{font-family:'Open Sans',sans-serif}
+.head div.menu p.menu-bar span.box-bar span,.head div.menu p.menu-bar span.box-bar span a{font-family:'Open Sans',sans-serif}
 .cc01{color:#8d8e91}
 .cc02{color:#737c0e}
 .cc03{color:#0bcc86}
 .cc04{color:#563475}
 .cc05{color:#8e3757}
 .cc06{color:#eee}
+
+@media (max-width: 767px){
+    .container, .head{
+        margin-top: 30px;
+        width: 100%;
+    }
+    .container  div.content {
+        margin: 0 auto;
+        width: 70%;
+    }
+}

@@ -35,8 +35,6 @@ body {
 * Page container.
 * ---------
 */
-.main  .containe {
-}
 
 .container {
 	margin: -150px auto 0;
@@ -61,7 +59,7 @@ body {
 * compenent: head.
 * ---------
 */
-.head >h1 {
+.head h1 {
 	margin: 100px 0 0 25px;
 	padding-bottom: 10px;
 	width: 150px;
@@ -69,24 +67,24 @@ body {
 	z-index: 999;
 }
 
-.head >h1:hover {
+.head h1:hover {
 	font-size: 1.8rem;
 }
 
-.head >h1 >a{
+.head h1 a{
 	color: #f2f2f2;
 }
 
-.head >.menu {
+.head .menu {
 	margin: 98px 0 0;
 	width: 100px;
 }
 
-.head >.menu >.menu-bar {
+.head .menu .menu-bar {
 	position: relative;
 }
 
-.head >.menu >.menu-bar >.box-bar {
+.head .menu .menu-bar .box-bar {
 	position: relative;
 	display: inline-block;
 	width: 90%;
@@ -95,7 +93,7 @@ body {
 	z-index: 999;
 }
 
-.head >.menu >.menu-bar >.box-bar >.box-grid {
+.head .menu .menu-bar .box-bar .box-grid {
 	position: relative;
 	display: inline-block;
 	margin-left: -1px;/*因为宽度百分之百，有边框就增加了1像素宽度*/
@@ -113,7 +111,7 @@ body {
 	z-index: 9;
 }
 
-.head >.menu >.menu-bar >.box-bar:hover >.box-grid:hover {
+.head .menu .menu-bar .box-bar:hover .box-grid:hover {
 	background-color: #fff;/*on moues over btn change color*/
 	border-color: rgb(111, 111, 111);/*ie不能显示rgba，但是能显示rgb*/
 	color: #222;
@@ -126,7 +124,7 @@ body {
 	overflow: visible;
 }
 
-.head >.menu >.menu-bar >.box-bar >.box-grid >a {
+.head .menu .menu-bar .box-bar .box-grid a {
 	position: relative;
 	display: inline-block;
 	float: right;
@@ -145,11 +143,11 @@ body {
 	color: #eee;
 	font-size: 16px;
 }
-.head>.menu>.menu-bar>.box-bar>.box-grid>a>span{
+.head .menu .menu-bar .box-bar .box-grid a span{
 	display: block;
 }
 
-.head >.menu >.menu-bar >.box-bar:hover >.box-grid:hover >a:hover {
+.head .menu .menu-bar .box-bar:hover .box-grid:hover a:hover {
 	background-color: #f2f2f2;/*on moues over btn change color*/
 	color: #222;
 	-webkit-transition: all 0.2s ease;
@@ -158,31 +156,31 @@ body {
 	transition: all 0.2s ease;
 }
 
-.head >.menu >.menu-bar:hover >.box-bar:hover >a {
+.head .menu .menu-bar:hover .box-bar:hover a {
 	box-shadow: 1px 0px 0px rgba(255,255,255,0.3), 0px 1px 0px rgba(255,255,255,0.3), -1px 0px 1px rgba(255,255,255,0.3), 0px -1px 1px rgba(255,255,255,0.5);
 }
 /*
 * compenent: container.
 * ---------
 */
-.container >div.content {
+.container div.content {
 	margin: 250px 0 20px 20%;
 	height: auto;
 	width: 60%;
 	min-width: 60%;
 }
 
-.container >div.content >p {
+.container div.content p {
 	color: #766454;
 	font-size: 1.25rem;
 	line-height: 2rem;
 }
 
-.container >div.content >p >span {
+.container div.content p span {
 	color: #373636;
 }
 
-.container >div.content >p >a:hover {
+.container div.content p a:hover {
 	text-transform: lowercase;
 }
 /*
@@ -199,18 +197,18 @@ body {
 * compenent: container.
 * -----------footer
 */
-.container >div.foot {
+.container div.foot {
 	bottom: 0;
 	width: 100%;
 	color: #eee;
 }
 
-.container >div.foot >.link {
+.container div.foot .link {
 	position: relative;
 	width: 100%;
 }
 
-.container >div.foot >.link >p {
+.container div.foot .link p {
 	width: 100%;
 	height: 50px;
 	max-height: 50px;
@@ -239,8 +237,8 @@ iframe{
 	min-width: 480px;
 }
 
-.head >div.menu >p.menu-bar >span.box-bar >span,
- .head >div.menu >p.menu-bar >span.box-bar >span >a {
+.head div.menu p.menu-bar span.box-bar span,
+ .head div.menu p.menu-bar span.box-bar span a {
 	font-family: 'Open Sans', sans-serif;
 }
 
