@@ -24,30 +24,30 @@
             js:
             <pre class="box">
 
-                var REO = new Reo();
+var REO = new Reo();
 
-                // 创建链式调用的方法
-                var Chain = REO.chain({
-                    module : '<span class="highlight">user_next</span>',
-                    val: [22,3,5] // mes1 = 22 ,mes2 = 3, mes3 = 5
-                });
+// 创建链式调用的方法
+var Chain = REO.chain({
+    module : '<span class="highlight">user_next</span>',
+    val: [22,3,5] // mes1 = 22 ,mes2 = 3, mes3 = 5
+});
 
-                // 定义链式调用
-                var getvalue = Chain.then(function ( api, mes1 ) {
-                    api( mes1 + 3 );
-                })
-                .then(function  ( api , mes2, massages ) {
-                    api( mes2 +  <span class="highlight">Number(fr.value)</span>  );
-                })
-                .then(function  ( api , mes3, massages ) {
-                    api( mes3 + massages );
-                });
+// 定义链式调用
+var getvalue = Chain.then(function ( api, mes1 ) {
+    api( mes1 + 3 );
+})
+.then(function  ( api , mes2, massages ) {
+    api( mes2 +  <span class="highlight">Number(fr.value)</span>  );
+})
+.then(function  ( api , mes3, massages ) {
+    api( mes3 + massages );
+});
 
-                // 输出所有
-                var getAll = getvalue.<span class="highlight">all</span>();  // => 25,15,20
+// 输出所有   // => 25,15,20
+var getAll = getvalue.<span class="highlight">all</span>();
 
-                // 或者（使用模块名输出）
-                var getAll = getvalue.<span class="highlight">user_next</span>();  // => 25
+// 或者（使用模块名输出）  // => 25
+var getAll = getvalue.<span class="highlight">user_next</span>();
             </pre>
         </code>
     </div>
