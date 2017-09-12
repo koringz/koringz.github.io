@@ -1,0 +1,84 @@
+<html>  
+<head>  
+    <meta charset='utf-8'>
+    <title>s3.JS</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <link rel="stylesheet" type="text/css" href="./../assets/public.css">
+    <style type="text/css">.bgwhite{background-color: white}.bgred{background-color: white}#mid{width:960px;margin:0 auto;text-align: left;padding: 5px}.header{text-align: center;}.header canvas{margin: 0 auto;}#clear{clear:both;margin-top:8px;padding: 0;}.active{color:gray;}</style>
+ <!-- <script src="./../../js/reo-simgl.js"></script> -->
+ <script src="./../S3/S3.js"></script>
+</head>  
+<body>
+<div>
+	<span>动画效果</span>
+</div>
+<div class=" main">
+	<div id="mid"> <span>鼠标:</span>
+		<button data-model="evtLine">line-鼠标</button>
+		<button data-model="evtWave">wave-自动</button>
+		<button data-model="back" style="float:right;font-weight:bold">back</button>
+	</div>
+
+	<div class="header">
+		<canvas id="lineId"></canvas>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="./../simglmodel/more.js"></script>
+<!-- <script type="text/javascript" src="./../../js/compenent/simglmodel/line.js"></script>
+<script type="text/javascript"> line();</script> -->
+<script type="text/javascript">
+var all = document.querySelector('#mid').querySelectorAll("button");
+var allLen = all.length;
+allLen--;
+for(var k = 0; k < all.length; k++ ){
+
+	if(k !== allLen){
+		all[k].onclick = function  (e) {
+			var pre = e.target.nextSibling;
+			var c = e.target.nextSibling.parentNode.children;
+			var allLen = c.length;
+
+			var items = [];
+			for(var d = 0; d < allLen; d++){
+				items.push( c.item(d) );
+				items[d].removeAttribute('class');
+			}
+
+			e.target.setAttribute('class','active');
+
+			var getFoo = e.target.getAttribute("data-model");
+
+			if(getFoo !== 'evtWave') clearTimeout(t);
+			window[getFoo]()
+		}
+	}
+	else{
+		all[k].onclick = function  () {
+			window.history.back()
+		}
+	}
+}
+</script>
+</html>
+
+
+
+
+<!-- 
+<script type="text/javascript" src="./../js/learn/test.simgl.js"></script>
+
+document.querySelector('canvas').getContext("webgl");
+GLbindBuffer 维持着一个opengl缓存标志符
+	
+<script src="./../js/other/ractive.js"></script>
+<script src="./../js/other/d3.js"></script>
+ -->
+<!-- 
+http://origamijs.com/docs/#examples
+http://www.senchalabs.org/philogl/doc/scene.html
+http://www.concretejs.com/#examples
+http://fabricjs.com/solar-system
+http://rekapi.com/demo/bubbles.html
+-->
