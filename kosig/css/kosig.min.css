@@ -1,7 +1,9 @@
 *{font-family:'Microsoft YaHei UI','Microsoft YaHei',SimSun,'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif!important}
 :after,:before{box-sizing:border-box;box-sizing:-webkit-border-box;box-sizing:-moz-border-box}
 body,html,p{margin:0;padding:0}
+img {width: 22px;height: 22px;font-size: 0;line-height: 1px;display: inline-block;vertical-align: middle;border-radius: 50%;overflow: hidden;}
 a{cursor:pointer;text-decoration:none}
+.friend{color: #373636}
 .ddb{display:block}
 .ddib{display:inline-block}
 .ddi{display:inline}
