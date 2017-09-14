@@ -1,7 +1,6 @@
 // one
 function lineAndarcAndcircle (){
-
-	var simgl = new s3.Shape();
+var simgl = new s3.Shape();
 var canvas = s3.dom('canvas');
 var ctx = canvas.getContext('2d');
 
@@ -54,6 +53,14 @@ var circleShap = ct.graphics.addComponent('circleShape', {
 	property: colorOrPosition
 });
 
+var restores = circleShap.config.set;
+for(var k = 0; k < 20; k++){
+	restores.property[k] = {
+		radius:Math.random() * radius,
+	};
+}
+
+
 
 // final
 app.root.addChild(ct);
@@ -65,8 +72,7 @@ simgl.render();
 }
 // two
 function lineAndcircleAndsectors (){
-
-	var simgl = new s3.Shape();
+var simgl = new s3.Shape();
 var canvas = s3.dom('canvas');
 var ctx = canvas.getContext('2d');
 

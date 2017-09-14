@@ -1,7 +1,6 @@
 function circle (){
 
-
-	var simgl = new s3.Shape();
+var simgl = new s3.Shape();
 var canvas = s3.dom('canvas');
 var ctx = canvas.getContext('2d');
 
@@ -36,13 +35,9 @@ var restore = circleShape.config.set;
 restore.type = 'Array';
 var col = ['#32e0a3','#eea033','#aae0a3'];
 
-for(var k = 0; k < 3; k++){
-	var x = 10 + k*10;
-	var y = 50 + k*10;
+for(var k = 0; k < 20; k++){
 	restore.property[k] = {
-		x: x,
-		y: y,
-		index:col[k]
+		radius:Math.random() * radius,
 	};
 }
 
