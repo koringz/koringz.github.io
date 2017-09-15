@@ -105,7 +105,7 @@
         // 并且变量的第二个字母以99使用的单词开头
         // 所有超过1000的按照英文的字母表顺序做变量的开头首字母
         // ARRSLICE_module
-        var Am, At, Atp, Ata, Atd, Att, Atr, Ats, Ata, Atc, Atc20, Atc30, Ac, Acls, Acas, Acrs, Acws, Acss, Achs, Aw, Al, As, Af, Bc, Br,
+        var Am, At, Atp, Ata, Atd, Att, Atr, Ats, Ata, Atc, Atc20, Atc30, Ac, Acls, Acas, Acrs, Acws, Acss, Achs, Ac_, Aw, Al, As, Af, Bc, Bp, Br,
 
         // functional property
         speed, times, logger, messages, processing, requestAnimation,
@@ -198,13 +198,14 @@
                     Acss = closure[1][294];
                     Achs = closure[1][293];
                     Acw = closure[1][240];
+                    Ac_ = closure[1][239];
                     As = closure[1][499];
                     Af = closure[1][999];
+                    Bp = closure[1][1000];
                     Bc = closure[1][1099];
                     Br = closure[1][1299];
                 },
                 2 : function() {
-
                     // used in the function properties.
                     speed = 0.1; // speed lv
                     times = 0; // time out
@@ -227,7 +228,6 @@
                     });
                 },
                 3 : function() {
-
                     // bind function mehtod in the rename variable.
                     // eleven with data and el document.
                     // first : properties; second : closure; third : prototype chain; fourth : __proto__ ; fifth : this gesture[6]
@@ -255,9 +255,10 @@
                         294 : 'sectorsShape',
                         293 : 'hatShape',
                         240 : 'wave',
+                        239 : 'circle',
                         499 : 'set',
                         999 : 'freezeProperty',
-                        1000 : 'getFreezeProperty',
+                        1000 : 'plugin',
                         1099 : 'cover2DProperty',
                         1111 : 'cache',
                         1299 : 'render',
@@ -359,14 +360,17 @@
                     this.x1 = Math.round(Math.random() * 36 + 36) * 2; // end position
                     this.y1 = Math.round(Math.random() * 36 + 36) * 2; // end position
                     this.calculationProperty = { // 进程的属性
-                        createWave: o[1][240].createWave
+                        createWave: o[1][240].createWave,
+                        createCircle: o[1][239].createCircle,
                     };
                     this.readyPosition = 50;
                     this.beginPosition = {
-                        x: 50
+                        x : 50,
+                        y : null
                     };
                     this.endPosition = {
-                        x: 500
+                        x: 500,
+                        y : null
                     };
                 },
                 299 : function() {
@@ -417,6 +421,10 @@
                     this.name = 'wave';
                     this.data = [];
                 },
+                239 : function() {
+                    this.name = 'circle';
+                    this.data = [];
+                },
                 499 : function() {
                     this.name = 'set';
                     this.data = [];
@@ -429,7 +437,8 @@
                     Object.freeze(this.isFreezeProperties)
                 },
                 1000 : function() {
-                    this.name = 'getFreezeProperty';
+                    this.name = 'plugin';
+                    shape.plugin(arguments);
                 },
                 1111 : function() {
                     this.name = 'cache';
@@ -944,10 +953,21 @@
         q[1][299].prototype.constructor = o[1][299];
         o[1][299] = q[1][299];
         Object.assign(o[1][299].prototype, {
+            initialize: function() {
+                return this,
+                o[1][299].call(this, arguments),
+                o[1][299].prototype
+            },
             draw: function(options) {
                 var getCollectionProperty = this.particularProperty(true);
                 // 获得默认的属性和参数
                 var shapeProperty = new o[1][300];
+                var _createCircle = shapeProperty.calculationProperty.createCircle;
+
+                this.iterator.dynimic = {};
+
+                this._scene2DFillStyles("rgb(255,255,255)")
+                this._fillRect();
 
                 var acceptCollection, inherit;
                 if (getCollectionProperty.type === 'Array') acceptCollection = getCollectionProperty.property;
@@ -957,18 +977,26 @@
                     inherit.radius = !inherit.radius ? shapeProperty.radius: inherit.radius;
                     inherit.x = !inherit.x ? shapeProperty.x: inherit.x;
                     inherit.y = !inherit.y ? shapeProperty.y: inherit.y;
+                    inherit.speed = !inherit.speed ? shapeProperty.speed: inherit.speed;
                     inherit.index = !inherit.index ? shapeProperty.index: inherit.index;
                     inherit.startAngles = !inherit.startAngles ? shapeProperty.startAngles: inherit.startAngles;
+                    inherit.beginPosition = !inherit.beginPosition ? shapeProperty.beginPosition: inherit.beginPosition;
+                    inherit.endPosition = !inherit.endPosition ? shapeProperty.endPosition: inherit.endPosition;
 
-                    this.iterator.radius = inherit.radius;
                     this.iterator.x = inherit.x;
                     this.iterator.y = inherit.y;
+                    this.iterator.speed = inherit.speed;
                     this.iterator.index = inherit.index;
+                    this.iterator.radius = inherit.radius;
                     this.iterator.startAngles = inherit.startAngles;
 
-                    this._beggingToDo();
                     this._moveTo();
-                    this._drawGraphicsArc();
+                    this._beggingToDo();
+                    this.getDynimicData(_createCircle, inherit.x, inherit.y);
+                    for(var d = this.iterator.dynimic.group,k = this.iterator.dynimic.length, i = 0; i < k; i++){
+                        var x = d[i][0] * this.iterator.speed, y = d[i][1] * this.iterator.speed;
+                        this._drawGraphicsArc(x,y);
+                    }
                     this._scene2DFillStyles();
                     this._scene2DFill()
                 }
@@ -989,17 +1017,31 @@
             /*
 				excuting the arc events 
 			*/
-            _drawGraphicsArc: function(options) {
-                this.data[0].arc(this.iterator.x, this.iterator.y, this.iterator.radius, this.iterator.startAngles, 2 * Math.PI);
+            _drawGraphicsArc: function(x,y) {
+                this.data[0].arc(this.iterator.x + x, this.iterator.y + y, this.iterator.radius, this.iterator.startAngles, 2 * Math.PI);
             },
             /*
 				setting color properties
 			*/
             _scene2DFillStyles: function(options) {
-                this.data[0].fillStyle = this.iterator.index;
+                this.data[0].fillStyle = options || this.iterator.index;
             },
             _scene2DFill: function() {
                 this.data[0].fill();
+            },
+            _fillRect : function (options){
+                this.data[0].fillRect(0, 0, this.data[0].canvas.width, this.data[0].canvas.height);
+            },
+            // 获得动态属性
+            getDynimicData: function(_createCircle, _a, _b) {
+                var collection = {};
+                var circleModule = _createCircle(_a, _b);
+
+                var item = circleModule.positionItem;
+
+                this.iterator.dynimic.group = item;
+                this.iterator.dynimic.length = item.length;
+                // especially of base property
             },
             Excute2DEngine: function() {
                 // accept ctx 2d property.
@@ -1047,6 +1089,11 @@
         q[1][298].prototype.constructor = o[1][298];
         o[1][298] = q[1][298];
         Object.assign(o[1][298].prototype, {
+            initialize: function() {
+                return this,
+                o[1][293].call(this, arguments),
+                o[1][293].prototype
+            },
             draw: function(options) {
                 var getCollectionProperty = this.particularProperty();
 
@@ -1147,6 +1194,11 @@
         q[1][297].prototype.constructor = o[1][297];
         o[1][297] = q[1][297];
         Object.assign(o[1][297].prototype, {
+            initialize: function() {
+                return this,
+                o[1][293].call(this, arguments),
+                o[1][293].prototype
+            },
             draw: function(options) {
                 var getCollectionProperty = this.particularProperty();
 
@@ -1244,6 +1296,11 @@
         q[1][296].prototype.constructor = o[1][296];
         o[1][296] = q[1][296];
         Object.assign(o[1][296].prototype, {
+            initialize: function() {
+                return this,
+                o[1][293].call(this, arguments),
+                o[1][293].prototype
+            },
             draw: function(options) {
                 var getCollectionProperty = this.particularProperty();
 
@@ -1360,6 +1417,11 @@
         q[1][295].prototype.constructor = o[1][295];
         o[1][295] = q[1][295];
         Object.assign(o[1][295].prototype, {
+            initialize: function() {
+                return this,
+                o[1][293].call(this, arguments),
+                o[1][293].prototype
+            },
             draw: function(options) {
                 var getCollectionProperty = this.particularProperty();
 
@@ -1559,6 +1621,11 @@
         q[1][294].prototype.constructor = o[1][294];
         o[1][294] = q[1][294];
         Object.assign(o[1][294].prototype, {
+            initialize: function() {
+                return this,
+                o[1][293].call(this, arguments),
+                o[1][293].prototype
+            },
             draw: function(options) {
 
                 var getCollectionProperty = this.particularProperty();
@@ -1685,6 +1752,11 @@
         q[1][293].prototype.constructor = o[1][293];
         o[1][293] = q[1][293];
         Object.assign(o[1][293].prototype, {
+            initialize: function() {
+                return this,
+                o[1][293].call(this, arguments),
+                o[1][293].prototype
+            },
             draw: function(options) {
 
                 var getCollectionProperty = this.particularProperty();
@@ -1745,8 +1817,8 @@
                 this.data[0].arc(this.iterator.x, this.iterator.y, this.iterator.radius, this.iterator.startAngles, this.iterator.stopAngles, false);
             },
             _lineTo: function(options) {
-                console.log(this.iterator.x1 + ',' + this.iterator.y1);
                 this.data[0].lineTo(this.iterator.x1, this.iterator.y1);
+                // console.log(this.iterator.x1 + ',' + this.iterator.y1);
             },
             _fillStyle: function(options) {
                 this.data[0].fillStyle = this.iterator.index;
@@ -1824,6 +1896,7 @@
         o[1][240].createWave = function(a, b, c, d, e, f, g, l) {
             var x, y, h, k, o, p, r, s, q, m, n, hx4, hy4, t = [];
 
+            // default position
             x = f;
 
             // 1/4 of the width and height
@@ -1853,14 +1926,6 @@
                 speed: s
             }
         }
-        Object.defineProperties(o[1][240].prototype, {
-            get: function() {
-                return 2
-            },
-            set: function(value) {
-                return value
-            }
-        });
         Object.assign(o[1][240].prototype, {
             initialize: function() {
                 return this,
@@ -1868,6 +1933,103 @@
                 o[1][240].prototype
             }
         });
+
+
+        /*
+            x,y,
+            aa = x
+            bb = y
+        */
+        q[1][239].prototype.constructor = o[1][239];
+        o[1][239] = q[1][239];
+        o[1][239].createCircle = function(aa, bb) {
+            var times = (new Date).getTime() / 60;
+
+            var circle_self = new o[1][239]();
+
+            var circle_self_location =  circle_self._location(aa, bb,times);
+
+            return {
+                positionItem: circle_self_location.results,
+            }
+        }
+        Object.assign(o[1][239].prototype, {
+            initialize: function() {
+                return this,
+                o[1][239].call(this, arguments),
+                o[1][239].prototype
+            },
+            _location: function (aa,bb,times){
+                var a, b, c, d, e, max, x, y, xx, yy,r, m, n;
+                var geths;
+
+                a = times / 68;
+                yy = bb;
+                xx = yy * Math.sin(Math.PI / 3);
+
+                for (d = 0; d < 2; d++) {
+                    r = Math.PI * 2 / 3 * d;
+                    m = Math.cos(r);
+                    n = Math.sin(r);
+                    for (b = 0; b < 2; b++) {
+                        c = 1;
+                        if (b % 2 == 1) c = 1/2;
+                        x = (b * m) * xx + times * 2;
+                        y =  yy + (a + c) * n;
+                        geths = this._destroy(x, y, xx, yy, times);
+                    }
+                }
+
+                return geths
+            },
+            _destroy: function (x, y, xx, yy, times) {
+                        var a, b, c, d, e, z, f1,f2,f3,f4, x0, y0, g, g1, g2, m1, m2, rx, ry, r1, r2;
+                        g = g2 = [];
+                        g1 = [];
+                        f1 = [x, y];
+                        f2 = [x + xx / 2, y - yy / 4];
+                        f3 = [x, y + yy / 2];
+                        f4 = [x - xx / 2, y + yy / 4];
+                        g = [f1,f2,f3,f4];
+
+                        len = 4;
+                        for (a = 0; a < 4; a++) {
+                            c = g[a];
+                            d = g[(a + 1) % 4];
+                            for (b = 0; b < len; b++) {
+                                r1 = b / len;
+                                r2 = 1 - r1;
+                                x0 = c[0] * r2 + d[0] * r1;
+                                y0 = c[1] * r2 + d[1] * r1;
+                                g1.push([x0, y0]);
+                            }
+                        }
+
+                        for (g = g1,a = 0; a < g.length; a++) {
+                            x0 = g[a][0];
+                            y0 = g[a][1];
+                            rx = (x0 / xx / 20) * Math.PI * 2;
+                            ry = (y0 / yy / 20) * Math.PI * 2 + times / 24;
+
+                            m1 = Math.cos(rx);
+                            m2 = Math.sin(rx);
+
+                            z = Math.cos(ry) / 2 + 1;
+                            y = Math.sin(ry) / 2;
+
+                            x = z * m2;
+                            y= z * x;
+
+                            z = z * m1;
+                            g2.push([x, y, z]);
+                        }
+
+                        return {
+                            results: g2
+                        };
+                }
+        });
+
 
         q[1][198].prototype.constructor = o[1][198];
         o[1][198] = q[1][198];
@@ -1942,11 +2104,7 @@
             }
         });
 
-        // 这是一个收集所有属性的集合
-        // 集合的作用 输出所有的类别的函数
-        // 把类别转换成可以被调用的结果 frzpos.index
-        // 接收的函数名为 固定getFreeze + 处理的后缀名 color = getFreezeColor
-        // app.getFreezeColor 接收函数名|方法名
+        // s3.plugin 接收插件名|插件方法
         q[1][1000].prototype.constructor = o[1][1000];
         o[1][1000] = q[1][1000];
         Object.defineProperties(o[1][1000].prototype, {
@@ -1963,24 +2121,7 @@
                 o[1][1000].call(this, arguments),
                 o[1][1000].prototype
             },
-        });
-
-        q[1][1111].prototype.constructor = o[1][1111];
-        o[1][1111] = q[1][1111];
-        Object.defineProperties(o[1][1111].prototype, {
-            get: function() {
-                return 2
-            },
-            set: function(value) {
-                return value
-            }
-        });
-        Object.assign(o[1][1111].prototype, {
-            initialize: function() {
-                return this,
-                o[1][1111].call(this, arguments),
-                o[1][1111].prototype
-            },
+            sets:function (){}
         });
 
         // 此处为重写2d属性的值 
@@ -2001,6 +2142,24 @@
                 return this,
                 o[1][1099].call(this, arguments),
                 o[1][1099].prototype
+            },
+        });
+
+        q[1][1111].prototype.constructor = o[1][1111];
+        o[1][1111] = q[1][1111];
+        Object.defineProperties(o[1][1111].prototype, {
+            get: function() {
+                return 2
+            },
+            set: function(value) {
+                return value
+            }
+        });
+        Object.assign(o[1][1111].prototype, {
+            initialize: function() {
+                return this,
+                o[1][1111].call(this, arguments),
+                o[1][1111].prototype
             },
         });
 
@@ -2042,7 +2201,7 @@
         Shape.plugin.create('hatShape', o[1][293]);
         Shape.plugin.create('set', o[1][499]);
         Shape.plugin.create('freezeProperty', o[1][999]);
-        Shape.plugin.create('getFreezeProperty', o[1][1000]);
+        Shape.plugin.create('plugin', o[1][1000]);
         Shape.plugin.create('cache', o[1][1111]);
         Shape.plugin.create('cover2DProperty', o[1][1099]);
         Shape.plugin.create('render', o[1][1299]);
