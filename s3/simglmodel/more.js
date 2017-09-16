@@ -1,6 +1,8 @@
 
+var t = 0;
+var c = 0;
+
 function evtLine(){
-	console.log(s3)
 	var shape = new s3.Shape();
 	var canvas = s3.dom('canvas');
 	var ctx = canvas.getContext('2d');
@@ -43,6 +45,7 @@ function evtLine(){
 			};
 		}
 
+
 		app.root.addChild(cr);
 	});
 
@@ -50,7 +53,6 @@ function evtLine(){
 }
 
 
-var t = 0;
 function evtWave (){
 	console.log(s3)
 
@@ -68,7 +70,7 @@ function evtWave (){
 	var scene = app.scene;
 	var getBlock = app.createGradient;
 	var getBlock20 = app.createGradient20;
-	var colorOrPosition = app.amount(20).handleModule(getBlock20).map(function(opt) {
+	var colorOrPosition = app.amount(10).handleModule(getBlock).map(function(opt) {
 		return {
 			index: opt,
 			x: Math.round(Math.random() * (width - radius * 2) + radius),
@@ -84,29 +86,31 @@ function evtWave (){
 		type: 'Array',
 		property: colorOrPosition
 	});
+	waveShape.start({speed:0.5});
 
 	var restore = waveShape.config.set;
 	restore.type = 'Array';
 
-	for(var k = 0; k <20; k++){
+	for(var k = 0; k <10; k++){
 		restore.property[k] = {
 			beginPosition:{
 				x:0
 			},
 			endPosition:{
 				x:width
-			}
+			},
 		};
 
 	}
 
+	// waveShape.start();
+	// waveShape.animation('start');
 	// app.animation(cr,t); // 只有一个canvas才能使用
-
 	if(t) clearTimeout(t);
+	if(c) clearTimeout(c);
+
 	function sc(){
-		t = setTimeout(sc,60);
-		// waveShape.start();
-		// waveShape.animation('start');
+		t = setTimeout(sc,20);
 		app.root.addChild(cr);
 	}
 	sc();
@@ -114,7 +118,6 @@ function evtWave (){
 	console.log(app)
 }
 
-var c = 0;
 function evtCircle (){
 
 	var simgl = new s3.Shape();
@@ -151,6 +154,7 @@ function evtCircle (){
 		type: 'Array',
 		property: colorOrPosition
 	});
+	circleShape.start();
 
 	var restore = circleShape.config.set;
 	restore.type = 'Array';

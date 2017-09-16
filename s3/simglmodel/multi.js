@@ -72,66 +72,69 @@ simgl.render();
 }
 // two
 function lineAndcircleAndsectors (){
-var simgl = new s3.Shape();
-var canvas = s3.dom('canvas');
-var ctx = canvas.getContext('2d');
+	var simgl = new s3.Shape();
+	var canvas = s3.dom('canvas');
+	var ctx = canvas.getContext('2d');
 
-simgl.set(canvas).attr('width').val('960').attr('height').val('500').attr('className').val('bgred');
+	simgl.set(canvas).attr('width').val('960').attr('height').val('500').attr('className').val('bgred');
 
-var width = simgl.set(canvas).attr("width").val(),
+	var width = simgl.set(canvas).attr("width").val(),
 	height = simgl.set(canvas).attr("height").val(),
 	radius = 32;
 
-var app = simgl.tool(ctx);
-var scene = app.scene;
-var getBlock = app.createGradient;
-var getBlock20 = app.createGradient20;
-var colorOrPosition = app.amount(20).handleModule(getBlock20).map(function(opt) {
+	var app = simgl.tool(ctx);
+	var scene = app.scene;
+	var getBlock = app.createGradient;
+	var getBlock20 = app.createGradient20;
+	var colorOrPosition = app.amount(20).handleModule(getBlock20).map(function(opt) {
 	return {
 		index: opt,
 		x: Math.round(Math.random() * (width - radius * 2) + radius),
 		y: Math.round(Math.random() * (height - radius * 2) + radius),
 	}
-});
+	});
 
-// var fz = simgl.freezeProperty(colorOrPosition);
-
-var at = new app.Manager(scene);
-// rebuilt app
-var as = at.graphics.addComponent('sectorsShape', {
-	type: 'Array',
-	property: colorOrPosition
-});
-var res = as.config.set;
-for(var k =0; k< 20; k++){
-	res.property[k] = {
-		x1:colorOrPosition[k].x+k,
-		y1:colorOrPosition[k].y+k,
-		x:colorOrPosition[k].x,
-		y:colorOrPosition[k].y,
-		radius:58,
-		index:colorOrPosition[k].index
-	};
-}
+	// var fz = simgl.freezeProperty(colorOrPosition);
 
 
-var cr = new app.Manager(scene);
-var circleShap = cr.graphics.addComponent('circleShape', {
-	type: 'Array',
-	property: colorOrPosition
-});
 
-var ls = new app.Manager(scene);
-var arcShap = ls.graphics.addComponent('lineShape', {
-	type: 'Array',
-	property: colorOrPosition
-});
+	var cr = new app.Manager(scene);
+	var circleShap = cr.graphics.addComponent('circleShape', {
+		type: 'Array',
+		property: colorOrPosition
+	});
 
-// final
-app.root.addChild(ls);
-app.root.addChild(cr);
-app.root.addChild(at);
 
-simgl.render();
+	var at = new app.Manager(scene);
+	// rebuilt app
+	var as = at.graphics.addComponent('sectorsShape', {
+		type: 'Array',
+		property: colorOrPosition
+	});
+	var res = as.config.set;
+	for(var k =0; k< 20; k++){
+		res.property[k] = {
+			x1:colorOrPosition[k].x+k,
+			y1:colorOrPosition[k].y+k,
+			x:colorOrPosition[k].x,
+			y:colorOrPosition[k].y,
+			radius:58,
+			index:colorOrPosition[k].index
+		};
+	}
+
+
+	var ls = new app.Manager(scene);
+	var arcShap = ls.graphics.addComponent('lineShape', {
+		type: 'Array',
+		property: colorOrPosition
+	});
+
+
+	// final
+	app.root.addChild(ls);
+	app.root.addChild(cr);
+	app.root.addChild(at);
+
 
 }

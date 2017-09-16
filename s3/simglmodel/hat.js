@@ -2,8 +2,7 @@
 function hat (){
 
 
-
-	var simgl = new s3.Shape();
+var simgl = new s3.Shape();
 var canvas = s3.dom('canvas');
 var ctx = canvas.getContext('2d');
 

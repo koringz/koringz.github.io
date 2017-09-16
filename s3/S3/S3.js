@@ -246,6 +246,7 @@
                         85 : 'createGradient20',
                         84 : 'createGradient30',
                         83 : 'pointerConfig',
+                        82 : 'startConfig',
                         300 : 'shape',
                         299 : 'circleShape',
                         298 : 'lineShape',
@@ -330,9 +331,13 @@
                 },
                 83 : function() {
                     this.name = 'pointerConfig';
-                    this.SPEED = 0.6;
                     this.TYPE = arguments[0].type;
                     this.PROPERTY = arguments[0].property;
+                },
+                82 : function() {
+                    this.name = 'startConfig';
+                    this.SPEED = 0.1;
+                    this.OPEN = 0;
                 },
                 198 : function() {
                     this.name = 'circleShapeResetting';
@@ -346,7 +351,7 @@
                     this.sensitivity = 10; // 敏感度高 浮动数量多
                     this.rate = 5; // 频率大 浮动高度低 否则高
                     this.SPEED_3 = null; // start set
-                    this.speed = this.SPEED_3 || 1.2; // 速度快慢
+                    this.speed = this.SPEED_3 || 0.2; // 速度快慢
                     this.opposite = 1;
                     this.bevel = 0.99996;
                     this.currentTimes = (new Date).getTime();
@@ -376,6 +381,7 @@
                 299 : function() {
                     this.name = 'circleShape';
                     this.data = [];
+                    this.o_OPEN = 0;
                     this.iterator = {};
                     this.collection = arguments[0];
                 },
@@ -401,6 +407,7 @@
                     this.name = 'waveShape';
                     this.stop = !0;
                     this.s_SPEED = 0;
+                    this.o_OPEN = 0;
                     this.data = [];
                     this.iterator = {};
                     this.collection = arguments[0];
@@ -651,20 +658,35 @@
                                     type: 'Array',
                                     property: []
                                 });
+
+                                // 是否自动执行
+                                var setAttr = new o[1][82]();
+                                Object.assign(atpc,setAttr);
+
                                 // 重新set设置参数的类型和属性
                                 return atpc
                             })()
                         },
                         start: function(options) {
-                            // 是否自动执行
-                            var setAttr = this.config.set;
 
-                            var getSpeed = setAttr.speed;
+                            var getAttr = this.config.set;
+                            var defaults_NUM = 0.66666;
+                            
+                            if( typeof options === 'object' ){
+                                if('speed' in options){
+                                    (typeof options.speed === 'string'? null : true);
+                                    if(typeof options.speed === 'number') defaults_NUM = 1 - options['speed'];
+                                }
+                            }
 
-                            getSpeed -= 0.4;
+                            var getSpeed = getAttr.speed;
 
-                            setAttr.speed = getSpeed;
-                            return ! 0
+                            getSpeed -= defaults_NUM;
+
+                            getAttr.speed = getSpeed;
+                            getAttr.open = 1;
+
+                            return !0
                         }
                     },
                     // 获得深度执行components组件的函数方法 that.storeBufferSlice 
@@ -776,13 +798,15 @@
                             // 执行保存在数组里面的组件的每一个方法
                             var getDepthCall = getBufferMethod.depthCall;
 
+                            // start ani config information
+
                             getDepthCall.forEach(function(opt) {
                                 // 存入一个2d的rending渲染
                                 // 如果第二个参数为false 执行默认的数组
                                 // 第三个参数限制作用 false 禁止自动 true 自动执行
                                 opt.Excute2DEngine(that.data[0], acceptCustomizeConfig, {
-                                    loop: !0,
-                                    speed: defineConfigurationInfo.speed
+                                    speed: defineConfigurationInfo.speed,
+                                    open : defineConfigurationInfo.open
                                 })
                             });
                             return this
@@ -902,6 +926,32 @@
                 }
             }
         });
+        // startconfig = '()'
+        q[1][82].prototype.constructor = o[1][82];
+        o[1][82] = q[1][82];
+        Object.assign(o[1][82].prototype, {
+            initialize: function() {
+                return this.val
+            }
+        });
+        Object.defineProperties(o[1][82].prototype, {
+            'speed': {
+                get: function() {
+                    return this.SPEED
+                },
+                set: function(val) {
+                    this.SPEED = val;
+                }
+            },
+            'open': {
+                get: function() {
+                    return this.OPEN
+                },
+                set: function(val) {
+                    this.OPEN = val;
+                }
+            }
+        });
 
         q[1][300].prototype.constructor = o[1][300];
         o[1][300] = q[1][300];
@@ -965,9 +1015,13 @@
                 var _createCircle = shapeProperty.calculationProperty.createCircle;
 
                 this.iterator.dynimic = {};
+                
+                // if loop.
+                if(this.o_OPEN){
+                    this.data[0].fillStyle = "rgb(255,255,255)";
+                    this.data[0].fillRect(0, 0, this.data[0].canvas.width, this.data[0].canvas.height);
+                }
 
-                this._scene2DFillStyles("rgb(255,255,255)")
-                this._fillRect();
 
                 var acceptCollection, inherit;
                 if (getCollectionProperty.type === 'Array') acceptCollection = getCollectionProperty.property;
@@ -1032,6 +1086,9 @@
             _fillRect : function (options){
                 this.data[0].fillRect(0, 0, this.data[0].canvas.width, this.data[0].canvas.height);
             },
+            start : function (options){
+                this.stop = options || 0
+            },
             // 获得动态属性
             getDynimicData: function(_createCircle, _a, _b) {
                 var collection = {};
@@ -1047,6 +1104,7 @@
                 // accept ctx 2d property.
                 var d2 = arguments[0],
                 isConfig = arguments[1],
+                auto = arguments[2],
                 domain = this.collection[0]['characteristic'];
 
                 if (isConfig) {
@@ -1060,6 +1118,11 @@
                         Object.assign(domain.property[j], getParams[j]);
                     }
                 }
+
+                // 可执行 true 循环运动
+                // start config info
+                // open the ani of return true
+                if(auto.open) this.o_OPEN = auto.open;
 
                 Object.assign(this.collection[0]['characteristic'], domain);
                 this.data.push(d2);
@@ -1419,8 +1482,8 @@
         Object.assign(o[1][295].prototype, {
             initialize: function() {
                 return this,
-                o[1][293].call(this, arguments),
-                o[1][293].prototype
+                o[1][295].call(this, arguments),
+                o[1][295].prototype
             },
             draw: function(options) {
                 var getCollectionProperty = this.particularProperty();
@@ -1437,11 +1500,14 @@
                 // the params in the early 
                 if (getCollectionProperty.type === 'Array') acceptCollection = getCollectionProperty.property;
 
-                // if loop. 
-                if (!this.stop) shapeProperty.speed -= this.s_SPEED;
+                // if loop.
+                if(this.o_OPEN){
+                    shapeProperty.speed -= this.s_SPEED;
 
-                this.data[0].fillStyle = "rgb(255,255,255)";
-                this.data[0].fillRect(0, 0, this.data[0].canvas.width, this.data[0].canvas.height);
+                    this.data[0].fillStyle = "rgb(255,255,255)";
+                    this.data[0].fillRect(0, 0, this.data[0].canvas.width, this.data[0].canvas.height);
+                }
+
                 for (var j = 0; j < acceptCollection.length; j++) {
 
                     inherit = acceptCollection[j];
@@ -1451,7 +1517,7 @@
                     inherit.y = !inherit.y ? shapeProperty.y: inherit.y;
                     inherit.rate = !inherit.rate ? shapeProperty.rate: inherit.rate;
                     inherit.index = !inherit.index ? shapeProperty.index: inherit.index;
-                    inherit.speed = !inherit.speed ? shapeProperty.speed + this.s_SPEED: inherit.speed + this.s_SPEED;
+                    inherit.speed = !inherit.speed ? shapeProperty.speed - this.s_SPEED: inherit.speed - this.s_SPEED;
                     inherit.bevel = !inherit.bevel ? shapeProperty.bevel: inherit.bevel;
                     inherit.opposite = !inherit.opposite ? shapeProperty.opposite: inherit.opposite;
                     inherit.sensitivity = !inherit.sensitivity ? shapeProperty.sensitivity: inherit.sensitivity;
@@ -1558,8 +1624,10 @@
                     }
                 }
                 // 可执行 true 循环运动
-                if (auto.loop) this.stop = !1,
-                this.s_SPEED = auto.speed;
+                // start config info
+                // open the ani of return true
+                this.o_OPEN = auto.open;
+                if( this.o_OPEN ) this.s_SPEED = auto.speed;
 
                 Object.assign(this.collection[0]['characteristic'], domain);
                 this.data.push(d2);
@@ -2014,7 +2082,7 @@
                             m1 = Math.cos(rx);
                             m2 = Math.sin(rx);
 
-                            z = Math.cos(ry) / 2 + 1;
+                            z = Math.sin(ry) / 2 + 1;
                             y = Math.sin(ry) / 2;
 
                             x = z * m2;

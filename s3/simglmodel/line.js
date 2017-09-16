@@ -2,8 +2,7 @@
 
 
 function line (){
-
-	var simgl = new s3.Shape();
+var simgl = new s3.Shape();
 var canvas = s3.dom('canvas');
 var ctx = canvas.getContext('2d');
 simgl.set(canvas).attr('width').val('960').attr('height').val('500').attr('className').val('bgred');

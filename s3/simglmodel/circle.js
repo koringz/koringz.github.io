@@ -28,7 +28,6 @@ function circle (){
 
 	// var fz = simgl.freezeProperty(colorOrPosition);
 
-
 	var cr = new app.Manager(scene);
 
 	var circleShape = cr.graphics.addComponent('circleShape', {
@@ -51,3 +50,16 @@ function circle (){
 
 	console.log(simgl)
 }
+
+
+/*
+property[0] = 
+	{
+		x : 
+		y : 
+		speed : 
+		radius :
+		startAngles　：
+		index : 
+	}
+*/
