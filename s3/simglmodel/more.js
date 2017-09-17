@@ -154,7 +154,7 @@ function evtCircle (){
 		type: 'Array',
 		property: colorOrPosition
 	});
-	circleShape.start();
+	circleShape.start({speed:0.1});
 
 	var restore = circleShape.config.set;
 	restore.type = 'Array';
@@ -164,7 +164,8 @@ function evtCircle (){
 	for(var k = 0; k < 20; k++){
 		restore.property[k] = {
 			radius:Math.random() * radius,
-			speed : 120
+			trails : 110,
+			mation : 'auto'
 		};
 	}
 

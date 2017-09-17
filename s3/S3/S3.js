@@ -291,9 +291,13 @@
                     this.data = [arguments[0]];
                     var data = this.data[0];
                     for (var k in data) {
-                        if (k === 'webkitImageSmoothingEnabled' || k === 'mozImageSmoothingEnabled' || k === 'msImageSmoothingEnabled') k = 'imageSmoothingEnabled';
+                        if (k === 'webkitImageSmoothingEnabled' || 
+                            k === 'mozImageSmoothingEnabled' || 
+                            k === 'msImageSmoothingEnabled') k = 'imageSmoothingEnabled';
                         var inherit = data[k];
-                        if (typeof inherit === 'string' || typeof inherit === 'number' || typeof inherit === 'boolean') {
+                        if (typeof inherit === 'string' || 
+                            typeof inherit === 'number' || 
+                            typeof inherit === 'boolean') {
                             this.newEmpty.push(k);
                             this.defaults[k] = {
                                 name: 'withoutMethod',
@@ -348,18 +352,19 @@
                     this.borderColor = '#7E8842';
                     this.radius = 36;
                     this.thick = 5;
+                    this.motion = 'stop'; // 运动方式 自动 随机 由名称决定
+                    this.trails = 1; // 运动轨迹 默认1
                     this.sensitivity = 10; // 敏感度高 浮动数量多
                     this.rate = 5; // 频率大 浮动高度低 否则高
                     this.SPEED_3 = null; // start set
                     this.speed = this.SPEED_3 || 0.2; // 速度快慢
+                    this.bMoveMode = !1; // if false is stop moving
                     this.opposite = 1;
                     this.bevel = 0.99996;
                     this.currentTimes = (new Date).getTime();
                     this.buffer = new ArrayBuffer(16);
                     this.fdata = new Float32Array(this.buffer, 0, 3);
                     this.index = this.fdata;
-                    this.startAngles = Math.PI * 0;
-                    this.stopAngles = Math.PI / 2;
                     this.x = Math.round(Math.random() * 36 + 36); // start position
                     this.y = Math.round(Math.random() * 36 + 36); // start position
                     this.x1 = Math.round(Math.random() * 36 + 36) * 2; // end position
@@ -377,12 +382,19 @@
                         x: 500,
                         y : null
                     };
+                    this.startAngles = Math.PI * 0;
+                    this.stopAngles = Math.PI / 2;
                 },
                 299 : function() {
                     this.name = 'circleShape';
                     this.data = [];
                     this.o_OPEN = 0;
                     this.iterator = {};
+                    // 运动方式 分别有 自动、随机 向左 右、下 上、停止
+                    this.moveMode = ['auto', 'random', 'left', 'right', 'bottom', 'top', 'stop'];
+                    // 如果是0停止 否则运动
+                    this.bMoveMode = !1;
+                    this.isMoveMode = this.bMoveMode ? this.moveMode[0] : this.moveMode[this.moveMode.length-1];
                     this.collection = arguments[0];
                 },
                 298 : function() {
@@ -985,20 +997,27 @@
             }
         });
         /*
+        - circle shape
 		- 传入参数(默认canvas Element)
 		- 回调函数(函数名为调用功能functional)
 		- 功能分别为 SHAPE WAVE CIRCLE LINE ARC ...
-		- shape : app.shape()
 		- circle : app.circle()
-		- line : app.line()
-		- arc : app.arc()
-		- camera : app.camera()
-		- tree : app.tree()
-		- game : app.game()
 		*/
         /*
 			定义配置信息
 			首次配置implement组件的属性和方法
+            {
+                x: 坐标 x,
+                y: 坐标 y,
+                index: color 值,
+                speed ：速度 number,
+                trails ：轨迹 number,
+                radius ：半径 number,
+                startAngles ：起始角度 pi,
+                stopAngles : 结束角度 pi,
+                motion : 运动方式 String,
+                bMoveMode : 运动方式 boolean
+            }
 		*/
         q[1][299].prototype.constructor = o[1][299];
         o[1][299] = q[1][299];
@@ -1028,29 +1047,37 @@
                 for (var j = 0; j < acceptCollection.length; j++) {
                     // 获取所有传入的属性 之后check检查
                     inherit = acceptCollection[j];
-                    inherit.radius = !inherit.radius ? shapeProperty.radius: inherit.radius;
                     inherit.x = !inherit.x ? shapeProperty.x: inherit.x;
                     inherit.y = !inherit.y ? shapeProperty.y: inherit.y;
-                    inherit.speed = !inherit.speed ? shapeProperty.speed: inherit.speed;
                     inherit.index = !inherit.index ? shapeProperty.index: inherit.index;
+                    inherit.speed = !inherit.speed ? shapeProperty.speed: inherit.speed;
+                    inherit.radius = !inherit.radius ? shapeProperty.radius: inherit.radius;
+                    inherit.trails = !inherit.trails ? shapeProperty.trails: inherit.trails;
                     inherit.startAngles = !inherit.startAngles ? shapeProperty.startAngles: inherit.startAngles;
-                    inherit.beginPosition = !inherit.beginPosition ? shapeProperty.beginPosition: inherit.beginPosition;
-                    inherit.endPosition = !inherit.endPosition ? shapeProperty.endPosition: inherit.endPosition;
+                    inherit.stopAngles = !inherit.stopAngles ? shapeProperty.stopAngles: inherit.stopAngles;
+                    inherit.motion = !inherit.motion ? shapeProperty.motion: inherit.motion;
+                    inherit.bMoveMode = !inherit.bMoveMode ? shapeProperty.bMoveMode: inherit.bMoveMode;
+                     
 
                     this.iterator.x = inherit.x;
                     this.iterator.y = inherit.y;
                     this.iterator.speed = inherit.speed;
+                    this.iterator.trails = inherit.trails;
                     this.iterator.index = inherit.index;
                     this.iterator.radius = inherit.radius;
+                    this.iterator.motion = inherit.motion;
                     this.iterator.startAngles = inherit.startAngles;
+                    this.iterator.stopAngles = inherit.stopAngles * 4; // 默认2 pi
+                    this.iterator.bMoveMode = inherit.bMoveMode; // 只接受二个值(0,1) 如果为1即为true 开启auto 否则stop
 
                     this._moveTo();
                     this._beggingToDo();
-                    this.getDynimicData(_createCircle, inherit.x, inherit.y);
-                    for(var d = this.iterator.dynimic.group,k = this.iterator.dynimic.length, i = 0; i < k; i++){
-                        var x = d[i][0] * this.iterator.speed, y = d[i][1] * this.iterator.speed;
-                        this._drawGraphicsArc(x,y);
-                    }
+                    // 如果默认停止即圆 否则 开始运动
+                    // 支持二种方式 {moveMode : String} {bMoveMode:0 || 1}
+                    if(this.iterator.motion === shapeProperty.mation && this.iterator.bMoveMode ?
+                      (this.iterator.motion === shapeProperty.isMoveMode || this.isMoveMode !== this.iterator.motion):
+                       this.iterator.motion !== shapeProperty.isMoveMode  ? false : !0 ) this._drawGraphicsArc(this.iterator.x,this.iterator.y);
+                    else this.start(_createCircle);
                     this._scene2DFillStyles();
                     this._scene2DFill()
                 }
@@ -1072,7 +1099,7 @@
 				excuting the arc events 
 			*/
             _drawGraphicsArc: function(x,y) {
-                this.data[0].arc(this.iterator.x + x, this.iterator.y + y, this.iterator.radius, this.iterator.startAngles, 2 * Math.PI);
+                this.data[0].arc(x, y, this.iterator.radius, this.iterator.startAngles, this.iterator.stopAngles);
             },
             /*
 				setting color properties
@@ -1087,7 +1114,15 @@
                 this.data[0].fillRect(0, 0, this.data[0].canvas.width, this.data[0].canvas.height);
             },
             start : function (options){
-                this.stop = options || 0
+                this.getDynimicData(options, this.iterator.x, this.iterator.y);
+                for(var d = this.iterator.dynimic.group,k = this.iterator.dynimic.length, i = 0; i < k; i++){
+                    var x = d[i][0] * this.iterator.trails + this.iterator.x, 
+                        y = d[i][1] * this.iterator.trails + this.iterator.y;
+                    this._drawGraphicsArc(x,y);
+                }
+            },
+            matchMode : function (options){
+
             },
             // 获得动态属性
             getDynimicData: function(_createCircle, _a, _b) {
@@ -1149,6 +1184,7 @@
             }
         });
 
+        // line shape
         q[1][298].prototype.constructor = o[1][298];
         o[1][298] = q[1][298];
         Object.assign(o[1][298].prototype, {
@@ -1254,6 +1290,7 @@
             }
         });
 
+        // arc shape
         q[1][297].prototype.constructor = o[1][297];
         o[1][297] = q[1][297];
         Object.assign(o[1][297].prototype, {
@@ -1356,6 +1393,7 @@
             }
         });
 
+        // rect shape
         q[1][296].prototype.constructor = o[1][296];
         o[1][296] = q[1][296];
         Object.assign(o[1][296].prototype, {
@@ -1477,6 +1515,7 @@
             }
         });
 
+        // wave shape
         q[1][295].prototype.constructor = o[1][295];
         o[1][295] = q[1][295];
         Object.assign(o[1][295].prototype, {
@@ -1686,6 +1725,7 @@
             },
         });
 
+        // sectors shape
         q[1][294].prototype.constructor = o[1][294];
         o[1][294] = q[1][294];
         Object.assign(o[1][294].prototype, {
@@ -1817,6 +1857,7 @@
             }
         });
 
+        // hat shape
         q[1][293].prototype.constructor = o[1][293];
         o[1][293] = q[1][293];
         Object.assign(o[1][293].prototype, {
@@ -2028,7 +2069,7 @@
                 o[1][239].prototype
             },
             _location: function (aa,bb,times){
-                var a, b, c, d, e, max, x, y, xx, yy,r, m, n;
+                var a, b, c, d, e, x, y, xx, yy,r, m, n;
                 var geths;
 
                 a = times / 68;
