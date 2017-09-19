@@ -165,7 +165,7 @@ function evtCircle (){
 		restore.property[k] = {
 			radius:Math.random() * radius,
 			trails : 110,
-			mation : 'auto'
+			motion : 'round'
 		};
 	}
 
