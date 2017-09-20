@@ -99,7 +99,7 @@
             }
         };
 
-        // the declare attribute used in the call.
+        // The declare attribute used in the call.
         // 变量首字母以A开始
         // 所有在1000以下的变量用A开头
         // 并且变量的第二个字母以99使用的单词开头
@@ -108,10 +108,44 @@
         // 数组的属性以_下划线开头
         // 如果hatShape首字母和其他名称类似 hs中间加一个大写字母
         // ARRSLICE_module
-        var Am, At, Atp, Ata, Atd, Att, Atr, Ats, Ata, Atc, Atc20, Atc30, Ac, Acls, Acas, Acrs, Acws, Acss, Achs, AchIs, Ac_, Ach, Aw, Al, As, Af, Bc, Bp, Br,
+        var 
+        Am, 
+        At, 
+        Atp, 
+        Ata, 
+        Atd, 
+        Att, 
+        Atr, 
+        Ats, 
+        Ata, 
+        Atc, 
+        Atc20, 
+        Atc30, 
+        Ac, 
+        Acls, 
+        Acas, 
+        Acrs, 
+        Acws, 
+        Acss, 
+        Achs, 
+        AchIs, 
+        Ac_, 
+        Ach, 
+        Aw, 
+        Al, 
+        As, 
+        Af, 
+        Bc, 
+        Bp, 
+        Br,
 
         // functional property
-        speed, times, logger, messages, processing, requestAnimation,
+        speed, 
+        times, 
+        logger, 
+        messages, 
+        processing, 
+        requestAnimation,
 
         // be used to configure the declared properties.
         put = {},
@@ -516,19 +550,19 @@
         });
 
         /*
-		-  options is an obj.
-		-  The 'previous' will be proto methods by reo target.
+				-  options is an obj.
+				-  The 'previous' will be proto methods by reo target.
 
-		- Shape.chain()
-		- 你可以重新写入调用的数据, 因此你可以自定义写插件
-		- 通过给chain的方法传入2个参数即可, 第一个参数为this
-		- 第二个参数就是你的插件名 world方法名称
+				- Shape.chain()
+				- 你可以重新写入调用的数据, 因此你可以自定义写插件
+				- 通过给chain的方法传入2个参数即可, 第一个参数为this
+				- 第二个参数就是你的插件名 world方法名称
 
-		-	var d = Shape.plugin({get:1},{
-				init : function(){},
-				frame : function(){}
-			}
-		*/
+				-	var d = Shape.plugin({get:1},{
+						init : function(){},
+						frame : function(){}
+					}
+				*/
         function Shape(options, previous) {
             // inject parameters;
             // Extend previous method of preotype chain properties.
@@ -545,11 +579,11 @@
 
         (function() {
             /*
-                set s3.js libriry version.
-                create a model name.
-                create Date.
-                other configuration info.
-			*/
+              set s3.js libriry version.
+              create a model name.
+              create Date.
+              other configuration info.
+						*/
             messages.version = '0.1';
             messages.privateModule = 's3';
             messages.date = '20170912';
@@ -558,16 +592,16 @@
         } ());
 
         /*
-		- Rename variable,get a function mehtod give rename var,
-		- this is a plugins methods,get the prototype property from the parent element.
-		 	
-		 	var app = simgl.tool('canvas');
-		 	// while we can call scene methods
+				- Rename variable,get a function mehtod give rename var,
+				- this is a plugins methods,get the prototype property from the parent element.
+				 	
+				 	var app = simgl.tool('canvas');
+				 	// while we can call scene methods
 
-		 	app.scene
-		 	// we are express the use of canvas	2d layers, or not svg and webgl
-		 	// add color and speed and rotia from the canvas 2d layout
-		*/
+				 	app.scene
+				 	// we are express the use of canvas	2d layers, or not svg and webgl
+				 	// add color and speed and rotia from the canvas 2d layout
+				*/
         q[1][99].prototype.constructor = o[1][99];
         o[1][99] = q[1][99];
         Object.assign(o[1][99].prototype, {
@@ -591,10 +625,10 @@
                 return rgb
             },
             /*
-			- 表示多个同等属性的设置
-			- 属性的值不同而已
-			- 后面的方法是处理的color方法
-			*/
+						- 表示多个同等属性的设置
+						- 属性的值不同而已
+						- 后面的方法是处理的color方法
+						*/
             amount: function(params) {
                 var amounts = new o[1][88](params);
                 var vals = amounts.value;
@@ -602,33 +636,33 @@
                 return amounts.set(vals)
             },
             /*
-			- 处理弧度的属性方法
-			- 不接收参数
-			- 后面是处理弧度的参数
-			- 比如Angle 角度 position 位置 radius 圆角等
-			*/
+						- 处理弧度的属性方法
+						- 不接收参数
+						- 后面是处理弧度的参数
+						- 比如Angle 角度 position 位置 radius 圆角等
+						*/
             arc: function(argument) {
                 var arcs = new o[1][87]();
                 return arcs
             },
             /*
-				管理图形下面的组件 graphics
-				给图像定义方法名 addComponent()
-				方法内部添加的二个属性 
-				第一 字符串 表示组件的名称 name
-				第二 对象 表示添加的属性名称 property
-				{ 
-					type : boolean || number || array || function || string,
-					property : colorArr
-				}
-				demo :
-				{
-					'circleShape',{
-						type : Array,
-						property : colorOrPosition
-					}
-				}
-			*/
+							管理图形下面的组件 graphics
+							给图像定义方法名 addComponent()
+							方法内部添加的二个属性 
+							第一 字符串 表示组件的名称 name
+							第二 对象 表示添加的属性名称 property
+							{ 
+								type : boolean || number || array || function || string,
+								property : colorArr
+							}
+							demo :
+							{
+								'circleShape',{
+									type : Array,
+									property : colorOrPosition
+								}
+							}
+						*/
             Manager: function() {
                 // 接收传的参数
                 this.pipe = [];
@@ -666,10 +700,10 @@
                             var utils = new o[1][getPropBindObject](that.pipe);
 
                             /*
-								 utils.draw() 第一次执行的函数方法
-								 utils 需要重置的函数方法
-								 utils 属性的方法可以被调用
-							*/
+															 utils.draw() 第一次执行的函数方法
+															 utils 需要重置的函数方法
+															 utils 属性的方法可以被调用
+														*/
                             that.storeBufferSlice.push(utils);
 
                             // 调用call组件的配置信息 进行一次重新配置
@@ -764,10 +798,10 @@
             },
 
             /*
-				將属性添加进 scene.root.addChild方法里面
-				此时 scene 场景即可调用克隆的2D属性
-				通过clone克隆scene属性赋值给2D进行render渲染
-			*/
+							將属性添加进 scene.root.addChild方法里面
+							此时 scene 场景即可调用克隆的2D属性
+							通过clone克隆scene属性赋值给2D进行render渲染
+						*/
             scene: {
                 get: function() {
                     var that = this,
@@ -791,20 +825,20 @@
             },
 
             /*
-				把这个场景的属性和调用属性传给一个新函数
-				此函数或方法主要manager管理一个物理实例事物
-				通过调用相应的物理对象 即可使用相应的属性和参数 并且赋值
-				var cir = new app.Manager('circle'); // or cylinder rect
-				此管理事件为新开的对象
-			*/
+							把这个场景的属性和调用属性传给一个新函数
+							此函数或方法主要manager管理一个物理实例事物
+							通过调用相应的物理对象 即可使用相应的属性和参数 并且赋值
+							var cir = new app.Manager('circle'); // or cylinder rect
+							此管理事件为新开的对象
+						*/
             root: {
                 get: function(x) {
                     var that = this;
                     return {
                         /*
-							get configuration of info on the Manager methods.
-							options property will be resetting.
-						*/
+													get configuration of info on the Manager methods.
+													options property will be resetting.
+												*/
                         addChild: function(options) {
                             var getBufferMethod = options;
 
@@ -1013,28 +1047,28 @@
             }
         });
         /*
-        - circle shape
-		- 传入参数(默认canvas Element)
-		- 回调函数(函数名为调用功能functional)
-		- 功能分别为 SHAPE WAVE CIRCLE LINE ARC ...
-		- circle : app.circle()
-		*/
+		        - circle shape
+				- 传入参数(默认canvas Element)
+				- 回调函数(函数名为调用功能functional)
+				- 功能分别为 SHAPE WAVE CIRCLE LINE ARC ...
+				- circle : app.circle()
+				*/
         /*
-			定义配置信息
-			首次配置implement组件的属性和方法
-            {
-                x: 坐标 x,
-                y: 坐标 y,
-                index: color 值,
-                speed ：速度 number,
-                trails ：轨迹 number,
-                radius ：半径 number,
-                startAngles ：起始角度 pi,
-                stopAngles : 结束角度 pi,
-                motion : 运动方式 String,
-                bMoveMode : 运动方式 boolean
-            }
-		*/
+					定义配置信息
+					首次配置implement组件的属性和方法
+          {
+              x: 坐标 x,
+              y: 坐标 y,
+              index: color 值,
+              speed ：速度 number,
+              trails ：轨迹 number,
+              radius ：半径 number,
+              startAngles ：起始角度 pi,
+              stopAngles : 结束角度 pi,
+              motion : 运动方式 String,
+              bMoveMode : 运动方式 boolean
+          }
+				*/
         q[1][299].prototype.constructor = o[1][299];
         o[1][299] = q[1][299];
         Object.assign(o[1][299].prototype, {
@@ -1101,8 +1135,8 @@
             },
 
             /*
-				example color array and pos
-			*/
+							example color array and pos
+						*/
             particularProperty: function(options) {
                 if (options) return this.collection[0].characteristic;
             },
@@ -1116,15 +1150,15 @@
                 this.data[0].moveTo(this.iterator.x, this.iterator.y);
             },
             /*
-				excuting the arc events 
-			*/
+							excuting the arc events 
+						*/
             _drawGraphicsArc: function(x,y) {
                 // console.log(x+'=x,'+y+'=y,'+ this.iterator.radius+'=this.iterator.radius,'+ this.iterator.startAngles+'=this.iterator.startAngles,'+ this.iterator.stopAngles + '=this.iterator.stopAngles')
                 this.data[0].arc(x, y, this.iterator.radius, this.iterator.startAngles, this.iterator.stopAngles);
             },
             /*
-				setting color properties
-			*/
+							setting color properties
+						*/
             _scene2DFillStyles: function(options) {
                 this.data[0].fillStyle = options || this.iterator.index;
             },
@@ -1214,9 +1248,9 @@
             }
         });
         /*
-			重新写入配置信息
-			通过 return set : { restore config info }
-		*/
+					重新写入配置信息
+					通过 return set : { restore config info }
+				*/
         Object.defineProperties(o[1][299].prototype, {
             config: {
                 get: function() {
@@ -1635,17 +1669,14 @@
                             y: this.iterator.dynimic.y
                         });
                     }
-                    // for(var d= inherit.x; d >0; d--){
-                    // 	this._lineTo( inherit,d ,-this.opposite,'sin');
-                    // }
                     this._fillStyle();
                     this._strokeStyle();
                     this._stroke()
                 }
             },
             /*
-				example color array and pos
-			*/
+							example color array and pos
+						*/
             particularProperty: function(options) {
                 return this.collection[0].characteristic;
             },
@@ -1656,16 +1687,16 @@
                 this.data[0].moveTo(this.iterator.x, this.iterator.y);
             },
             /*
-				excuting the arc events 
-			*/
+							excuting the arc events 
+						*/
             _lineTo: function(options) {
                 // 从0 到总width宽度的实际长度
                 this.data[0].lineTo(options.x, options.y);
                 // this.data[0].lineTo(x, y2);
             },
             /*
-				setting color properties
-			*/
+							setting color properties
+						*/
             _strokeStyle: function(options) {
                 this.data[0].strokeStyle = this.iterator.index;
             },
@@ -2040,7 +2071,7 @@
 
 
         /*
-            - 方向使用指针Arrow函数获取
+          - 方向使用指针Arrow函数获取
         */
         q[1][292].prototype.constructor = o[1][292];
         o[1][292] = q[1][292];
@@ -2100,7 +2131,7 @@
             },
 
             /*
-                example color array and pos
+              example color array and pos
             */
             particularProperty: function(options) {
                 if (options) return this.collection[0].characteristic;
@@ -2230,16 +2261,16 @@
         });
 
         /*
-			options,count,a
-			x,y,inherit.sensitivity, inherit.rate, inherit.speed, i, inherit.opposite
-			a = x
-			b = y
-			c = sensitivity
-			d = rate
-			e = speed
-			f = i <== transform x
-			g = opposite
-		*/
+					options,count,a
+					x,y,inherit.sensitivity, inherit.rate, inherit.speed, i, inherit.opposite
+					a = x
+					b = y
+					c = sensitivity
+					d = rate
+					e = speed
+					f = i <== transform x
+					g = opposite
+				*/
         q[1][240].prototype.constructor = o[1][240];
         o[1][240] = q[1][240];
         o[1][240].createWave = function(a, b, c, d, e, f, g, l) {
@@ -2285,9 +2316,9 @@
 
 
         /*
-            x,y,
-            aa = x
-            bb = y
+          x,y,
+          aa = x
+          bb = y
         */
         q[1][239].prototype.constructor = o[1][239];
         o[1][239] = q[1][239];
@@ -2380,18 +2411,16 @@
                 }
         });
 
-
         /*
-            x,y,
-            aa = x
-            bb = y
-
-            - 如果是半个周期的
-            - 模型是static形式的位置
-            - draw调用的输出的results还是和动态的写法类似
-            - 和动态的唯一不同点
-            - 一静态是location_后面的参数名称不一样
-            - 二动态的需要start方法调用改变的运动motion类型type
+          x,y,
+          aa = x
+          bb = y
+          - 如果是半个周期的
+          - 模型是static形式的位置
+          - draw调用的输出的results还是和动态的写法类似
+          - 和动态的唯一不同点
+          - 一静态是location_后面的参数名称不一样
+          - 二动态的需要start方法调用改变的运动motion类型type
         */
         q[1][232].prototype.constructor = o[1][232];
         o[1][232] = q[1][232];
@@ -2436,31 +2465,25 @@
                 return pointNums
             },
             /*
-                - 总共的点为pointNums 
-                - 每一个点的度数为angleNums
-                - 角度的90度为1 
-                - 所以pointNums一半的数乘以度数要为90
-                - 也就是说p/2的点乘多少度的数等于90(且排除2与4的点) 
-                - 由最大的点数为180 最小的点数为6
-                - 弧度边小 那么点就会多一点 意味着平滑一点
-                - 弧度越大 点的数量少 越陡峭
+              - 总共的点为pointNums 
+              - 每一个点的度数为angleNums
+              - 角度的90度为1 
+              - 所以pointNums一半的数乘以度数要为90
+              - 也就是说p/2的点乘多少度的数等于90(且排除2与4的点) 
+              - 由最大的点数为180 最小的点数为6
+              - 弧度边小 那么点就会多一点 意味着平滑一点
+              - 弧度越大 点的数量少 越陡峭
             */
             _location_staticn_top : function (aa ,bb, point){
-                var getSmoothness,angles,two;
                 // 使用平滑度计算坡平面的光滑程度(平滑度从0开始结束为180)
                 // 假设平滑度等于点数的数量
+                var getSmoothness,angles,points,two,midPointerHalf;
+
                 getSmoothness = this.takeInteger(6,point);
-
-                var points;
-                points = getSmoothness;
-
-                // 取中间的点
-                var midPointerHalf;
+                points = getSmoothness; 
                 two = 2;
-                midPointerHalf = points / two;
-
-                // 获得一个点的度数
-                angles = 90 / midPointerHalf;
+                midPointerHalf = points / two;// 取中间的点
+                angles = 90 / midPointerHalf; // 获得一个点的度数
 
                 for(var radian,radianValues,x,y,a = [],i = 0; i < points; i++){
                     radian = i * angles * Math.PI / 180;
@@ -2478,27 +2501,21 @@
                 }
             },
             _location_static_left : function (aa ,bb, point){
-                var getSmoothness,angles,two;
+                var getSmoothness,angles,points,two,midPointerHalf;
+
                 getSmoothness = this.takeInteger(6,point);
-
-                var points;
-                points = getSmoothness;
-
-                // 取中间的点
-                var midPointerHalf;
+                points = getSmoothness; 
                 two = 2;
-                midPointerHalf = points / two;
-
-                // 获得一个点的度数
-                angles = 90 / midPointerHalf;
+                midPointerHalf = points / two;// 取中间的点
+                angles = 90 / midPointerHalf; // 获得一个点的度数
 
                 for(var radian,radianValues,x,y,a = [],i = 0; i < points; i++){
-                    var radian = i * angles * Math.PI / 180;
-                    var radianValues = Math.cos(radian);
+                    radian = i * angles * Math.PI / 180;
+                    radianValues = Math.cos(radian);
 
                     // 根据纵坐标的位移实现几何图形 余弦
-                    var x = Math.pow(radianValues*two,two);
-                    var y = i;
+                    x = Math.pow(radianValues*two,two);
+                    y = i;
                     a.push([x,y]);
                 }
 
@@ -2507,19 +2524,13 @@
                 }
             },
             _location_static_right : function (aa ,bb, point){
-                var getSmoothness,angles,two;
+                var getSmoothness,angles,points,two,midPointerHalf;
+
                 getSmoothness = this.takeInteger(6,point);
-
-                var points;
-                points = getSmoothness;
-
-                // 取中间的点
-                var midPointerHalf;
+                points = getSmoothness; 
                 two = 2;
-                midPointerHalf = points / two;
-
-                // 获得一个点的度数
-                angles = 90 / midPointerHalf;
+                midPointerHalf = points / two;// 取中间的点
+                angles = 90 / midPointerHalf; // 获得一个点的度数
 
                 for(var radian,radianValues,x,y,a = [],i = 0; i < points; i++){
                     radian = i * angles * Math.PI / 180;
@@ -2536,19 +2547,13 @@
                 }
             },
             _location_static_bottom : function (aa ,bb, point){
-                var getSmoothness,angles,two;
+                var getSmoothness,angles,points,two,midPointerHalf;
+
                 getSmoothness = this.takeInteger(6,point);
-
-                var points;
-                points = getSmoothness;
-
-                // 取中间的点
-                var midPointerHalf;
+                points = getSmoothness; 
                 two = 2;
-                midPointerHalf = points / two;
-
-                // 获得一个点的度数
-                angles = 90 / midPointerHalf;
+                midPointerHalf = points / two;// 取中间的点
+                angles = 90 / midPointerHalf; // 获得一个点的度数
 
                 for(var radian,radianValues,x,y,a = [],i = 0; i < points; i++){
                     radian = i * angles * Math.PI / 180;
@@ -2719,14 +2724,14 @@
         });
 
         /*
-		* create a class.
-		* call subclasses and prototype attributes to parent element.
-		* implemention invoking anonymous function of properties.
-		* there	are	invoking extends subclasses.
-		* fn(first params ,second params )
-		* params first = this.prototype.first
-		* params second = second.prototype
-		*/
+					* create a class.
+					* call subclasses and prototype attributes to parent element.
+					* implemention invoking anonymous function of properties.
+					* there	are	invoking extends subclasses.
+					* fn(first params ,second params )
+					* params first = this.prototype.first
+					* params second = second.prototype
+				*/
         Shape.plugin.create('tool', o[1][99]);
         Shape.plugin.create('circleShape', o[1][299]);
         Shape.plugin.create('lineShape', o[1][298]);
