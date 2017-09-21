@@ -67,7 +67,6 @@ app.root.addChild(ct);
 app.root.addChild(cr);
 app.root.addChild(ma);
 
-simgl.render();
 
 }
 // two
@@ -112,14 +111,17 @@ function lineAndcircleAndsectors (){
 		property: colorOrPosition
 	});
 	var res = as.config.set;
+
+	var se = 20;
 	for(var k =0; k< 20; k++){
+		se--;
 		res.property[k] = {
 			x1:colorOrPosition[k].x+k,
 			y1:colorOrPosition[k].y+k,
 			x:colorOrPosition[k].x,
 			y:colorOrPosition[k].y,
-			radius:58,
-			index:colorOrPosition[k].index
+			radius:12,
+			index:colorOrPosition[se].index
 		};
 	}
 

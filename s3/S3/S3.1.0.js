@@ -1476,20 +1476,28 @@
                     inherit.beginPosition = !inherit.beginPosition ? shapeProperty.beginPosition: inherit.beginPosition;
                     inherit.endPosition = !inherit.endPosition ? shapeProperty.endPosition: inherit.endPosition;
 
-                    this.iterator.x = inherit.x;
-                    this.iterator.y = inherit.y;
-                    this.iterator.rate = inherit.rate;
                     this.iterator.index = inherit.index;
-                    this.iterator.speed = inherit.speed;
-                    this.iterator.slope = inherit.slope;
-                    this.iterator.opposite = inherit.opposite;
-                    this.iterator.sensitivity = inherit.sensitivity;
                     this.iterator.readyPosition = inherit.readyPosition;
                     this.iterator.beginPosition = inherit.beginPosition;
                     this.iterator.endPosition = inherit.endPosition;
 
+                    // 准备x位置 readyPosition = i
+                    // 起始x位置 beginPosition = i
+                    // 结束x位置 endPosition = len
+                    // 水平运动长度 len = 10
+                    var beginDistance_x = this.iterator.beginPosition.x;
+                    var endDistance_x = this.iterator.endPosition.x;
                     this._beggingToDo();
-                    this.start(_createWave);
+
+                    for (var i = beginDistance_x; i < endDistance_x; i++) {
+                        // 传入参数进行计算pos 位移的动态x y位置
+                        this.getDynimicData(_createWave, inherit.x, inherit.y, inherit.sensitivity, inherit.rate, inherit.speed, i, inherit.opposite, inherit.slope);
+
+                        this._lineTo({
+                            x: this.iterator.dynimic.x,
+                            y: this.iterator.dynimic.y
+                        });
+                    }
                     this._fillStyle();
                     this._strokeStyle();
                     this._stroke()
@@ -1530,44 +1538,20 @@
             _stroke: function() {
                 this.data[0].stroke();
             },
-            // 准备x位置 readyPosition = i
-            // 起始x位置 beginPosition = i
-            // 结束x位置 endPosition = len
-            // 水平运动长度 len = 10
-            start : function (options){
-                var beginDistance_x = this.iterator.beginPosition.x;
-                var endDistance_x = this.iterator.endPosition.x;
-
-                // loop all坐标的连线
-                // 传入参数进行计算pos 位移的动态x y位置
-                this.getDynimicData(options,
-                    beginDistance_x,
-                    endDistance_x,
-                    this.iterator.x,
-                    this.iterator.y,
-                    this.iterator.sensitivity,
-                    this.iterator.rate,
-                    this.iterator.speed,
-                    this.iterator.opposite,
-                    this.iterator.slope);
-
-                for(var d = this.iterator.dynimic.group,k = d.length, i = 0; i < k; i++){
-                    var x = d[i][0], y = d[i][1];
-                    this._lineTo({
-                        x: x,
-                        y: y
-                    });
-                }
-            },
             // 获得动态属性
-            getDynimicData: function(_createWave, _a, _b, _c, _d, _e, _f, _g, _l, _m) {
+            getDynimicData: function(_createWave, _a, _b, _c, _d, _e, _f, _g, _l) {
                 var collection = {};
-                var waveModule = _createWave(_a, _b, _c, _d, _e, _f, _g, _l, _m);
+                var waveModule = _createWave(_a, _b, _c, _d, _e, _f, _g, _l);
 
-                // 默认获得一个向右的运动轨迹
-                var item = waveModule['right'];
+                collection = {
+                    'x': waveModule.x,
+                    'y': waveModule.y
+                };
 
-                this.iterator.dynimic.group = item; // especially of base property
+                this.iterator.dynimic = collection;
+
+                // especially of base property
+                Object.assign(this.iterator.dynimic, waveModule);
             },
             Excute2DEngine: function() {
                 // accept ctx 2d property.
@@ -1822,7 +1806,6 @@
 
 
         /*
-          - hill shape
           - 方向使用指针Arrow函数获取
         */
         q[1][292].prototype.constructor = o[1][292];

@@ -58,7 +58,6 @@ restore.property[2] = {
 
 app.root.addChild(cr);
 
-simgl.render();
 
 console.log(app)
 

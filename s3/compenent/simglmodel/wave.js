@@ -15,7 +15,7 @@ var app = simgl.tool(ctx);
 var scene = app.scene;
 var getBlock = app.createGradient;
 var getBlock20 = app.createGradient20;
-var colorOrPosition = app.amount(20).handleModule(getBlock20).map(function(opt) {
+var colorOrPosition = app.amount(3).handleModule(getBlock20).map(function(opt) {
 	return {
 		index: opt,
 		x: Math.round(Math.random() * (width - radius * 2) + radius),
@@ -54,7 +54,6 @@ restore.property[2] = {
 
 app.root.addChild(cr);
 
-simgl.render();
 
 console.log(app)
 

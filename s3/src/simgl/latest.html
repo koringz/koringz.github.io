@@ -3,7 +3,7 @@
 <meta charset='utf-8'>
 <title>s3.JS</title>
 <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-<script src="./jquery-3.2.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="./../../assets/public.css">
 <style type="text/css">
 	body{background: #111;}
@@ -47,7 +47,8 @@
 <div class="main">
 	<div id="mid" class="mid">
 		<button data-model="hill" class="active">hill</button>
-		<button data-model="moveCircleTest">moveCircleTest</button>
+		<button data-model="moveWave">moveWave</button>
+		<button data-model="moveCircle">moveCircle</button>
 
 		<span class="config select1">Dir:
 			<select class="menuBar" data-item="direction">
@@ -64,6 +65,10 @@
 				<option>250</option>
 				<option>350</option>
 				<option>450</option>
+				<option>550</option>
+				<option>650</option>
+				<option>750</option>
+				<option>850</option>
 			</select>
 		</span>
 		<span class="config select2">Y:
@@ -107,7 +112,8 @@
 </div>
 <div id="worker" class="worker self top-none">auther: <span>koringz</span></div>
 </body>
-<script type="text/javascript" src="./../../compenent/simglmodel/moveCircleTest.js"></script>
+<script type="text/javascript" src="./../../compenent/simglmodel/moveCircle.js"></script>
+<script type="text/javascript" src="./../../compenent/simglmodel/moveWave.js"></script>
 <script type="text/javascript" src="./../../compenent/simglmodel/hill.js"></script>
 <script type="text/javascript">
 
@@ -170,11 +176,6 @@ $(document).ready(function(){
 		});
 	}
 	emmitEvent(bindObjectProperties); // 默认
-
-	document.querySelector("#back").onclick = function (){
-		window.history.back()
-	}
-
 });
 </script>
 <script type="text/javascript"> hill(bindObjectProperties); </script>

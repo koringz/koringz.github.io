@@ -55,12 +55,11 @@ function arcAndCircle (){
 		};
 	}
 
+	app.root.addChild(cr);
 	app.root.addChild(sc);
 
 	// final
-	app.root.addChild(cr);
 
-// simgl.render();
 }
 
 // second
@@ -105,7 +104,6 @@ function arcAndWave (){
 	// final
 	app.root.addChild(cr);
 
-	simgl.render();
 
 }
 
@@ -151,7 +149,6 @@ function rectAndline (){
 	// final
 	app.root.addChild(cr);
 
-	simgl.render();
 
 }
 
@@ -197,7 +194,6 @@ function circleAndsectors (){
 	// final
 	app.root.addChild(cr);
 
-	simgl.render();
 
 }
 
@@ -243,7 +239,6 @@ function lineAndsectors (){
 	// final
 	app.root.addChild(cr);
 
-	simgl.render();
 
 }
 
@@ -281,7 +276,7 @@ function waveAndcircle (){
 		type: 'Array',
 		property: colorOrPosition
 	});
-	waveShape.start();
+	waveShape.start({speed:1});
 
 	var wave = waveShape.config.set;
 	for(var k =0; k< 10; k++){
@@ -353,7 +348,6 @@ function rectAndcircle (){
 	// final
 	app.root.addChild(cr);
 	app.root.addChild(rc);
-	// simgl.render();
 
 }
 
@@ -402,7 +396,6 @@ function arcAndline (){
 	app.root.addChild(lr);
 	app.root.addChild(cr);
 
-	// simgl.render();
 
 }
 
@@ -450,6 +443,5 @@ function lineAndcircle (){
 	app.root.addChild(sc);
 	app.root.addChild(lr);
 
-	simgl.render();
 
 }

@@ -99,7 +99,7 @@
             }
         };
 
-        // The declare attribute used in the call.
+        // the declare attribute used in the call.
         // 变量首字母以A开始
         // 所有在1000以下的变量用A开头
         // 并且变量的第二个字母以99使用的单词开头
@@ -108,46 +108,10 @@
         // 数组的属性以_下划线开头
         // 如果hatShape首字母和其他名称类似 hs中间加一个大写字母
         // ARRSLICE_module
-        var 
-        Am, 
-        At, 
-        Atp, 
-        Ata, 
-        Atd, 
-        Att, 
-        Atr, 
-        Ats, 
-        Ata, 
-        Atc, 
-        Atc20, 
-        Atc30, 
-        Ac,
-        Ashape,
-        Acls, 
-        Acas, 
-        Acrs, 
-        Acws, 
-        Acss, 
-        Achs, 
-        AchIs, 
-        Ac_2d,
-        Ac_, 
-        Ach, 
-        Aw, 
-        Al, 
-        Aset, 
-        Af, 
-        Bc, 
-        Bp, 
-        Br,
+        var Am, At, Atp, Ata, Atd, Att, Atr, Ats, Ata, Atc, Atc20, Atc30, Ac, Acls, Acas, Acrs, Acws, Acss, Achs, AchIs, Ac_, Ach, Aw, Al, As, Af, Bc, Bp, Br,
 
         // functional property
-        speed, 
-        times, 
-        logger, 
-        messages, 
-        processing, 
-        requestAnimation,
+        speed, times, logger, messages, processing, requestAnimation,
 
         // be used to configure the declared properties.
         put = {},
@@ -229,7 +193,6 @@
                     Atc20 = closure[1][85];
                     Atc30 = closure[1][84];
                     Atpc = closure[1][83];
-                    Ashape = closure[1][300];
                     Ac = closure[1][299];
                     Acls = closure[1][298];
                     Acas = closure[1][297];
@@ -238,11 +201,10 @@
                     Acss = closure[1][294];
                     Achs = closure[1][293];
                     AchIs = closure[1][292];
-                    Ac_2d = closure[1][250];
                     Acw = closure[1][240];
                     Ac_ = closure[1][239];
                     Ach = closure[1][232];
-                    Aset = closure[1][499];
+                    As = closure[1][499];
                     Af = closure[1][999];
                     Bp = closure[1][1000];
                     Bc = closure[1][1099];
@@ -299,7 +261,6 @@
                         294 : 'sectorsShape',
                         293 : 'hatShape',
                         292 : 'hillShape',
-                        250 : 'cover2DModule',
                         240 : 'wave',
                         239 : 'circle',
                         232 : 'hill',
@@ -367,6 +328,9 @@
                     this.name = 'amount';
                     this.nums = num;
                 },
+                87 : function() {
+                    this.name = 'arc';
+                },
                 86 : function() {
                     this.name = 'createGradient';
                 },
@@ -386,6 +350,10 @@
                     this.SPEED = 0.1;
                     this.OPEN = 0;
                 },
+                198 : function() {
+                    this.name = 'circleShapeResetting';
+                    this.collection = arguments[0];
+                },
                 300 : function() {
                     this.name = 'shape';
                     this.borderColor = '#7E8842';
@@ -400,7 +368,7 @@
                     this.bMoveMode = !1; // if false is stop moving
                     this.opposite = 1;
                     this.direction = 'top'; // 方向
-                    this.slope = 0.99996; // 倾斜度
+                    this.bevel = 0.99996; // 倾斜度
                     this.smooth = 1; // 平滑度
                     this.currentTimes = (new Date).getTime();
                     this.buffer = new ArrayBuffer(16);
@@ -480,10 +448,6 @@
                     this.radius = 0.0001;
                     this.collection = arguments[0];
                 },
-                250 : function(options) {
-                    this.name = 'cover2DModule';
-                    this.data = [options];
-                },
                 240 : function() {
                     this.name = 'wave';
                     this.data = [];
@@ -552,19 +516,19 @@
         });
 
         /*
-        -  options is an obj.
-        -  The 'previous' will be proto methods by reo target.
+		-  options is an obj.
+		-  The 'previous' will be proto methods by reo target.
 
-        - Shape.chain()
-        - 你可以重新写入调用的数据, 因此你可以自定义写插件
-        - 通过给chain的方法传入2个参数即可, 第一个参数为this
-        - 第二个参数就是你的插件名 world方法名称
+		- Shape.chain()
+		- 你可以重新写入调用的数据, 因此你可以自定义写插件
+		- 通过给chain的方法传入2个参数即可, 第一个参数为this
+		- 第二个参数就是你的插件名 world方法名称
 
-        -   var d = Shape.plugin({get:1},{
-                init : function(){},
-                frame : function(){}
-            }
-        */
+		-	var d = Shape.plugin({get:1},{
+				init : function(){},
+				frame : function(){}
+			}
+		*/
         function Shape(options, previous) {
             // inject parameters;
             // Extend previous method of preotype chain properties.
@@ -581,11 +545,11 @@
 
         (function() {
             /*
-              set s3.js libriry version.
-              create a model name.
-              create Date.
-              other configuration info.
-            */
+                set s3.js libriry version.
+                create a model name.
+                create Date.
+                other configuration info.
+			*/
             messages.version = '0.1';
             messages.privateModule = 's3';
             messages.date = '20170912';
@@ -594,16 +558,16 @@
         } ());
 
         /*
-        - Rename variable,get a function mehtod give rename var,
-        - this is a plugins methods,get the prototype property from the parent element.
-            
-            var app = simgl.tool('canvas');
-            // while we can call scene methods
+		- Rename variable,get a function mehtod give rename var,
+		- this is a plugins methods,get the prototype property from the parent element.
+		 	
+		 	var app = simgl.tool('canvas');
+		 	// while we can call scene methods
 
-            app.scene
-            // we are express the use of canvas 2d layers, or not svg and webgl
-            // add color and speed and rotia from the canvas 2d layout
-        */
+		 	app.scene
+		 	// we are express the use of canvas	2d layers, or not svg and webgl
+		 	// add color and speed and rotia from the canvas 2d layout
+		*/
         q[1][99].prototype.constructor = o[1][99];
         o[1][99] = q[1][99];
         Object.assign(o[1][99].prototype, {
@@ -627,10 +591,10 @@
                 return rgb
             },
             /*
-            - 表示多个同等属性的设置
-            - 属性的值不同而已
-            - 后面的方法是处理的color方法
-            */
+			- 表示多个同等属性的设置
+			- 属性的值不同而已
+			- 后面的方法是处理的color方法
+			*/
             amount: function(params) {
                 var amounts = new o[1][88](params);
                 var vals = amounts.value;
@@ -638,29 +602,38 @@
                 return amounts.set(vals)
             },
             /*
-                管理图形下面的组件 graphics
-                给图像定义方法名 addComponent()
-                方法内部添加的二个属性 
-                第一 字符串 表示组件的名称 name
-                第二 对象 表示添加的属性名称 property
-                { 
-                    type : boolean || number || array || function || string,
-                    property : colorArr
-                }
-                demo :
-                {
-                    'circleShape',{
-                        type : Array,
-                        property : colorOrPosition
-                    }
-                }
-            */
+			- 处理弧度的属性方法
+			- 不接收参数
+			- 后面是处理弧度的参数
+			- 比如Angle 角度 position 位置 radius 圆角等
+			*/
+            arc: function(argument) {
+                var arcs = new o[1][87]();
+                return arcs
+            },
+            /*
+				管理图形下面的组件 graphics
+				给图像定义方法名 addComponent()
+				方法内部添加的二个属性 
+				第一 字符串 表示组件的名称 name
+				第二 对象 表示添加的属性名称 property
+				{ 
+					type : boolean || number || array || function || string,
+					property : colorArr
+				}
+				demo :
+				{
+					'circleShape',{
+						type : Array,
+						property : colorOrPosition
+					}
+				}
+			*/
             Manager: function() {
                 // 接收传的参数
                 this.pipe = [];
                 // 缓存执行animation的数组
                 this.storeBufferSlice = [];
-                this.storeStartOfconfig = [];
 
                 var preArgs = arguments[0];
                 var that = this;
@@ -693,10 +666,10 @@
                             var utils = new o[1][getPropBindObject](that.pipe);
 
                             /*
-                                 utils.draw() 第一次执行的函数方法
-                                 utils 需要重置的函数方法
-                                 utils 属性的方法可以被调用
-                            */
+								 utils.draw() 第一次执行的函数方法
+								 utils 需要重置的函数方法
+								 utils 属性的方法可以被调用
+							*/
                             that.storeBufferSlice.push(utils);
 
                             // 调用call组件的配置信息 进行一次重新配置
@@ -705,6 +678,8 @@
                         },
                         config: {
                             set: (function() {
+                                var that = this;
+
                                 // 执行默认的参数类型
                                 // 只能设置到[]数组的第一层
                                 var atpc = new o[1][83]({
@@ -712,35 +687,33 @@
                                     property: []
                                 });
 
-                                // 是否自动执行 设置属性
+                                // 是否自动执行
                                 var setAttr = new o[1][82]();
-                                // Object.assign(atpc,setAttr);
-                                that.storeStartOfconfig.push(setAttr);
+                                Object.assign(atpc,setAttr);
 
                                 // 重新set设置参数的类型和属性
                                 return atpc
-                            })(),
-                            startconfig : that.storeStartOfconfig
+                            })()
                         },
                         start: function(options) {
-                            var _this = this,
-                                getArrAttr = _this.config.startconfig[0],
-                                defaults_NUM = 0.66666,
-                                strSpeed = 'speed';
 
+                            var getAttr = this.config.set;
+                            var defaults_NUM = 0.66666;
+                            
                             if( typeof options === 'object' ){
-                                if(strSpeed in options){
-                                    var getCustomSpeedAttr = options[strSpeed];
-                                    (typeof getCustomSpeedAttr === 'string'? null : true);
-                                    if(typeof getCustomSpeedAttr === 'number') defaults_NUM = 1 - getCustomSpeedAttr;
+                                if('speed' in options){
+                                    (typeof options.speed === 'string'? null : true);
+                                    if(typeof options.speed === 'number') defaults_NUM = 1 - options['speed'];
                                 }
                             }
 
-                            var getConfigSpeed = getArrAttr[strSpeed];
-                            getConfigSpeed -= defaults_NUM;
-                            getArrAttr[strSpeed] = getConfigSpeed;
-                            getArrAttr.open = !0;
-                            delete getArrAttr;
+                            var getSpeed = getAttr.speed;
+
+                            getSpeed -= defaults_NUM;
+
+                            getAttr.speed = getSpeed;
+                            getAttr.open = 1;
+
                             return !0
                         }
                     },
@@ -765,11 +738,36 @@
             }
         });
         Object.defineProperties(o[1][99].prototype, {
+            posX: {
+                get: function() {
+                    return this.data[0]
+                },
+                set: function(value) {
+                    this.data[0] = value
+                }
+            },
+            posY: {
+                get: function() {
+                    return this.data[0]
+                },
+                set: function(value) {
+                    this.data[0] = value
+                }
+            },
+            posZ: {
+                get: function() {
+                    return this.val
+                },
+                set: function(value) {
+                    this.data[0] = value
+                }
+            },
+
             /*
-                將属性添加进 scene.root.addChild方法里面
-                此时 scene 场景即可调用克隆的2D属性
-                通过clone克隆scene属性赋值给2D进行render渲染
-            */
+				將属性添加进 scene.root.addChild方法里面
+				此时 scene 场景即可调用克隆的2D属性
+				通过clone克隆scene属性赋值给2D进行render渲染
+			*/
             scene: {
                 get: function() {
                     var that = this,
@@ -793,27 +791,27 @@
             },
 
             /*
-                把这个场景的属性和调用属性传给一个新函数
-                此函数或方法主要manager管理一个物理实例事物
-                通过调用相应的物理对象 即可使用相应的属性和参数 并且赋值
-                var cir = new app.Manager('circle'); // or cylinder rect
-                此管理事件为新开的对象
-            */
+				把这个场景的属性和调用属性传给一个新函数
+				此函数或方法主要manager管理一个物理实例事物
+				通过调用相应的物理对象 即可使用相应的属性和参数 并且赋值
+				var cir = new app.Manager('circle'); // or cylinder rect
+				此管理事件为新开的对象
+			*/
             root: {
                 get: function(x) {
                     var that = this;
                     return {
                         /*
-                            get configuration of info on the Manager methods.
-                            options property will be resetting.
-                        */
+							get configuration of info on the Manager methods.
+							options property will be resetting.
+						*/
                         addChild: function(options) {
                             var getBufferMethod = options;
-                            var getConfig = getBufferMethod.graphics.config;
-                            var defineStartConfigInfo = getConfig.startconfig[0];
+
                             // 重新定义属性 from graphics object to config.
-                            var defineConfigurationInfo = getConfig.set;
+                            var defineConfigurationInfo = getBufferMethod.graphics.config.set;
                             var defineConfigurationInfoPropertiesType;
+
                             if (defineConfigurationInfo.type === 'Array' || !defineConfigurationInfo.type) {
                                 defineConfigurationInfoPropertiesType = 'Array';
                             } else if (defineConfigurationInfo.type !== 'Array') {
@@ -835,8 +833,8 @@
                                 // 如果第二个参数为false 执行默认的数组
                                 // 第三个参数限制作用 false 禁止自动 true 自动执行
                                 opt.Excute2DEngine(that.data[0], acceptCustomizeConfig, {
-                                    speed: defineStartConfigInfo.speed,
-                                    open : defineStartConfigInfo.open
+                                    speed: defineConfigurationInfo.speed,
+                                    open : defineConfigurationInfo.open
                                 })
                             });
                             return this
@@ -894,6 +892,34 @@
             }
         });
 
+        // name = 'arc()'
+        q[1][87].prototype.constructor = o[1][87];
+        o[1][87] = q[1][87];
+        Object.assign(o[1][87].prototype, {
+            handlePosition: function(argument) {},
+        });
+
+        // name = '()'
+        q[1][86].prototype.constructor = o[1][86];
+        o[1][86] = q[1][86];
+        Object.assign(o[1][86].prototype, {
+            handleColor: function(argument) {},
+        });
+
+        // name = '()'
+        q[1][85].prototype.constructor = o[1][85];
+        o[1][85] = q[1][85];
+        Object.assign(o[1][85].prototype, {
+            handleColor: function(argument) {},
+        });
+
+        // name = '()'
+        q[1][84].prototype.constructor = o[1][84];
+        o[1][84] = q[1][84];
+        Object.assign(o[1][84].prototype, {
+            handleColor: function(argument) {},
+        });
+
         // pointerconfig = '()'
         q[1][83].prototype.constructor = o[1][83];
         o[1][83] = q[1][83];
@@ -917,6 +943,14 @@
                 },
                 set: function(val) {
                     this.PROPERTY = val;
+                }
+            },
+            'speed': {
+                get: function() {
+                    return this.SPEED
+                },
+                set: function(val) {
+                    this.SPEED = val;
                 }
             }
         });
@@ -953,30 +987,54 @@
             initialize: function(argument) {},
         });
         Object.defineProperties(o[1][300].prototype, {
+            'mouseX': {
+                get: function() {
+                    return this.x1
+                },
+                set: function(val) {
+                    this.x1 = val;
+                }
+            },
+            'mouseY': {
+                get: function() {
+                    return this.y1
+                },
+                set: function(val) {
+                    this.y1 = val;
+                }
+            },
+            'SPEED_3': {
+                get: function() {
+                    return this._SPEED
+                },
+                set: function(val) {
+                    this._SPEED = val
+                }
+            }
         });
         /*
         - circle shape
-        - 传入参数(默认canvas Element)
-        - 回调函数(函数名为调用功能functional)
-        - 功能分别为 SHAPE WAVE CIRCLE LINE ARC ...
-        - circle : app.circle()
-        */
+		- 传入参数(默认canvas Element)
+		- 回调函数(函数名为调用功能functional)
+		- 功能分别为 SHAPE WAVE CIRCLE LINE ARC ...
+		- circle : app.circle()
+		*/
         /*
-            定义配置信息
-            首次配置implement组件的属性和方法
-          {
-              x: 坐标 x,
-              y: 坐标 y,
-              index: color 值,
-              speed ：速度 number,
-              trails ：轨迹 number,
-              radius ：半径 number,
-              startAngles ：起始角度 pi,
-              stopAngles : 结束角度 pi,
-              motion : 运动方式 String,
-              bMoveMode : 运动方式 boolean
-          }
-        */
+			定义配置信息
+			首次配置implement组件的属性和方法
+            {
+                x: 坐标 x,
+                y: 坐标 y,
+                index: color 值,
+                speed ：速度 number,
+                trails ：轨迹 number,
+                radius ：半径 number,
+                startAngles ：起始角度 pi,
+                stopAngles : 结束角度 pi,
+                motion : 运动方式 String,
+                bMoveMode : 运动方式 boolean
+            }
+		*/
         q[1][299].prototype.constructor = o[1][299];
         o[1][299] = q[1][299];
         Object.assign(o[1][299].prototype, {
@@ -1043,8 +1101,8 @@
             },
 
             /*
-                example color array and pos
-            */
+				example color array and pos
+			*/
             particularProperty: function(options) {
                 if (options) return this.collection[0].characteristic;
             },
@@ -1058,15 +1116,15 @@
                 this.data[0].moveTo(this.iterator.x, this.iterator.y);
             },
             /*
-                excuting the arc events 
-            */
+				excuting the arc events 
+			*/
             _drawGraphicsArc: function(x,y) {
                 // console.log(x+'=x,'+y+'=y,'+ this.iterator.radius+'=this.iterator.radius,'+ this.iterator.startAngles+'=this.iterator.startAngles,'+ this.iterator.stopAngles + '=this.iterator.stopAngles')
                 this.data[0].arc(x, y, this.iterator.radius, this.iterator.startAngles, this.iterator.stopAngles);
             },
             /*
-                setting color properties
-            */
+				setting color properties
+			*/
             _scene2DFillStyles: function(options) {
                 this.data[0].fillStyle = options || this.iterator.index;
             },
@@ -1156,10 +1214,23 @@
             }
         });
         /*
-            重新写入配置信息
-            通过 return set : { restore config info }
-        */
+			重新写入配置信息
+			通过 return set : { restore config info }
+		*/
         Object.defineProperties(o[1][299].prototype, {
+            config: {
+                get: function() {
+                    var that = this;
+                    var collection = this.collection;
+
+                    return {
+                        set: new o[1][299]()
+                    }
+                },
+                set: function(value) {
+                    return value
+                }
+            }
         });
 
         // line shape
@@ -1168,8 +1239,8 @@
         Object.assign(o[1][298].prototype, {
             initialize: function() {
                 return this,
-                o[1][298].call(this, arguments),
-                o[1][298].prototype
+                o[1][293].call(this, arguments),
+                o[1][293].prototype
             },
             draw: function(options) {
                 var getCollectionProperty = this.particularProperty();
@@ -1244,6 +1315,28 @@
             }
         });
         Object.defineProperties(o[1][298].prototype, {
+            config: {
+                get: function() {
+                    var that = this;
+                    var collection = this.collection;
+
+                    return {
+                        set: new o[1][299]()
+                    }
+                },
+                set: function(value) {
+                    return value
+                }
+            },
+            pos: {
+                get: function() {
+                    return this.position
+                },
+                set: function(value) {
+                    if (value) this.position = value
+                    return value
+                }
+            }
         });
 
         // arc shape
@@ -1325,6 +1418,28 @@
             }
         });
         Object.defineProperties(o[1][297].prototype, {
+            config: {
+                get: function() {
+                    var that = this;
+                    var collection = this.collection;
+
+                    return {
+                        set: new o[1][297]()
+                    }
+                },
+                set: function(value) {
+                    return value
+                }
+            },
+            pos: {
+                get: function() {
+                    return this.position
+                },
+                set: function(value) {
+                    if (value) this.position = value
+                    return value
+                }
+            }
         });
 
         // rect shape
@@ -1425,6 +1540,28 @@
             }
         });
         Object.defineProperties(o[1][296].prototype, {
+            config: {
+                get: function() {
+                    var that = this;
+                    var collection = this.collection;
+
+                    return {
+                        set: new o[1][296]()
+                    }
+                },
+                set: function(value) {
+                    return value
+                }
+            },
+            pos: {
+                get: function() {
+                    return this.position
+                },
+                set: function(value) {
+                    if (value) this.position = value
+                    return value
+                }
+            }
         });
 
         // wave shape
@@ -1469,35 +1606,46 @@
                     inherit.rate = !inherit.rate ? shapeProperty.rate: inherit.rate;
                     inherit.index = !inherit.index ? shapeProperty.index: inherit.index;
                     inherit.speed = !inherit.speed ? shapeProperty.speed - this.s_SPEED: inherit.speed - this.s_SPEED;
-                    inherit.slope = !inherit.slope ? shapeProperty.slope: inherit.slope;
+                    inherit.bevel = !inherit.bevel ? shapeProperty.bevel: inherit.bevel;
                     inherit.opposite = !inherit.opposite ? shapeProperty.opposite: inherit.opposite;
                     inherit.sensitivity = !inherit.sensitivity ? shapeProperty.sensitivity: inherit.sensitivity;
                     inherit.readyPosition = !inherit.readyPosition ? shapeProperty.readyPosition: inherit.readyPosition;
                     inherit.beginPosition = !inherit.beginPosition ? shapeProperty.beginPosition: inherit.beginPosition;
                     inherit.endPosition = !inherit.endPosition ? shapeProperty.endPosition: inherit.endPosition;
 
-                    this.iterator.x = inherit.x;
-                    this.iterator.y = inherit.y;
-                    this.iterator.rate = inherit.rate;
                     this.iterator.index = inherit.index;
-                    this.iterator.speed = inherit.speed;
-                    this.iterator.slope = inherit.slope;
-                    this.iterator.opposite = inherit.opposite;
-                    this.iterator.sensitivity = inherit.sensitivity;
                     this.iterator.readyPosition = inherit.readyPosition;
                     this.iterator.beginPosition = inherit.beginPosition;
                     this.iterator.endPosition = inherit.endPosition;
 
+                    // 准备x位置 readyPosition = i
+                    // 起始x位置 beginPosition = i
+                    // 结束x位置 endPosition = len
+                    // 水平运动长度 len = 10
+                    var beginDistance_x = this.iterator.beginPosition.x;
+                    var endDistance_x = this.iterator.endPosition.x;
                     this._beggingToDo();
-                    this.start(_createWave);
+
+                    for (var i = beginDistance_x; i < endDistance_x; i++) {
+                        // 传入参数进行计算pos 位移的动态x y位置
+                        this.getDynimicData(_createWave, inherit.x, inherit.y, inherit.sensitivity, inherit.rate, inherit.speed, i, inherit.opposite, inherit.bevel);
+
+                        this._lineTo({
+                            x: this.iterator.dynimic.x,
+                            y: this.iterator.dynimic.y
+                        });
+                    }
+                    // for(var d= inherit.x; d >0; d--){
+                    // 	this._lineTo( inherit,d ,-this.opposite,'sin');
+                    // }
                     this._fillStyle();
                     this._strokeStyle();
                     this._stroke()
                 }
             },
             /*
-                example color array and pos
-            */
+				example color array and pos
+			*/
             particularProperty: function(options) {
                 return this.collection[0].characteristic;
             },
@@ -1508,16 +1656,16 @@
                 this.data[0].moveTo(this.iterator.x, this.iterator.y);
             },
             /*
-                excuting the arc events 
-            */
+				excuting the arc events 
+			*/
             _lineTo: function(options) {
                 // 从0 到总width宽度的实际长度
                 this.data[0].lineTo(options.x, options.y);
                 // this.data[0].lineTo(x, y2);
             },
             /*
-                setting color properties
-            */
+				setting color properties
+			*/
             _strokeStyle: function(options) {
                 this.data[0].strokeStyle = this.iterator.index;
             },
@@ -1530,44 +1678,20 @@
             _stroke: function() {
                 this.data[0].stroke();
             },
-            // 准备x位置 readyPosition = i
-            // 起始x位置 beginPosition = i
-            // 结束x位置 endPosition = len
-            // 水平运动长度 len = 10
-            start : function (options){
-                var beginDistance_x = this.iterator.beginPosition.x;
-                var endDistance_x = this.iterator.endPosition.x;
-
-                // loop all坐标的连线
-                // 传入参数进行计算pos 位移的动态x y位置
-                this.getDynimicData(options,
-                    beginDistance_x,
-                    endDistance_x,
-                    this.iterator.x,
-                    this.iterator.y,
-                    this.iterator.sensitivity,
-                    this.iterator.rate,
-                    this.iterator.speed,
-                    this.iterator.opposite,
-                    this.iterator.slope);
-
-                for(var d = this.iterator.dynimic.group,k = d.length, i = 0; i < k; i++){
-                    var x = d[i][0], y = d[i][1];
-                    this._lineTo({
-                        x: x,
-                        y: y
-                    });
-                }
-            },
             // 获得动态属性
-            getDynimicData: function(_createWave, _a, _b, _c, _d, _e, _f, _g, _l, _m) {
+            getDynimicData: function(_createWave, _a, _b, _c, _d, _e, _f, _g, _l) {
                 var collection = {};
-                var waveModule = _createWave(_a, _b, _c, _d, _e, _f, _g, _l, _m);
+                var waveModule = _createWave(_a, _b, _c, _d, _e, _f, _g, _l);
 
-                // 默认获得一个向右的运动轨迹
-                var item = waveModule['right'];
+                collection = {
+                    'x': waveModule.x,
+                    'y': waveModule.y
+                };
 
-                this.iterator.dynimic.group = item; // especially of base property
+                this.iterator.dynimic = collection;
+
+                // especially of base property
+                Object.assign(this.iterator.dynimic, waveModule);
             },
             Excute2DEngine: function() {
                 // accept ctx 2d property.
@@ -1599,6 +1723,55 @@
             }
         });
         Object.defineProperties(o[1][295].prototype, {
+            config: {
+                get: function() {
+                    var that = this;
+                    var collection = this.collection;
+
+                    return {
+                        set: new o[1][295]()
+                    }
+                },
+                set: function(value) {
+                    return value
+                }
+            },
+            pos: {
+                get: function() {
+                    return this.position
+                },
+                set: function(value) {
+                    if (value) this.position = value
+                    return value
+                }
+            },
+            RATE: {
+                get: function() {
+                    return this.rate
+                },
+                set: function(value) {
+                    if (value) this.rate = value
+                    return value
+                }
+            },
+            SENSITIVITY: {
+                get: function() {
+                    return this.sensitivity
+                },
+                set: function(value) {
+                    if (value) this.sensitivity = value
+                    return value
+                }
+            },
+            SPEED: {
+                get: function() {
+                    return this.speed
+                },
+                set: function(value) {
+                    if (value) this.speed = value
+                    return value
+                }
+            },
         });
 
         // sectors shape
@@ -1709,6 +1882,28 @@
             }
         });
         Object.defineProperties(o[1][294].prototype, {
+            config: {
+                get: function() {
+                    var that = this;
+                    var collection = this.collection;
+
+                    return {
+                        set: new o[1][294]()
+                    }
+                },
+                set: function(value) {
+                    return value
+                }
+            },
+            pos: {
+                get: function() {
+                    return this.position
+                },
+                set: function(value) {
+                    if (value) this.position = value
+                    return value
+                }
+            }
         });
 
         // hat shape
@@ -1781,6 +1976,7 @@
             },
             _lineTo: function(options) {
                 this.data[0].lineTo(this.iterator.x1, this.iterator.y1);
+                // console.log(this.iterator.x1 + ',' + this.iterator.y1);
             },
             _fillStyle: function(options) {
                 this.data[0].fillStyle = this.iterator.index;
@@ -1818,12 +2014,33 @@
             }
         });
         Object.defineProperties(o[1][293].prototype, {
+            config: {
+                get: function() {
+                    var that = this;
+                    var collection = this.collection;
+
+                    return {
+                        set: new o[1][293]()
+                    }
+                },
+                set: function(value) {
+                    return value
+                }
+            },
+            pos: {
+                get: function() {
+                    return this.position
+                },
+                set: function(value) {
+                    if (value) this.position = value
+                    return value
+                }
+            }
         });
 
 
         /*
-          - hill shape
-          - 方向使用指针Arrow函数获取
+            - 方向使用指针Arrow函数获取
         */
         q[1][292].prototype.constructor = o[1][292];
         o[1][292] = q[1][292];
@@ -1883,7 +2100,7 @@
             },
 
             /*
-              example color array and pos
+                example color array and pos
             */
             particularProperty: function(options) {
                 if (options) return this.collection[0].characteristic;
@@ -1997,80 +2214,80 @@
             通过 return set : { restore config info }
         */
         Object.defineProperties(o[1][292].prototype, {
+            config: {
+                get: function() {
+                    var that = this;
+                    var collection = this.collection;
+
+                    return {
+                        set: new o[1][292]()
+                    }
+                },
+                set: function(value) {
+                    return value
+                }
+            }
         });
 
         /*
-            options,count,a
-            x,y,inherit.sensitivity, inherit.rate, inherit.speed, i, inherit.opposite
-            a = x
-            b = y
-            c = sensitivity
-            d = rate
-            e = speed
-            ex = i <== transform x
-            g = opposite
-        */
+			options,count,a
+			x,y,inherit.sensitivity, inherit.rate, inherit.speed, i, inherit.opposite
+			a = x
+			b = y
+			c = sensitivity
+			d = rate
+			e = speed
+			f = i <== transform x
+			g = opposite
+		*/
         q[1][240].prototype.constructor = o[1][240];
         o[1][240] = q[1][240];
-        o[1][240].createWave = function(sx, ex, a, b, c, d, e, g, l) {
-            var 
-                times = (new Date).getTime() / 60,
-                circle_modelType_chain = new o[1][240](),
-                chain_right =  circle_modelType_chain._location_dynamic_right(sx, ex, a, b, c, d, e, g, l, times);
+        o[1][240].createWave = function(a, b, c, d, e, f, g, l) {
+            var x, y, h, k, o, p, r, s, q, m, n, hx4, hy4, t = [];
 
-                return {
-                    'right' : chain_right.results
-                }
+            // default position
+            x = f;
+
+            // 1/4 of the width and height
+            hx4 = Math.abs(f - a);
+            hy4 = Math.abs(f - b);
+
+            n = Math.pow(l, hy4);
+            m = hx4;
+
+            q = Math.pow(n, m);
+            o = q * b / d; // the rate on the pos.y = height
+            p = Math.PI / 180 * f * c;
+            s = e;
+
+            r = Math.cos(p + s);
+
+            y = b + o * r * g;
+            t.push(x, y);
+
+            this.base = !0;
+
+            return {
+                x: x,
+                y: y,
+                base: this.base,
+                rate: d,
+                speed: s
+            }
         }
         Object.assign(o[1][240].prototype, {
             initialize: function() {
                 return this,
                 o[1][240].call(this, arguments),
                 o[1][240].prototype
-            },
-            _location_dynamic_right: function(sx, ex, a, b, c, d, e, g, l, times) {
-                var x, y, h, k, o, p, r, s, q, m, n, hx4, hy4;
-
-                    var t = [];
-                    // 循环每一个位移
-                    for (var i = sx; i < ex; i++) {
-                        // default position
-                        f = i;
-
-                        // 1/4 of the width and height
-                        hx4 = Math.abs(f - a);
-                        hy4 = Math.abs(f - b);
-
-                        n = Math.pow(l, hy4);
-                        m = hx4;
-
-                        q = Math.pow(n, m);
-                        o = q * b / d; // the rate on the pos.y = height
-                        p = Math.PI / 180 * f * c;
-                        s = e;
-
-                        r = Math.cos(p + s);
-
-                        y = b + o * r * g;
-
-                        // 指定x轴的坐标
-                        x = f;
-                        
-                        //  把每一个点的坐标 都保存到一个数组里
-                        t.push([x, y]);
-                    }
-
-                    return {
-                        results : t
-                    }
-            },
+            }
         });
 
 
         /*
-          x,y,
-          aa = x
-          bb = y
+            x,y,
+            aa = x
+            bb = y
         */
         q[1][239].prototype.constructor = o[1][239];
         o[1][239] = q[1][239];
@@ -2163,16 +2380,18 @@
                 }
         });
 
+
         /*
-          x,y,
-          aa = x
-          bb = y
-          - 如果是半个周期的
-          - 模型是static形式的位置
-          - draw调用的输出的results还是和动态的写法类似
-          - 和动态的唯一不同点
-          - 一静态是location_后面的参数名称不一样
-          - 二动态的需要start方法调用改变的运动motion类型type
+            x,y,
+            aa = x
+            bb = y
+
+            - 如果是半个周期的
+            - 模型是static形式的位置
+            - draw调用的输出的results还是和动态的写法类似
+            - 和动态的唯一不同点
+            - 一静态是location_后面的参数名称不一样
+            - 二动态的需要start方法调用改变的运动motion类型type
         */
         q[1][232].prototype.constructor = o[1][232];
         o[1][232] = q[1][232];
@@ -2217,25 +2436,31 @@
                 return pointNums
             },
             /*
-              - 总共的点为pointNums 
-              - 每一个点的度数为angleNums
-              - 角度的90度为1 
-              - 所以pointNums一半的数乘以度数要为90
-              - 也就是说p/2的点乘多少度的数等于90(且排除2与4的点) 
-              - 由最大的点数为180 最小的点数为6
-              - 弧度边小 那么点就会多一点 意味着平滑一点
-              - 弧度越大 点的数量少 越陡峭
+                - 总共的点为pointNums 
+                - 每一个点的度数为angleNums
+                - 角度的90度为1 
+                - 所以pointNums一半的数乘以度数要为90
+                - 也就是说p/2的点乘多少度的数等于90(且排除2与4的点) 
+                - 由最大的点数为180 最小的点数为6
+                - 弧度边小 那么点就会多一点 意味着平滑一点
+                - 弧度越大 点的数量少 越陡峭
             */
             _location_staticn_top : function (aa ,bb, point){
+                var getSmoothness,angles,two;
                 // 使用平滑度计算坡平面的光滑程度(平滑度从0开始结束为180)
                 // 假设平滑度等于点数的数量
-                var getSmoothness,angles,points,two,midPointerHalf;
-
                 getSmoothness = this.takeInteger(6,point);
-                points = getSmoothness; 
+
+                var points;
+                points = getSmoothness;
+
+                // 取中间的点
+                var midPointerHalf;
                 two = 2;
-                midPointerHalf = points / two;// 取中间的点
-                angles = 90 / midPointerHalf; // 获得一个点的度数
+                midPointerHalf = points / two;
+
+                // 获得一个点的度数
+                angles = 90 / midPointerHalf;
 
                 for(var radian,radianValues,x,y,a = [],i = 0; i < points; i++){
                     radian = i * angles * Math.PI / 180;
@@ -2253,21 +2478,27 @@
                 }
             },
             _location_static_left : function (aa ,bb, point){
-                var getSmoothness,angles,points,two,midPointerHalf;
-
+                var getSmoothness,angles,two;
                 getSmoothness = this.takeInteger(6,point);
-                points = getSmoothness; 
+
+                var points;
+                points = getSmoothness;
+
+                // 取中间的点
+                var midPointerHalf;
                 two = 2;
-                midPointerHalf = points / two;// 取中间的点
-                angles = 90 / midPointerHalf; // 获得一个点的度数
+                midPointerHalf = points / two;
+
+                // 获得一个点的度数
+                angles = 90 / midPointerHalf;
 
                 for(var radian,radianValues,x,y,a = [],i = 0; i < points; i++){
-                    radian = i * angles * Math.PI / 180;
-                    radianValues = Math.cos(radian);
+                    var radian = i * angles * Math.PI / 180;
+                    var radianValues = Math.cos(radian);
 
                     // 根据纵坐标的位移实现几何图形 余弦
-                    x = Math.pow(radianValues*two,two);
-                    y = i;
+                    var x = Math.pow(radianValues*two,two);
+                    var y = i;
                     a.push([x,y]);
                 }
 
@@ -2276,13 +2507,19 @@
                 }
             },
             _location_static_right : function (aa ,bb, point){
-                var getSmoothness,angles,points,two,midPointerHalf;
-
+                var getSmoothness,angles,two;
                 getSmoothness = this.takeInteger(6,point);
-                points = getSmoothness; 
+
+                var points;
+                points = getSmoothness;
+
+                // 取中间的点
+                var midPointerHalf;
                 two = 2;
-                midPointerHalf = points / two;// 取中间的点
-                angles = 90 / midPointerHalf; // 获得一个点的度数
+                midPointerHalf = points / two;
+
+                // 获得一个点的度数
+                angles = 90 / midPointerHalf;
 
                 for(var radian,radianValues,x,y,a = [],i = 0; i < points; i++){
                     radian = i * angles * Math.PI / 180;
@@ -2299,13 +2536,19 @@
                 }
             },
             _location_static_bottom : function (aa ,bb, point){
-                var getSmoothness,angles,points,two,midPointerHalf;
-
+                var getSmoothness,angles,two;
                 getSmoothness = this.takeInteger(6,point);
-                points = getSmoothness; 
+
+                var points;
+                points = getSmoothness;
+
+                // 取中间的点
+                var midPointerHalf;
                 two = 2;
-                midPointerHalf = points / two;// 取中间的点
-                angles = 90 / midPointerHalf; // 获得一个点的度数
+                midPointerHalf = points / two;
+
+                // 获得一个点的度数
+                angles = 90 / midPointerHalf;
 
                 for(var radian,radianValues,x,y,a = [],i = 0; i < points; i++){
                     radian = i * angles * Math.PI / 180;
@@ -2323,13 +2566,32 @@
             },
         });
 
+
+        q[1][198].prototype.constructor = o[1][198];
+        o[1][198] = q[1][198];
+        Object.defineProperties(o[1][198].prototype, {
+            get: function() {
+                return 2
+            },
+            set: function(value) {
+                return value
+            }
+        });
+        Object.assign(o[1][198].prototype, {
+            initialize: function() {
+                return this,
+                o[1][198].call(this, arguments),
+                o[1][198].prototype
+            },
+        });
+
         q[1][499].prototype.constructor = o[1][499];
         o[1][499] = q[1][499];
         Object.assign(o[1][499].prototype, {
             initialize: function() {
                 return this,
-                Aset.call(this, arguments),
-                new Aset(arguments[0])
+                As.call(this, arguments),
+                new As(arguments[0])
             },
             attr: function(attr) {
                 // 查看是否具有属性
@@ -2338,7 +2600,8 @@
                 // 否则不存在就会保存 手动设置
                 // console.log(attr in this.data[0])
                 try {
-                    if (attr in this.data[0]) return this.data.unshift(attr),this;
+                    if (attr in this.data[0]) return this.data.unshift(attr),
+                    this;
                     else return void this
                 } catch(e) {
                     throw e
@@ -2377,16 +2640,93 @@
             }
         });
 
+        // s3.plugin 接收插件名|插件方法
+        q[1][1000].prototype.constructor = o[1][1000];
+        o[1][1000] = q[1][1000];
+        Object.defineProperties(o[1][1000].prototype, {
+            get: function() {
+                return 2
+            },
+            set: function(value) {
+                return value
+            }
+        });
+        Object.assign(o[1][1000].prototype, {
+            initialize: function() {
+                return this,
+                o[1][1000].call(this, arguments),
+                o[1][1000].prototype
+            },
+            sets:function (){}
+        });
+
+        // 此处为重写2d属性的值 
+        // reject实现注入的方法
+        // var d = app.define2DAttr(scene);
+        q[1][1099].prototype.constructor = o[1][1099];
+        o[1][1099] = q[1][1099];
+        Object.defineProperties(o[1][1099].prototype, {
+            get: function() {
+                return 2
+            },
+            set: function(value) {
+                return value
+            }
+        });
+        Object.assign(o[1][1099].prototype, {
+            initialize: function() {
+                return this,
+                o[1][1099].call(this, arguments),
+                o[1][1099].prototype
+            },
+        });
+
+        q[1][1111].prototype.constructor = o[1][1111];
+        o[1][1111] = q[1][1111];
+        Object.defineProperties(o[1][1111].prototype, {
+            get: function() {
+                return 2
+            },
+            set: function(value) {
+                return value
+            }
+        });
+        Object.assign(o[1][1111].prototype, {
+            initialize: function() {
+                return this,
+                o[1][1111].call(this, arguments),
+                o[1][1111].prototype
+            },
+        });
+
+        q[1][1299].prototype.constructor = o[1][1299];
+        o[1][1299] = q[1][1299];
+        Object.assign(o[1][1299].prototype, {
+            initialize: function() {
+                return this,
+                o[1][1299].call(this, arguments),
+                o[1][1299].prototype
+            },
+
+        });
+        Object.defineProperties(o[1][1299].prototype, {
+            get: function() {
+                return 2
+            },
+            set: function(value) {
+                return value
+            }
+        });
+
         /*
-            * create a class.
-            * call subclasses and prototype attributes to parent element.
-            * implemention invoking anonymous function of properties.
-            * there are invoking extends subclasses.
-            * fn(first params ,second params )
-            * params first = this.prototype.first
-            * params second = second.prototype
-        */
-        
+		* create a class.
+		* call subclasses and prototype attributes to parent element.
+		* implemention invoking anonymous function of properties.
+		* there	are	invoking extends subclasses.
+		* fn(first params ,second params )
+		* params first = this.prototype.first
+		* params second = second.prototype
+		*/
         Shape.plugin.create('tool', o[1][99]);
         Shape.plugin.create('circleShape', o[1][299]);
         Shape.plugin.create('lineShape', o[1][298]);
@@ -2398,6 +2738,10 @@
         Shape.plugin.create('hillShape', o[1][292]);
         Shape.plugin.create('set', o[1][499]);
         Shape.plugin.create('freezeProperty', o[1][999]);
+        Shape.plugin.create('plugin', o[1][1000]);
+        Shape.plugin.create('cache', o[1][1111]);
+        Shape.plugin.create('cover2DProperty', o[1][1099]);
+        Shape.plugin.create('render', o[1][1299]);
 
         var _build = new s3();
         /*simply api*/

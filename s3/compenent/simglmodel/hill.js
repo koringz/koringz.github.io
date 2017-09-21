@@ -4,17 +4,17 @@ function hill (option){
 
 	// sideBar
 	var _direction = option.direction || 'top',
-		_trails = Number(option.trails) || 10,
-		_x = Number(option.x) || 50,
-		_y = Number(option.y) || 50,
-		_smooth =Number( option.smooth) || 5;
+			_trails = Number(option.trails) || 10,
+			_x = Number(option.x) || 50,
+			_y = Number(option.y) || 50,
+			_smooth =Number( option.smooth) || 5;
 
 
 	var simgl = new s3.Shape();
 
 	var canvas = s3.dom('canvas'),
-		can = simgl.set(canvas),
-		ctx = canvas.getContext('2d');
+			can = simgl.set(canvas),
+			ctx = canvas.getContext('2d');
 
 	can.attr('width').val('960').attr('height').val('500').attr('className').val('bgwhite');
 
@@ -55,7 +55,7 @@ function hill (option){
 	}
 
 	clearTimeout(mct);
-	clearTimeout(t);
+	// clearTimeout(t);
 
 	app.root.addChild(_scene);
 
