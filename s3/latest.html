@@ -4,7 +4,8 @@
 <title>s3.JS</title>
 <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 <script src="./jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="./../../assets/public.css">
+<link rel="stylesheet" type="text/css" href="./assets/public.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style type="text/css">
 	body{background: #111;}
 	a{color: blanchedalmond}
@@ -12,24 +13,23 @@
 	.bgwhite{background-color: white}
 	.bgred{background-color: white}
 	.header,.center{text-align: center;}
-	.header canvas{margin: 0 auto;}
+	.header canvas{margin: 0 auto;width:960px;height: 500px}
+	.main .header{overflow: hidden;width: 100%;}
 	.main .mid{width:960px;margin:0 auto;text-align: left;padding: 5px;background: #222}
-	.main .mid span{color: #eee}
 	.main .mid button{background: #222;color: gray;border: navajowhite;}
 	.main .mid .active{color:#ddd;}
-	.main .mid span.config{color: #aaa;font-size: 12px;}
-	.center{margin: 0 auto;}
+	.main .mid .config{color: #aaa;font-size: 12px;}
+	.center{margin: 0 auto;color: #eee}
 	div[att='config'] button,
 	div[att='config'] span,.sideLink{background: none;color: #ddd;border: none;margin-left:5px;font-size: 12px;cursor:pointer;padding: 0}
 	div[att='config'] span a{color: #dfdfdf;text-decoration: none;}
 	.sideLink,.config{float: right;padding-right: 10px;text-align: left;}
-	.config {display: inline-block;}
-	.config select,.config span{position:relative;}
-	.config span{width: auto;margin-right: 10px;margin-left: 2px;}
-	.config select{width: 50px;height: 22px;margin-right: 10px;background: #333;color: #aaa;border: none;}
+	.config select,.config{position:relative;}
+	.config {display: inline-block;width: auto;}
+	.config select{width: auto;height: 22px;margin-right: 10px;background: #333;color: #aaa;border: none;}
 	#worker.worker.self{position: absolute;bottom: 0;padding: 0;width: 100%;text-align: center;color: #333;background: #000;}
 </style>
- <script src="./../../S3/S3.js"></script>
+ <script src="./S3/S3.js"></script>
 </head>
 <body>
 <div class="top-none">
@@ -50,7 +50,7 @@
 		<button data-model="moveWave">moveWave</button>
 		<button data-model="moveCircle">moveCircle</button>
 
-		<span class="config select1">Dir:
+		<span class="config select1"><em>Dir:</em>
 			<select class="menuBar" data-item="direction">
 				<option>top</option>
 				<option>bottom</option>
@@ -58,7 +58,7 @@
 				<option>right</option>
 			</select>
 		</span>
-		<span class="config select2">X:
+		<span class="config select2"><em>X:</em>
 			<select class="menuBar" data-item="x">
 				<option>50</option>
 				<option>150</option>
@@ -71,7 +71,7 @@
 				<option>850</option>
 			</select>
 		</span>
-		<span class="config select2">Y:
+		<span class="config select2"><em>Y:</em>
 			<select class="menuBar" data-item="y">
 				<option>50</option>
 				<option>150</option>
@@ -80,7 +80,7 @@
 				<option>450</option>
 			</select>
 		</span>
-		<span class="config select2">Scale:
+		<span class="config select2"><em>Scale:</em>
 			<select class="menuBar" data-item="trails">
 				<option>1</option>
 				<option>5</option>
@@ -92,7 +92,7 @@
 				<option>35</option>
 			</select>
 		</span>
-		<span class="config select2">Smooth:
+		<span class="config select2"><em>Smooth:</em>
 			<select class="menuBar" data-item="smooth">
 				<option>1</option>
 				<option>5</option>
@@ -104,6 +104,16 @@
 				<option>35</option>
 			</select>
 		</span>
+		<span class="config select2"><em>Color:</em>
+			<select class="menuBar" data-item="index">
+				<option data-color="rgba(0,0,0,1)">黑色</option>
+				<option data-color="rgba(214,39,42,1)">红色</option>
+				<option data-color="rgba(246,189,15,1)">黄色</option>
+				<option data-color="rgba(8,139,209,1)">蓝色</option>
+				<!-- <option>绿色</option> -->
+				<!-- <option>紫色</option> -->
+			</select>
+		</span>
 	</div>
 
 	<div class="header">
@@ -112,13 +122,14 @@
 </div>
 <div id="worker" class="worker self top-none">auther: <span>koringz</span></div>
 </body>
-<script type="text/javascript" src="./../../compenent/simglmodel/moveCircle.js"></script>
-<script type="text/javascript" src="./../../compenent/simglmodel/moveWave.js"></script>
-<script type="text/javascript" src="./../../compenent/simglmodel/hill.js"></script>
+<script type="text/javascript" src="./compenent/simglmodel/moveCircle.js"></script>
+<script type="text/javascript" src="./compenent/simglmodel/moveWave.js"></script>
+<script type="text/javascript" src="./compenent/simglmodel/hill.js"></script>
 <script type="text/javascript">
 
 var all = document.querySelector('#mid').querySelectorAll("button");
 var _config = $('.config select.menuBar');
+var _onlyConfig = $('.config');
 var configEvent = 'hill';
 var bindObjectProperties = {
 	direction : null,
@@ -126,9 +137,21 @@ var bindObjectProperties = {
 	smooth : null,
 	x : null,
 	y : null,
+	index : "rgb('46','139','87')"
 };
 
 $(document).ready(function(){
+	var na = window.navigator;
+	function appBrowser(){
+		if(na){
+			var browserApp = na.appVersion;
+			if(browserApp.search('Mobile') > 0){
+				_onlyConfig.hide()
+			}
+			else _onlyConfig.show();
+		}
+	}
+	appBrowser();
 
 	for(var k = 0; k < all.length; k++ ){
 			all[k].onclick = function  (e) {
@@ -147,7 +170,9 @@ $(document).ready(function(){
 
 				var getFoo = e.target.getAttribute("data-model");
 
-				if(getFoo !== 'evtCircle') clearTimeout(t);
+				if(getFoo !== 'hill') _onlyConfig.hide();
+				else appBrowser();
+				if(getFoo !== 'moveWave') clearTimeout(t);
 				if(getFoo !== 'moveCircleTest') clearTimeout(mct);
 
 				window[getFoo](bindObjectProperties)
@@ -159,10 +184,13 @@ $(document).ready(function(){
 		_config.on('change',function (){
 			// get values
 			var v = $("option:selected",this).val();
+			var vc = $("option:selected",this).attr('data-color');
 			// get attributes
 			var parentNode = $(this).attr("data-item");
 
 
+				
+			if (parentNode === 'index' ) option[parentNode] = vc;
 			if( parentNode === 'x' || 
 				parentNode === 'y' ||
 				parentNode === 'trails' ||
@@ -172,7 +200,6 @@ $(document).ready(function(){
 			}
 
 			window[configEvent](option);
-			// alert(v);
 		});
 	}
 	emmitEvent(bindObjectProperties); // 默认

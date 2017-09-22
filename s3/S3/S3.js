@@ -14,7 +14,7 @@
 
         var _s3 = typeof exports !== "undefined" ? exports: {};
         // Default global properties.
-        var doc = exports.document || document;
+        var doc = exports.document || document,win = window;
         function s3(element, options) {
             this.options = new order(element, options) || {};
             return this.options;
@@ -87,7 +87,7 @@
                     options.call(this, log.options);
                 }
                 return warn(function(options) {
-                    window.console.warn(options);
+                    win.console.warn(options);
                 },
                 {
                     options: options ? options: 'disable write. call function error'
@@ -255,7 +255,7 @@
                     logger = false; // record
                     processing = 1;
                     messages = {}; // start properties
-                    requestAnimation = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || (function() {
+                    requestAnimation = win.requestAnimationFrame || win.webkitRequestAnimationFrame || win.mozRequestAnimationFrame || win.msRequestAnimationFrame || (function() {
                         var fps = 1000 / 60;
                         var lastTimes = 0;
                         return function(callback) {
@@ -336,11 +336,16 @@
                     this.defaults = {};
                     this.data = [arguments[0]];
                     var data = this.data[0];
+                    for (var i in messages) {
+                        this[i] = messages[i];
+                    }
                     for (var k in data) {
                         if (k === 'webkitImageSmoothingEnabled' || 
                             k === 'mozImageSmoothingEnabled' || 
                             k === 'msImageSmoothingEnabled') k = 'imageSmoothingEnabled';
                         var inherit = data[k];
+                        var m = 0;
+                        var n = 0;
                         if (typeof inherit === 'string' || 
                             typeof inherit === 'number' || 
                             typeof inherit === 'boolean') {
@@ -348,19 +353,17 @@
                             this.defaults[k] = {
                                 name: 'withoutMethod',
                                 type: typeof data[k]
-                            }
+                            };
+                            this.config['withoutMethod'] = n++;
                         } else if (typeof inherit === 'function') {
                             this.newEmpty.push(k);
                             this.defaults[k] = {
                                 name: 'withMethod',
                                 type: typeof data[k],
                                 length: data[k].length
-                            }
+                            };
+                            this.config['withMethod'] = m++;
                         }
-                    }
-
-                    for (var i in messages) {
-                        this[i] = messages[i];
                     }
                 },
                 88 : function(num) {
@@ -406,6 +409,7 @@
                     this.buffer = new ArrayBuffer(16);
                     this.fdata = new Float32Array(this.buffer, 0, 3);
                     this.index = this.fdata;
+                    this._device = win.devicePixelRatio;
                     this.x = Math.round(Math.random() * 36 + 36); // start position
                     this.y = Math.round(Math.random() * 36 + 36); // start position
                     this.x1 = Math.round(Math.random() * 36 + 36) * 2; // end position
@@ -769,6 +773,7 @@
                 將属性添加进 scene.root.addChild方法里面
                 此时 scene 场景即可调用克隆的2D属性
                 通过clone克隆scene属性赋值给2D进行render渲染
+                渲染size根据屏幕适配调整size
             */
             scene: {
                 get: function() {
@@ -954,6 +959,7 @@
         });
         Object.defineProperties(o[1][300].prototype, {
         });
+
         /*
         - circle shape
         - 传入参数(默认canvas Element)
@@ -991,14 +997,15 @@
                 var shapeProperty = new o[1][300];
                 var _createCircle = shapeProperty.calculationProperty.createCircle;
 
-                this.iterator.dynimic = {};
+                this.iterator.dynamic = {};
                 
+                var ctx2M = new o[1][250](this.data[0]);
+
                 // if loop.
                 if(this.o_OPEN){
-                    this.data[0].fillStyle = "rgb(255,255,255)";
-                    this.data[0].fillRect(0, 0, this.data[0].canvas.width, this.data[0].canvas.height);
+                    ctx2M.hook2D('fillStyle',{index:"rgb(255,255,255)"});
+                    ctx2M.hook2D('fillRect',{x:'0', y:'0', x1:this.data[0].canvas.width,y1:this.data[0].canvas.height});
                 }
-
 
                 var acceptCollection, inherit;
                 if (getCollectionProperty.type === 'Array') acceptCollection = getCollectionProperty.property;
@@ -1015,10 +1022,9 @@
                     inherit.stopAngles = !inherit.stopAngles ? shapeProperty.stopAngles: inherit.stopAngles;
                     inherit.motion = !inherit.motion ? shapeProperty.motion: inherit.motion;
                     inherit.bMoveMode = !inherit.bMoveMode ? shapeProperty.bMoveMode: inherit.bMoveMode;
-                     
-
-                    this.iterator.x = inherit.x;
-                    this.iterator.y = inherit.y;
+                    
+                    this.iterator.x = inherit.x * shapeProperty._device;
+                    this.iterator.y = inherit.y * shapeProperty._device;
                     this.iterator.speed = inherit.speed;
                     this.iterator.trails = inherit.trails;
                     this.iterator.index = inherit.index;
@@ -1028,60 +1034,31 @@
                     this.iterator.stopAngles = inherit.stopAngles * 4; // 默认2 pi
                     this.iterator.bMoveMode = inherit.bMoveMode; // 只接受二个值(0,1) 如果为1即为true 开启auto 否则stop
 
-                    this._moveTo();
-                    this._beggingToDo();
+                    ctx2M.hook2D('moveTo',{x:this.iterator.x, y:this.iterator.y});
+                    ctx2M.hook2D('beginPath');
                     // 如果默认停止即圆 否则 开始运动
                     // 支持二种方式 {moveModel : String} {bMoveMode:0 || 1}
                     if(this.iterator.motion === shapeProperty.motion && this.iterator.bMoveMode ?
                       (this.iterator.motion === shapeProperty.motion || this.isMoveModel !== this.iterator.motion):
-                       this.iterator.motion !== shapeProperty.motion  ? false : !0 ) this._drawGraphicsArc(this.iterator.x,this.iterator.y);
-                    else this.start(_createCircle);
-                    this._closePath();
-                    this._scene2DFillStyles();
-                    this._scene2DFill()
+                       this.iterator.motion !== shapeProperty.motion  ? false : !0 ) ctx2M.hook2D('arc',{x:this.iterator.x,y:this.iterator.y,radius:this.iterator.radius, startAngles:this.iterator.startAngles, stopAngles:this.iterator.stopAngles,bool:false});
+                    else this.start(_createCircle,ctx2M);
+                    ctx2M.hook2D('closePath');
+                    ctx2M.hook2D('fillStyle',{index:this.iterator.index});
+                    ctx2M.hook2D('fill');
                 }
             },
-
-            /*
-                example color array and pos
-            */
+            // example color array and pos
             particularProperty: function(options) {
                 if (options) return this.collection[0].characteristic;
             },
-            _beggingToDo: function(options) {
-                this.data[0].beginPath();
-            },
-            _closePath : function (){
-                this.data[0].closePath();
-            },
-            _moveTo: function(options) {
-                this.data[0].moveTo(this.iterator.x, this.iterator.y);
-            },
-            /*
-                excuting the arc events 
-            */
-            _drawGraphicsArc: function(x,y) {
-                // console.log(x+'=x,'+y+'=y,'+ this.iterator.radius+'=this.iterator.radius,'+ this.iterator.startAngles+'=this.iterator.startAngles,'+ this.iterator.stopAngles + '=this.iterator.stopAngles')
-                this.data[0].arc(x, y, this.iterator.radius, this.iterator.startAngles, this.iterator.stopAngles);
-            },
-            /*
-                setting color properties
-            */
-            _scene2DFillStyles: function(options) {
-                this.data[0].fillStyle = options || this.iterator.index;
-            },
-            _scene2DFill: function() {
-                this.data[0].fill();
-            },
-            _fillRect : function (options){
-                this.data[0].fillRect(0, 0, this.data[0].canvas.width, this.data[0].canvas.height);
-            },
-            start : function (options){
+            start : function (options,ctx2M){
                 this.getDynimicData(options, this.iterator.x, this.iterator.y);
-                for(var d = this.iterator.dynimic.group,k = this.iterator.dynimic.length, i = 0; i < k; i++){
+                // shape的数量取决于for循环的数目
+                // 循环多 绘画多 draw multiple shapes
+                for(var d = this.iterator.dynamic.group,k = 1, i = 0; i < k; i++){
                     var x = d[i][0] * this.iterator.trails + this.iterator.x, 
                         y = d[i][1] * this.iterator.trails + this.iterator.y;
-                    this._drawGraphicsArc(x,y);
+                    ctx2M.hook2D('arc',{x:x, y:y, radius:this.iterator.radius, startAngles:this.iterator.startAngles, stopAngles:this.iterator.stopAngles,bool:false});
                 }
             },
             // 获得动态属性
@@ -1106,10 +1083,9 @@
                 // 根据指定圆形的动画模型获得位移数据
                 circleModule = _createCircle(_a, _b, getModel);
 
-                item = circleModule[getModel];
+                var item = circleModule[getModel];
 
-                this.iterator.dynimic.group = item;
-                this.iterator.dynimic.length = item.length;
+                this.iterator.dynamic.group = item;
                 // especially of base property
             },
             matchModel : function (options){
@@ -1148,7 +1124,8 @@
                 // 可执行 true 循环运动
                 // start config info
                 // open the ani of return true
-                if(auto.open) this.o_OPEN = auto.open;
+                this.o_OPEN = auto.open;
+                if( this.o_OPEN ) this.s_SPEED = auto.speed;
 
                 Object.assign(this.collection[0]['characteristic'], domain);
                 this.data.push(d2);
@@ -1177,6 +1154,8 @@
                 // 获得默认的属性和参数
                 var shapeProperty = new o[1][300];
 
+                var ctx2M = new o[1][250](this.data[0]);
+
                 var acceptCollection, inherit;
                 if (getCollectionProperty.type === 'Array') acceptCollection = getCollectionProperty.property;
                 for (var j = 0; j < acceptCollection.length; j++) {
@@ -1189,36 +1168,21 @@
                     inherit.x1 = !inherit.x1 ? shapeProperty.x1: inherit.x1;
                     inherit.y1 = !inherit.y1 ? shapeProperty.y1: inherit.y1;
 
-                    this.iterator.x = inherit.x;
-                    this.iterator.y = inherit.y;
+                    this.iterator.x = inherit.x * shapeProperty._device;
+                    this.iterator.y = inherit.y * shapeProperty._device;
                     this.iterator.index = inherit.index;
-                    this.iterator.x1 = inherit.x1;
-                    this.iterator.y1 = inherit.y1;
+                    this.iterator.x1 = inherit.x1 * shapeProperty._device;
+                    this.iterator.y1 = inherit.y1 * shapeProperty._device;
 
-                    this._strokeStyle();
-                    this._beggingToDo();
-                    this._moveTo();
-                    this._lineTo();
-                    this._stroke()
+                    ctx2M.hook2D('strokeStyle',{index:this.iterator.index});
+                    ctx2M.hook2D('beginPath');
+                    ctx2M.hook2D('moveTo',{x:this.iterator.x, y:this.iterator.y});
+                    ctx2M.hook2D('lineTo',{x:this.iterator.x1, y:this.iterator.y1});
+                    ctx2M.hook2D('stroke');
                 }
             },
             particularProperty: function(options) {
                 return this.collection[0].characteristic;
-            },
-            _strokeStyle: function(options) {
-                this.data[0].strokeStyle = this.iterator.index;
-            },
-            _beggingToDo: function() {
-                this.data[0].beginPath();
-            },
-            _moveTo: function(options) {
-                this.data[0].moveTo(this.iterator.x, this.iterator.y);
-            },
-            _lineTo: function(options) {
-                this.data[0].lineTo(this.iterator.x1, this.iterator.y1);
-            },
-            _stroke: function() {
-                this.data[0].stroke();
             },
             Excute2DEngine: function() {
                 // accept ctx 2d property.
@@ -1261,6 +1225,8 @@
                 // 获得默认的属性和参数
                 var shapeProperty = new o[1][300];
 
+                var ctx2M = new o[1][250](this.data[0]);
+
                 var acceptCollection, inherit;
                 if (getCollectionProperty.type === 'Array') acceptCollection = getCollectionProperty.property;
                 for (var j = 0; j < acceptCollection.length; j++) {
@@ -1274,32 +1240,20 @@
                     inherit.stopAngles = !inherit.stopAngles ? shapeProperty.stopAngles: inherit.stopAngles;
 
                     this.iterator.radius = inherit.radius;
-                    this.iterator.x = inherit.x;
-                    this.iterator.y = inherit.y;
+                    this.iterator.x = inherit.x * shapeProperty._device;
+                    this.iterator.y = inherit.y * shapeProperty._device;
                     this.iterator.index = inherit.index;
                     this.iterator.startAngles = inherit.startAngles;
                     this.iterator.stopAngles = inherit.stopAngles;
 
-                    this._strokeStyle();
-                    this._beggingToDo();
-                    this._drawGraphicsArc();
-                    this._stroke()
+                    ctx2M.hook2D('strokeStyle',{index:this.iterator.borderColor});
+                    ctx2M.hook2D('beginPath');
+                    ctx2M.hook2D('arc',{x:this.iterator.x, y:this.iterator.y, radius:this.iterator.radius, startAngles:this.iterator.startAngles, stopAngles:this.iterator.stopAngles, bool:false});
+                    ctx2M.hook2D('stroke');
                 }
             },
             particularProperty: function(options) {
                 return this.collection[0].characteristic;
-            },
-            _strokeStyle: function(options) {
-                this.data[0].strokeStyle = this.iterator.index;
-            },
-            _beggingToDo: function() {
-                this.data[0].beginPath();
-            },
-            _drawGraphicsArc: function(options) {
-                this.data[0].arc(this.iterator.x, this.iterator.y, this.iterator.radius, this.iterator.startAngles, this.iterator.stopAngles, false);
-            },
-            _stroke: function() {
-                this.data[0].stroke();
             },
             Excute2DEngine: function() {
                 // accept ctx 2d property.
@@ -1342,6 +1296,8 @@
                 // 获得默认的属性和参数
                 var shapeProperty = new o[1][300];
 
+                var ctx2M = new o[1][250](this.data[0]);
+
                 var acceptCollection, inherit;
                 if (getCollectionProperty.type === 'Array') acceptCollection = getCollectionProperty.property;
 
@@ -1357,49 +1313,25 @@
                     inherit.x1 = !inherit.x1 ? shapeProperty.x1: inherit.x1;
                     inherit.y1 = !inherit.y1 ? shapeProperty.y1: inherit.y1;
 
-                    this.iterator.x = inherit.x;
-                    this.iterator.y = inherit.y;
+                    this.iterator.x = inherit.x * shapeProperty._device;
+                    this.iterator.y = inherit.y * shapeProperty._device;
                     this.iterator.index = inherit.index;
                     this.iterator.thick = inherit.thick;
                     this.iterator.x1 = inherit.x1;
                     this.iterator.y1 = inherit.y1;
 
-                    this._strokeStyle();
-                    this._fillStyle();
-                    this._beggingToDo();
-                    //设定图形边框的样式
-                    this._lineWidth();
-                    this._fillRect();
-                    this._strokeRect();
-                    this._stroke()
+                    
+                    ctx2M.hook2D('strokeStyle',{index:this.iterator.borderColor});
+                    ctx2M.hook2D('fillStyle',{index:this.iterator.index});
+                    ctx2M.hook2D('beginPath');
+                    ctx2M.hook2D('lineWidth',{thick:this.iterator.thick}); //设定图形边框的样式
+                    ctx2M.hook2D('fillRect',{x:this.iterator.x, y:this.iterator.y,x1:this.iterator.x1, y1:this.iterator.y1});
+                    ctx2M.hook2D('strokeRect',{x:this.iterator.x, y:this.iterator.y,x1:this.iterator.x1, y1:this.iterator.y1});
+                    ctx2M.hook2D('stroke');
                 }
             },
             particularProperty: function(options) {
                 return this.collection[0].characteristic;
-            },
-            _fillStyle: function(options) {
-                this.data[0].fillStyle = this.iterator.index;
-            },
-            _strokeStyle: function(options) {
-                this.data[0].strokeStyle = this.iterator.borderColor;
-            },
-            _beggingToDo: function() {
-                this.data[0].beginPath();
-            },
-            _fillRect: function(options) {
-                this.data[0].fillRect(this.iterator.x, this.iterator.y, this.iterator.x1, this.iterator.y1);
-            },
-            _lineWidth: function(options) {
-                this.data[0].lineWidth = this.iterator.thick;
-            },
-            _strokeRect: function(options) {
-                this.data[0].strokeRect(this.iterator.x, this.iterator.y, this.iterator.x1, this.iterator.y1);
-            },
-            _clearRect: function(options) {
-                this.data[0].clearRect(this.iterator.x, this.iterator.y, this.iterator.x1, this.iterator.y1);
-            },
-            _stroke: function() {
-                this.data[0].stroke();
             },
             Excute2DEngine: function() {
                 // accept ctx 2d property.
@@ -1445,7 +1377,9 @@
                 var shapeProperty = new o[1][300];
                 var _createWave = shapeProperty.calculationProperty.createWave;
 
-                this.iterator.dynimic = {};
+                this.iterator.dynamic = {};
+
+                var ctx2M = new o[1][250](this.data[0]);
 
                 var acceptCollection, inherit;
                 // the params in the early 
@@ -1454,9 +1388,8 @@
                 // if loop.
                 if(this.o_OPEN){
                     shapeProperty.speed -= this.s_SPEED;
-
-                    this._fillStyle("rgb(255,255,255)");
-                    this._fillRect('0', '0', this.data[0].canvas.width, this.data[0].canvas.height);
+                    ctx2M.hook2D('fillStyle',{index:"rgb(255,255,255)"});
+                    ctx2M.hook2D('fillRect',{x:'0',y:'0', x1:this.data[0].canvas.width, y1:this.data[0].canvas.height});
                 }
 
                 for (var j = 0; j < acceptCollection.length; j++) {
@@ -1476,8 +1409,8 @@
                     inherit.beginPosition = !inherit.beginPosition ? shapeProperty.beginPosition: inherit.beginPosition;
                     inherit.endPosition = !inherit.endPosition ? shapeProperty.endPosition: inherit.endPosition;
 
-                    this.iterator.x = inherit.x;
-                    this.iterator.y = inherit.y;
+                    this.iterator.x = inherit.x * shapeProperty._device;
+                    this.iterator.y = inherit.y * shapeProperty._device;
                     this.iterator.rate = inherit.rate;
                     this.iterator.index = inherit.index;
                     this.iterator.speed = inherit.speed;
@@ -1488,59 +1421,28 @@
                     this.iterator.beginPosition = inherit.beginPosition;
                     this.iterator.endPosition = inherit.endPosition;
 
-                    this._beggingToDo();
-                    this.start(_createWave);
-                    this._fillStyle();
-                    this._strokeStyle();
-                    this._stroke()
+                    ctx2M.hook2D('beginPath');
+                    this.start(_createWave,ctx2M);
+                    ctx2M.hook2D('fillStyle',{index:this.iterator.index});
+                    ctx2M.hook2D('strokeStyle',{index:this.iterator.index});
+                    ctx2M.hook2D('stroke');
                 }
             },
-            /*
-                example color array and pos
-            */
+            // example color array and pos
             particularProperty: function(options) {
                 return this.collection[0].characteristic;
-            },
-            _beggingToDo: function(options) {
-                this.data[0].beginPath();
-            },
-            _moveTo: function(options) {
-                this.data[0].moveTo(this.iterator.x, this.iterator.y);
-            },
-            /*
-                excuting the arc events 
-            */
-            _lineTo: function(options) {
-                // 从0 到总width宽度的实际长度
-                this.data[0].lineTo(options.x, options.y);
-                // this.data[0].lineTo(x, y2);
-            },
-            /*
-                setting color properties
-            */
-            _strokeStyle: function(options) {
-                this.data[0].strokeStyle = this.iterator.index;
-            },
-            _fillStyle: function(options) {
-                this.data[0].fillStyle = options || this.iterator.index;
-            },
-            _fillRect: function(a, b, c, d) {
-                this.data[0].fillRect(a||this.iterator.x, b||this.iterator.y, c||this.iterator.x1, d||this.iterator.y1);
-            },
-            _stroke: function() {
-                this.data[0].stroke();
             },
             // 准备x位置 readyPosition = i
             // 起始x位置 beginPosition = i
             // 结束x位置 endPosition = len
             // 水平运动长度 len = 10
-            start : function (options){
+            start : function (options,ctx2M){
                 var beginDistance_x = this.iterator.beginPosition.x;
                 var endDistance_x = this.iterator.endPosition.x;
 
                 // loop all坐标的连线
                 // 传入参数进行计算pos 位移的动态x y位置
-                this.getDynimicData(options,
+                this.getDynamicData(options,
                     beginDistance_x,
                     endDistance_x,
                     this.iterator.x,
@@ -1551,23 +1453,20 @@
                     this.iterator.opposite,
                     this.iterator.slope);
 
-                for(var d = this.iterator.dynimic.group,k = d.length, i = 0; i < k; i++){
+                for(var d = this.iterator.dynamic.group,k = d.length, i = 0; i < k; i++){
                     var x = d[i][0], y = d[i][1];
-                    this._lineTo({
-                        x: x,
-                        y: y
-                    });
+                     ctx2M.hook2D('lineTo',{x:x,y:y});
                 }
             },
             // 获得动态属性
-            getDynimicData: function(_createWave, _a, _b, _c, _d, _e, _f, _g, _l, _m) {
+            getDynamicData: function(_createWave, _a, _b, _c, _d, _e, _f, _g, _l, _m) {
                 var collection = {};
                 var waveModule = _createWave(_a, _b, _c, _d, _e, _f, _g, _l, _m);
 
                 // 默认获得一个向右的运动轨迹
                 var item = waveModule['right'];
 
-                this.iterator.dynimic.group = item; // especially of base property
+                this.iterator.dynamic.group = item; // especially of base property
             },
             Excute2DEngine: function() {
                 // accept ctx 2d property.
@@ -1617,6 +1516,8 @@
                 // 获得默认的属性和参数
                 var shapeProperty = new o[1][300];
 
+                var ctx2M = new o[1][250](this.data[0]);
+
                 var acceptCollection, inherit;
                 if (getCollectionProperty.type === 'Array') acceptCollection = getCollectionProperty.property;
 
@@ -1635,55 +1536,27 @@
                     inherit.stopAngles = !inherit.stopAngles ? shapeProperty.stopAngles: inherit.stopAngles;
 
                     this.iterator.radius = inherit.radius;
-                    this.iterator.x = inherit.x;
-                    this.iterator.y = inherit.y;
-                    this.iterator.x1 = inherit.x1;
-                    this.iterator.y1 = inherit.y1;
+                    this.iterator.x = inherit.x * shapeProperty._device;
+                    this.iterator.y = inherit.y * shapeProperty._device;
+                    this.iterator.x1 = inherit.x1 * shapeProperty._device;
+                    this.iterator.y1 = inherit.y1 * shapeProperty._device;
                     this.iterator.index = inherit.index;
                     this.iterator.startAngles = inherit.startAngles;
                     this.iterator.stopAngles = inherit.stopAngles;
 
-                    this._beggingToDo();
-                    this._moveTo();
-                    this._drawGraphicsArc();
-                    this._fillStyle();
-                    this._strokeStyle();
-                    this._fill();
-                    this._lineTo();
-                    this._closePath();
-                    this._stroke()
+                    ctx2M.hook2D('beginPath');
+                    ctx2M.hook2D('moveTo',{x:this.iterator.x1, y:this.iterator.y1});
+                    ctx2M.hook2D('arc',{x:this.iterator.x, y:this.iterator.y, radius:this.iterator.radius, startAngles:this.iterator.startAngles, stopAngles:this.iterator.stopAngles, bool:false});
+                    ctx2M.hook2D('fillStyle',{index:this.iterator.index});
+                    ctx2M.hook2D('strokeStyle',{index:this.iterator.index});
+                    ctx2M.hook2D('fill');
+                    ctx2M.hook2D('lineTo',{x:this.iterator.x1, y:this.iterator.y1});
+                    ctx2M.hook2D('closePath');
+                    ctx2M.hook2D('stroke');
                 }
             },
             particularProperty: function(options) {
                 return this.collection[0].characteristic;
-            },
-            _strokeStyle: function(options) {
-                this.data[0].strokeStyle = this.iterator.index;
-            },
-            _beggingToDo: function() {
-                this.data[0].beginPath();
-            },
-            _moveTo: function(options) {
-                // console.log(options.x1+'=options.x1,'+options.y1)
-                this.data[0].moveTo(this.iterator.x1, this.iterator.y1);
-            },
-            _drawGraphicsArc: function(options) {
-                this.data[0].arc(this.iterator.x, this.iterator.y, this.iterator.radius, this.iterator.startAngles, this.iterator.stopAngles, false);
-            },
-            _lineTo: function(options) {
-                this.data[0].lineTo(this.iterator.x1, this.iterator.y1);
-            },
-            _fillStyle: function(options) {
-                this.data[0].fillStyle = this.iterator.index;
-            },
-            _closePath: function() {
-                this.data[0].closePath();
-            },
-            _fill: function() {
-                this.data[0].fill();
-            },
-            _stroke: function() {
-                this.data[0].stroke();
             },
             Excute2DEngine: function() {
                 // accept ctx 2d property.
@@ -1727,6 +1600,8 @@
                 // 获得默认的属性和参数
                 var shapeProperty = new o[1][300];
 
+                var ctx2M = new o[1][250](this.data[0]);
+
                 var acceptCollection, inherit;
                 if (getCollectionProperty.type === 'Array') acceptCollection = getCollectionProperty.property;
 
@@ -1745,54 +1620,28 @@
                     inherit.stopAngles = !inherit.stopAngles ? shapeProperty.stopAngles: inherit.stopAngles;
 
                     this.iterator.radius = inherit.radius;
-                    this.iterator.x = inherit.x;
-                    this.iterator.y = inherit.y;
-                    this.iterator.x1 = inherit.x1;
-                    this.iterator.y1 = inherit.y1;
+                    this.iterator.x = inherit.x * shapeProperty._device;
+                    this.iterator.y = inherit.y * shapeProperty._device;
+                    this.iterator.x1 = inherit.x1 * shapeProperty._device;
+                    this.iterator.y1 = inherit.y1 * shapeProperty._device;
                     this.iterator.index = inherit.index;
                     this.iterator.startAngles = inherit.startAngles;
                     this.iterator.stopAngles = inherit.stopAngles;
 
-                    this._moveTo();
-                    this._beggingToDo();
-                    this._drawGraphicsArc();
-                    this._fillStyle();
-                    this._strokeStyle();
-                    this._fill();
-                    this._lineTo();
-                    this._closePath();
-                    this._stroke()
+                    ctx2M.hook2D('moveTo',{x:this.iterator.x, y:this.iterator.y});
+                    ctx2M.hook2D('beginPath');
+                    ctx2M.hook2D('arc',{x:this.iterator.x, y:this.iterator.y, radius:this.iterator.radius, startAngles:this.iterator.startAngles, stopAngles:this.iterator.stopAngles, bool:false});
+                    ctx2M.hook2D('fillStyle',{index:this.iterator.index});
+                    ctx2M.hook2D('strokeStyle',{index:this.iterator.index});
+                    ctx2M.hook2D('fill');
+                    ctx2M.hook2D('lineTo',{x:this.iterator.x, y:this.iterator.y});
+                    ctx2M.hook2D('lineTo',{x:this.iterator.x1, y:this.iterator.y1});
+                    ctx2M.hook2D('closePath');
+                    ctx2M.hook2D('stroke');
                 }
             },
             particularProperty: function(options) {
                 return this.collection[0].characteristic;
-            },
-            _strokeStyle: function(options) {
-                this.data[0].strokeStyle = this.iterator.index;
-            },
-            _beggingToDo: function() {
-                this.data[0].beginPath();
-            },
-            _moveTo: function(options) {
-                this.data[0].moveTo(this.iterator.x, this.iterator.y);
-            },
-            _drawGraphicsArc: function(options) {
-                this.data[0].arc(this.iterator.x, this.iterator.y, this.iterator.radius, this.iterator.startAngles, this.iterator.stopAngles, false);
-            },
-            _lineTo: function(options) {
-                this.data[0].lineTo(this.iterator.x1, this.iterator.y1);
-            },
-            _fillStyle: function(options) {
-                this.data[0].fillStyle = this.iterator.index;
-            },
-            _closePath: function() {
-                this.data[0].closePath();
-            },
-            _fill: function() {
-                this.data[0].fill();
-            },
-            _stroke: function() {
-                this.data[0].stroke();
             },
             Excute2DEngine: function() {
                 // accept ctx 2d property.
@@ -1847,6 +1696,8 @@
 
                 this.iterator.static = {};
 
+                var ctx2M = new o[1][250](this.data[0]);
+
                 var acceptCollection, inherit;
                 if (getCollectionProperty.type === 'Array') acceptCollection = getCollectionProperty.property;
                 for (var j = 0; j < acceptCollection.length; j++) {
@@ -1862,8 +1713,8 @@
                     inherit.direction = !inherit.direction ? shapeProperty.direction: inherit.direction;
                     inherit.smooth = !inherit.smooth ? shapeProperty.smooth: inherit.smooth;
 
-                    this.iterator.x = inherit.x;
-                    this.iterator.y = inherit.y;
+                    this.iterator.x = inherit.x * shapeProperty._device;
+                    this.iterator.y = inherit.y * shapeProperty._device;
                     this.iterator.speed = inherit.speed;
                     this.iterator.trails = inherit.trails;
                     this.iterator.index = inherit.index;
@@ -1873,51 +1724,31 @@
                     this.iterator.direction = inherit.direction;
                     this.iterator.smooth = inherit.smooth;
 
-                    this._moveTo();
-                    this._beggingToDo();
-                    this.silence(_createHill);
-                    this._closePath();
-                    this._scene2DFillStyles();
-                    this._scene2DFill()
+                    ctx2M.hook2D('moveTo',{x:this.iterator.x, y:this.iterator.y});
+                    ctx2M.hook2D('beginPath');
+                    this.silence(_createHill,ctx2M);
+                    ctx2M.hook2D('closePath');
+                    ctx2M.hook2D('fillStyle',{index:this.iterator.index});
+                    ctx2M.hook2D('fill');
                 }
             },
-
-            /*
-              example color array and pos
-            */
+            // example color array and pos
             particularProperty: function(options) {
                 if (options) return this.collection[0].characteristic;
             },
-            _beggingToDo: function(options) {
-                this.data[0].beginPath();
-            },
-            _closePath : function (){
-                this.data[0].closePath();
-            },
-            _moveTo: function(options) {
-                this.data[0].moveTo(this.iterator.x, this.iterator.y);
-            },
-            // excuting the arc events 
-            _drawGraphicsArc: function(x,y) {
-                this.data[0].arc(x, y, this.iterator.radius, this.iterator.startAngles, this.iterator.stopAngles);
-            },
-            // setting color properties
-            _scene2DFillStyles: function(options) {
-                this.data[0].fillStyle = options || this.iterator.index;
-            },
-            _scene2DFill: function() {
-                this.data[0].fill();
-            },
-            _fillRect : function (options){
-                this.data[0].fillRect(0, 0, this.data[0].canvas.width, this.data[0].canvas.height);
-            },
             // 获得静态属性
-            silence : function (options){
+            silence : function (options,ctx2M){
+                var 
+                    radius = this.iterator.radius,
+                    startAngles = this.iterator.startAngles,
+                    stopAngles = this.iterator.stopAngles;
+
                 this.getArrowData(options, this.iterator.x, this.iterator.y);
-                for(var d = this.iterator.static.group,k = this.iterator.static.length, i = 0; i < k; i++){
+
+                for(var d = this.iterator.static.group,k = d.length, i = 0; i < k; i++){
                     var x = d[i][0] * this.iterator.trails + this.iterator.x, 
                         y = d[i][1] * this.iterator.trails + this.iterator.y;
-                    this._drawGraphicsArc(x,y);
+                    ctx2M.hook2D('arc',{x:x,y:y,radius:radius, startAngles:startAngles, stopAngles:stopAngles});
                 }
             },
             // 获得static属性 即获得指针数据
@@ -1946,7 +1777,6 @@
                 item = hillModule[getModel];
 
                 this.iterator.static.group = item;
-                this.iterator.static.length = item.length;
                 // especially of base property
             },
             matchModel : function (options){
@@ -2000,6 +1830,112 @@
         });
 
         /*
+        - 初始化2d
+        - 重新模拟canvas 2d方法
+        - 并在shape图形方法上调用此对象
+        */
+        q[1][250].prototype.constructor = o[1][250];
+        o[1][250] = q[1][250];
+        Object.assign(o[1][250].prototype, {
+            initialize: function() {
+                return this,
+                Ac_2d.call(this, arguments[0]),
+                Ac_2d.prototype
+            },
+            hook2D : function(options,obj){
+                var model;
+                var _this = this;
+                if(typeof options === 'string') model = this[options], model.data = this.data[0];
+                model.call(model,obj);
+            },
+            fillRect: function (options) {
+                this.data.fillRect(options.x,options.y,options.x1,options.y1);
+            },
+            beginPath: function () {
+                this.data.beginPath();
+            },
+            moveTo: function (options) {
+                this.data.moveTo(options.x, options.y);
+            },
+            fillRect : function (options) {
+                this.data.fillRect(options.x, options.y, options.x1, options.y1);
+            },
+            fill: function () {
+                this.data.fill();
+            },
+            fillStyle: function (options) {
+                this.data.fillStyle = options.index;
+            },
+            arc: function (options) {
+                this.data.arc(options.x, options.y, options.radius, options.startAngles, options.stopAngles);
+            },
+            lineTo: function (options) {
+                this.data.lineTo(options.x,options.y);
+            },
+            lineWidth: function (options) {
+                this.data.lineWidth = options.thick;
+            },
+            closePath: function () {
+                this.data.closePath();
+            },
+            strokeStyle: function (options) {
+                this.data.strokeStyle = options.index;
+            },
+            stroke: function (options) {
+                this.data.stroke();
+            },
+            strokeRect: function (options) {
+                this.data.strokeRect(options.x,options.y,options.x1,options.y1);
+            },
+            lineCap: function (options) {
+                this.data.lineCap = options.val;
+            },
+            lineDashOffset: function (options) {
+                this.data.lineDashOffset = options.val;
+            },
+            lineJoin: function (options) {
+                this.data.lineJoin = options.val;
+            },
+            miterLimit: function (options) {
+                this.data.miterLimit = options.val;
+            },
+            font: function (options) {
+                this.data.font = options.val;
+            },
+            textAlign: function (options) {
+                this.data.textAlign = options.val;
+            },
+            textBaseline: function (options) {
+                this.data.textBaseline = options.val;
+            },
+            quadraticCurveTo: function (options) {
+                this.data.quadraticCurveTo(options.cpx,options.cpy,options.x,options.y);
+            },
+            bezierCurveTo: function (options) {
+                this.data.bezierCurveTo(options.cp1x,options.cp1y,options.cp2x,options.cp2y,options.x,options.y);
+            },
+            fillText: function (options) {
+                this.data.fillText(options.text,options.x,options.y);
+            },
+            strokeText: function (options) {
+                this.data.strokeText(options.text,options.x,options.y);
+            },
+            setLineDash: function (options) {
+                this.data.setLineDash = options.val;
+            }
+        });
+        Object.defineProperties(o[1][250].prototype, {
+            ctx :{
+                get: function() {
+                    return this.data
+                },
+                set: function(value) {
+                    this.val = value;
+                }
+            }
+        });
+
+        /*
             options,count,a
             x,y,inherit.sensitivity, inherit.rate, inherit.speed, i, inherit.opposite
             a = x
@@ -2016,7 +1952,7 @@
             var 
                 times = (new Date).getTime() / 60,
                 circle_modelType_chain = new o[1][240](),
-                chain_right =  circle_modelType_chain._location_dynamic_right(sx, ex, a, b, c, d, e, g, l, times);
+                chain_right =  circle_modelType_chain._location_ynamic_right(sx, ex, a, b, c, d, e, g, l, times);
 
                 return {
                     'right' : chain_right.results
@@ -2028,7 +1964,7 @@
                 o[1][240].call(this, arguments),
                 o[1][240].prototype
             },
-            _location_dynamic_right: function(sx, ex, a, b, c, d, e, g, l, times) {
+            _location_ynamic_right: function(sx, ex, a, b, c, d, e, g, l, times) {
                 var x, y, h, k, o, p, r, s, q, m, n, hx4, hy4;
 
                     var t = [];
@@ -2063,7 +1999,7 @@
                     return {
                         results : t
                     }
-            },
+            }
         });
 
 
@@ -2100,11 +2036,11 @@
                 yy = bb;
                 xx = yy * Math.sin(Math.PI / 3);
 
-                for (d = 0; d < 2; d++) {
+                for (d = 0; d < 1; d++) {
                     r = Math.PI * 2 / 3 * d;
                     m = Math.cos(r);
                     n = Math.sin(r);
-                    for (b = 0; b < 2; b++) {
+                    for (b = 0; b < 1; b++) {
                         c = 1;
                         if (b % 2 == 1) c = 1/2;
                         x = (b * m) * xx + times * 2;
