@@ -8,7 +8,8 @@ function moveCircle (){
 		if(na){
 			var browserApp = na.appVersion;
 			if(browserApp.search('Mobile') > 0){
-				w = '768';
+				var headerW = $('.header')
+				w = '' + headerW.width();
 				_trails = 200;
 			}
 		}
@@ -19,6 +20,7 @@ function moveCircle (){
 				can = shape_circle.set(canvas),
 				ctx = canvas.getContext('2d');
 
+		canvas.style.width = w;
 		can.attr('width').val(w).attr('height').val(h).attr('className').val('bgwhite');
 
 		var width = can.attr("width").val(),

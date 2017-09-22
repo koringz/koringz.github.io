@@ -28,6 +28,8 @@
 	.config {display: inline-block;width: auto;}
 	.config select{width: auto;height: 22px;margin-right: 10px;background: #333;color: #aaa;border: none;}
 	#worker.worker.self{position: absolute;bottom: 0;padding: 0;width: 100%;text-align: center;color: #333;background: #000;}
+	.clear{display: none;float: right;color: #666}
+	@media (max-width: 768px){.main .mid{width: 100%;padding: 0;}.config{display: none;}div{padding-left: 0;padding-right: 0} }
 </style>
  <script src="./S3/S3.js"></script>
 </head>
@@ -49,6 +51,7 @@
 		<button data-model="hill" class="active">hill</button>
 		<button data-model="moveWave">moveWave</button>
 		<button data-model="moveCircle">moveCircle</button>
+		<span class="clear">hill仅pc视角</span>
 
 		<span class="config select1"><em>Dir:</em>
 			<select class="menuBar" data-item="direction">
@@ -127,9 +130,11 @@
 <script type="text/javascript" src="./compenent/simglmodel/hill.js"></script>
 <script type="text/javascript">
 
+
 var all = document.querySelector('#mid').querySelectorAll("button");
 var _config = $('.config select.menuBar');
 var _onlyConfig = $('.config');
+var clear = $('.clear');
 var configEvent = 'hill';
 var bindObjectProperties = {
 	direction : null,
@@ -139,19 +144,23 @@ var bindObjectProperties = {
 	y : null,
 	index : "rgb('46','139','87')"
 };
+var isMobile = 0;
 
 $(document).ready(function(){
 	var na = window.navigator;
-	function appBrowser(){
-		if(na){
-			var browserApp = na.appVersion;
-			if(browserApp.search('Mobile') > 0){
-				_onlyConfig.hide()
+	var appBrowser = (function appBrowser(){
+			if(na){
+				var browserApp = na.appVersion;
+				if(browserApp.search('Mobile') > 0){
+					_onlyConfig.hide();
+					clear.show();
+				}
+				else {
+					isMobile++;
+					_onlyConfig.show();
+				}
 			}
-			else _onlyConfig.show();
-		}
-	}
-	appBrowser();
+		}());
 
 	for(var k = 0; k < all.length; k++ ){
 			all[k].onclick = function  (e) {
@@ -170,8 +179,14 @@ $(document).ready(function(){
 
 				var getFoo = e.target.getAttribute("data-model");
 
-				if(getFoo !== 'hill') _onlyConfig.hide();
-				else appBrowser();
+				if(getFoo !== 'hill') {
+					_onlyConfig.hide();
+				}
+				else{
+					if(isMobile) {
+						_onlyConfig.show();
+					}
+				} 
 				if(getFoo !== 'moveWave') clearTimeout(t);
 				if(getFoo !== 'moveCircleTest') clearTimeout(mct);
 
