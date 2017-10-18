@@ -73,7 +73,6 @@ wrap.service('ajax',function ajax() {
         var val = data;
         console.log(val)
         console.log($scope)
-        alert($scope)
         $scope.$props.state.$el(state.content).push(data)
     }
     this.ERROR = function(err) {
