@@ -87,7 +87,7 @@ wrap.service('ajax',function ajax() {
                 this.el(scope.state.class).remove()
             },
             pushHtml: function (scope){
-                this.el([scope.state.static,scope.state.hasClass]).push()
+                this.el([scope.state.static,scope.state.class]).push()
             },
             hasClass: function (scope){
                 this.el(scope.state.content).has()
