@@ -106,12 +106,11 @@ defaults.wrap.prototype.nativeAjax = function (success, error) {
 
 
 defaults.wrap.prototype.resolveData = function (options){
-  var responseTextData = options.textData
-
   (options.state === 200) && !0
+  var responseTextData = typeof options.textData
 
   var text
-  if(typeof responseTextData === 'string'){
+  if(responseTextData === 'string'){
     var _search = responseTextData.search(' ')
     if(_search >= 0){
       text = this.trim(responseTextData)
@@ -173,7 +172,7 @@ defaults.wrap.prototype.resolveComplexFallback = function resolveComplexFallback
 
 
 defaults.wrap.prototype.trim = function(options){
-  return options.replace(/\s/g,'')
+  return options.replace(/^\s+|\S|\n$/,'')
 }
 
 
