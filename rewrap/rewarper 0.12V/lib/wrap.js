@@ -571,7 +571,16 @@ defaults.wrap.prototype.callHandlePlanGroup.Team_2 = function  () {
         var cpc_len = callPublic.length
         var getWithPublicCurrentKeys = defaults.wrap.common[0].public[cpc_len-1]
 
-        defaults.wrap.storageNodeElement[1][getWithPublicCurrentKeys][0].element.push(node)
+        try{
+          if(typeof node === 'string'){
+            defaults.wrap.storageNodeElement[1][getWithPublicCurrentKeys][0].element.push(node)
+          }
+          else if(node instanceof Array){
+            defaults.wrap.storageNodeElement[1][getWithPublicCurrentKeys][0].element.concat(node)
+          }
+        }
+        catch(e) throw e
+        
 
         var getClass = _self[getWithPublicCurrentKeys]
 
