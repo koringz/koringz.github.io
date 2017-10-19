@@ -83,10 +83,10 @@ defaults.wrap.prototype.nativeAjax = function (success, error) {
 
     if (xhrRequest.readyState == 4) {
 
-      if (xhrRequest.state == 200) {
+      if (xhrRequest.status == 200) {
 
         var obj = {
-          state: xhrRequest.state,
+          state: xhrRequest.status,
           textData: xhrRequest.responseText
         }
 
@@ -94,7 +94,7 @@ defaults.wrap.prototype.nativeAjax = function (success, error) {
 
         _this.validateSuccess( _this.$scope, success, [responseData], true )
 
-      } else error( _this.$scope, xhrRequest.state )
+      } else error( _this.$scope, xhrRequest.status )
 
     }
 
