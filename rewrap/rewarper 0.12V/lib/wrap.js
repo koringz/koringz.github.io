@@ -540,11 +540,11 @@ defaults.wrap.prototype.callHandlePlanGroup.Team_2 = function  () {
 
   function plan_entre (getClass) {
     var gac = getClass.toString()
-    var e = /(this.el)(\()(([a-zA-Z])*?((\.)([a-zA-Z])*)*)(\))(\.)([a-zA-Z]|(\_)|($)|\d)*(\()((\s)*(([a-zA-Z]?(\d)*)|(\_)|(\$))+(\s)*?((\,)+(\s)*?([a-zA-Z]|(\_)|(\$)))*)*(\))/g
+    var e = /(this.el)(\()(\[)?((([a-zA-Z])*?((\.)([a-zA-Z])*)*)+?(\,)?)*(\])?(\))(\.)([a-zA-Z]|(\_)|($)|\d)*(\()((\s)*(([a-zA-Z]?(\d)*)|(\_)|(\$))+(\s)*?((\,)+(\s)*?([a-zA-Z]|(\_)|(\$)))*)*(\))/g
     var r_m = gac.match(e)
     var arr = []
     r_m.forEach(function(opt){
-      var _opt = opt.replace(/(this.el)(\()(([a-zA-Z])*?(\.)([a-zA-Z])*)*(\))./g,function(w){
+      var _opt = opt.replace(/(this.el)(\()(\[)?((([a-zA-Z])*?((\.)([a-zA-Z])*)*)+?(\,)?)*(\])?(\))./g,function(w){
         
         return w = '',w
       })
@@ -571,16 +571,14 @@ defaults.wrap.prototype.callHandlePlanGroup.Team_2 = function  () {
         var cpc_len = callPublic.length
         var getWithPublicCurrentKeys = defaults.wrap.common[0].public[cpc_len-1]
 
-        try{
-          if(typeof node === 'string'){
-            defaults.wrap.storageNodeElement[1][getWithPublicCurrentKeys][0].element.push(node)
-          }
-          else if(node instanceof Array){
-            defaults.wrap.storageNodeElement[1][getWithPublicCurrentKeys][0].element.concat(node)
-          }
+        if(typeof node === 'string'){
+          defaults.wrap.storageNodeElement[1][getWithPublicCurrentKeys][0].element.push(node)
         }
-        catch(e) throw e
-        
+        else if(node instanceof Array){
+          node.map(function (n){
+            defaults.wrap.storageNodeElement[1][getWithPublicCurrentKeys][0].element.push(n)
+          })
+        }
 
         var getClass = _self[getWithPublicCurrentKeys]
 
@@ -591,7 +589,8 @@ defaults.wrap.prototype.callHandlePlanGroup.Team_2 = function  () {
         invoked[subClass[0]] = function (isInvokeData) {
 
           var initConstru = function (options){
-            return defaults.wrap.common[0].static[0][getWithPublicCurrentKeys](node,options)
+            if(node instanceof Array) return defaults.wrap.common[0].static[0][getWithPublicCurrentKeys](defaults.wrap.target,options)
+            else if(typeof node === 'string') return defaults.wrap.common[0].static[0][getWithPublicCurrentKeys](node,options)
           }
 
           if(isInvokeData !== undefined) return initConstru(isInvokeData)
