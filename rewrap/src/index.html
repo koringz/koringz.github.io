@@ -36,7 +36,7 @@ wrap.service('ajax',function ajax() {
         ajaxType: "GET",
         urlStr: "rewrap/query.do",
         data: null
-    }
+    };
 
     var postOption = {
         ajaxType: "POST",
@@ -50,38 +50,18 @@ wrap.service('ajax',function ajax() {
                 a: 1
             }
         }
-    }
-    this.props = function (){
-        return {
-            state: [{class:'.all',head:'.header', content:'.content'}]
-        }
-    }
-    this.methods = function  ($scope) {
-        var state = this.$scope.state
-
-        return {
-            // addClass('add', state.class, data )
-            addClass: function ( $scope, aclass ){
-                this.el().add(aclass)
-            },
-            hasClass: function ( _class, aclass ){
-                this.el.has(aclass)
-            }
-        }
-    }
+    };
 
     // 支持大小写
-    this.URL = getOption.urlStr
-    this.TYPE = getOption.ajaxType
-    this.SUCCESS = function($scope,data) {
+    this.URL = getOption.urlStr;
+    this.TYPE = getOption.ajaxType;
+    this.SUCCESS = function(data) {
         var val = data;
         console.log(val)
-        console.log($scope)
-        $scope.$props.state.$el(state.content).push(data)
-    }
+    };
     this.ERROR = function(err) {
         console.log(err)
-    }
+    };
 
 });
 
