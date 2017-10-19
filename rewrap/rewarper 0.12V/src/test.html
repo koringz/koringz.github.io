@@ -81,16 +81,10 @@ wrap.service('ajax',function ajax() {
         var scope = this.$scope
         return {
             addClass: function (scope){
-                this.el(scope.state.class).add()
-            },
-            addClass: function (scope){
-                this.el(scope.state.static).add()
+                this.el([scope.state.class,scope.state.static]).add()
             },
             removeClass: function (scope){
                 this.el(scope.state.class).remove()
-            },
-            removeClass: function (scope){
-                this.el(scope.state.static).remove()
             },
             pushHtml: function (scope){
                 this.el(scope.state.static).push()
