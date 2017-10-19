@@ -107,10 +107,10 @@ defaults.wrap.prototype.nativeAjax = function (success, error) {
 
 defaults.wrap.prototype.resolveData = function (options){
   (options.state === 200) && !0
-  var responseTextData = typeof options.textData
+  var responseTextData = options.textData
 
   var text
-  if(responseTextData === 'string'){
+  if(typeof responseTextData === 'string'){
     var _search = responseTextData.search(' ')
     if(_search >= 0){
       text = this.trim(responseTextData)
