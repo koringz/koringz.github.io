@@ -565,17 +565,18 @@ defaults.wrap.prototype.callHandlePlanGroup.Team_2 = function  () {
       getPlan_combo.$methods.$scope = options
       getPlan_combo.$methods.el = function ( node ) {
 
-        defaults.wrap.storageNodeElement[0].push(node)
 
         var callPublic = defaults.wrap.common[0].public
         var cpc_len = callPublic.length
         var getWithPublicCurrentKeys = defaults.wrap.common[0].public[cpc_len-1]
 
         if(typeof node === 'string'){
+          defaults.wrap.storageNodeElement[0].push(node)
           defaults.wrap.storageNodeElement[1][getWithPublicCurrentKeys][0].element.push(node)
         }
         else if(node instanceof Array){
           node.map(function (n){
+            defaults.wrap.storageNodeElement[0].push(n)
             defaults.wrap.storageNodeElement[1][getWithPublicCurrentKeys][0].element.push(n)
           })
         }
