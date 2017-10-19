@@ -106,7 +106,7 @@ wrap.service('ajax',function ajax() {
         else getOutputData = '查询成功 未获得数据'
 
         $scope.$props.$el($scope.$props.$scope.state.class).add('success_message')
-        $scope.$props.$el($scope.$props.$scope.state.class).push(val)
+        $scope.$props.$el($scope.$props.$scope.state.class).push(getOutputData)
     }
     this.ERROR = function( $scope, err ) {
         $scope.$props.$el($scope.$props.$scope.state.static).add('error_message')
