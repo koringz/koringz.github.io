@@ -679,6 +679,8 @@ defaults.wrap.prototype.eachWithPublicMethods = function ( $definetionPublicMeth
 defaults.wrap.prototype.appPool = function (){
   var Args = arguments[0]
 
+  this.staticMethods()
+
   // used insert the Array of position
   var distState = this.organization( Args, [] )
 
@@ -706,8 +708,6 @@ defaults.wrap.prototype.appPool = function (){
   var definetionMethods = new COT2()
 
   definetionMethods.$methods = definetionProps.$scope
-
-  this.staticMethods()
 
   var subMethods = definetionMethods.$methods
 
