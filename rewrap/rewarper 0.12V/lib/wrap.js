@@ -289,6 +289,23 @@ defaults.wrap.prototype.validateKeyForLowerCase = function (){
   return 1
 }
 
+function parseData (options){
+  var opt = options
+  var ebbe = /(\{\{)\s*([a-zA-Z]*(\_|\$)?)*\s*(\}\})/g
+  if(opt.search(/\{\{/) >= 0){
+    var rem = opt.match(ebbe)
+    var paramName = rem[0].replace(/\{\{|\}\}|\s*/g,'')
+
+    var dataTarget = defaults.wrap.common[0].$scope.$props.$dataTarget[paramName]
+    var str = ''
+    for(var i= 0; i < dataTarget.length; i++){
+      str += opt.replace(ebbe,dataTarget[i])
+    }
+
+    return (str.length > 1) && str
+  }
+}
+
 
 defaults.wrap.prototype.initStaticMethods = function (){
   
@@ -302,7 +319,8 @@ defaults.wrap.prototype.initStaticMethods = function (){
       return this.getSelector(elem).className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'))
     },
     pushHtml : function (elem,data){
-      return this.getSelector(elem).innerHTML = data
+      var value = parseData(data)
+      return this.getSelector(elem).innerHTML = value
     },
     removeClass : function (elem,cls){
       var node = this.getSelector(elem)
@@ -590,6 +608,7 @@ defaults.wrap.prototype.callHandlePlanGroup.Team_2 = function  () {
         invoked[subClass[0]] = function (isInvokeData) {
 
           var initConstru = function (options){
+
             if(node instanceof Array) return defaults.wrap.common[0].static[0][getWithPublicCurrentKeys](defaults.wrap.target,options)
             else if(typeof node === 'string') return defaults.wrap.common[0].static[0][getWithPublicCurrentKeys](node,options)
           }
@@ -633,24 +652,57 @@ defaults.wrap.prototype.broadcastInterface = function ( _invokeMethods, _prop ){
   var _invoke_subClass = new _invokeMethods()
   var _scope = _prop.$scope
 
-  this.$scope = {
-    $props: {
-      $scope: _scope.$scope,
-      $el: function (node){
-        var useMethod = {}
+  var _self = this
 
-        if(defaults.wrap.storageNodeElement[0].indexOf(node) >= 0){
-          for(var ix in defaults.wrap.storageNodeElement[1]){
-            if(defaults.wrap.storageNodeElement[1][ix][0].element.indexOf(node) >= 0){
-              Object.assign(useMethod, defaults.wrap.storageNodeElement[1][ix][0].use)
-            }
+  this.$scope = {
+    $props: function (data){
+      _self.$scope.$props.$data = {}
+      _self.$scope.$props.$dataTarget = {}
+
+      if(data){
+        for(var ks in data){
+          // json data
+          var isDataAndArgs = data[ks]
+          if(_self.$scope.$props.$data[ks] === undefined) _self.$scope.$props.$data[ks] = {}
+
+          if(typeof isDataAndArgs === 'string'){
+            _self.$scope.$props.$data[ks] = data[ks]
           }
+          else if( isDataAndArgs instanceof Array ){
+            isDataAndArgs.forEach(function (ea){
+              for(var argsKeys in ea){
+
+                if(typeof _self.$scope.$props.$data[ks][argsKeys] !== 'string') _self.$scope.$props.$data[ks][argsKeys] = argsKeys
+
+                if(!(_self.$scope.$props.$dataTarget[argsKeys] instanceof Array)) _self.$scope.$props.$dataTarget[argsKeys] = []
+                
+                _self.$scope.$props.$dataTarget[argsKeys].push(ea[argsKeys])
+              }
+            })
+          }
+
         }
-        defaults.wrap.target = node
-        return useMethod
       }
+
+
+      return {
+          $el (node) {
+            var useMethod = {}
+            if(defaults.wrap.storageNodeElement[0].indexOf(node) >= 0){
+              for(var ix in defaults.wrap.storageNodeElement[1]){
+                if(defaults.wrap.storageNodeElement[1][ix][0].element.indexOf(node) >= 0){
+                  Object.assign(useMethod, defaults.wrap.storageNodeElement[1][ix][0].use)
+                }
+              }
+            }
+            defaults.wrap.target = node
+            return useMethod
+        }
+      }
+
     }
   }
+  this.$scope.$props['$scope'] = _scope.$scope
 }
 
 
@@ -806,30 +858,3 @@ defaults.wrap.fn = function bindObjectGroup(opt,fallback){
 global.wrap['service'] = defaults.wrap.fn
 
 })(this)
-
-
-
-
-
-
-
-
-/*
-合并其他分支上指定的文件或者文件夹到当前分支
-
-git checkout branchName folderName
-git checkout branchName path
-
-注：一下都是在主分支master上执行的命令
-1 把dev1 分支上app下所有的文件合并到主分支master上.
-git checkout dev app
-
-2 部分更新，如单独合并app/css/index.css到master主分支上.
-git checkout dev app/css/index.css
-
-3 部分文件夹dev分支上app的js文件夹下有多个JS文件都更新了.
-git checkout dev app/js
-
-合并过来的文件或者文件夹在主分支master上都是默认add过的，
-然后需要在master分支上commit,再push即可完成合并更新！
-*/
