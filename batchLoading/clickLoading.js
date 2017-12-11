@@ -1,6 +1,6 @@
 (function  (g) {
 	var _plus = 1
-	function addBatchTemplate (data, start, stop, everyTimes, fallBack) {
+	function addBatchTemplate (data, start, stop, everyTimes, fallBack, complate) {
 		var str = ''
 		if ((stop-everyTimes) <= data.length) {
 			for (var i = start; i < stop; i++) {
@@ -10,21 +10,24 @@
 				}
 			}
 		}
+		else {
+			complate()
+		}
 		return str
 	}
 
-	function implementionAddBatchTemplate (option, start, stop, everyTimes, fallBack) {
-		$(option.node[0]).append(addBatchTemplate(option.data, start, stop, everyTimes, fallBack))
+	function implementionAddBatchTemplate (option, start, stop, everyTimes, fallBack, complate) {
+		$(option.node[0]).append(addBatchTemplate(option.data, start, stop, everyTimes, fallBack, complate))
 	}
 
-	function excuteBatchLoadData (option, everyTimes, fallBack) {
+	function excuteBatchLoadData (option, everyTimes, fallBack, complate) {
 		var start = _plus
-		implementionAddBatchTemplate(option, start * everyTimes, ++_plus * everyTimes, everyTimes, fallBack)
+		implementionAddBatchTemplate(option, start * everyTimes, ++_plus * everyTimes, everyTimes, fallBack, complate)
 	}
 
-	function handleEventLoadData (option, everyTimes, fallBack) {
+	function handleEventLoadData (option, everyTimes, fallBack, complate) {
 		$(option.node[1]).unbind('click').on('click', function  (e) {
-			excuteBatchLoadData(option, everyTimes, fallBack)
+			excuteBatchLoadData(option, everyTimes, fallBack, complate)
 		})
 	}
 
@@ -37,7 +40,8 @@
 			params.default, 
 			params.everyTime, 
 			params.everyTime, 
-			params.method
+			params.method,
+			params.complate
 		)
 		handleEventLoadData(
 			{
@@ -45,7 +49,8 @@
 				node: params.node
 			}, 
 			params.everyTime, 
-			params.method
+			params.method,
+			params.complate
 		)
 	}
 
