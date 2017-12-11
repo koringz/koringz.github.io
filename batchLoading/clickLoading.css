@@ -1,0 +1,61 @@
+.batch-load{
+	margin: 10px 20px;
+}
+.default-batch-box{
+	width: 500px;
+	border: 1px solid #aaa;
+}
+.default-list-box{
+	margin: 0;
+	padding: 0;
+}
+.default-list-box .default-list-box-head{
+	display: inline-block;
+	width: 100%;
+}
+.default-list-box .default-list-box-head span{
+	display: inline-block;
+	float: left;
+	padding: 10px 0;
+	width: 20%;
+	cursor: pointer;
+	background-color: #efefe3;
+	text-align: center;
+	box-shadow: 0px -1px 1px #ddd
+}
+.default-list-box li{
+	display: inline-block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.default-list-box li span{
+	display: inline-block;
+	float: left;
+	width: 20%;
+	padding: 10px 0;
+	cursor: pointer;
+	text-align: center;
+	box-shadow: 0px 0px 1px #ddd
+}
+.default-list-box li span:hover{
+	background-color: #fafafa
+}
+.default-list-box li span:last-child{
+}
+.default-batch-unlock{
+	padding: 10px 0;
+	text-align: center;
+}
+.default-batch-unlock span{
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	color: #aaa;
+	font-size: 16px;
+	white-space: 3px;
+	background: url(load.png) no-repeat center;
+	background-size: cover;
+	cursor: pointer;
+}
