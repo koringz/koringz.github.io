@@ -84,7 +84,7 @@
     .container{
       position: relative;
       width: 100%;
-      padding: 10px 0;
+      padding: 70px 0 10px;
     }
     .default-frame{
       padding: 0 100px;
@@ -122,6 +122,8 @@
       /*background-color: #eee;*/
     }
     .grid-list li a{
+      display: block;
+      width: 100%;
       margin-left: 10px;
       color: #333;
       text-decoration: none;
@@ -171,7 +173,7 @@
       background-color: #eee
     }
     .mtop{
-      padding-top: 60px;
+      padding-top: 70px;
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -194,7 +196,7 @@
 <div class="container">
   <div class="default-frame">
     <div class="grid-content">
-      <div class="con-1 list-dialog mtop" id="dialog">
+      <div class="con-1 list-dialog" id="dialog">
         <div>
           <h2>弹出框</h2>
           <!--  -->
@@ -306,11 +308,19 @@
 </div>
 
 <script type="text/javascript">
+$(document).ready(function () {
+var t = 0
 $(".grid-list").on('click','li',function (i) {
+  t = 0
   $(this).addClass("active").siblings().removeClass("active")
   var id = $(this).children().attr('href')
-  $('.grid-content').find(id).addClass("mtop").siblings().removeClass("mtop")
-  console.log($('.grid-content').find(id))
+  if(id != "#tabs") $('.grid-content').find(id).addClass("mtop").siblings().removeClass("mtop")
+    setTimeout(function () {t = 1},100)
+})
+
+$(window).scroll(function () {
+  if(t) $('.grid-content').find('.con-1').removeClass("mtop")
+})
 })
 </script>
 </body>
