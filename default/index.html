@@ -125,6 +125,7 @@
       display: block;
       width: 100%;
       margin-left: 10px;
+      cursor: pointer;
       color: #333;
       text-decoration: none;
     }
@@ -281,15 +282,15 @@
       <div class="grid-list">
         <ul>
           <li class="active"><a href="#dialog">弹出框</a></li>
-          <li><a href="#drag">拖动</a></li>
-          <li><a href="#form">表单</a></li>
-          <li><a href="#header">头部</a></li>
-          <li><a href="#pagination">分页</a></li>
-          <li><a href="#product">商品类</a></li>
-          <li><a href="#search">搜索</a></li>
-          <li><a href="#suspend">悬浮层</a></li>
-          <li><a href="#table">表格</a></li>
-          <li><a href="#tabs">切换</a></li>
+          <li><a data-attr="drag">拖动</a></li>
+          <li><a data-attr="form">表单</a></li>
+          <li><a data-attr="header">头部</a></li>
+          <li><a data-attr="pagination">分页</a></li>
+          <li><a data-attr="product">商品类</a></li>
+          <li><a data-attr="search">搜索</a></li>
+          <li><a data-attr="suspend">悬浮层</a></li>
+          <li><a data-attr="table">表格</a></li>
+          <li><a data-attr="tabs">切换</a></li>
         </ul>
       </div>
     </div>
@@ -309,18 +310,24 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-var t = 0
-$(".grid-list").on('click','li',function (i) {
-  t = 0
-  $(this).addClass("active").siblings().removeClass("active")
-  var id = $(this).children().attr('href')
-  if(id != "#tabs") $('.grid-content').find(id).addClass("mtop").siblings().removeClass("mtop")
+  var t = 0
+  var currentTop = 0
+  var list = $(".grid-list").find('li')
+  $(".grid-list").on('click','li',function (ea) {
+    t = 0
+    var ix = [].indexOf.call(list,ea.currentTarget)
+    console.log(ix)
+    var next = (ix * 311) + (ix * 30)
+    $(this).addClass("active").siblings().removeClass("active")
+    var id = '#' + $(this).children().attr('data-attr')
+    if(id != "#tabs") $('.grid-content').find(id).addClass("mtop").siblings().removeClass("mtop")
+    $('html,body').animate({scrollTop: next},'slow')
     setTimeout(function () {t = 1},100)
-})
+  })
 
-$(window).scroll(function () {
-  if(t) $('.grid-content').find('.con-1').removeClass("mtop")
-})
+  $(window).scroll(function () {
+    if(t) $('.grid-content').find('.con-1').removeClass("mtop")
+  })
 })
 </script>
 </body>
