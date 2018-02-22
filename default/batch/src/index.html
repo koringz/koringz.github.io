@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>batch-css-frame</title>
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<!-- <link rel="stylesheet" type="text/css" href="../../default.css"> -->
+  <script src="./jq.js"></script>
+</head>
+<body>
+
+<div class="skybatch">
+	<div class="crm003721-batch-frame">
+		<div class="crm003721-batch-box">
+			<div class="crm003721-batch-loadingData">
+
+				<div class="loadingData-styles">
+					<ul class="default-loadingData-container">
+						<div class="default-loadingData-container-header">
+							<span>编号</span>
+							<span>地址</span>
+							<span>行业</span>
+							<span>进度</span>
+							<span>团战</span>
+						</div>
+					</ul>
+					<div class="default-loadingData-end"></div>
+					<div class="default-loadingData-unlock">
+						<span></span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+(function  (g) {
+	var _plus = 1
+	function addBatchTemplate (data, start, stop, everyTimes, fallBack, complate) {
+		var str = ''
+		if ((stop-everyTimes) <= data.length) {
+			for (var i = start; i < stop; i++) {
+				if (data[i]) str += fallBack(data[i])
+				else complate()
+			}
+		}
+		else {
+			complate()
+		}
+		return str
+	}
+
+	function implementionAddBatchTemplate (option, start, stop, everyTimes, fallBack, complate) {
+		$(option.node[0]).append(addBatchTemplate(option.data, start, stop, everyTimes, fallBack, complate))
+	}
+
+	function excuteBatchLoadData (option, everyTimes, fallBack, complate) {
+		var start = _plus
+		implementionAddBatchTemplate(option, start * everyTimes, ++_plus * everyTimes, everyTimes, fallBack, complate)
+	}
+
+	function handleEventLoadData (option, everyTimes, fallBack, complate) {
+		$(option.node[1]).unbind('click').on('click', function  (e) {
+			excuteBatchLoadData(option, everyTimes, fallBack, complate)
+		})
+	}
+
+	function batchLoading (params) {
+		implementionAddBatchTemplate({
+				data: params.data,
+				node: params.node
+			}, params.default, params.everyTime, params.everyTime,  params.method, params.complate)
+		handleEventLoadData({
+				data: params.data,
+				node: params.node
+			}, params.everyTime, params.method, params.complate)
+	}
+
+	g.batchLoading = batchLoading
+})(this ? window : global)
+</script>
+
+<script type="text/javascript">
+
+var data = [1,2,3,4,'a','b','c','d',5,6,9,10,11,12,13]
+batchLoading({
+	node: ['.default-loadingData-container','.default-loadingData-unlock'], // 第一个节点为添加数据父class类 第二个为点击事件父class类
+	data: data,	// 总数据
+	default: 2, // 默认从第几条数据开始
+	everyTime: 4, // 每次添加多少条数据
+	method: function (data_val) { // 循环数据
+		var str = ''
+		var tiny = data_val
+		str += '<li>'
+		str += '<span>' + tiny +'</span>'
+		str += '<span>上海</span>'
+		str += '<span>机械业</span>'
+		str += '<span>加载器</span>'
+		str += '<span>去参团</span>'
+		str += '</li>'
+		return str
+	},
+	complate: function  () {
+		$('.default-loadingData-end').html('加载结束')
+	}
+})
+</script>
+</body>
+</html>
