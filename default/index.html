@@ -177,8 +177,6 @@
       padding-top: 70px;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 </head>
 <body>
 
@@ -277,6 +275,14 @@
           <!--  -->
         </div>
       </div>
+      <div class="con-1 list-form" id="batchLoading">
+        <div>
+          <h2>批量加载</h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="GQGNWK" data-default-tab="js,result" data-user="koringz" data-embed-version="2" data-pen-title="batch.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/GQGNWK/">batch.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
     </div>
     <div class="navigation-aside">
       <div class="grid-list">
@@ -291,6 +297,7 @@
           <li><a data-attr="suspend">悬浮层</a></li>
           <li><a data-attr="table">表格</a></li>
           <li><a data-attr="tabs">切换</a></li>
+          <li><a data-attr="batchLoading">批量加载</a></li>
         </ul>
       </div>
     </div>
@@ -308,6 +315,8 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
   var t = 0
@@ -316,11 +325,10 @@ $(document).ready(function () {
   $(".grid-list").on('click','li',function (ea) {
     t = 0
     var ix = [].indexOf.call(list,ea.currentTarget)
-    console.log(ix)
     var next = (ix * 311) + (ix * 30)
     $(this).addClass("active").siblings().removeClass("active")
     var id = '#' + $(this).children().attr('data-attr')
-    if(id != "#tabs") $('.grid-content').find(id).addClass("mtop").siblings().removeClass("mtop")
+    $('.grid-content').find(id).addClass("mtop").siblings().removeClass("mtop")
     $('html,body').animate({scrollTop: next},'slow')
     setTimeout(function () {t = 1},100)
   })
