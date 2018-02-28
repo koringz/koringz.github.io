@@ -1,0 +1,146 @@
+body,html{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+:before, :after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+/*两列布局 start*/
+.default-2{
+  display: block;
+  position: relative;
+}
+
+/*两列布局 end*/
+
+/*两列布局(左1右2)*/
+.default-2-1-2{
+  display: block;
+  position: relative;
+}
+.group .default-fl{
+  position: relative;
+}
+/*两列布局(左1右2)*/
+
+/*三列布局*/
+.default-3{
+  display: block;
+  position: relative;
+}
+.default-3 .distribution{
+  width: 33.3333333333333333%
+}
+.default-2,
+.default-3,
+.default-4,
+.default-5,
+.default-6,
+.default-7,
+.default-8,
+.default-9,
+.default-10{
+  display: block;
+  position: relative;
+}
+.default-4 .distribution{
+  width: 25%
+}
+/*四列布局*/
+.default-5 .distribution{
+  width: 20%
+}
+.default-6 .distribution{
+  width: 16.666666666666%
+}
+.default-7 .distribution{
+  width: 14.285714285714%
+}
+.default-8 .distribution{
+  width: 12.5%
+}
+.default-9 .distribution{
+  width: 11.111111111111%
+}
+.default-10:after{
+  width: 10%
+}
+
+/*common*/
+.default-2-1-2:before{
+  content: "";
+  display: table;
+}
+.default-2-1-2:after{
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+.default-2:after,
+.default-2-1-2:after,
+.default-3:after,
+.default-4:after,
+.default-5:after,
+.default-6:after,
+.default-7:after,
+.default-8:after,
+.default-9:after,
+.default-10:after,
+.default-clearfix:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+.default-2-1-2 .auto,
+.default-2 .auto{
+  width: auto;
+}
+.default-2-1-2 .half,
+.default-2 .half{
+  width: 50%;
+}
+.default-3.group,
+.default-4.group,
+.default-5.group,
+.default-6.group,
+.default-7.group,
+.default-8.group,
+.default-9.group,
+.default-10.group,
+.group .distribution{
+  box-sizing: border-box;
+}
+.auto-align{
+  display: inline-block;
+}
+.default-fl{
+  float: left;
+}
+.default-fr{
+  float: right;
+}
+/*common*/
+
+/*you should delete*/
+.skylayout .default-2,
+.skylayout .default-3,
+.skylayout .default-4,
+.skylayout .default-5,
+.skylayout .default-6,
+.skylayout .default-7,
+.skylayout .default-8,
+.skylayout .default-9,
+.skylayout .default-10,
+.skylayout .group .distribution,
+.skylayout .default-2-1-2{
+  border: 1px solid #ccc;
+  background-color: #f2f2f2
+}
+.skylayout{
+  padding: 10px;
+}
+
+
