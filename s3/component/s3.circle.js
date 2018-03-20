@@ -52,7 +52,7 @@ for(var z = 0, results = [], angl = ang.length, ml = m.length; z < 100; z++) {
     x: Math.random() * document.body.offsetWidth,
     y: Math.random() * document.body.offsetHeight,
     speed: Math.random() * 2,
-    radius: Math.random() * 38,
+    radius: (Math.random() * 26) + 10,
     trails: Math.random() * 10,
     startAngles: ang[Math.round(Math.random() * angl)],
     stopAngles: ang[Math.round(Math.random() * angl)],
@@ -102,6 +102,7 @@ addLister(OOC,'click',function(e){
     nextTime = (new Date).getTime() - curTime
     var originalTimes = Number(times.innerText)
     var seconds = (nextTime / 1000)
+    console.log(originalTimes)
     times.innerHTML = originalTimes + seconds
     if (clear) clearTimeout(clear)
     clear = setTimeout( function () {
