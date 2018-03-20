@@ -37,32 +37,32 @@ function moveBottom (api) {
   }
   return val
 }
-var m = ["stop","move"];
+
 var ang = [10,230,360,80,160];
 function color () {
   return 'hsla('+ Math.round(Math.random() * 360) +','+Math.round(Math.random() * 100)+'%,'+Math.round(Math.random() * 100)+'%,'+'1)';
 }
-function motion (ml) {
-  var md = Math.random()
-  return m[Math.round(md * ml)]
-}
-for(var z = 0, results = [], angl = ang.length, ml = m.length; z < 100; z++) {
-  var d = {
-    color: color(),
-    x: Math.random() * document.body.offsetWidth,
-    y: Math.random() * document.body.offsetHeight,
-    speed: Math.random() * 2,
-    radius: (Math.random() * 26) + 10,
-    trails: Math.random() * 10,
-    startAngles: ang[Math.round(Math.random() * angl)],
-    stopAngles: ang[Math.round(Math.random() * angl)],
-    motion: motion,
-    method: moveBottom
+
+function reset () {
+  for(var z = 0, results = [], angl = ang.length; z < 100; z++) {
+    var d = {
+      color: color(),
+      x: Math.random() * document.body.offsetWidth,
+      y: Math.random() * document.body.offsetHeight,
+      speed: Math.random() * 2,
+      radius: (Math.random() * 26) + 10,
+      trails: Math.random() * 10,
+      startAngles: ang[Math.round(Math.random() * angl)],
+      stopAngles: ang[Math.round(Math.random() * angl)],
+      motion: 'move',
+      method: moveBottom
+    }
+    results.push(d)
   }
-  results.push(d)
+  return results
 }
 
-go(results)
+go(reset())
 
 function addLister(domnode,eventType,handler){
   el();
@@ -79,6 +79,8 @@ const plus = s3.dom(".plus")
 const add = s3.dom(".add")
 const keeping = s3.dom(".keeping")
 const times = s3.dom(".times")
+const configuration = s3.dom(".configuration")
+const button = s3.dom("button")
 addLister(CAN,'mousemove', function(e){
   this.box = e;
   this.clitx = e.clientX;
@@ -94,11 +96,11 @@ var nextTime = null;
 addLister(OOC,'click',function(e){
   open_or_close = !open_or_close
   if (open_or_close) {
-    OOC.innerHTML = "已开始"
+    OOC.innerHTML = "已开始(查)"
     curTime = (new Date).getTime()
   }
   else {
-    OOC.innerHTML = "已关闭"
+    OOC.innerHTML = "已停止"
     nextTime = (new Date).getTime() - curTime
     var originalTimes = Number(times.innerText)
     var seconds = (nextTime / 1000)
@@ -132,8 +134,36 @@ addLister(CAN,'click',function(e){
         }
     }
     if(changed) {
-      var TOTAL= Number(plus.innerText) + interface.score
+      var pls = Number(plus.innerText)
+      var TOTAL = pls + interface.score
       plus.innerHTML = TOTAL
+      if(pls > 80) {
+        configuration.innerHTML = "恭喜你！闯关成功！"
+        button.innerHTML = "再来一次"
+        button.setAttribute("awards","1")
+      }
     }
+  }
+})
+
+
+addLister(button,'click',function(e){
+  var content = button.getAttribute("awards")
+  if(content == 1) {
+    mouseX = 0;
+    mouseY = 0;
+    virX = 0;
+    virY = 0;
+    changed = 0;
+    score = null;
+    open_or_close = 0;
+    clear = 0;
+    console.log(content)
+    go(reset())
+    button.setAttribute("awards",0)
+    button.innerHTML = "继续"
+    plus.innerHTML = 0
+    configuration.innerHTML = ''
+    times.innerHTML = 0
   }
 })
