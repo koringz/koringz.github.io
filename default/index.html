@@ -87,19 +87,21 @@
       padding: 70px 0 10px;
     }
     .default-frame{
-      padding: 0 100px;
+      width: 1200px;
+      margin: 0 auto;
       background-color: transparent;
     }
     .grid-content{
       margin: 0 0 0 10px;
-      width: 78%;
+      width: 980px;
     }
     .navigation-aside{
-      float: right;
+      position: fixed;
+      top: 70px;
       width: auto;
-      min-width: 18%;
-      max-width: 20%;
-      background-color: #fff
+      left: 50%;
+      margin-left: 390px;
+      background-color: #fff;
     }
     ul,
     li{
@@ -110,8 +112,6 @@
       padding: 0;
     }
     .grid-list{
-      position: fixed;
-      top: 70px;
     }
     .grid-list li{
       width: 180px;
@@ -181,10 +181,11 @@
       background-color: #fefefe
     }
     .footer{
+      position: absolute;
+      left: 0;
       float: left;
       width: 100%;
-      margin: 0 -100px;
-      padding: 10px 100px;
+      padding: 10px 0;
       color: #aaa;
       text-align: center;
       background-color: #eee
@@ -372,7 +373,8 @@ $(document).ready(function () {
   $(".grid-list").on('click','li',function (ea) {
     t = 0
     var ix = [].indexOf.call(list,ea.currentTarget)
-    var next = (ix * 311) + (ix * 30)
+    var box_len = $(".con-1")[0].offsetHeight
+    var next = (ix * box_len) + (ix * 30)
     $(this).addClass("active").siblings().removeClass("active")
     var id = '#' + $(this).children().attr('data-attr')
     $('.grid-content').find(id).addClass("mtop").siblings().removeClass("mtop")
