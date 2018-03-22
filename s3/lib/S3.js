@@ -1204,7 +1204,7 @@
                     }
                     var na = new Array();
                     for (var i = 0; i < acceptCollection.length; i++) {
-                        if (acceptCollection[i]instanceof Object)
+                        if (acceptCollection[i] instanceof Object)
                             na.push(acceptCollection[i])
                         else
                             continue;
