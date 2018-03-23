@@ -1,13 +1,5 @@
 <html><head><link rel="import" href="../../bower_components/polymer/polymer.html"><link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html"><link rel="import" href="../../bower_components/app-layout/app-header/app-header.html"><link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html"><link rel="import" href="../../bower_components/app-layout/app-drawer/app-drawer.html"><link rel="import" href="../../bower_components/app-route/app-location.html"><link rel="import" href="../../bower_components/app-route/app-route.html"><link rel="import" href="../../bower_components/iron-selector/iron-selector.html"><link rel="import" href="../../bower_components/iron-pages/iron-pages.html"><link rel="import" href="../../bower_components/paper-styles/color.html"><link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html"><link rel="import" href="../../bower_components/paper-tabs/paper-tab.html"><link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html"><link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html"><link rel="import" href="../../bower_components/paper-item/paper-item.html"></head><body><dom-module id="weihua-header"><template><style>:host {
         display: block;
-        --app-primary-color: #202020;
-        --app-secondary-color: #757575;
-        --app-accent-color: #172C50;
-        --paper-button-ink-color: var(--app-accent-color);
-        --paper-icon-button-ink-color: var(--app-accent-color);
-        --paper-spinner-color: var(--app-accent-color);
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        color: var(--app-primary-color);
       }
       app-header-layout {
         z-index: 1;
@@ -17,13 +9,14 @@
         /*background-color: var(--paper-indigo-500);*/
       }
       a.nav{
+        color: #fff;
         line-height: 48px;
         vertical-align: middle;
         display: inline-block;
         text-decoration: none;
         padding: 0 20px;
       }
-      a.nav{
+      a.nav:link{
         color: #fff
       }
       app-drawer {
@@ -33,7 +26,7 @@
       paper-tab a{
         --paper-tab-content: {
           padding: 0 15px;
-          color: var(--app-primary-color);
+          color: #fff;
           font-weight: normal !important;
         }
       }
@@ -52,7 +45,7 @@
         paper-item a{
           padding: 0;
           width: 100%; 
-          color: var(--app-primary-color);
+          color: inherit;
         }
         [icon="menu"] {
           display: inline-block;
@@ -61,4 +54,4 @@
           text-align: center;
           margin-left: -40px;
         }
-      }</style><app-location route="{{route}}"></app-location><app-route route="{{route}}" data="{{routeData}}" tail="{{subRoute}}" pattern="/:page"></app-route><app-header-layout><app-header fixed=""><app-toolbar><paper-icon-button icon="menu" on-tap="_onMenuTap"></paper-icon-button><div main-title="">微划</div><paper-tabs selected="[[selected]]" attr-for-selected="name"><paper-tab><a class="nav link" name="home1" href="/home1" alt="首页">首页</a></paper-tab><paper-tab><a class="nav link" name="home2" href="/home2" alt="我们">我们</a></paper-tab><paper-tab><a class="nav link" name="home3" href="/home3" alt="服务">服务</a></paper-tab><paper-tab><a class="nav link" name="home4" href="/home4" alt="模版">模版</a></paper-tab></paper-tabs></app-toolbar></app-header><iron-pages selected="[[page]]" attr-for-selected="name" role=""><weihua-home1 name="home1"></weihua-home1><weihua-home2 name="home2"></weihua-home2><weihua-home3 name="home3"></weihua-home3><weihua-home4 name="home4"></weihua-home4></iron-pages></app-header-layout><app-drawer><paper-listbox selected="[[selected]]" attr-for-selected="name"><paper-item><a class="nav link" name="home1" href="/home1" style$="color: {{myColor}};" alt="首页">首页</a></paper-item><paper-item><a class="nav link" name="home2" href="/home2" alt="我们">我们</a></paper-item><paper-item><a class="nav link" name="home3" href="/home3" alt="服务">服务</a></paper-item><paper-item><a class="nav link" name="home4" href="/home4" alt="模版">模版</a></paper-item></paper-listbox></app-drawer></template><script>Polymer({is:"weihua-header",properties:{selected:{type:Number,value:0},page:{type:String,reflectToAttribute:!0,observer:"_pageChanged"}},observers:["_routePageChanged(routeData.page)"],_routePageChanged:function(e){this.page=e||"home1"},_pageChanged:function(e){var t=this.resolveUrl("weihua-"+e+".html");this.importHref(t)},ready:function(){var e=this;e.$$("paper-tabs").addEventListener("tap",function(){e.selected=this.selected,console.log(e.selected),e.fire("change",{selected:this.selected})}),e.$$("paper-listbox").addEventListener("tap",function(){e.selected=this.selected,e.fire("change",{selected:this.selected}),e._onMenuTap()})},_onMenuTap:function(){this.$$("app-drawer").toggle()}});</script></dom-module></body></html>
+      }</style><app-location route="{{route}}"></app-location><app-route route="{{route}}" data="{{routeData}}" tail="{{subRoute}}" pattern="/:page"></app-route><app-header-layout><app-header fixed=""><app-toolbar><paper-icon-button icon="menu" on-tap="_onMenuTap"></paper-icon-button><div main-title="">微划</div><paper-tabs selected="[[selected]]" attr-for-selected="name"><paper-tab><a class="nav link" name="home1" href="/home1" alt="首页">首页</a></paper-tab><paper-tab><a class="nav link" name="home2" href="/home2" alt="我们">我们</a></paper-tab><paper-tab><a class="nav link" name="home3" href="/home3" alt="服务">服务</a></paper-tab><paper-tab><a class="nav link" name="home4" href="/home4" alt="模版">模版</a></paper-tab></paper-tabs></app-toolbar></app-header><iron-pages selected="[[page]]" attr-for-selected="name" role=""><weihua-home1 name="home1"></weihua-home1><weihua-home2 name="home2"></weihua-home2><weihua-home3 name="home3"></weihua-home3><weihua-home4 name="home4"></weihua-home4></iron-pages></app-header-layout><app-drawer><paper-listbox selected="[[selected]]" attr-for-selected="name"><paper-item><a class="nav link" name="home1" href="/home1" alt="首页">首页</a></paper-item><paper-item><a class="nav link" name="home2" href="/home2" alt="我们">我们</a></paper-item><paper-item><a class="nav link" name="home3" href="/home3" alt="服务">服务</a></paper-item><paper-item><a class="nav link" name="home4" href="/home4" alt="模版">模版</a></paper-item></paper-listbox></app-drawer></template><script>Polymer({is:"weihua-header",properties:{selected:{type:Number,value:0},page:{type:String,reflectToAttribute:!0,observer:"_pageChanged"}},observers:["_routePageChanged(routeData.page)"],_routePageChanged:function(e){this.page=e||"home1"},_pageChanged:function(e){var t=this.resolveUrl("weihua-"+e+".html");this.importHref(t)},ready:function(){var e=this;e.$$("paper-tabs").addEventListener("tap",function(){e.selected=this.selected,console.log(e.selected),e.fire("change",{selected:this.selected})}),e.$$("paper-listbox").addEventListener("tap",function(){e.selected=this.selected,e.fire("change",{selected:this.selected}),e._onMenuTap()})},_onMenuTap:function(){this.$$("app-drawer").toggle()}});</script></dom-module></body></html>
