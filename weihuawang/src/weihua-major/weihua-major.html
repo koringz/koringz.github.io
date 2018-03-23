@@ -1,0 +1,88 @@
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html"><link rel="import" href="../../bower_components/app-layout/app-grid/app-grid-style.html"><link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html"></head><body><dom-module id="weihua-major"><template><style include="app-grid-style" has-aspect-ratio="">:host {
+        display: block;
+        height: calc(100% - 64px);
+        margin-top: 64px;
+        text-align: center;
+        --app-grid-columns: 4;
+        --app-grid-gutter: 10px;
+        --app-grid-expandible-item-columns: 1;
+        --app-grid-item-height: 50%;
+      }
+      ul {
+        height: 100%;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        background-color: #fff;
+      }
+      ul li {
+        list-style: none;
+        line-height: 1.5;
+        text-align: left;
+      }
+      h3 span {
+        border-bottom: 1px solid #000;
+        padding-bottom: 10px;
+      }
+      .item:nth-child(3){
+        height: 80%;
+      }
+      .circle-border{
+        border-radius: 50%;
+      }
+     /* .item:nth-child(4n + 1) {
+        height: 30% !important;
+        @apply(--app-grid-expandible-item);
+      }*/
+      .major-title-color{
+        line-height: 1.8; 
+        letter-spacing: 8px;
+      }
+      .fa {
+        font-size: 20px;
+      }
+      .major-children {
+        position: relative;
+        width: 70%;
+        margin: 5px 0;
+        padding: 5px 0;
+      }
+      .major-children paper-checkbox{
+        font-weight: bold;
+        color: #2f2f2f;
+      }
+      .color222{
+        color: #2f2f2f
+      }
+      .fontSize17{
+        font-size: 17px;
+      }
+      .fontSize30{
+        font-size: 30px;
+      }
+      .fontSize32{
+        font-size: 32px;
+      }
+      .fontSize34{
+        font-size: 34px;
+      }
+      .fontSize40{
+        font-size: 40px;
+      }
+      .major-title-color{
+        color: #05599d;
+      }
+
+      @media(max-width: 767px) {
+        :host {
+          text-align: left;
+          --app-grid-columns: 1;
+          --app-grid-item-height: calc(80% / 3);
+        }
+        .item:nth-child(4n + 1) {
+          height: 20% !important;
+        }
+        ul li {
+          float: left;
+        }
+      }</style><ul class="app-grid"><li class="item"></li><li class="item"><h3><span class="major-title-color fontSize34">专业技术、全程护航</span></h3><div class="major-children color222 fontSize17"><paper-checkbox checked="{{flexibleCustomization}}">灵活定制</paper-checkbox></div><div class="major-children color222 fontSize17"><paper-checkbox checked="{{highExtensibilty}}">高扩展性</paper-checkbox></div><div class="major-children color222 fontSize17"><paper-checkbox checked="{{intelligentRouting}}">智能路由</paper-checkbox></div><div class="major-children color222 fontSize17"><paper-checkbox checked="{{rapidDevelopment}}">快速开发</paper-checkbox></div><div class="major-children color222 fontSize17"><paper-checkbox checked="{{BSmultisafe}}">B/S多层架构，安全高效</paper-checkbox></div></li><li class="item circle-border"><div class=""><img src="safe.jpg" width="100%" height="100%"></div></li><li class="item"></li></ul></template><script>Polymer({is:"weihua-major",properties:{flexibleCustomization:{type:Boolean,value:!0},highExtensibilty:{type:Boolean,value:!0},intelligentRouting:{type:Boolean,value:!0},rapidDevelopment:{type:Boolean,value:!0},BSmultisafe:{type:Boolean,value:!0},observers:['_removeIf("BSmultisafe", flexibleCustomization)','_removeIf("highExtensibilty", BSmultisafe)'],_computeEffects:function(){return[this.flexibleCustomization?"flexible-Customization ":"",this.highExtensibilty?"high-Extensibilty ":"",this.intelligentRouting?"intelligent-Routing ":"",this.rapidDevelopment?"rapid-Development ":"",this.BSmultisafe?"BSmulti-safe ":""].join("")},_removeIf:function(e,i){this[e]&&i&&(this[e]=!1)}}});</script></dom-module></body></html>

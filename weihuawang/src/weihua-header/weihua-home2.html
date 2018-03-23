@@ -1,0 +1,22 @@
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html"><link rel="import" href="../weihua-about-us/weihua-aboutus.html"></head><body><dom-module id="weihua-home2"><template><style include="app-grid-style">:host {
+	        display: block;
+	      }
+	      #wrapper {
+	        position: relative;
+	        top: 0;
+	        left: 0;
+	        width: 100%;
+	        height: 100%;
+	      }
+	      @media(max-width: 767px) {
+	        paper-tabs {
+	          display: none;
+	        }
+	        [icon="menu"] {
+	          display: inline-block;
+	        }
+	        [main-title] {
+	          text-align: center;
+	          margin-left: -40px;
+	        }
+	      }</style><div id="wrapper"><weihua-aboutus></weihua-aboutus></div></template><script>Polymer({is:"weihua-home2"});</script></dom-module></body></html>

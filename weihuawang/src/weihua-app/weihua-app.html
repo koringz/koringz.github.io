@@ -1,0 +1,22 @@
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html"><link rel="import" href="../../bower_components/iron-icons/iron-icons.html"><link rel="import" href="../weihua-header/weihua-header.html"><link rel="import" href="../weihua-us/weihua-us.html"><link rel="import" href="../weihua-service/weihua-service.html"><link rel="import" href="../weihua-major/weihua-major.html"><link rel="import" href="../weihua-home/weihua-home.html"><link rel="import" href="../weihua-footer/weihua-footer.html"><link rel="import" href="./jquery.js.html"><link rel="import" href="./fullpage.js.html"></head><body><dom-module id="weihua-app"><template><style include="app-grid-style">:host {
+        display: block;
+      }
+      #wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      @media(max-width: 767px) {
+        paper-tabs {
+          display: none;
+        }
+        [icon="menu"] {
+          display: inline-block;
+        }
+        [main-title] {
+          text-align: center;
+          margin-left: -40px;
+        }
+      }</style><weihua-header></weihua-header></template><script>Polymer({is:"weihua-app",attached:function(){this._updateGridStyles=this._updateGridStyles||function(){this.updateStyles()}.bind(this),window.addEventListener("resize",this._updateGridStyles)},detached:function(){window.removeEventListener("resize",this._updateGridStyles)},ready:function(){}});</script></dom-module></body></html>
