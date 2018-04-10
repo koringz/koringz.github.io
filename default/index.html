@@ -87,21 +87,19 @@
       padding: 70px 0 10px;
     }
     .default-frame{
-      width: 1200px;
-      margin: 0 auto;
+      padding: 0 100px;
       background-color: transparent;
     }
     .grid-content{
       margin: 0 0 0 10px;
-      width: 980px;
+      width: 78%;
     }
     .navigation-aside{
-      position: fixed;
-      top: 70px;
+      float: right;
       width: auto;
-      left: 50%;
-      margin-left: 390px;
-      background-color: #fff;
+      min-width: 18%;
+      max-width: 20%;
+      background-color: #fff
     }
     ul,
     li{
@@ -112,6 +110,8 @@
       padding: 0;
     }
     .grid-list{
+      position: fixed;
+      top: 70px;
     }
     .grid-list li{
       width: 180px;
@@ -181,11 +181,10 @@
       background-color: #fefefe
     }
     .footer{
-      position: absolute;
-      left: 0;
       float: left;
       width: 100%;
-      padding: 10px 0;
+      margin: 0 -100px;
+      padding: 10px 100px;
       color: #aaa;
       text-align: center;
       background-color: #eee
@@ -194,6 +193,7 @@
       padding-top: 70px;
     }
   </style>
+  <script src="./jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
@@ -203,6 +203,7 @@
   </div>
   <div class="introduction-frame">
     <span>这是一个基于HTML+CSS+JS实现的功能库！</span>
+    <span>案例用codepen生成,如效果失效则需手动按右下角RERUN</span>
   </div>
   <div class="default-web-information">
     <span class="authmessage"><a href="http://koringz.github.io"><strong>koringz</strong></a></span>
@@ -329,6 +330,24 @@
           <!--  -->
         </div>
       </div>
+      <div class="con-1 list-form" id="gradient">
+        <div>
+          <h2>渐变背景
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="300" data-theme-id="16957" data-slug-hash="pLGpyZ" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="gradient background" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/pLGpyZ/">gradient background</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="slider">
+        <div>
+          <h2>轮播
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="300" data-theme-id="16957" data-slug-hash="EErozP" data-default-tab="js,result" data-user="koringz" data-embed-version="2" data-pen-title="EErozP" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/EErozP/">EErozP</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
     </div>
     <div class="navigation-aside">
       <div class="grid-list">
@@ -346,6 +365,8 @@
           <li><a data-attr="followsuspend">悬浮层贴边框</a></li>
           <li><a data-attr="table">表格</a></li>
           <li><a data-attr="tabs">切换</a></li>
+          <li><a data-attr="gradient">渐变背景</a></li>
+          <li><a data-attr="slider">轮播</a></li>
         </ul>
       </div>
     </div>
@@ -363,8 +384,7 @@
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<script src="./ei.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
   var t = 0
@@ -373,8 +393,7 @@ $(document).ready(function () {
   $(".grid-list").on('click','li',function (ea) {
     t = 0
     var ix = [].indexOf.call(list,ea.currentTarget)
-    var box_len = $(".con-1")[0].offsetHeight
-    var next = (ix * box_len) + (ix * 30)
+    var next = (ix * 311) + (ix * 30)
     $(this).addClass("active").siblings().removeClass("active")
     var id = '#' + $(this).children().attr('data-attr')
     $('.grid-content').find(id).addClass("mtop").siblings().removeClass("mtop")

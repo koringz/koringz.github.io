@@ -9,7 +9,7 @@ $.fn.tabs = function (option) {
       .addClass(option.header.selector)
       .siblings()
       .removeClass(option.header.selector)
-      .parents('div[default-tabs]')
+      .parents('[default-tabs]')
       .find(option.page.class+index)
       .addClass(option.page.selector)
       .siblings()

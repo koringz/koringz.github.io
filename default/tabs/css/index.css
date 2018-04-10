@@ -13,9 +13,7 @@ body {
   content: "";
   display: table;
 }
-/**
- * Container CSS
- */
+/* tabs */
 .default-tabs{
   display: block;
   padding: 10px;
@@ -23,11 +21,11 @@ body {
   height: auto;
   overflow: hidden;
 }
-.default-tabs-menu{
+.default-tabs-nav{
   display: table;
   width: 100%;
 }
-.default-tab-submenu{
+.default-tab-subitem{
   display: table-cell;
   padding: 5px 15px;
   font-size: 14px;
@@ -37,7 +35,7 @@ body {
   color: #111;
   cursor: pointer;
 }
-.default-tab-submenu:last-child{
+.default-tab-subitem:last-child{
   border-right: none
 }
 .default-tabs-content{
@@ -54,7 +52,7 @@ body {
 .default-tab-page.active{
   display: block;
 }
-.default-tab-submenu.active{
+.default-tab-subitem.active{
   background-color: #E4DDFD;
   color: #505050;
   font-size: 13px;

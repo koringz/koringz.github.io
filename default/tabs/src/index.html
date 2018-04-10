@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
   <meta name="format-detection" content="telephone=no" />
   <title>tabs-css-frame</title>
-  <link rel="stylesheet" type="text/css" href="../css/index.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../css/index.css"> -->
+  <link rel="stylesheet" type="text/css" href="../../default.css">
   <script src="./jq.js"></script>
 </head>
 <body>
 
 <div class="default-tabs" default-tabs>
-  <div class="default-tabs-menu">
-    <span class="default-tab-submenu">编号</span>
-    <span class="default-tab-submenu active">分类</span>
-    <span class="default-tab-submenu">内容</span>
+  <div class="default-tabs-nav">
+    <span class="default-tab-subitem">编号</span>
+    <span class="default-tab-subitem active">分类</span>
+    <span class="default-tab-subitem">内容</span>
   </div>
   <div class="default-tabs-content">
     <div class="default-tab-page default-tab-tube-0">
@@ -33,7 +34,7 @@
 <script>
 $('.default-tabs').tabs({
   header: {
-    class: '.default-tab-submenu',
+    class: '.default-tab-subitem',
     selector: 'active'
   },
   page: {
