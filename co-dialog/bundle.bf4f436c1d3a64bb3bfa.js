@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "d944af895a50e2acc85a";
+/******/ 	var hotCurrentHash = "bf4f436c1d3a64bb3bfa";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2163,10 +2163,10 @@ function codepen() {
         pretag.addEventListener("click", function(n) {
         	if(n.offsetY < 0) {
 	            var v = {
-	                js_external: "https://cdn.jsdelivr.net/npm/co-dialog;"
+	                js_external: "https://cdn.jsdelivr.net/npm/co-dialog"
 	            };
-	            v.js = "";
-	            v.js += pretag.innerText;
+	            v.js = "",
+	            v.js += pretag.innerText,
 	            document.getElementById("codepen-value").value = JSON.stringify(v),
 	            document.getElementById("codepen-node").submit()
         	}
@@ -2633,8 +2633,8 @@ function usage () {
 function form () {
 	var str = ''
 
-	str += '<form action="https://codepen.io/pen/define" method="POST" target="_blank" id="codepen-node" aria-label="false" aria-hidden="true">'
-	str += '<input type="hidden" value="" id="codepen-value">'
+	str += '<form id="codepen-node" action="https://codepen.io/pen/define" method="POST" target="_blank" aria-label="false" aria-hidden="true">'
+	str += '<input type="hidden" name="data" id="codepen-value" value="">'
 	str += '</form>'
 
 	return str
@@ -5117,4 +5117,4 @@ var APP = new app('#root');
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.d944af895a50e2acc85a.js.map
+//# sourceMappingURL=bundle.bf4f436c1d3a64bb3bfa.js.map
