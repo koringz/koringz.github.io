@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "bf4f436c1d3a64bb3bfa";
+/******/ 	var hotCurrentHash = "e6ff686da96c75d0d944";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2291,14 +2291,14 @@ function excuteHeader() {
 	str += '<span>'
 	str += 'Latest update:'
 	str += '<a href="https://github.com/koringz/co-dialog/releases/latest" class="updated_at">'
-	str +=  updated_at || ''
+	str +=  sessionStorage.updated_at || ''
 	str += '</a>'
 	str += '</span>'
 	str += '&nbsp;&nbsp;'
 	str += '<span>'
 	str += 'Current version:'
 	str += '<a href="https://github.com/koringz/co-dialog/tree/master" class="tag_name">'
-	str +=  tag_name || ''
+	str +=  sessionStorage.tag_name || ''
 	str += '</a>'
 	str += '</span>'
 	str += '</div>'
@@ -5117,4 +5117,4 @@ var APP = new app('#root');
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.bf4f436c1d3a64bb3bfa.js.map
+//# sourceMappingURL=bundle.e6ff686da96c75d0d944.js.map
