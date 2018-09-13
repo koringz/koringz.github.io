@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5cc1ad801a7e32228d0a";
+/******/ 	var hotCurrentHash = "b230b6095bef7dcd1327";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2524,13 +2524,11 @@ function browserSupport () {
 	str += '<th>Firefox</th>'
 	str += '<th>Safari</th>'
 	str += '<th>Opera</th>'
-	str += '<th>Android Browser*</th>'
-	str += '<th>UC Browser*</th>'
 	str += '</tr>'
 	str += '</thead>'
 
 	str += '<tbody>'
-	for (var i = 0; i < 3; i++) {
+	for (var i = 0; i < 6; i++) {
 		str +='<td key="' + i + '">'
 		str +='<img class="emoji" height="20" width="20" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png">'
 		str +='</td>'
@@ -5117,4 +5115,4 @@ var APP = new app('#root');
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.5cc1ad801a7e32228d0a.js.map
+//# sourceMappingURL=bundle.b230b6095bef7dcd1327.js.map
