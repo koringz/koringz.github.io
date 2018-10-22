@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "674a417b990b306886a4";
+/******/ 	var hotCurrentHash = "c511495a6c12b9157a08";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2140,7 +2140,7 @@ function moreExamples () {
 		    layout: "center",
 		    isDrag: true,
 		    animation: false,
-		    customAnimation: "slideInDown",
+		    customAnimation: "tada",
 		}).show()
 
 	}
@@ -3117,7 +3117,7 @@ function coDialog_examples (argument) {
 	str += '</span>'
 	str += '\n'
 	str += '<span role="presentation" style="padding-right: 0.1px;"> '
-	str += '&nbsp; &nbsp;<span class="cm-property">customAnimation</span>: <span class="cm-string">"slideInDown"</span>,'
+	str += '&nbsp; &nbsp;<span class="cm-property">customAnimation</span>: <span class="cm-string">"tada"</span>,'
 	str += '</span>'
 	str += '\n'
 	
@@ -4012,4 +4012,4 @@ var APP = new app('#root');
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.674a417b990b306886a4.js.map
+//# sourceMappingURL=bundle.c511495a6c12b9157a08.js.map
