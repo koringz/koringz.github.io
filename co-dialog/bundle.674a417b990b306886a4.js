@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "3a08b96bf437732c36b2";
+/******/ 	var hotCurrentHash = "674a417b990b306886a4";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -2096,7 +2096,7 @@ function moreExamples () {
 		co_dialog__WEBPACK_IMPORTED_MODULE_1___default.a.app(".timeout").use({
 		    title: "超时-timeout",
 		    message: "超时自动关闭",
-		    timeout: "2000",
+		    timeout: 2000,
 		    type: 'info'
 		}).show()
 	}
@@ -4012,4 +4012,4 @@ var APP = new app('#root');
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.3a08b96bf437732c36b2.js.map
+//# sourceMappingURL=bundle.674a417b990b306886a4.js.map
