@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "weihua",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "polymer serve",
+    "preInstall": "npm i && bower i",
+    "watch": "nodemon --exec \"browser-sync start -c ./bs-config.js\" -w \"bs-config.js\"",
+    "build": "rimraf ./build && polymer build --html.collapseWhitespace",
+    "deploy": "npm run build && gulp deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "cntanglijun",
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "browser-sync": "^2.18.6",
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
+    "nodemon": "^1.11.0",
+    "polymer-cli": "^0.17.0",
+    "webcomponentsjs": "^1.0.2"
+  }
+}

@@ -1,0 +1,47 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+
+<dom-module id="weihua-home1">
+	<template>
+		<style include="app-grid-style">
+	      :host {
+	        display: block;
+	      }
+	      #wrapper {
+	        position: absolute;
+	        top: 0;
+	        left: 0;
+	        width: 100%;
+	        height: 100%;
+	      }
+	      @media(max-width: 767px) {
+	        paper-tabs {
+	          display: none;
+	        }
+	        [icon="menu"] {
+	          display: inline-block;
+	        }
+	        [main-title] {
+	          text-align: center;
+	          margin-left: -40px;
+	        }
+	      }
+	    </style>
+		<div id="wrapper">
+		  <div id="fullpage">
+		    <div class="section" id="home"><weihua-home></weihua-home></div>
+		    <div class="section" id="us"><weihua-us></weihua-us></div>
+		    <div class="section" id="service"><weihua-service></weihua-service></div>
+		    <div class="section" id="major"><weihua-major></weihua-major></div>
+		    <div class="section" id="section-footer"><weihua-footer></weihua-footer></div>
+		  </div>
+		</div>
+
+	</template>
+	<script>
+	Polymer({
+	  is: 'weihua-home1'
+	})
+	</script>
+
+</dom-module>

@@ -1,0 +1,94 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html" />
+
+
+<dom-module id="weihua-footer">
+	<template>
+
+		<style>
+
+		:host {
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		}
+		.footer-text {
+			width: 100%;
+			height: auto;
+			margin: 0 auto;
+			padding: 20px 0 10px;
+			background: -moz-linear-gradient( top,#5394c5,#192256);
+			background: -webkit-linear-gradient( top,#5394c5,#192256);
+			background: linear-gradient( top,#5394c5,#192256);
+		}
+		.container-mid{
+			position: relative;
+			display: block;
+			width: 80%;
+			height: 100%;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		.comm-cut,.comm-menu-link{
+			display: inline-block;
+			width: 80px;
+			height: auto;
+			margin: 0 auto;
+			padding: 0;
+			overflow: hidden;
+		}
+		.comm-menu-link{
+			width: auto;
+			padding: 0 10px;
+			text-decoration: none;
+		}
+		.capyright{
+			font-family: 'Microsoft YaHei';
+		}
+		.fontSize20{
+			font-size: 20px;
+		}
+		.white{
+			color: #fff;
+		}
+		.gray{
+			color: #eee;
+		}
+		.img01>img{
+			float: none;
+		}
+		.img02>img{
+			margin-left: -96px;
+		}
+		.img03>img{
+			float: right;
+		}
+
+		</style>
+
+		<div class="footer-text">
+			<div class="container-mid">
+				<p>
+					<a href="/home2" class="comm-cut img01"><img src="comm.png" alt="" width="auto"></a>
+					<a href="/home3" class="comm-cut img02" style="margin: 0 20px;"><img src="comm.png" alt="" width="auto"></a>
+					<a href="/home4" class="comm-cut img03"><img src="comm.png" alt="" width="auto"></a>
+				</p>
+				<p>
+					<a href="/home2" class="comm-menu-link fontSize20 white">关于我们</a>
+					<a href="/home3" class="comm-menu-link fontSize20 white">我们的服务</a>
+					<a href="/home4" class="comm-menu-link fontSize20 white">模板样式</a>
+				</p>
+				<p>
+					<span class="capyright gray">Copyright 2017-2018 All Rights Reserved 微划团队 赣ICP备16007763号-1</span>
+				</p>
+			</div>
+		</div>
+
+	</template>
+
+	<script>
+	Polymer({
+		is:"weihua-footer"
+	})
+	</script>
+
+</dom-module>
+

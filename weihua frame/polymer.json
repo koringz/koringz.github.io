@@ -1,0 +1,13 @@
+{
+  "entrypoint": "./index.html",
+  "shell": "./src/weihua-app/weihua-app.html",
+  "sourceGlobs": [
+    "assets/**/*",
+    "src/**/*",
+    "bower.json"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ]
+}
