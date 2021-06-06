@@ -9,7 +9,7 @@ name: koringz
 description: 前端开发工程师
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://avatars.githubusercontent.com/u/13350327?v=4
+avatar: /images/13350327.jpg
 
 #
 # Flags below are optional
@@ -17,19 +17,20 @@ avatar: https://avatars.githubusercontent.com/u/13350327?v=4
 
 # Includes an icon in the footer for each username you enter
 footer-links:
-  dribbble:
-  email:
+  dribbble: 
+  email: ok234@foxmail.com
   facebook:
   flickr:
-  github: barryclark/jekyll-now
+  github: koringz
   instagram:
   linkedin:
   pinterest:
   rss: # just type anything here for a working RSS icon
-  twitter: jekyllrb
+  twitter: koringz
   stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
   youtube: # channel/<your_long_string> or user/<user-name>
   googleplus: # anything in your profile username that comes after plus.google.com/
+  github: cntanglijun
 
 
 # Enter your Disqus shortname (not your username) to enable commenting on posts
@@ -41,7 +42,7 @@ google_analytics:
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url:
+url: 
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
