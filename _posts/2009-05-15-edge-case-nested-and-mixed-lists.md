@@ -26,7 +26,8 @@ MYSQL_HOME
 C:\Program Files\MySQL\MySQL Server 5.6
 path
 %MYSQL_HOME%\bin
-sql
+```
+
 然后回到MySQL目录（个人电脑 C:\Program Files\MySQL\MySQL Server 5.6）打开\bin文件夹下创建my.ini文件（可以理解为初始化启动提供服务并建立连接传输数据所需的协议信息），填写如下代码：
 
 ```YAML
