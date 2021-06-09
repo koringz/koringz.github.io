@@ -1,0 +1,14 @@
+# main links
+main:
+  - title: "主页"
+    url: /
+  - title: "关于"
+    url: /about/
+  # - title: "Quick-Start Guide"
+  #   url: /quick-start-guide/
+  # - title: "Sample Posts"
+  #   url: /year-archive/
+  # - title: "Sample Collections"
+  #   url: /collection-archive/
+  # - title: "Sitemap"
+  #   url: /sitemap/
