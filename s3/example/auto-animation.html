@@ -1,0 +1,73 @@
+<html>
+<head>
+  <title>Auto Animation</title>
+  <style type="text/css">h1{ position: absolute; padding-left: 50px}body{margin:0;}</style>
+  <script src="./../lib/S3.js"></script>
+</head>
+<body>
+
+  <h1>s3.js Auto Animation</h1>
+  <canvas></canvas>
+
+</body>
+<script type="text/javascript">
+const offsetWidth = document.body.offsetWidth
+const offsetHeight = document.body.offsetHeight
+
+const Pos = pos();
+const Body = s3.body(s3.dom("canvas"))
+Body.set({ width: offsetWidth, height: offsetHeight })
+Body.component('circle', { type:'Array', property: [
+  {color: '#AB5EEE', x: offsetWidth / 2, y: offsetHeight / 2, radius: 15, speed: .3, motion: 'stop'},
+  {color: '#AB5EEE', x: offsetWidth / 2, y: offsetHeight / 2, radius: 15, speed: .3, motion: 'move', method: Pos.left},
+  {color: '#AB5EEE', x: offsetWidth / 2, y: offsetHeight / 2, radius: 15, speed: .3, motion: 'move', method: Pos.right},
+  {color: '#AB5EEE', x: offsetWidth / 2, y: offsetHeight / 2, radius: 15, speed: .3, motion: 'move', method: Pos.top},
+  {color: '#AB5EEE', x: offsetWidth / 2, y: offsetHeight / 2, radius: 15, speed: .3, motion: 'move', method: Pos.bottom},
+]})
+
+function pos () {
+  let y,x,s,r;
+  var that = function (api) {
+    var current = api.current
+    y = current.y
+    x = current.x
+    s = current.speed
+    r = current.radius
+  }
+
+  return {
+    left: function (api) {
+      that.call(null,api);
+      x -= s;
+      api.setState( { x : x } );
+      if(x < -r * 2) api.setState( { x: offsetWidth + r } );
+      return [[x,y]]
+    },
+    right: function (api) {
+      that.call(null,api);
+      x += s;
+      api.setState( { x : x } );
+      if(x > offsetWidth + r) api.setState( { x: -r * 2 } );
+      return [[x,y]]
+    },
+    top: function (api) {
+      that.call(null,api);
+      y -= s;
+      api.setState( { y : y } );
+      if(y < -r * 2) api.setState( { y: offsetHeight + r } );
+      return [[x,y]]
+    },
+    bottom: function (api) {
+      that.call(null,api);
+      y += s;
+      api.setState( { y : y } );
+      if(y > offsetHeight + r ) api.setState( { y: -r * 2 } );
+      return [[x,y]]
+    }
+  }
+}
+
+
+
+</script>
+</html>
