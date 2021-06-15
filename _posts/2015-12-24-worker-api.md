@@ -1,5 +1,6 @@
 ---
 title: "JavaScript:理解worker事件api"
+show_date: true
 # categories:
 #   - Edge Case
 # tags:
