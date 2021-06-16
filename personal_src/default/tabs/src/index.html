@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>tabs-css-frame</title>
+  <!-- <link rel="stylesheet" type="text/css" href="../css/index.css"> -->
+  <link rel="stylesheet" type="text/css" href="../../default.css">
+  <script src="./jq.js"></script>
+</head>
+<body>
+
+<div class="default-tabs" default-tabs>
+  <div class="default-tabs-nav">
+    <span class="default-tab-subitem">编号</span>
+    <span class="default-tab-subitem active">分类</span>
+    <span class="default-tab-subitem">内容</span>
+  </div>
+  <div class="default-tabs-content">
+    <div class="default-tab-page default-tab-tube-0">
+      <span>1. 一道看似非常难的面试算法题</span>
+    </div>
+    <div class="default-tab-page default-tab-tube-1 active">
+      <span>6. Vue.js 系列教程</span>
+    </div>
+    <div class="default-tab-page default-tab-tube-2">
+      <span>10. 研究思考</span>
+    </div>
+  </div>
+</div>
+
+<script src="./../js/index.js"></script>
+<script>
+$('.default-tabs').tabs({
+  header: {
+    class: '.default-tab-subitem',
+    selector: 'active'
+  },
+  page: {
+    class: '.default-tab-tube-',
+    selector: 'active'
+  },
+  event: 'click'
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+body,html{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+/* suspend*/
+.crm003721-suspend-frame{
+	display: block;
+	position: fixed;
+	height: auto;
+	left: 30px;
+	top: 50%;
+	margin-top: -152px;
+	background-color: #000;
+}
+.crm003721-suspend-frame .crm003721-suspend-box{
+	display: block;
+	position: relative;
+	float: left;
+	width: 120px;
+	text-align: center;
+}
+.crm003721-suspend-frame .crm003721-suspend-box .crm003721-suspend-fixedMap{
+	display: block;
+	padding: 0;
+	margin: 0;
+}
+.crm003721-suspend-frame .crm003721-suspend-box .crm003721-suspend-fixedMap .fixedMap-styles{
+	display: block;
+}
+.fixedMap-styles .fixedMap-head{
+	display: block;
+	float: left;
+	width: 100%;
+	overflow: hidden;
+}
+.fixedMap-styles .fixedMap-head .head-item{
+	display: block;
+	width: 120px;
+	height: 120px;
+}
+.fixedMap-styles .fixedMap-head .head-item img{
+	float: left;
+	height: 100%;
+	width: 100%;
+	outline: none;
+	border: none;
+}
+.fixedMap-styles .fixedMap-head .head-close{
+	display: block;
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	text-align: center;
+	font-size: 14px;
+	color: #3dc;
+}
+.fixedMap-styles .fixedMap-head .head-close span{
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	border-radius: 22px;
+	border: 1px solid #3de;
+	background-color: #fff
+}
+.fixedMap-styles .fixedMap-content{
+	display: block;
+	float: left;
+	width: 100%;
+}
+.fixedMap-styles .fixedMap-content .content-item{
+	text-align: center;
+	padding: 0 10px;
+}
+.fixedMap-styles .fixedMap-content .content-item .item-list{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.fixedMap-styles .fixedMap-content .content-item .item-list .list-text{
+	display: block;
+	margin-top: 5px;
+	padding: 5px 15px;
+	text-align: center;
+	text-decoration: none;
+	background-color: #666;
+	color: #fff;
+	font-size: 16px;
+}
+.fixedMap-styles .fixedMap-content .content-item .item-list .list-text:first-child{
+	margin-top: 0;
+}
+.fixedMap-styles .fixedMap-content .content-item .item-list .list-text:hover{
+	background-color: #FCF10E;
+	color: #111;
+}
+.fixedMap-styles .fixedMap-foot{
+	display: block;
+}

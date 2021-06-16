@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>default.css</title>
+  <style type="text/css">
+  body,html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  :before, :after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+
+  /* header */
+  .default-top-header:before,
+  .default-top-header:after{
+    content: "";
+    display: table;
+  }
+  .default-top-header{
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+    margin: 0;
+    border: none;
+    line-height: 1;
+    box-shadow: none;
+    background-color: #cfcfcf;
+    color: #848484;
+  }
+  .default-web-icon,
+  .default-web-information{
+    display: inline-block;
+    margin: 10px 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: normal;
+    color: #333;
+  }
+  .default-web-icon{
+    padding-left: 10px;
+  }
+  .default-web-information{
+    padding-right: 10px;
+    float: right;
+  }
+  .default-header-shadow{
+    box-shadow: 0px 1px 4px gray
+  }
+  .introduction-frame{
+    display: inline-block;
+    margin-left: 100px;
+    color: #888;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+    .graywhite{
+      position: fixed;
+      top: 0;
+      z-index: 999;
+      background-color: rgba(252,252,252,1)
+    }
+    .grayred{
+      margin-left: 100px;
+      color: #3E225E
+    }
+    .grayred span{
+      color: #D11C6F
+    }
+    .authmessage{
+      margin-right: 138px;
+    }
+    .authmessage a{
+      color: #333;
+    }
+    .container{
+      position: relative;
+      width: 100%;
+      padding: 70px 0 10px;
+    }
+    .default-frame{
+      padding: 0 100px;
+      background-color: transparent;
+    }
+    .grid-content{
+      margin: 0 0 0 10px;
+      width: 78%;
+    }
+    .navigation-aside{
+      float: right;
+      width: auto;
+      min-width: 18%;
+      max-width: 20%;
+      background-color: #fff
+    }
+    ul,
+    li{
+      list-style: none;
+    }
+    ul{
+      margin: 0;
+      padding: 0;
+    }
+    .grid-list{
+      position: fixed;
+      top: 70px;
+    }
+    .grid-list li{
+      width: 180px;
+      padding: 3px 3px 2px 0;
+      color: #333;
+      font-size: 14px;
+      text-align: left;
+      /*background-color: #eee;*/
+    }
+    .grid-list li a{
+      display: block;
+      width: 100%;
+      margin-left: 10px;
+      cursor: pointer;
+      color: #333;
+      text-decoration: none;
+    }
+    .grid-list li.active{
+      background-color: #fafafa
+    }
+    .grid-list li.active a{
+      color: #E41B72;
+    }
+    .con-1{
+      margin-bottom: 30px;
+    }
+    .con-1 div{
+      background-color: #fafafe
+    }
+    h2,h3{
+      padding: 10px 0;
+      margin: 0;
+      line-height: 22px;
+      font-size: 22px;
+    }
+    iframe{
+      position: relative;
+      width: 100%;
+      border: none;
+      background-color: #fefefe
+    }
+    h2{
+      padding-left: 10px;
+      font-size: 18px;
+      color: #6F3895
+    }
+    h2 span{
+      display: inline-block;
+      float: right;
+      margin-right: 20px;
+      color: #b1a0a2;
+      font-size: 14px;
+      font-weight: normal;
+      font-family: inherit;
+    }
+    h2 span a {
+      text-decoration: none;
+      color: inherit;
+    }
+    h2 span a:hover{
+      text-decoration: underline;
+    }
+    pre{
+      margin: 0
+    }
+    .settingcode{
+      background-color: #fefefe
+    }
+    .footer{
+      float: left;
+      width: 100%;
+      margin: 0 -100px;
+      padding: 10px 100px;
+      color: #aaa;
+      text-align: center;
+      background-color: #eee
+    }
+    .mtop{
+      padding-top: 70px;
+    }
+  </style>
+  <script src="./jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+<div class="default-top-header graywhite">
+  <div class="default-web-icon">
+    <strong class="grayred"><span>Default</span>-<span>Plugin</span></strong>
+  </div>
+  <div class="introduction-frame">
+    <span>这是一个基于HTML+CSS+JS实现的功能库！</span>
+    <span>案例用codepen生成,如效果失效则需手动按右下角RERUN</span>
+  </div>
+  <div class="default-web-information">
+    <span class="authmessage"><a href="http://koringz.github.io"><strong>koringz</strong></a></span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="default-frame">
+    <div class="grid-content">
+      <div class="con-1 list-form" id="batchLoading">
+        <div>
+          <h2>批量加载
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="GQGNWK" data-default-tab="js,result" data-user="koringz" data-embed-version="2" data-pen-title="batch.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/GQGNWK/">batch.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="layout">
+        <div>
+          <h2>布局容器
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="16957" data-slug-hash="rJogqN" data-default-tab="html,result" data-user="koringz" data-embed-version="2" data-pen-title="layout.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/rJogqN/">layout.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-dialog" id="dialog">
+        <div>
+          <h2>弹出框
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="QQrEQz" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="dialog.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/QQrEQz/">dialog.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="drag">
+        <div>
+          <h2>拖动
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="RQyRML" data-default-tab="html,result" data-user="koringz" data-embed-version="2" data-pen-title="drag.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/RQyRML/">drag.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="form">
+        <div>
+          <h2>表单
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="YeLWLx" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="form.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/YeLWLx/">form.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="header">
+        <div>
+          <h2>头部
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="bLMeMm" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="header.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/bLMeMm/">header.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="pagination">
+        <div>
+          <h2>分页
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="jZxrxJ" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="pagination.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/jZxrxJ/">pagination.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="product">
+        <div>
+          <h2>商品类
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="VQxjdW" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="product.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/VQxjdW/">product.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="search">
+        <div>
+          <h2>搜索
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="NyMrBE" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="search.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/NyMrBE/">search.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="suspend">
+        <div>
+          <h2>悬浮层
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="rJvLZV" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="suspend.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/rJvLZV/">suspend.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="followsuspend">
+        <div>
+          <h2>悬浮层贴边框
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="16957" data-slug-hash="ddamgm" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="followsuspend.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/ddamgm/">followsuspend.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="table">
+        <div>
+          <h2>表格
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="gvzMdz" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="table.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/gvzMdz/">table.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="tabs">
+        <div>
+          <h2>切换
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="265" data-theme-id="dark" data-slug-hash="zRjBmr" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="tabs.css" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/zRjBmr/">tabs.css</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="gradient">
+        <div>
+          <h2>渐变背景
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="300" data-theme-id="16957" data-slug-hash="pLGpyZ" data-default-tab="css,result" data-user="koringz" data-embed-version="2" data-pen-title="gradient background" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/pLGpyZ/">gradient background</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+      <div class="con-1 list-form" id="slider">
+        <div>
+          <h2>轮播
+            <span><a href="https://github.com/koringz/default-plugin">view source</a></span></h2>
+          <!--  -->
+          <p data-height="300" data-theme-id="16957" data-slug-hash="EErozP" data-default-tab="js,result" data-user="koringz" data-embed-version="2" data-pen-title="EErozP" class="codepen">See the Pen <a href="https://codepen.io/koringz/pen/EErozP/">EErozP</a> by koringz (<a href="https://codepen.io/koringz">@koringz</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+          <!--  -->
+        </div>
+      </div>
+    </div>
+    <div class="navigation-aside">
+      <div class="grid-list">
+        <ul>
+          <li class="active"><a data-attr="batchLoading">批量加载</a></li>
+          <li><a data-attr="layout">布局容器</a></li>
+          <li><a data-attr="dialog">弹出框</a></li>
+          <li><a data-attr="drag">拖动</a></li>
+          <li><a data-attr="form">表单</a></li>
+          <li><a data-attr="header">头部</a></li>
+          <li><a data-attr="pagination">分页</a></li>
+          <li><a data-attr="product">商品类</a></li>
+          <li><a data-attr="search">搜索</a></li>
+          <li><a data-attr="suspend">悬浮层</a></li>
+          <li><a data-attr="followsuspend">悬浮层贴边框</a></li>
+          <li><a data-attr="table">表格</a></li>
+          <li><a data-attr="tabs">切换</a></li>
+          <li><a data-attr="gradient">渐变背景</a></li>
+          <li><a data-attr="slider">轮播</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer">
+      <div>
+        <span>
+          Date:2018.01.21
+        </span>
+        &nbsp;
+        <span>
+          Auth:koringz
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./ei.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+  var t = 0
+  var currentTop = 0
+  var list = $(".grid-list").find('li')
+  $(".grid-list").on('click','li',function (ea) {
+    t = 0
+    var ix = [].indexOf.call(list,ea.currentTarget)
+    var next = (ix * 311) + (ix * 30)
+    $(this).addClass("active").siblings().removeClass("active")
+    var id = '#' + $(this).children().attr('data-attr')
+    $('.grid-content').find(id).addClass("mtop").siblings().removeClass("mtop")
+    $('html,body').animate({scrollTop: next},'slow')
+    setTimeout(function () {t = 1},100)
+  })
+
+  $(window).scroll(function () {
+    if(t) $('.grid-content').find('.con-1').removeClass("mtop")
+  })
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>search-css-frame</title>
+  <!-- <link rel="stylesheet" type="text/css" href="../css/index.css"> -->
+  <link rel="stylesheet" type="text/css" href="../../default.css">
+</head>
+<body>
+
+<div class="skysearch">
+  <div class="crm003721-search-frame">
+    <div class="crm003721-search-box">
+      <div class="crm003721-search-lookMessage">
+        <div class="lookMessage-styles">
+
+          <div class="styles-search">
+            <div class="search-text">
+              <input type="text" name="" value="" placeholder="请输入">
+            </div>
+            <div class="mark-search">
+              <button type="button">搜索</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="index.js"></script>
+<script type="text/javascript">
+
+  onceEventSearch({
+    type: 'click',
+    node: '.lookMessage-styles button',
+    methods: function (optionEvent) {
+    }
+  })
+
+  function getAnother(e, p, c) {
+    return $(e.target).parents(p).find(c)
+  }
+
+  function disabled(e) {
+    e.target.setAttribute('disabled','disabled')
+    e.target.style.color = 'gray'
+  }
+
+  function onceEventSearch(option) {
+    if(option.methods instanceof Function && typeof option.type === 'string' && typeof option.node === 'string'){
+      $(option.node).on(option.type, function (event) {
+        event.preventDefault()
+        option.methods(event)
+      })
+    } else {
+      return false
+    }
+  }
+
+</script>
+</body>
+</html>

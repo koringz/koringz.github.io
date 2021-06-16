@@ -1,0 +1,144 @@
+body,html{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+:before, :after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+/* skypagination*/
+.skypagination{
+	width: 90%;
+}
+.crm003721-pagination-frame{
+	margin: 0;
+	padding: 10px 0;
+}
+.crm003721-pagination-frame .crm003721-pagination-box{
+	margin: 0;
+	padding: 0 15px;
+	background-color: #fefefe;
+}
+.crm003721-pagination-frame .crm003721-pagination-box .crm003721-pagination-paginationIndex{
+	display: inline-block;
+	width: 100%;
+	margin: 0 auto;
+}
+.crm003721-pagination-frame .crm003721-pagination-box .crm003721-pagination-paginationIndex .paginationIndex-styles{
+	text-align: right;
+	width: auto;
+}
+.paginationIndex-styles .styles-composition{
+	display: inline-block;
+	width: auto;
+}
+.paginationIndex-styles .styles-composition .composition-group{
+	padding: 0 10px;
+	margin: 10px 0;
+}
+.paginationIndex-styles .composition-group .group-order,
+.paginationIndex-styles .composition-group .group-index{
+  display:inline-block
+}
+.paginationIndex-styles .composition-group .group-order >span{
+  	text-align: center;
+  	font-size: 14px;
+	color: #888
+}
+.paginationIndex-styles .composition-group .group-order >a{
+  display:inline-block;
+  width: 46px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  background-color: #eed;
+  color: #333;
+}
+.paginationIndex-styles .composition-group .group-order >a:hover{
+	border-color: #C0C0C0;
+}
+
+.paginationIndex-styles .composition-group .group-order a:first-child{
+	width: 86px;
+   background-color: static;
+}
+.paginationIndex-styles .composition-group .group-order a:first-child:hover{
+	border-color: transparent;
+	background-color: #aaa;
+	color: #fff;
+}
+.paginationIndex-styles .composition-group .group-order >a:last-child{
+	width: 86px;
+  	background-color: static
+}
+.paginationIndex-styles .composition-group .group-order >a:last-child:hover{
+	border-color: transparent;
+	background-color: #aaa;
+	color: #fff;
+}
+.paginationIndex-styles .composition-group .group-order >a.active{
+	background-color: #111;
+	color: #fff;
+}
+.paginationIndex-styles .composition-group .group-order >a.active:hover{
+  border-color: transparent;
+}
+.paginationIndex-styles .composition-group .group-index{
+	height: 32px;
+	clear: both;
+}
+.paginationIndex-styles .composition-group .group-index span{
+	display: inline-block;
+	white-space: nowrap;
+	vertical-align: middle;
+	border-spacing: 0;
+	text-align: center;
+	color: #888;
+}
+.paginationIndex-styles .composition-group .group-index span strong{
+	font-weight: normal;
+	color: #333;
+}
+.paginationIndex-styles .composition-group .group-index span input.index-search{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	height: 30px;
+	line-height: 30px;
+	width: 44px;
+	color: #333;
+	text-align: center;
+	font-size: 14px;
+	background-color: #fff;
+	border: 1px solid #eee;
+	outline: none;
+}
+.paginationIndex-styles .composition-group .group-index span button{
+	display: inline-block;
+	float: none;
+	margin: 0;
+	padding: 0 12px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	vertical-align: middle;
+	height: 30px !important;
+	line-height: 30px;
+	border-radius: 3px;
+	border: none;
+	outline: none;
+	white-space: nowrap;
+	cursor: pointer;
+	background-color: #ddd;
+	color: #555
+}
+.paginationIndex-styles .composition-group .group-index span button:hover{
+	background-color: #bdbdbd;
+	color: #fafafa;
+}

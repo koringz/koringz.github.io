@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>test</title>
+</head>
+<style type="text/css">
+    .clickme {
+        max-width:100px; 
+    }
+    .clickme {
+        max-width:100px; 
+        padding: .75rem 1.5rem;
+        font-size: 1.25rem;
+        border-radius: .3rem;
+        background-color: #0275d8;
+        border-color: #0275d8;
+        color: #fff;
+    }
+    .btn{
+        display: inline-block;
+        font-weight: 400;
+        line-height: 1.25;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: .5rem 1rem;
+        font-size: 1rem;
+        border-radius: .25rem;
+    }
+</style>
+<body>
+    <div class="clickme btn" id="clickme">demo</div>
+    <link rel="stylesheet" href="./animate.css">
+    <script src="./co-animation-plugins.js"></script>
+    <script>
+        var app = cote.app(".aaa");
+
+
+        console.log(app)
+
+
+         document.querySelector("#clickme").onclick = function(a) {
+            cote.app(".clickme").delay(100).bounceOut("bounceOut", {
+                type: "start",
+                callback: function() {}
+            }).render()
+        }
+    </script>
+</body>
+
+</html>

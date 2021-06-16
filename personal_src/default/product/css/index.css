@@ -1,0 +1,97 @@
+body,html{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+/* product*/
+.skyproduct{
+}
+.productGroupList-styles{
+	display: table;
+	position: relative;
+	width: 100%;
+	*background-color: #ccc;
+	background-color: #ccc
+}
+.productGroupList-styles .default-item-list{
+	float: left;
+	margin: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 221px;
+	*background-color: #fff;
+	background-color: #fff;
+}
+.productGroupList-styles .default-item-list .default-img{
+	display: inline-block;
+	width: 100%;
+	vertical-align: middle;
+}
+.productGroupList-styles .default-item-list .default-img img{
+	width: 100%;
+}
+.productGroupList-styles .default-item-list .default-title{
+	display: inline-block;
+	padding: 5px 0;
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+}
+.productGroupList-styles .default-item-list .default-title span{
+	display: inline-block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	text-align: left;
+	font-size: 14px;
+	color: #a2aee2;
+	overflow: hidden;
+}
+.productGroupList-styles .default-item-list .default-price{
+	display: inline-block;
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}
+.productGroupList-styles .default-item-list .default-price span{
+	display: inline-block;
+	font-size: 14px;
+}
+.productGroupList-styles .default-item-list .default-price span:first-child{
+	float: left;
+}
+.productGroupList-styles .default-item-list .default-price span:last-child{
+	float: right;
+}
+.productGroupList-styles .default-item-list .default-submit{
+	display: inline-block;
+	float: left;
+	padding: 10px 0 0;
+	width: 100%;
+	text-align: center;
+}
+.productGroupList-styles .default-item-list .default-submit >span{
+	display: inline-block;
+	float: none;
+	width: 80px;
+	padding: 8px 0;
+	border-radius: 8px;
+	font-size: 14px;
+	text-align: center;
+	cursor: pointer;
+	background-color: #FA5655;
+	color: #fff;
+}
+.productGroupList-styles .default-item-list .default-submit span:first-child{
+	margin-right: 5px;
+	border: 1px solid #FA5655;
+	background-color: transparent;
+	color: #FA5655;
+}
+.productGroupList-styles .default-item-list .default-submit span:last-child{
+	margin-left: 5px;
+	background-color: #FA5655;
+	color: #fff;
+}

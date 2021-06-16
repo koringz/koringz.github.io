@@ -1,0 +1,108 @@
+body,html{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+:before, :after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+/*两列布局(左1右2)*/
+.group .default-fl{
+  position: relative;
+}
+/*两列布局(左1右2)*/
+.default-2-1-2
+.default-2,
+.default-3,
+.default-4,
+.default-5,
+.default-6,
+.default-7,
+.default-8,
+.default-9,
+.default-10{
+  display: block;
+  position: relative;
+}
+.default-3 .distribution{
+  width: 33.3333333333333333%
+}
+.default-4 .distribution{
+  width: 25%
+}
+.default-5 .distribution{
+  width: 20%
+}
+.default-6 .distribution{
+  width: 16.666666666666%
+}
+.default-7 .distribution{
+  width: 14.285714285714%
+}
+.default-8 .distribution{
+  width: 12.5%
+}
+.default-9 .distribution{
+  width: 11.111111111111%
+}
+.default-10:after{
+  width: 10%
+}
+.default-2-1-2:before{
+  content: "";
+  display: table;
+}
+.default-2-1-2:after{
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+.default-2:after,
+.default-2-1-2:after,
+.default-3:after,
+.default-4:after,
+.default-5:after,
+.default-6:after,
+.default-7:after,
+.default-8:after,
+.default-9:after,
+.default-10:after,
+.default-clearfix:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+.default-2-1-2 .auto,
+.default-2 .auto{
+  width: auto;
+}
+.default-2-1-2 .half,
+.default-2 .half,
+.default-2 .distribution{
+  width: 50%;
+}
+.group .distribution{
+  box-sizing: border-box;
+}
+.auto-align{
+  display: inline-block;
+}
+.default-fl{
+  float: left;
+}
+.default-fr{
+  float: right;
+}
+/*common*/
+
+/*you should delete*/
+.skylayout .default-2,
+.skylayout .group .distribution,
+.skylayout .default-2-1-2{
+  border: 1px solid #ccc;
+  background-color: #f2f2f2
+}
+.skylayout{
+  padding: 10px;
+}

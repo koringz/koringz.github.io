@@ -1,0 +1,80 @@
+body,html{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+:before, :after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+/* search */
+.skysearch{
+	width: 90%;
+}
+.crm003721-search-frame{
+	margin: 0;
+	padding: 10px 0;
+}
+.crm003721-search-frame{
+  display: block;
+  width: 40%;
+  background-color: #eee;
+}
+.crm003721-search-frame .crm003721-search-box{
+  padding: 10px;
+}
+.crm003721-search-frame .crm003721-search-box .crm003721-search-lookMessage{
+    display: inline-block;
+    width: 100%;
+    background-color: #eee;
+}
+.crm003721-search-frame .crm003721-search-box .crm003721-search-lookMessage .lookMessage-styles{
+  float: right;
+}
+.lookMessage-styles .styles-search{
+  display: block;
+}
+.lookMessage-styles .styles-search > div{
+  border-spacing: 0;
+}
+.lookMessage-styles .mark-search,
+.lookMessage-styles .search-text{
+  display: inline-block;
+}
+.lookMessage-styles .search-text input[type="text"]{
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  height: 32px;
+  line-height: 32px;
+  width: 240px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  text-indent: 8px;
+  font-weight: normal;
+  white-space: normal;
+  font-size: 14px;
+  background-color: #fafafa;
+  color: #222;
+  outline: none;
+}
+.lookMessage-styles .mark-search button[type="button"]{
+  position: relative;
+  margin: 0;
+  padding: 0 12px;
+  height: 32px;
+  border: 1px solid transparent;
+  vertical-align: middle;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+  outline: none;
+  background-color: #fcfcfc;
+  cursor:pointer;
+  color: #464646;
+}
+.lookMessage-styles .mark-search button[type="button"]:hover{
+  background-color: #dedede;
+  color: #1a1a1a
+}

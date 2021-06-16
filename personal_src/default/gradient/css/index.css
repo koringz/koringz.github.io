@@ -1,0 +1,101 @@
+*{
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+   background-color:#eee;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.gradientBackground-box {
+	position: relative;
+	margin: 50px auto;
+	height: 90%;
+	max-height: 90% !important;
+	justify-content:center;
+	white-space: nowrap;
+	overflow: hidden;
+	background: radial-gradient(ellipse farthest-corner,rgba(36, 217, 120,.2) 0%,rgba(82, 116, 91,0.2) 55%,rgba(6, 17, 222,.2) 100%);
+	background: -webkit-radial-gradient(ellipse farthest-corner,rgba(36, 217, 120,.2) 0%,rgba(82, 116, 91,0.2) 55%,rgba(6, 17, 222,.2) 100%);
+	background-position: 220px 220px;
+	background-size: 100%;
+}
+.gradientBackground-box:after{
+	display: block;
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(230deg,rgba(222,22,222,.1) 0%,rgba(57,100,22,.2) 50%,rgba(222,22,22,.2) 100%);
+	background: -webkit-linear-gradient(230deg,rgba(222,22,222,.2) 0%,rgba(57,100,22,.4) 50%,rgba(222,22,22,.1) 100%);
+	z-index: 999;
+}
+
+
+/*child tiny*/
+.move-grid{
+	position: absolute;
+	left:20px;
+	top:20px;
+	width: 150px;
+	height: 150px;
+	border-radius:20px;
+	background-color: rgba(36, 27, 62,.9);
+	box-shadow: 2px 0px 5px rgba(111,111,111,1),0px 2px 3px rgba(22,22,22,1),-2px 0px 5px rgba(222,222,222,1),0px -5px 5px rgba(22,22,22,1);
+	overflow: hidden;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 30px;
+	font-size: 16px;
+	font-weight: bolder;
+	color:rgba(255,255,255,.9);
+}

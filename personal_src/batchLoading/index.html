@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>order</title>
+	<script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="clickLoading.css">
+</head>
+<body>
+	<div class="batch-load">
+		<div class="default-batch-box batch-box">
+			<ul class="default-list-box">
+				<div class="default-list-box-head">
+					<span>编号</span>
+					<span>地址</span>
+					<span>行业</span>
+					<span>进度</span>
+					<span>团战</span>
+				</div>
+			</ul>
+			<div class="default-batch-unlock">
+				<span></span>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="clickLoading.js"></script>
+<script>
+var data = [1,2,3,4,'a','b','c','d',1,2,3,4,5,6,9,]
+batchLoading({
+	node: ['.default-list-box','.default-batch-unlock'], // 第一个节点为添加数据class 第二个为点击事件class
+	data: data,	// 总数据
+	default: 0, // 默认从第几条数据开始
+	everyTime: 4, // 每次添加多少条数据
+	method: function (data) { // 循环数据
+		var str = ''
+		var tiny = data
+		str += '<li>'
+		str += '<span>' + tiny +'</span>'
+		str += '<span>上海</span>'
+		str += '<span>机械业</span>'
+		str += '<span>加载器</span>'
+		str += '<span>去参团</span>'
+		str += '</li>'
+		return str
+	},
+	complate: function  () {
+		alert('加载结束')
+	}
+})
+</script>
+</html>

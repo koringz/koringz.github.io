@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>drag-css-frame</title>
+  <!-- <link rel="stylesheet" type="text/css" href="../css/index.css"> -->
+  <link rel="stylesheet" type="text/css" href="../../default.css">
+</head>
+<body>
+
+<div class="skydrag">
+  <div class="crm003721-drag-frame">
+    <div class="crm003721-drag-box">
+      <div class="crm003721-drag-dragBox">
+        <div class="dragBox-styles dragBox-item">
+          <div class="styles-list">
+
+            <div class="default-list" data-id="1">
+              <div class="list-child">
+                <div class="default-title">
+                  <span>幽鬼</span>
+                </div>
+                <div class="default-content">
+                  <span>肉核</span>
+                </div>
+                <div class="default-name">
+                  <span>大哥</span>
+                </div>
+              </div>
+            </div>
+            <div class="default-list" data-id="2">
+              <div class="list-child">
+                <div class="default-title">
+                  <span>肉山</span>
+                </div>
+                <div class="default-content">
+                  <span>野怪</span>
+                </div>
+                <div class="default-name">
+                  <span>boss</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="index.js"></script>
+<script type="text/javascript">
+  var ara = []
+  $('.styles-list .default-list').each(function (index, item) {
+    ara.push(item)
+    $(item).attr('draggable','true')
+  })
+
+  var currentTarget = null
+  var nextTarget = null
+  $('.styles-list .default-list')
+  .on('dragstart',function (node) {
+    node.originalEvent.dataTransfer.setData("dataid",$(node.target).attr('data-id'));
+    currentTarget = node.target
+  })
+  .on('dragover',function (node) {
+    node.originalEvent.preventDefault()
+    nextTarget = node.target
+  })
+  .on('drop',function (node) {
+    var getnode = node.originalEvent.dataTransfer.getData("dataid");
+
+    var cur = $(currentTarget).html()
+    var next = $(nextTarget).parents('.default-list').html()
+
+    $(currentTarget).html(next)
+    $(nextTarget).parents('.default-list').html(cur)
+  })
+
+</script>
+</body>
+</html>

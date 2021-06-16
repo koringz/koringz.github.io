@@ -1,0 +1,42 @@
+body,html{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+/* followsuspend*/
+.followsuspend{
+  position: relative;
+  padding: 200px 0;
+  width: 800px;
+  margin: auto;
+  background-color: gray
+}
+.followsuspend-aside{
+  display: table;
+  position: fixed;
+  width: 30px;
+  height: 300px;
+  left: 50%;
+  bottom: 130px;
+  margin-left: 400px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700px;
+  color: #fff;
+  background-color: #0a3e8d
+}
+.followsuspend-item{
+  display: table-cell;
+  vertical-align: middle;
+}
+.child-container{
+  display: table-cell;
+  vertical-align: middle;
+  margin-top: 200px;
+  margin-bottom: 200px;
+  height: 700px;
+  width: 800px;
+  font-size: 20px;
+  text-align: center;
+  background-color: #fafafa;
+}

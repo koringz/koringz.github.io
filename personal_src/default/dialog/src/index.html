@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>dialog-css-frame</title>
+  <!-- <link rel="stylesheet" type="text/css" href="../css/index.css"> -->
+	<link rel="stylesheet" type="text/css" href="../../default.css">
+</head>
+<body>
+
+<div class="skydialog">
+	<div class="crm003721-dialog-shadow">
+		<div class="crm003721-dialog-frame">
+			<div class="crm003721-dialog-box">
+				<div class="crm003721-dialog-fixedDialog">
+					<div class="fixedDialog-styles">
+
+						<div class="styles-head">
+							<div class="head-title">
+								<span>提示信息</span>
+							</div>
+							<div class="head-close">
+								<span class="addClose">x</span>
+							</div>
+						</div>
+						<div class="styles-content">
+							<div class="content-message">
+								<div class="message-text">
+									<span>你确定要删除吗?</span>
+								</div>
+							</div>
+						</div>
+						<div class="styles-foot">
+							<div class="foot-button">
+								<div class="button-group">
+									<button type="button" class="cancle group-btn">取消</button>
+									<button type="button" class="primary group-btn">确定</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+function eventlister (param) {
+	var _event = param.event || 'click'
+	var _style = param.style || 'none'
+	var _method = param.method || 1
+	var default_event = ['click','mousemove','mouseout']
+	var _node = param.node
+	if(default_event.indexOf(_event) >= 0){
+		if (_style === 'block' || _style === 'none') {
+			document.querySelector(_node[0]).addEventListener("click",function  (e) {
+				document.querySelector(_node[1]).style.display= _style
+			},false)
+		}
+		else if(_method instanceof Function){
+			_method(_node)
+		}
+	}
+}
+eventlister({
+	node: [".cancle",".skydialog"],
+	style: 'none'
+})
+
+eventlister({
+	node: [".addClose",".skydialog"],
+	style: 'none'
+})
+
+</script>
+</body>
+</html>

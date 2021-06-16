@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>A Pen by  koringz</title>
+    
+    
+    
+    
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+  </head>
+
+  <body>
+
+     <span id="rect" style=""></span>
+    <div class="pos">
+      <center>
+          <label for="txt1">
+              <span>screenX and screenY:</span> <input type="text" id="txt1" value="0">
+          </label>
+          <label for="txt2">
+              <span>clientX and clientY:</span> <input type="text" id="txt2" value="0">
+          </label>
+          <label for="">
+              <span>鼠标移动:获得窗口坐标</span>
+          </label>
+      </center>
+    </div>
+    
+        <script src="koringz.js"></script>
+        <script src="js/index.js"></script>
+        <script type="text/javascript" >
+          var box = getElementNode("body");
+          var txt1 = getElementNode("#txt1");
+          var txt2 = getElementNode("#txt2");
+          var rect = getElementNode("#rect");
+           var e = e ?event : window.event;
+          addLister(box,'mousemove',function(e){Box(e,txt1,txt2,rect)})
+        </script>
+    
+    
+    
+  </body>
+</html>

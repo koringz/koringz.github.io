@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>layout-css-frame</title>
+  <link rel="stylesheet" type="text/css" href="../css/index.css">
+</head>
+<body>
+
+<div class="skylayout">
+  <p>2列布局</p>
+  <div class="default-2">
+    <div class="default-fl auto">
+      <div class="auto-align">左边布局</div>
+    </div>
+    <div class="default-fr auto">
+      <div class="auto-align">右边布局</div>
+    </div>
+  </div>
+
+  <p>两列布局(左1右2)</p>
+  <div class="default-2-1-2 group">
+    <div class="default-fl half">
+      1
+    </div>
+    <div class="default-fr half">
+      <div>1</div>
+      <div>1</div>
+    </div>
+  </div>
+
+  <p>三列布局</p>
+  <div class="default-3 group">
+    <div class="default-fl distribution">
+      1
+    </div>
+    <div class="default-fl distribution">
+      2
+    </div>
+    <div class="default-fl distribution">
+      2
+    </div>
+  </div>
+
+  <p>四列布局</p>
+  <div class="default-4 group">
+    <div class="default-fl distribution">
+      1
+    </div>
+    <div class="default-fl distribution">
+      2
+    </div>
+    <div class="default-fl distribution">
+      2
+    </div>
+    <div class="default-fl distribution">
+      2
+    </div>
+  </div>
+
+  <p>...</p>
+  <p><span style="color:gray">更多布局只需更改一个class类名default-1,default-2,default-3...</span></p>
+
+
+</body>
+</html>
