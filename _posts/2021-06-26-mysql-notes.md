@@ -8,19 +8,19 @@ tags:
 
 ## 删除字段
 
-```mysql
+```bash
 delete from userlist where name = "${getParseData.name}"
 ```
 
 ## 添加字段
 
-```mysql
+```bash
 insert into members ( firstname, lastname, memberid ) values( "zzz", "sss", 1);
 ```
 
 ## 创建表
 
-```mysql
+```bash
 mysql> create table test(name varchar(20) not null);
 mysql> alter table test add column id int auto_increment not null, add primary key(id);
 mysql> describe test2;
@@ -28,7 +28,7 @@ mysql> describe test2;
 
 ## 查询最后一条
 
-```mysql
+```bash
 select id from table1 where id>1,name=1 order by id desc limit 1
 ```
 
@@ -38,33 +38,33 @@ select id from table1 where id>1,name=1 order by id desc limit 1
 
 ## 查询一条记录($id)的下一条记录
 
-```mysql
+```bash
 select * from table1 where id>$id  order by id asc dlimit 1
 ```
 
 
 ## 查询前n行记录
 
-```mysql
+```bash
 select * from table1 limit 0,n;
 ```
 
 ## 查询多个字段的模糊搜索
 
-```mysql
+```bash
 
 select * from user where realname like '%龙%' and realname like '%文%'
 ```
 
 ## 模糊查询加分页
 
-```mysql
+```bash
 select * from userlist1 where name like "%${search_data}%" and id limit ${10 * (page_index-1) } , ${10}
 ```
 
 ## 插入数据到表格
 
-```mysql
+```bash
 insert into userlist1( name, type, description ) values( "${getParseData.name}", "${getParseData.type}", "${getParseData.description}" )
 ```
 
