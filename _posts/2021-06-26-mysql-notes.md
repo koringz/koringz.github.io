@@ -83,8 +83,6 @@ INNER JOIN testList
 ON userList.member_id = testList.member_id
 ```
 **Note:**列表和字段关联编写..使用逗号分隔表名和列名,如`select name, type from`会写成`select userList.name, testList.type from`, 此处关联表名表示告诉数据库要查找每个表来查找每个表的列.`from`查找表名后面紧接着`join`指定应该连接哪些表并`on`指定每个表中哪些列是相关的.
-
-
 {: .notice--info}
 
 
