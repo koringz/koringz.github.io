@@ -34,7 +34,7 @@ select id from table1 where id>1,name=1 order by id desc limit 1
 
 **note** 了解最后一个命令 `order by`, 这个命令允许我们在给定的列上对数据库进行排序, 后面给需要排序字段的名称. 默认情况下, 按照升序排列; 其中`asc`为升序如`ORDER BY id asc`, `desc`为降序如`ORDER BY id desc`. 
 其中给定命令`limit`为输出限制 1 行数量.
-{: .notice-info}
+{: .notice--info}
 
 ## 查询一条记录($id)的下一条记录
 
