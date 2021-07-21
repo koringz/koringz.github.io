@@ -22,11 +22,6 @@ insert into userlist( name, type, description ) values(
 )
 ```
 
-## 添加字段
-
-```bash
-insert into members ( firstname, lastname, memberid ) values( "zzz", "sss", 1);
-```
 
 ## 删除字段
 
