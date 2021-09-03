@@ -19,7 +19,7 @@ var scrollTop = document.documentElement.scrollTop || window.pageYOfset ||docume
 ```
 
 #### 设置滚动
-如果你想在页面顶部点击滚动到页面顶部，原生JavaScript平滑的滚动顶部：
+如果你想在页面底部点击滚动到页面顶部，原生JavaScript平滑的滚动顶部：
 ```js
 window.scrollTop({behavior:"smooth", left: 0, top: 0}) 
 ```
