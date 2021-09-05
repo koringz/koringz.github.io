@@ -25,7 +25,14 @@
 font-size: $type-size-6 替换 $type-size-5; 
 )
 
-添加样式(
+
+@添加样式 _sass\minimal-mistakes\_page.scss(
 p,li,dl {
     letter-spacing: -0.06px;
 })
+
+@修改样式 _sass\minimal-mistakes\_base.scss(
+    body {
+        color: $text-color 替换 rgba(41, 41, 41, 1);
+    }
+)
