@@ -15,7 +15,7 @@ const defineComponent = () => {
 
   useMemo(() => {
     componentRef.current = conditions;
-  });
+  }, [conditions]);
 
   console.log(componentRef.current)
   // 2
@@ -24,7 +24,8 @@ const defineComponent = () => {
     setConditions({
       value: '2'
     })
-  },100)
+  },100);
+
   render() {
     return (
       <>
