@@ -11,4 +11,7 @@ tags:
 ### 解决
 
 把`copy-webpack-plugin`版本从^10.2.4 降低到 9，可以解决打包出错的问题。
-`npm i -D copy-webpack-plugin@9`
+
+```base
+npm i -D copy-webpack-plugin@9
+```
