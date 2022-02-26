@@ -15,7 +15,7 @@ const handleLoadingFile = (dataStream:any, fallback: Function) => {
     fr.onload= function (ev) {
       fallback(ev.targe.result)
     }
-    fr.readAsDataURL(resBlobdata)
+    fr.readAsDataURL(blob)
   }
   getBlobData(dataStream, (value: any) => {
     if(value) fallback(value)
