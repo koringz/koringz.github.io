@@ -41,7 +41,7 @@ axios('172.0.0.1').then((res:any) => {
       link.href = value
       document.body.appendChild(link)
       link.click()
-      document.body.appendChild(link)
+      document.body.removeChild(link)
     }catch(err) {
       console.log(err)
     }
