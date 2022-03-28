@@ -1,5 +1,5 @@
 ﻿---
-title: "go-channel 通道死锁"
+title: "go-channel通道死锁"
 tags:
   - golang
 ---
