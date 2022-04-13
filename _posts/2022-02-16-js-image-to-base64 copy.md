@@ -14,6 +14,8 @@ xhr.responseType = 'blob'
 
 ### blob 转换 base64
 
+当请求响应时, 需要把响应的数据进行数据流转换, 格式方法如下:
+
 ```bash
 function blobToBase64 (resBlobdata, fallback) {
   const fr = new FileReader()
