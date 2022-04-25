@@ -26,4 +26,12 @@ const all = content.map((item) => {
 
 ```bash
 // 123-移动端=1,123-pc端=2,123-平板3
- ```
+```
+
+### 替换每一个字符
+
+```js
+let nickname = "koringz";
+nickname.substr(0, 1) + nickname.substr(1).split("").fill("*").join("");
+// k******
+```
