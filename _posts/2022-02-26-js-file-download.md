@@ -13,7 +13,7 @@ const handleLoadingFile = (dataStream:any, fallback: Function) => {
   const getBlobData = (blob:any,fallback:Function) =>{
     const fr = new FileReader()
     fr.onload= function (ev) {
-      fallback(ev.targe.result)
+      fallback(ev.target.result)
     }
     fr.readAsDataURL(blob)
   }
@@ -25,12 +25,17 @@ const handleLoadingFile = (dataStream:any, fallback: Function) => {
 
 ### 读取并下载数据
 
-在封装了上面的接收数据流的同时读取结果数据, 然后把结果数据通过回调函数进行输出下载.
+在封装了上面的接收数据流的同时读取结果数据, 然后把结果数据通过回调函数进行输出下载. 如果返回的是 base64 二进制编码的数据流则直接显示即可.
 
 ```bash
 import axios from 'axios'
 
-axios('172.0.0.1').then((res:any) => {
+axios({
+  method: 'post',
+  url:'172.0.0.1',
+  data: {a:'file'},
+  header: { reponseType: "blob" }  // 接收响应二进制数据流
+}).then((res:any) => {
   handleLoadingFile(res.data, function (value: any) {
     try{
       let link = document.createElement('a')
